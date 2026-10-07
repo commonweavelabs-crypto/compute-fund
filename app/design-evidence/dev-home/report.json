@@ -1,0 +1,13 @@
+[
+  {
+    "file": "page.png",
+    "state": null,
+    "size": "390x844",
+    "zoom": 1,
+    "issues": [
+      "控制台错误：In HTML, %s cannot be a descendant of <%s>.\nThis will cause a hydration error.%s <a> a \n\n  ...\n    <RedirectErrorBoundary router={{...}}>\n      <InnerLayoutRouter url=\"/\" tree={[...]} params={{}} rend",
+      "控制台错误：<%s> cannot contain a nested %s.\nSee this log for the ancestor stack trace. a <a>",
+      "脚本错误：Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:"
+    ]
+  }
+]
