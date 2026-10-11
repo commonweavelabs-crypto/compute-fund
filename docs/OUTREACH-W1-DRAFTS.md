@@ -2,17 +2,23 @@
 *2026-10-11 · all follow the law: value-first, no link in comment, link-on-request only*
 
 ## A. Comment-seeds (3 this week; targets picked from the archive's hot cluster)
+*REWRITTEN 2026-10-11 per Gui's correction — purpose = organic platform marketing to the
+modding/token-burning niche (see brainstorms/modding-tokens-compute-fund-niche.md).
+Law kept: no links in comment text; platform named; "link on profile" carries the click.*
 
 1. **Modern Vintage Gamer — "Recomps and Decomps have taken over Retro Gaming"** (585K views)
-   > what the decomp scene figured out years ago — that clean functional reimplementation is legal and the community documents everything — is exactly the pattern AI agents are now replicating for any binary. the difference: agents don't write the docs. whoever builds the receipts layer for agent-driven RE wins the trust game.
+   > the recomp/decomp wave is quietly turning modding into full-blown software projects — and with AI agents in the picture, modders are burning serious token budgets on Claude/GPT to build these things. what the scene doesn't have yet is the funding layer: open your mod as a project, let players patron it (money or spare compute), let the community vote on what gets built next, keep every receipt public. we're building exactly that — Compute Fund. modders spending real money on agents (or players who want to back the next big mod): link's on my profile.
 
 2. **Can It Code? — "Can AI Build a Game Good Enough for Steam?"** (138K views)
-   > love that you're shipping the test instead of arguing about it. honest question for ep.2: when the AI writes code you don't fully understand, how do you plan to maintain it after launch? that's the next billion-dollar question for AI-built software.
+   > love that you're shipping the test instead of arguing about it. one thing the series hasn't touched yet: AI-built games burn through agent tokens fast, and the solo dev carrying that bill alone is the part nobody talks about. imagine if the people who WANT your game could patron it directly — fund the compute, vote on the roadmap, receipts for every token. that's the platform we're building (Compute Fund, link on profile) — built for exactly this.
 
 3. **Cloud Codes — "Hugging Face Trained an Open Model Inside Claude Code"** (11K views, early = high reply chance)
-   > the 62% vs 33% harness gap is the most underrated result this year. it means "model choice" posts are mostly measuring the wrapper. would love to see the same model in a third harness as a control.
+   > the 62% vs 33% gap also explains why AI-built projects get expensive solo — the same outcome can cost 2x the tokens depending on your harness. pooling is the fix: when a hundred people want the same thing, they patron one governed run instead of each burning their own tokens on a worse harness. public receipts on every run, too. that pooling layer is what we're building at Compute Fund (link on profile). great breakdown.
 
-*(post from @Commonweavelabs; if a video author replies: offer the maintainer pilot + receipts screen-share — no links unless asked)*
+*(post from @Commonweavelabs; if an author or commenter replies: offer the maintainer pilot
++ receipts screen-share — still no links until asked)*
+
+*(replaced original drafts 2026-10-11; if a video author replies: offer the maintainer pilot + receipts screen-share — no links unless asked)*
 
 ## B. Reddit post #1 (value post, link stays in profile)
 **Sub:** r/opensource (and r/LocalLLaMA as variant #2 next week)

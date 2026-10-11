@@ -59,3 +59,11 @@ legal money-wire, profiles, project pages). Conflicts resolved per CONSOLIDATION
 3. No personal data of Gui or any user; no keys/secrets in any artifact
 4. Nothing gated: every feature works with zero payment and zero accounts (asks live in footers, walls live in law)
 5. Fiction (Golden Ticket scripts) is inspiration, never spec — explicitly non-canonical
+
+## Niche evidence (N-002) — modding community = first target market
+Validated 2026-10-11 (echo-chamber checked, competitor-scanned). The decomp/recomp +
+agent-modding wave = token-burning modders + patron players; CF is the funding rail.
+Full thesis + market research: `../link-archive/brainstorms/modding-tokens-compute-fund-niche.md`
+(DO NOT copy contents here — pointers only. Feature pressure recorded in the brainstorm:
+roadmap voting priority, token-donation credit type, distribution stays external.)
+
