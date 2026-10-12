@@ -1,29 +1,48 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+
+// Real sign-in. Errors name the cause; no invented success states.
 export default function LoginPage() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-  useEffect(() => {
-    const id = requestAnimationFrame(() => document.documentElement.setAttribute("data-theme", theme));
-    return () => cancelAnimationFrame(id);
-  }, [theme]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "error" | "ok">("idle");
+  const [message, setMessage] = useState("");
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("submitting");
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok) { setStatus("ok"); window.location.href = "/account"; }
+    else { setStatus("error"); setMessage(data.error ?? "Sign-in failed. Try again."); }
+  }
+
   return (
-    <>
-      <header className="top">
-        <div className="wrap inner">
-          <Link href="/" className="brand"><span className="sig">▚</span><b>COMPUTE&nbsp;FUND</b></Link>
-          <button className="theme-toggle" type="button" onClick={() => setTheme(t => t === "dark" ? "light" : "dark")}>
-            {theme === "dark" ? "☾ terminal" : "☀ ledger"} — switch
+    <main className="wrap">
+      <section className="auth-card">
+        <p className="ptitle">LOG IN</p>
+        <h1 className="auth-h">Back to the fund.</h1>
+        <form onSubmit={submit} className="auth-form">
+          <label className="lbl">email
+            <input className="inp" type="email" required value={email}
+                   onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" />
+          </label>
+          <label className="lbl">password
+            <input className="inp" type="password" required value={password}
+                   onChange={(e) => setPassword(e.target.value)} placeholder="at least 8 characters" />
+          </label>
+          {status === "error" && <p className="form-error" role="alert">{message}</p>}
+          <button className="btn btn-primary" disabled={status === "submitting"}>
+            {status === "submitting" ? "Signing in…" : "Log in"}
           </button>
-        </div>
-      </header>
-      <main className="wrap doc">
-        <h1>Log in</h1>
-        <p className="sub">Accounts arrive in Phase 1 (MVP) — signup/login + transferable org profiles. Nothing is gated until real money moves.</p>
-      </main>
-      <footer className="bottom big"><div className="footrow">
-        <span>A <b>CommonWeave Labs</b> project — fund the compute, see the receipts.</span>
-      </div></footer>
-    </>
+        </form>
+        <p className="auth-alt">New here? <Link href="/start">Start a project</Link> or just browse the <Link href="/">fund</Link>.</p>
+      </section>
+    </main>
   );
 }
