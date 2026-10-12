@@ -1,7 +1,8 @@
 # Outreach W1 drafts — ready to post (Gui picks)
 *2026-10-11 · all follow the law: value-first, no link in comment, link-on-request only*
 
-## A. Comment-seeds (3 this week; targets picked from the archive's hot cluster)
+## A. Comment-seeds — ALL 3 POSTED + VERIFIED 2026-10-11 (watch for replies; author DMs -> pilot offer)
+*Verification: each comment found in its thread, author @CommonweaveLabs, read-back by CDP. Log: outreach-log/posted-comments.jsonl*
 *REWRITTEN 2026-10-11 per Gui's correction — purpose = organic platform marketing to the
 modding/token-burning niche (see brainstorms/modding-tokens-compute-fund-niche.md).
 Law kept: no links in comment text; platform named; "link on profile" carries the click.*
