@@ -3,6 +3,18 @@
 Law: public info only (channels/repos/emails-on-profile), no scraping behind logins, no spam —
 each contact gets the pilot offer, 1 touch.*
 
+## WHEN GO FIRES (clarified with Gui 2026-10-13)
+"Pilots fire" = we contact the creators below WITH A WORKING PLATFORM. Precondition chain:
+1. ✅ Stranger loop demo-green (done 10/11, demo mode)
+2. ⬜ Deployable public URL (Vercel or box tunnel) — a creator must be able to sign up,
+   create a CFQ project, and see it live
+3. ⬜ Real (even Stripe test-mode) card funding — no demo rows in a pilot's receipt story
+4. ⬜ The pilot's own project pre-created + pre-funded budget approved (which project,
+   which models, cap)
+Saying "go" before 2–4 are done would mean DMing creators to a platform they cannot touch.
+So the real "GO" = after deploy + test-mode funding. Until then, no creator is contacted.
+(This answers Gui's: "are you going to message creators while the platform is not ready?")
+
 ## Tier 1 — proven token-burners, in our archive already
 | # | Who | Why they fit | Evidence | Where |
 |---|---|---|---|---|
