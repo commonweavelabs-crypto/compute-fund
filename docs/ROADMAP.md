@@ -35,6 +35,17 @@ legal money-wire, profiles, project pages). Conflicts resolved per CONSOLIDATION
 - [ ] Comments ON RELEASES only; ratings; community badges ("Compute Sponsor")
 - [ ] Public answer pages: popular-questions funding (v1 of manifesto's phases)
 
+
+### Phase 2 addition — Community governance (Hephaestus Doctrine)
+Flags: non-tradeable governance objects; weight = 12-month average engagement (decays;
+anti-oligarchy); one flag staked per project per user; each flag raises that project's
+compute price; economic kill via price pressure, no ban lists; surpluses subsidize
+low-flag projects. Values community-adjustable. Safety layer ABOVE the CFQ intake lint.
+Full thesis + mechanics + competitor scan:
+`C:/Users/Guilherme/.hermes/projects/link-archive/brainstorms/hephaestus-doctrine-community-governance.md`
+(schema prep already compatible: donations table carries user/amount/date already; zero
+MVP-sprint impact).
+
 ## Phase 3 — Sustainability rails
 - [ ] Platform fee % — community-voted (starts 0%; vote mechanism first, then propose 3–5%)
 - [ ] Printed compute spread on token dispensing (published %, receipts show it)
