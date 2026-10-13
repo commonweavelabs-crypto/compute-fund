@@ -18,7 +18,12 @@ export default function LoginPage() {
       body: JSON.stringify({ email, password }),
     });
     const data = await res.json().catch(() => ({}));
-    if (res.ok) { setStatus("ok"); window.location.href = "/account"; }
+    if (res.ok) {
+      setStatus("ok");
+      // Kickstarter law: login returns the user to where the interaction started.
+      const next = new URLSearchParams(window.location.search).get("next");
+      window.location.href = next && next.startsWith("/") ? next : "/account";
+    }
     else { setStatus("error"); setMessage(data.error ?? "Sign-in failed. Try again."); }
   }
 

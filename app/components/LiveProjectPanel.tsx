@@ -1,4 +1,5 @@
 "use client";
+import type React from "react";
 import { useEffect, useState } from "react";
 
 type Receipt = { id: string; ts: string; model: string; kind: string; tokens_in: number; tokens_out: number; cost_usd: number; outcome: string };
@@ -9,7 +10,7 @@ type Live = { cfq_id: string; funded_usd: number; donors: number; receipts: Rece
 // labeled demo everywhere it appears.
 export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOwner: boolean }) {
   const [live, setLive] = useState<Live | null>(null);
-  const [note, setNote] = useState("");
+  const [note, setNote] = useState<React.ReactNode>("");
   const [key, setKey] = useState("");
   const [busy, setBusy] = useState("");
 
@@ -31,6 +32,10 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
       window.location.assign(d.url);
       return;
     }
+    if (res.status === 401) {
+      setNote(<>Sign in to fund this project — <a href={`/login?next=${encodeURIComponent(`/p/${slug}`)}`}>you come right back</a>.</>);
+      return;
+    }
     if (res.ok) { setNote(`+$${tier} demo payment recorded. In live mode this is a real card charge.`); refresh(); }
     else setNote(d.error ?? "Funding failed.");
   }
@@ -43,6 +48,9 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
     const d = await res.json().catch(() => ({}));
     setBusy("");
     if (res.ok && d.key) { setKey(d.key); setNote(`Cap: $${d.cap_credits}. The key is shown once; only its hash is stored.`); }
+    else if (res.status === 401) {
+      setNote(<>Sign in as the project owner to issue the key — <a href={`/login?next=${encodeURIComponent(`/p/${slug}`)}`}>you come right back</a>.</>);
+    }
     else setNote(d.error ?? "Key issuance failed.");
   }
 

@@ -79,7 +79,7 @@ export default function Home() {
   useEffect(() => { setFdays(daysLeft(featured.deadline)); }, [featured.deadline]);
   return (
     <>
-      <AppHeader theme={theme} toggle={toggle} />
+      
 
       <main className="wrap">
         <section className="hero center">

@@ -57,6 +57,11 @@ body::before {
   z-index: 0;
 }
 
+main.wrap {
+  padding-top: 28px;
+  padding-bottom: 56px;
+}
+
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
 
 /* ---------- header ---------- */
@@ -392,3 +397,8 @@ footer.bottom.big { flex-direction: column; align-items: stretch; gap: 18px; }
 .receipt-line { color: var(--ink-dim); font-size: 12.5px; padding: 4px 0; }
 .ptitle { font-size: 10.5px; letter-spacing: 2px; color: var(--ink-dim); margin: 0; }
 @media (max-width: 800px) { .account-grid { grid-template-columns: 1fr; } .grid-2 { grid-template-columns: 1fr; } }
+
+
+/* SPRINT-002: /start chooser (no signup wall — browse-first law) */
+.start-hero { max-width: 760px; margin: 0 auto; }
+.start-hero .auth-lead { color: var(--dim); }

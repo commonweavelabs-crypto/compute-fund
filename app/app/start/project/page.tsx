@@ -24,6 +24,7 @@ export default function ProjectStartPage() {
   const [errors, setErrors] = useState<{ field: string; rule: string }[]>([]);
   const [created, setCreated] = useState<{ slug: string; cfq_id: string } | null>(null);
   const [busy, setBusy] = useState(false);
+  const [needAuth, setNeedAuth] = useState(false);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -36,6 +37,10 @@ export default function ProjectStartPage() {
     const data = await res.json().catch(() => ({}));
     setBusy(false);
     if (res.ok) setCreated(data);
+    else if (res.status === 401) {
+      // Kickstarter law: the form was browsable; sign-in appears at submission, and returns here.
+      setNeedAuth(true);
+    }
     else setErrors(data.errors ?? [{ field: "server", rule: data.error ?? "Creation failed." }]);
   }
 
@@ -47,6 +52,19 @@ export default function ProjectStartPage() {
           <h1 className="auth-h">{created.cfq_id}</h1>
           <p className="auth-lead">Your question is live at <Link href={`/project/${created.slug}`}>/project/{created.slug}</Link>.</p>
           <p className="auth-lead">Next: share it. When funding lands, issue your governed key from the project page — capped by what is funded, allowed models only.</p>
+        </section>
+      </main>
+    );
+  }
+
+  if (needAuth) {
+    return (
+      <main className="wrap">
+        <section className="auth-card">
+          <p className="ptitle">ONE STEP</p>
+          <h1 className="auth-h">Sign in to open this project.</h1>
+          <p className="auth-lead">Your answers are still here when you return — sign in, then submit.</p>
+          <p><a className="btn btn-primary" href={`/login?next=${encodeURIComponent("/start/project")}`}>Sign in</a></p>
         </section>
       </main>
     );
