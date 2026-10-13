@@ -26,6 +26,11 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
     });
     const d = await res.json().catch(() => ({}));
     setBusy("");
+    if (res.ok && d.url) {
+      // Stripe test/live mode: redirect to the hosted checkout. The webhook confirms.
+      window.location.assign(d.url);
+      return;
+    }
     if (res.ok) { setNote(`+$${tier} demo payment recorded. In live mode this is a real card charge.`); refresh(); }
     else setNote(d.error ?? "Funding failed.");
   }

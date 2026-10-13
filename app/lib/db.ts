@@ -64,7 +64,7 @@ export function insertDonation(d: Record<string, unknown>) {
     VALUES (@id, @user_id, @project_id, @amount_cents, @tier, @demo, @stripe_ref)`).run(d as never);
 }
 export function sumFundedCents(projectId: string): number {
-  const row = db.prepare("SELECT COALESCE(SUM(amount_cents),0) AS total FROM donations WHERE project_id = ?")
+  const row = db.prepare("SELECT COALESCE(SUM(amount_cents),0) AS total FROM donations WHERE project_id = ? AND demo != 2")
     .get(projectId) as { total: number };
   return row.total;
 }
