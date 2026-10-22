@@ -18,6 +18,8 @@ legal money-wire, profiles, project pages). Conflicts resolved per CONSOLIDATION
 - [x] Spec, Question Standard v0, Token Distribution arch, legacy consolidation
 
 ## Phase 1 — MVP: "the smallest legal loop that moves compute"
+- [ ] SPEC-V2 WRITTEN (docs/SPEC-V2.md): the game-theory layer as data models + valves + phase mapping; 'build it' = section 7 sequence
+- [ ] PILOT PROPOSAL DRAFTED (docs/PILOT-PROPOSAL.md): 'The Fire Pilot' done-for-you tier; awaiting Gui: green light + cap number + target pick + the send
 *Gui's definition adopted: login + legal guardrails + real governed compute + receipts.*
 - [ ] **Project pages (v1.5)** — click a card → creator-authored page: hero, story, roadmap, funding state, receipts, CFQ id. (Current homepage becomes CommonWeave Labs profile page + avatar circle.)
 - [ ] **Platform homepage v1.5 (KS-arrangement, our skin)** — header: logo + mock search + CFQ-domain category strip + "Start a project" + Log in; centered slogan; seasonal/featured **Question-of-the-Month** hero; Featured project (progress line ON the image, meta row "time left • % funded", desc, tag chips incl. location) + "Recommended for you" 2x2 with mini progress-underlines + pagination; "Home Stretch" urgency row; **creator hover-card popup** (X created · Y funded · community-loved count · joined date · mini bio → profile link); creator-guide cards ("Every experiment starts with the same question..." vertical accent bars); Crowdfunding/Compute Tips 4-card row; footer w/ CFQ-domain columns + giant wordmark + language/currency + legal row. **Layout law: arrangement adopted from KS reference shots (Oct 2026), skin 100% ours (Terminal Commons/Carbon Ledger); no KS branding, artwork, or copy.**
@@ -31,6 +33,7 @@ legal money-wire, profiles, project pages). Conflicts resolved per CONSOLIDATION
 ## Phase 2 — Profiles, Copy-Project, community surfaces
 - [ ] Copy-Project button ("adopt and rename" — the bootstrap mechanic)
 - [ ] Search + discovery (deliberately non-addictive: weekly top list, optional swipe mode, never a slot machine)
+- [ ] SHOWCASE LAYER (Gui 10/18): weekly top-EXCITEMENT projects featured on the landing hero (computed: donation velocity + Standing-weighted engagement); discover page: categories + filter/search algorithms (Kickstarter-style taxonomy; research at milestone execution) + the M6.1 OPEN-GATES section (mismatch/up-for-grabs feed — see game-theory doc)
 - [ ] Follow vs funding split; auto-follow on fund (David-era pattern)
 - [ ] Comments ON RELEASES only; ratings; community badges ("Compute Sponsor")
 - [ ] Public answer pages: popular-questions funding (v1 of manifesto's phases)
@@ -45,6 +48,23 @@ Full thesis + mechanics + competitor scan:
 `C:/Users/Guilherme/.hermes/projects/link-archive/brainstorms/hephaestus-doctrine-community-governance.md`
 (schema prep already compatible: donations table carries user/amount/date already; zero
 MVP-sprint impact).
+
+### Phase 2 addition — NFX alignment (from NFX-ALIGNMENT.md, 2026-10-19)
+Source: NFX Masterclass Ep.4 "Hidden Patterns of Great Startup Ideas" (full
+transcript analysis; docs/NFX-ALIGNMENT.md). Not in stone:
+- [ ] N-1 Name the network core: docs/NETWORK-CORE.md — receipts-graph as the
+  core data-network effect; seed graph = pilot fleet + roster; open/data policy
+- [ ] N-2 docs/RISK-INVENTORY.md: every risk stack (regulatory/payment-geo/
+  provider-dependency/fraud/governance/cold-start/key-person), owner-tagged
+- [ ] N-3 COMPLEXITY FIREWALL (standing law): new mechanisms phase-gated; MVP =
+  charter + claim + receipts + ledger only (zero-MVP-impact, now explicit)
+- [ ] N-4 advisor bench: 2-3 scarred platform operators reading weekly receipts
+- [ ] N-5 Open-Gates = the red-ocean scanner (demand-proven, delivery-starved =
+  priority fire targets)
+- [ ] N-8 play-to-win gate: first GREEN PILOT receipts -> the all-in outreach
+  sprint (posture flip scheduled, not mood-based)
+(Execution-risk-only pilot checklist + boundary-layer tracking live in the
+pilot proposal itself - see NFX-ALIGNMENT.md #3/#7.)
 
 ## Phase 3 — Sustainability rails
 - [ ] Platform fee % — community-voted (starts 0%; vote mechanism first, then propose 3–5%)
