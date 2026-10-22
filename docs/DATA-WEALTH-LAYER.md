@@ -140,3 +140,82 @@ themselves).
 4. The external cash/crypto bridge: WHICH rails eventually? (suggest: defer
    until the fiscal-host + Stripe reality is stress-tested; the wall docs
    then)
+## 9. THE RENT MODE (Gui caught it, 10/22 — "we already do this") — BUY vs RENT
+
+**Gui's insight is correct and the receipts exist:** compute-fund-v0 ALREADY
+IMPLEMENTS the rent mode — src/lib/forks.ts: the fork pays ONE-HOP RENT to the
+parent (rent recorded in plugin_splits: project_id = the fork that PAYS,
+plugin_owner = parent project id, split_percentage = rent %, is_required).
+Laws already encoded in v0:
+- **FORK_RENT_MIN=5 / FORK_RENT_MAX=20, standing default 10** (Gui remembered
+  "5 or 10 percent" — the actual law: 5-20, default 10)
+- **GRANDFATHERING: fork_rent_pct FROZEN AT FORK TIME** — owner raising rent
+  affects only FUTURE forks; existing forks keep the rate they copied. We
+  never re-read the parent
+- The fork = taking custody of the parent's lineage + discoveries = paying
+  rent on exactly that pre-computed work (Gui's framing, verbatim)
+
+THE UNIFIED MODEL (one provenance spine, two payment modes):
+- **BUY (data-tokens, GATE+2):** spot payment for a specific finding/artifact
+- **RENT (fork rent, v0-implemented):** success-contingent one-hop % on the
+  lineage you carry forward
+Both route value to custodians via receipt-attribution. Port scope grows
+accordingly: D-port = auth + claims + FORKS/RENT (+showcase) from v0; note:
+the SPRINT-001 clean-room dropped all of fork/rent/splits as well.
+
+## 10. THE EXPANSION (Gui, 10/22 evening): the RECORD-KEEPER becomes the product
+
+His push: the receipts system is a block chain in spirit — a spine that just
+RECORDS — and that spine can serve far beyond modders:
+
+**L4 — THE REGISTRY LAYER (aspirational, phase 5+):** institutions (governments,
+enterprise) run their project accounting THROUGH our receipt format — funding
+optional (they fund themselves; the platform = the record keeper):
+- Anti-fraud forensics: "the children's-meals contractor claims 1,000 meals
+  served — show the food-purchase receipts against the fund flows" (absence
+  + presence both prove: receipts exist = audited; missing = flagged)
+- History/claims: a disputed claim about a past project = check the
+  time-stamped, checksummed trail (documentaries built on provenance)
+- THE BLOCKCHAIN PART: Cardano commit-stamping + Midnight selective
+  disclosure (ALREADY IN THE ROADMAP) = tamper-EVIDENT stamps + private
+  payloads: institutions get privacy (their data stays theirs, possibly
+  off-leaf) while the STAMPS stay public/checkable — the receipts brand's
+  public-by-default law gets a middle state: public STAMPS, private
+  PAYLOADS (selective disclosure)
+
+**L5 — SECTIONAL ENTITLEMENTS (refines L2/L3's unit law):**
+- Not whole-fork-or-nothing: buy RIGHTS TO ONE ARTIFACT (the Marvel-project
+  example: 40 rigged characters, you need ONE — purchase that artifact's
+  entitlement in credits instead of forking 40)
+- The new project stitches the artifact in → the receipt TRAIL PRESERVES
+  BOTH: the original custodian's provenance + the child's continuation
+  (lineage: stitched-from — attribution compounds, never breaks)
+- The license gate (honesty first): entitlements exist ONLY where the
+  creator's chosen license allows resale/reuse; nobody's rights get sold
+  without their own license saying so
+
+**HONEST WALLS for the expansion (do not overpromise, ever):**
+- Compliance-grade legal evidence = a different bar (legal hold, retention
+  law, chain-of-custody, audit certifications per jurisdiction). Our
+  checksums+stamps = tamper-EVIDENT (good), NOT court-grade evidence (yet);
+  aim: the registry layer = feasibility study only at this stage, possibly
+  its own product line later ("records" as the second product; the funding
+  platform stays the first)
+- Institution data = sensitive: adoption implies the passport/selective
+  disclosure layer FIRST + jurisdiction questions (PII, FOIA shapes) —
+  phase 5+ with real counsel
+- The pitch to institutions is NOT anti-fraud promises; it is tamper-evident
+  bookkeeping with public stamps and private payloads — understated, true
+
+**THE REFRESH (Gui asked to re-hear the parked decision, plainly):**
+We have two codebases: (A) the clean-room main line = small, strict, fully
+tested for the money-gate (SQLite, demo-green), and (B) compute-fund-v0 =
+the big rich one (Supabase+GitHub login, claims ladder, forks+rent, showcase)
+ALREADY DEPLOYED LIVE at compute-fund-site.vercel.app. Piece-porting (A←B)
+keeps growing (auth ✓, then claims, then forks/rent, then showcase...).
+Option B': flip it — v0 becomes THE front door (it is already live and rich)
+and the clean-room line becomes the test track where every new mechanism is
+proven before it lands in v0. My recommendation: decide AFTER Gui's test
+session — walk the clean-room first (it is the safest hands-on), then look
+at the deployed vercel site side by side, and pick the front door with eyes
+on both. No decision tonight.
