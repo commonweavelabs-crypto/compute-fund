@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
   pw_hash       TEXT NOT NULL,                -- scrypt: salt$hash
   display_name  TEXT NOT NULL,
   role          TEXT NOT NULL DEFAULT 'user', -- user only in MVP
+  supabase_user_id TEXT
   created_at    TEXT NOT NULL DEFAULT (datetime('now'))
 );
 

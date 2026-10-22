@@ -4,12 +4,24 @@
 preconditions: 1 GREEN (identity/direction clear) · 2 n/a · 3 PENDING (the
 budget caps below are PROPOSALS) · 4 SHIPPED (this doc IS the decision draft)*
 
-## 0. The one-sentence offer (NFX: the C-student pitch)
+## 0. THE THREE STAGES (Gui's reshaping, 10/22 — organic-first)
 
-**"We set up your project, run the models, and send you weekly receipts —
-you do nothing."** The done-for-you tier of compute funding: the pilot IS
-M1+M2+M3's first live demo — rounds, milestones, the outcome ledger, real
-receipts. Fund the machine by SHOWING the machine.
+**STAGE 0 — THE PIPE TEST (NOW):** Gui donates to HIS OWN CommonWeave projects
+inside the platform. Money in -> credits -> claims -> compute -> receipts. Zero
+public exposure; proves the PIPING before any audience sees it. ("I can donate
+to my own projects and see it working - test drive the plumbing.")
+**STAGE 1 — LAUNCH + ORGANIC (site live first):** the site UP and RUNNING (the
+MVP-gate sprint must land first), THEN $500 of ads (not on creators - on the
+PLATFORM): real visitors arrive, look around, and we WATCH: do people donate
+organically? Excitement + donations = the organic proof Gui wants ("people
+finding a project and being excited about the project and actually wanting to
+donate"). No donations after a reasonable window = the trigger for Stage 2.
+**STAGE 2 — THE SPONSOR PILOT (PARKED possibility - Gui approved 10/22):**
+"we set up your project, run the models, send you weekly receipts - you do
+nothing." The done-for-you demo (the original proposal, kept intact in section
+1) fires ONLY IF organic donations don't show - the fallback route, by his own
+design. NFX-aligned: never fake the market; take only execution risk until
+proven.
 
 ## 1. The shape (three weeks, one pilot, zero ceremony)
 

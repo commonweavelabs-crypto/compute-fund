@@ -66,6 +66,38 @@ transcript analysis; docs/NFX-ALIGNMENT.md). Not in stone:
 (Execution-risk-only pilot checklist + boundary-layer tracking live in the
 pilot proposal itself - see NFX-ALIGNMENT.md #3/#7.)
 
+### Phase 1 addition — THE THREE DOORS sprint (Gui's test-run plan, 2026-10-22)
+
+Gui opened the third stage: before ANY public opening, he runs the whole thing
+as its first real user (claiming + creating + funding his own work). Doors:
+
+- [ ] D1-AUTH: PORT THE SUPABASE AUTH from compute-fund-v0 (CORRECTION 10/22:
+  Gui was right - the setup session was real; v0 holds @supabase/ssr wiring,
+  auth.tsx, accounts.ts, supabase-schema-v4-accounts.sql AND src/app/api/
+  claims/verify = the claim flow ALSO exists in v0; the SPRINT-001 SQLite
+  rebuild left it behind; his Supabase account exists in the cloud already).
+  Decision pending: supabase-auth as PRIMARY (port, recommended) with SQLite as
+  local fallback, or re-verify email+pw first; his real account = already in
+  the Supabase cloud (v4 accounts schema); GitHub login via supabase OAuth = the
+  flow he tested
+- [ ] D3-CREATE-FLOW: creator workspace: /create (CFQ lint EXISTS already) +
+  image/logo upload (served statically; no third-party host) + repo/links
+  fields + DRAFT state (private, personal-profile workspace) + PUBLISH ->
+  public page + org/business-account creation under a user (transferable per
+  existing law - org page already renders from data)
+- [ ] D3-TEST: scripted integration tests for the whole create path (the
+  SPRINT-001 stranger-loop test pattern extended); feature/debug PAIRED
+- [ ] D2-CLAIM-FLOW: research-imported projects loaded as UNCLAIMED stubs
+  (from the link-archive pilot targets: MiroFish/last30days/colibri/tierllama)
+  + claim flow on the project page: maintainer proof -> executor role
+- [ ] D3-PILOT-PIPE-TEST (Stage 0 of PILOT-PROPOSAL): Gui claims HIS dogfood
+  project (tierllama bench row already seeded) + self-funds $50-100 + gateway
+  run + receipts public = the first REAL receipts story
+- [ ] MVP-GATE rerun with REAL USER (Gui): the stranger loop by the platform's
+  first actual user, on the deployed tunnel
+
+Build order: D1 -> D3 -> D2 -> tests -> Gui's walkthrough -> Stage 0 -> launch.
+
 ## Phase 3 — Sustainability rails
 - [ ] Platform fee % — community-voted (starts 0%; vote mechanism first, then propose 3–5%)
 - [ ] Printed compute spread on token dispensing (published %, receipts show it)

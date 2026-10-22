@@ -12,6 +12,12 @@ export function getDb(): DatabaseSync {
   if (!_db) {
     _db = new DatabaseSync(DB_PATH);
     _db.exec(readFileSync(join(process.cwd(), "lib", "schema.sql"), "utf8"));
+    // Schema drift repair for databases created before the auth port: the
+    // lazy initializer is the ONLY safe place for DDL (never at import time).
+    const cols = _db.prepare("PRAGMA table_info(users)").all() as Array<{ name: string }>;
+    if (!cols.some((c) => c.name === "supabase_user_id")) {
+      _db.exec("ALTER TABLE users ADD COLUMN supabase_user_id TEXT");
+    }
   }
   return _db;
 }
@@ -40,6 +46,28 @@ export function createUser(email: string, pwHash: string, displayName: string) {
   db.prepare("INSERT INTO users (id, email, pw_hash, display_name) VALUES (?, ?, ?, ?)")
     .run(id, email.toLowerCase(), pwHash, displayName);
   return findUserById(id);
+}
+
+
+// -- supabase identity join (the auth port; SQLite stays the ledger) -----------
+// The Supabase cloud profile is the front door; this row is the local ledger
+// identity. pw_hash stays blank for OAuth-only users (not null: the column is
+// NOT NULL — the sentinel means "no local password set").
+export function ensureUserByEmail(email: string, displayName: string, supabaseUserId: string) {
+  const em = email.toLowerCase();
+  const existing = db.prepare("SELECT * FROM users WHERE email = ?").get(em) as
+    { id: string; supabase_user_id?: string | null } | undefined;
+  if (existing) {
+    if (!existing.supabase_user_id) {
+      db.prepare("UPDATE users SET supabase_user_id = ? WHERE id = ?").run(supabaseUserId, existing.id);
+      return db.prepare("SELECT id, email, display_name FROM users WHERE id = ?").get(existing.id);
+    }
+    return existing;
+  }
+  const id = newId("usr");
+  db.prepare("INSERT INTO users (id, email, pw_hash, display_name, supabase_user_id) VALUES (?, ?, ?, ?, ?)")
+    .run(id, em, "oauth-no-local-password", displayName || "patron", supabaseUserId);
+  return db.prepare("SELECT id, email, display_name FROM users WHERE id = ?").get(id);
 }
 
 // -- projects ----------------------------------------------------------------
