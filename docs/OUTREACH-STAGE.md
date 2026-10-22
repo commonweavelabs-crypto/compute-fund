@@ -251,3 +251,12 @@ When the MVP gate passes (stranger-loop + Gui walkthrough clean): say "The
 outreach stage is open — Pj first, then the maintainer wave; the resources:
 OUTREACH-STAGE.md 6-8 + the outreach-strategy tag + the last30days run." Gui
 re-reads, edits the drafts, gives the send-word per contact.
+## 10. THE FOURTH LEG (the user pitch gains data wealth — 10/22)
+
+Link: docs/DATA-WEALTH-LAYER.md (GATE+2). The patrons/creators/audience get a
+promise beyond excitement: the work funded here KEEPS EARNING — outcomes
+become tradeable findings (data-tokens denominated in compute credits), and
+the receipts route the credit to the custodians who made the findings. The
+first-funded spotlight + the data-wealth tail = a harder pitch than any
+competitor: fund once, stay credited forever. (Walls unchanged: cash returns
+= never; creator licenses decide ownership.)

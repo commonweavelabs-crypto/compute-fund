@@ -98,6 +98,25 @@ as its first real user (claiming + creating + funding his own work). Doors:
 
 Build order: D1 -> D3 -> D2 -> tests -> Gui's walkthrough -> Stage 0 -> launch.
 
+### GATE+2 milestone — THE DATA WEALTH LAYER (Gui's second architecture, 2026-10-22; after OUTREACH-1)
+
+The thesis: all platform-generated data is WEALTH — open, value-generating for
+the PEOPLE (custodians/maintainers/creators), never concentrated (the HEPHAESTUS
+law extends to data). The receipts + artifact checksums = the provenance spine
+(already designed): when data gets used, credit routes to exactly who made it.
+The instrument: MEMORY/DATA tokens = TRADE CLAIMS on pre-computed work,
+denominated in compute credits (ONE asset class — no securities exposure);
+a project needing an answer pays the project that already did the work in
+credits instead of re-deriving. CUSTODIAN = the honored role.
+WALLS (cannot promise, ever): cash returns to users (securities trip-wire);
+ownership over creator outcomes (their license decides — default open).
+Schema hooks from day one (free): artifact checksums + receipt ids + license
+fields. Full brainstorm: docs/DATA-WEALTH-LAYER.md (the loops, trade mechanics,
+name candidates, open questions).
+
+- [ ] WEALTH-1: data-trade marketplace design (artifact-priced credits +
+  escrow) + the receipt-attribution split + the custodian credit layer
+
 ### GATE+1 milestone — THE OUTREACH STAGE (Gui's order, 2026-10-22)
 
 Fires when: MVP gate FULLY tested-robust-ready + Guis walkthrough clean.
