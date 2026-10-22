@@ -98,6 +98,19 @@ as its first real user (claiming + creating + funding his own work). Doors:
 
 Build order: D1 -> D3 -> D2 -> tests -> Gui's walkthrough -> Stage 0 -> launch.
 
+### GATE+1 milestone — THE OUTREACH STAGE (Gui's order, 2026-10-22)
+
+Fires when: MVP gate FULLY tested-robust-ready + Guis walkthrough clean.
+THE REVIVAL: docs/OUTREACH-STAGE.md is the standing plan (Pj first — two-lane
+partner: hosts projects AND makes content; email wave to maintainers; organic
+momentum first, paid hybrid later; the first-funded spotlight pitch; ask Pj's
+content prices in the DM). The lookout order: MORE two-lane creators
+(agent-native + DM-reachable + regular output) — tags: two-lane-creator.
+
+- [ ] OUTREACH-1: open the outreach stage ( revival: read OUTREACH-STAGE.md
+  back to Gui; Pj DM = prices + partnership; email wave per the claim-ladder
+  contact plan; content partners produce the receipts story)
+
 ## Phase 3 — Sustainability rails
 - [ ] Platform fee % — community-voted (starts 0%; vote mechanism first, then propose 3–5%)
 - [ ] Printed compute spread on token dispensing (published %, receipts show it)
