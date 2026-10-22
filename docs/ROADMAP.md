@@ -110,6 +110,11 @@ content prices in the DM). The lookout order: MORE two-lane creators
 - [ ] OUTREACH-1: open the outreach stage ( revival: read OUTREACH-STAGE.md
   back to Gui; Pj DM = prices + partnership; email wave per the claim-ladder
   contact plan; content partners produce the receipts story)
+  RESOURCES ready at the trigger (research 2026-10-22): OUTREACH-STAGE.md #6-8 =
+  THE MARKET (P1 maintainers / P2 two-lane creators / P3 patrons + the
+  ads-targeting shortlist) + THE STRATEGY LIBRARY (the outreach-strategy
+  tag in the archive) + THREE sample emails (maintainer/creator/DM) +
+  docs/OUTREACH-RESEARCH-20261022.md (the last30days evidence run)
 
 ## Phase 3 — Sustainability rails
 - [ ] Platform fee % — community-voted (starts 0%; vote mechanism first, then propose 3–5%)
