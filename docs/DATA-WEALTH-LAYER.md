@@ -427,3 +427,61 @@ name off + change the handle ≠ forgotten. Two reasons:
 pack memberships, tombstone state) = GATE+2 account-model fields; test order
 in the clean-room: floor stamps → name overlay → handle change → tombstone
 rebind → org pack on a member receipt.
+
+## 15. THE JURISDICTION LAYER, CORRECTED (Gui's clarifying round, 10/22 late)
+
+His reading (confirmed-with-corrections): tombstone = the human becomes
+unknown on OUR platform (name + handle erased/archived; the account shell =
+a visibly retired "unknown" with the work intact). TRUE in substance. And:
+"whatever is on the blockchain is out of our jurisdiction." TRUE in control,
+OVERREACHED in law — two corrections:
+
+**CORRECTION 1 — NAMES NEVER TOUCH THE CHAIN (the design law this round
+earned):** whatever the toggle state, chain stamps carry ONLY pseudonymous
+data: account-ID/hash, checksums, pack states, lineage. The NAME lives
+ONLY in the platform DB as the public-figure OVERLAY (erasable by
+tombstone). Consequences:
+- Nobody's NAME is immutable anywhere — not even public figures'. The
+  IMMUTABLE thing = the WORK's provenance (which is all the historian
+  needs): the receipts stay attributable to a persistent pseudonymous
+  identity whose public-era association with the person existed in the
+  world (community memory, mirrors, press) — not in our writes, not on
+  chain
+- This makes the chain minimal-personal-data BY CONSTRUCTION = the
+  strongest defensible posture (and cheaper stamps)
+- His Gates scenario still LANDS: the org-pack requires chain-stamping →
+  the WORK is provably Microsoft's-CEO's-era work forever (stamps +
+  lineage); the NAME association survives via the public era, not via
+  chain-resident names. Erasure he CAN get (our overlay); the world's
+  memory nobody can erase. The honest balance he actually wanted.
+
+**CORRECTION 2 — NO IMMUNITY ILLUSIONS:** "user chose a third party → we
+can't be sued" is not how liability works: WE (or our infra) operate the
+stamping pipeline, so we remain an acting party. The REAL defense stack:
+(1) explicit user CONSENT at stamping (disclosed, opt-in, permanent-choice
+warning BEFORE first stamp), (2) chain stamps = pseudonymous/minimal (C1),
+(3) the tombstone = good-faith erasure of everything WE control, (4) the
+archiving/historical-research exemptions (Art. 17(3)), (5) org-required
+stamps = disclosed as the ORG's requirement (the requiring party owns it).
+Defensible, never immune. Our job = make consent real and data minimal.
+
+**THE FRAUDSTER QUESTION he raised (erasure ≠ amnesty):** a fraudster
+invoking the tombstone does NOT erase their trail: the receipts, stamps,
+lineage, compliance flags (§12) all REMAIN — pseudonymous but queryable as
+one account-shell; the name-link goes, the evidence stays; legal-claims
+exemptions cover retention anyway. Erasure removes the person, never the
+record. (The work is not the person — that's the whole architecture.)
+
+**CONFIRMED:** the join-or-don't framing: compliance = the project's terms;
+the user's real choice = join-with-requirements or don't-join.
+
+**RISKS DISCLOSED TO USERS (the consent screen lists these):**
+- First-stamp permanence: chain-stamped receipts are irreversible
+  (toggle-off = prospective only) — warned at enable time
+- Public-era association cannot be recalled: while public-figure is ON, the
+  person↔account association propagates (screenshots, mirrors, memory);
+  toggling off ≠ recalling the era
+- Public-identity harassment exposure: name + work = a doxxing surface;
+  sealed class + org packs mediate, never eliminate
+- Tombstone ≠ fresh start mid-career: retirement is the ONLY unlink; ongoing
+  accounts always correlate (§14)
