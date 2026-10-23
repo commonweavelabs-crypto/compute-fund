@@ -655,3 +655,71 @@ All three: same provenance spine (receipts+checksums), same rent routes,
 zero new mechanisms. The USER EXPERIENCE = maneuvers (fork / merge /
 claim / fund), not paperwork — his closing instinct, kept verbatim: "you
 maneuver yourself within the platform."
+
+## 20. THE LICENSE COMPETITION (Gui, 10/23 — the game-theory guess + the pushbacks)
+
+THE GAME AS DESIGNED (the surfaces already built): permissive = the full
+maneuver stack; copyleft = full-minus-fork (until C5); NC/ND/BSL/none =
+full-minus-fork + a visible closed seal. Three gradients press toward open:
+(1) DISCOVERY: the fork/convergence graph = the community engine — a
+closed-license project = an ISLAND (no forks = no fork-tree discovery, no
+convergence feed, no lineage community) — structural, not censorship
+(2) TRUST: standing math favors open disclosure (verified-use + open
+artifacts = the strongest signals → bigger claim sizes, lighter review,
+showcase rank)
+(3) THE RENT ECONOMY: an open artifact gets USED — every in-platform use =
+rent + verified-use compounding; a closed artifact = idle (nobody can
+reuse it). Openness profits ON OUR RAILS by being reused, not by gating.
+Scarcity note (honest): closed receipts = scarce = high spot-price/low
+volume; open = low-price/high-volume/compounding — the market can price
+either; the rails stay neutral, the GRADIENTS do the persuading.
+
+THE EQUILIBRIUM PREDICTION (educated guess, per the game):
+- Small/indie projects flip fast — exclusivity is worth little to them;
+  the fork-community + discovery + reuse-rents are worth a lot
+- Medium projects try hybrids (the real-world pattern: open core +
+  restricted edge) — the platform handles hybrids fine (per-artifact
+  license seals; the maneuver stack applies per receipt)
+- Incumbents with brand/trust moats stay closed and lose the
+  compounding network — becoming the "legacy licenses" Gui predicts
+- THRESHOLD EFFECT: once open projects' funded-share passes critical
+  mass, switching becomes a wave (network-effect bootstrapping = the NFX
+  law; the cold-start risk = N-2 in the risk register: restrictive
+  incumbents arrive with liquidity — supply-side P2 seeding = the answer,
+  already the plan)
+- OWNERS CAN SWITCH, but only PROSPECTIVELY: released versions stay
+  governed by the license they shipped under; a relicense = a receipt-of-
+  record (versioned license event); our frozen-at-fork law already
+  snapshots license-at-event-time (C5's family inheritance reads the
+  snapshot)
+
+THE PUSHBACKS (where Gui is wrong — labeled and stated):
+1. THE REVERSE-ENGINEERING INEVITABILITY ≠ LICENSE INEVITABILITY. AI
+   recreates code-adjacent assets faster than ever — directionally his
+   point holds. But the LEGAL world doesn't vanish with it: DMCA takedowns,
+   EULA/§1201 claims, courts (the ones we route AROUND for our flows — the
+   world still uses them), platform bans. Open clones of closed products
+   live gray, get sued, die on app stores. The CLEAN route for a closed
+   incumbent isn't a clone — it's OUR RAILS: get funded to open up, keep
+   the stewardship, earn the reuse-rents. Compute Fund should be the
+   open-up ladder, never the pirate bazaar (the publish floor +
+   takedown-respect stands; legal suicide refused).
+2. CLOSED ≠ VALUELESS — the un-cloneable moats survive recreation: brand,
+   trust, stewardship, timing, relationships, community. Code moats erode;
+   TRUST moats don't — and trust is exactly what receipts mint. Our thesis
+   upgraded: in a world where everything gets recreated, the value shifts
+   from HAVING the artifact to being its PROVEN CUSTODIAN — which is
+   precisely the platform's product (don't compute what's computed: pay
+   the rent; don't re-earn trust: carry the receipts).
+3. SMALL CORRECTION ON "OPEN WILL PROFIT": profit here = platform-side
+   income (funding + reuse-rents + standing), never gate-rents for
+   closed... AND the rails stay neutral-by-design: the seal isn't a fine;
+   if closed scarcity wins in some niche, that's M9-emergent behavior, not
+   a failure. We tilt, we don't force. The M9 votability = the pressure
+   valve if the gradient overreaches.
+
+MILESTONE NOTE: no new milestone — this round = gradients already encoded
+(fork table C5-update, standing math M4, seals showcase-layer, rent rails
+§16/§18/19). The one watch-item: measure the funded-share of open vs
+closed at the pilot (the threshold-effect evidence — a receipts question
+we can answer with our own data; add to pilot metrics).
