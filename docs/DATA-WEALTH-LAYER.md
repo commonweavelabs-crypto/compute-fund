@@ -485,3 +485,62 @@ the user's real choice = join-with-requirements or don't-join.
   sealed class + org packs mediate, never eliminate
 - Tombstone ≠ fresh start mid-career: retirement is the ONLY unlink; ongoing
   accounts always correlate (§14)
+
+## 16. THE MERGE + THE CONVERGENCE SIGNAL (Gui, 10/22 late night)
+
+**THE VISION (accepted — it completes the fork):** forks today diverge and
+never rejoin (the famous OSS reality: long-lived forks stay split). Gui's
+instinct: if the platform shows forks working the same direction RISING in
+parallel, it should make joining CHEAPER than competing — team up, pool
+resources, put lineages together. Game theory: cooperation must be the
+smooth path. THE MERGE = fork-in-reverse.
+
+**THE MECHANISM SKETCH (v0, mutual-consent only):**
+1. THE DAG-JOIN: lineages are chains; a merge = a join receipt with TWO
+   parent edges (git's merge-commit shape). Shared-ancestor forks get the
+   common prefix deduped automatically; cross-lineage merges = a fresh root
+   with both lineages as parents. Provenance survives BOTH sides forever.
+2. THE MERGE CONTRACT (the prenup — the real work): one on-receipt artifact:
+   who brought what (contributed receipt ranges), credit/veto/exit rights,
+   charter adoption (superset or side B's), name resolution (one canonical;
+   the other tombstone-marked "merged into X"), rent allocation.
+3. RENT INHERITANCE: the merged project inherits BOTH parents' one-hop rents
+   — proposal: capped (max of the two, not the sum) — the ancestor collects
+   its due once, not doubled. (Also the honest upside: two single forks each
+   paying 10% rent become one project paying max(10%,10%) = the merge SAVES
+   rent = a real economic pull toward cooperation. Watch it: it must not
+   become a consolidation weapon — M6.2 accumulation-gravity rules apply.)
+4. PERSONAL RECEIPTS SURVIVE EVERYTHING: the merge moves PROJECT lineage,
+   never user receipts — passports untouched (the property that makes
+   merging safe to try: your record never merges away).
+5. THE UPSTREAM MERGE (the special case = the OSS loop closed): a fork
+   merging BACK into its parent = our version of the pull request — the
+   parent's custodian reviews; acceptance mints the upstream-merge receipt;
+   the fork's author gets credited in the parent's lineage + a claim for
+   the review work (the claim ladder feeds it — the maintainer pain point
+   from outreach P1 finally has its payment rail).
+6. THE CONVERGENCE SIGNAL (the discovery mechanism he described): the
+   platform watches lineage siblings' velocity; when 2+ forks rise in
+   parallel on the same direction, the discover page surfaces "converging
+   work" — a NUDGE, never an auto-merge. Competitors become visible to
+   each other; the platform never pushes them together.
+
+**THE PUSHBACKS (his "tell me if I'm overcomplicating" reverse):**
+- NOT overcomplicated — but the SPLIT between easy and hard must be honest:
+  LEDGERS merge easily (append + DAG-join); ARTIFACTS do not. Two game
+  engines can't auto-merge code. The merged project starts with both as
+  sources + an integration milestone series (merge-plan receipts). The
+  contract + the work = the creators'; the platform receipts the process.
+- WASH-MERGE GUARD: merging must never MINT standing (standing recomputes
+  from real receipts; a merge only unions lineages) — no sybil farming of
+  "bigger pool" illusions.
+- MERGE-AS-TAKEOVER: mutual consent + free exit (the split law stays
+  available) + gravity rules. Cooperation without lock-out — the only
+  stable cooperation.
+- The two timeline versions he described are BOTH real and BOTH kept:
+  business-account co-fork = the day-one version (start together); the
+  merge = the converge-later version. Same mechanism family, opposite
+  ends of time.
+
+**PROMOTION NOTE:** this section promotes to GAME-THEORY-MECHANISMS as
+M-THE-MERGE at the next consolidation pass (with the fork suite in M6).
