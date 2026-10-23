@@ -544,3 +544,17 @@ smooth path. THE MERGE = fork-in-reverse.
 
 **PROMOTION NOTE:** this section promotes to GAME-THEORY-MECHANISMS as
 M-THE-MERGE at the next consolidation pass (with the fork suite in M6).
+
+## 17. THE RECIPE-OUTPUT PAIR (Gui, 10/23 morning — "prompt stamped into receipts")
+
+His question: the Opus-videos gallery shows outcome + prompt together — is
+that in our receipts? ANSWER: the data model supports it (artifacts are
+first-class receipt objects; prompts can be artifacts; disclosure =
+default-open). ADDED to the designs (roadmap: under SHOWCASE LAYER):
+1. **RECIPE ARTIFACT TYPE**: prompt + output PAIRED as one minted object
+(the Skillry pattern — outcome playing, recipe underneath, both checksummed)
+2. **THE RECEIPT VIEWER**: hero/discovery cards render outcome + recipe (the
+cards already 80% there; this extends them)
+3. Disclosure = a choice (open default / sealed class — the receipts law);
+the PAIR = the natural data-token unit; remakes link via stitched-from
+lineage; the wedge stands: 703 credited authors earning nothing.
