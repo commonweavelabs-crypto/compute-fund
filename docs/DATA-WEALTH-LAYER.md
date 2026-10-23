@@ -788,3 +788,7 @@ keeps the magnet spinning at scale:
   association that's VISIBLE): the roster + co-sign receipts on the page =
   the legible signal, without the fake number. (Goodhart guard: display
   the true receipts, not a smooth metric people will game toward.)
+
+**ACCEPTED by Gui (10/23, verbatim): "Earned not average!"** — the joint-meter
+law confirmed: project reputation = co-written receipts + explicit co-signs;
+identity-averaging = dead. Promote to the SPEC-V2 pass.
