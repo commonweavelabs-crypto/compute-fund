@@ -219,3 +219,51 @@ proven before it lands in v0. My recommendation: decide AFTER Gui's test
 session — walk the clean-room first (it is the safest hands-on), then look
 at the deployed vercel site side by side, and pick the front door with eyes
 on both. No decision tonight.
+
+## 11. THE TEST CASE (10/22, researched): Navier-Stokes / OpenAI vs Buckmaster-Alpöge
+
+Gui's memory was directionally right; the file (links/navier-stokes-priority-
+controversy.md + catalog #627) holds the verified receipts. Short form:
+OpenAI announced a NS-variant proof Sept 8 2026 (10k agents, 88h, internal
+model, Lean formalization, ~$22.5M compute reported). 12 HOURS before,
+Buckmaster (Courant) published that his + Alpöge's Aug-15 Euler/IPM/Boussinesq
+advances were LEAKED to OpenAI days earlier; a year of their secret work had
+run on LLMs from BOTH labs (Codex included). OpenAI first denied seeing any of
+it, then admitted session data as "de-identified, derived" training material;
+offered Buckmaster authorship of a rewritten proof + the $1M Clay prize
+("closest humans to the problem") while keeping the method/model internal and
+excluding Alpöge; he declined. 28 Fields Medalists then signed a misalignment
+warning. Public: the proof. Private: the method, the model, the credit
+posture.
+**THE OPINION Gui asked for (honest):**
+- Does the Data Wealth Layer accomplish decentralization of discovery? On the
+  MEASURABLE conditions, yes: (1) provenance on-record before need (their
+  Euler advances as timestamped chapters → the leak dispute adjudicates
+  itself from data, no tribunal), (2) fork economics route rent to lineages
+  AUTOMATICALLY (a company adopting the Córdoba–Martínez-Zoroa programme on
+  our rails = a fork = rent owed), (3) discovery ownership = the holding
+  fork's (Gui's law, below), (4) the custodian/standing layer = credit that
+  persists. The counterfactual is the pitch: their year on OUR rails = no
+  press-release war, just receipts.
+- The LIMIT we cannot legislate: our economy cannot force an OpenAI-sized
+  lab to run its internal research through our ledger. Decentralization here
+  means: the OPEN route becomes the profitable-default route (provable work,
+  automatic attribution, rent by design) — so the next Buckmaster-Alpöge
+  collaboration has a better place to stand. Pull, not force.
+- QUANTIZATION (Gui's "can we measure the 80%?"): no principled percentage of
+  human-vs-model contribution exists; anyone claiming one is selling
+  something. What we CAN measure and pay on: WHO HELD WHICH RECEIPT WHEN.
+  The market prices the receipt; the fork-rent chain compensates the lineage;
+  the checkpoint unit of credit is the chapter/receipt, not a %.
+- THE CASCADE LAW (Gui's question, stipulated 10/22 — brainstorm-v0.1):
+  1. Post-fork DISCOVERIES belong exclusively to the holding fork (his law —
+     ACCEPTED as default): a bought NS-receipt pays the fork in full.
+  2. The DIRECT parent's one-hop rent (v0: 5-20%, default 10, frozen at fork
+     time) applies to the fork's revenue INCLUDING discovery sales.
+  3. Deeper ancestors (grandparent+): NOTHING by default (v0 one-hop law).
+     Parked-votable alternatives: (a) keep one-hop — simple, predictable,
+     already grandfathered everywhere; (b) decaying cascade — hop-2 gets a
+     share of the rent (rent-on-rent), thin at depth; (c) VOLUNTARY
+     custodian tips — winners thank their lineage by receipt-attributed tip,
+     no mandate. RECOMMENDATION: (a) default + (c) as a feature; revisit (b)
+     only if real market data shows ancestors systematically unpaid.
