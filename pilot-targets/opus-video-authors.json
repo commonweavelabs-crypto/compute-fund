@@ -1,0 +1,3096 @@
+{
+ "source": {
+  "repo": "yihui-dev/awesome-opus5-5-videos",
+  "license": "MIT (public data; only public author credits harvested)",
+  "harvested_by": "windows-hermes",
+  "harvested_at": "2026-10-23",
+  "method": "one github tree call + filename parse + one sample content read; no private data"
+ },
+ "stat": {
+  "prompt_files": 703,
+  "unique_handles": 616
+ },
+ "legend": "handle = X/creator credit from the repo filenames+credits; weight = prompt count in the gallery; status = candidates-seeded (NOT contacted; verify handle activity at outreach time; some handles may be aggregators - top ones like buildfastwithai ARE aggregator accounts: flag)",
+ "targets": [
+  {
+   "handle": "aichrislee",
+   "weight": 7,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "curieuxexplorer",
+   "weight": 7,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "twoclipping",
+   "weight": 7,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "buildfastwithai",
+   "weight": 4,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "gdgtify",
+   "weight": 4,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sudo-kiran",
+   "weight": 4,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ajith-io",
+   "weight": 3,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "apoorvjain25",
+   "weight": 3,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dotey",
+   "weight": 3,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kamstudiolabs",
+   "weight": 3,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "konstantinsaifo",
+   "weight": 3,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mdaman010",
+   "weight": 3,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "op7418",
+   "weight": 3,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "petert",
+   "weight": 3,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rneayan",
+   "weight": 3,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "techartist",
+   "weight": 3,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xlangeai",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xvalure",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "1littlecoder",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "acoramaa",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "agioyaz",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "aiwarts",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ambiguous-ai",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "annacher",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "arumii-movie",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "chrisjdimarco",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "chudry223",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "deedydas",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "deeprajo1",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "flxrnc",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "fornyapayzeka",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "gandamu-ml",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "georgejimenez98",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "godsboy7777",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "humzaakhalid",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ishuagra02",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ivanainai",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "juancarlos17626",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kewai386772",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kingokings",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kloss-xyz",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "l3d1c",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "llama3dstudio",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mtvneo",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nft-chen",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "notdwd",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "retropunkai",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rossaxbt",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sanjeevn72",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tanabe-fragm",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thallisribeiro",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thusatharan",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "topi-003",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "wikiwayne",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "youwareai",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "zacxbt",
+   "weight": 2,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xchuckstock",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xcodez",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xevinho",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xfemyn",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xkarmi",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xnfrith",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xnicc0",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xpai-eth",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xrapzz",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xrathi",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xsolty",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xspikez",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xverdao",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "0xwast3",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "1234lust",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "1stnoel",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "aayush4soni",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "abderrahmen-g",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "abhinavflac",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "abhinayguptha",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "abyssalld",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "adomicael",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "adrianduta96",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "advait-jayant",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "agentgamesbot",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ai-ba-reza",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ai-baymax",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ai9app",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "aiaircle34052",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "aicreataro",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "aidinzeo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "aijipusi75693",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "aimevzulari",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "airobertdaily",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "aisongman",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ajthemongol",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "akakuma0219",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "akokoi1",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "alanschwegler",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "alex-leiro",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "alex-prompter",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "alex-vainshtein",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "alexalbert",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "allforbigfire",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "allodev",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "als-link",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "amberpromptai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "amitsingha89",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "amol909s",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "anabology",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "anas0ra",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "andginja",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "andre-lucaxxs",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "andrewmichaelsa",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "andriyfernandes",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "anduraio",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "angie-carel",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "anilraok",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "anirockshady",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "anjmaxx",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ann-nnng",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "archiveexplorer",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "argbeknwn",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "arixxbt",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "arjunsh1607",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "arthurkatcher",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "artless101",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "aschapmann",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "asei-ikarashi",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "astroboysoup",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "astrodevil",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "astrothewizard",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "atif-0075",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "axtonliu",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "aydenspringer23",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ayi-ainotes",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "aylmerth",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ayumi-t820",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "bilimfili1",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "bitcoinrui",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "bitfish",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "bizibeast",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "blitast-studio",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "blueoctopusai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "bogdandragomir",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "boona11",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "bradmillscan",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "brainextends",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "brainwavepub",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "brenbuilds",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "bridgemindai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "btc5887899",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "btcup99",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "bthreeagency",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "builtbysketch",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "byaiden-vu",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "cagrimbakirci",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "cansincengiz-me",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "cboyack",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ceowinkz",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "cgclick",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "chang",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "chapi13",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "charlesmendez",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "charlessieg",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "charliie",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "charumitradubey",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "chatgptastra",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "cipherwrk",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "claudecode-ut",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "codrops",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "colecornelll",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "cryptowluha",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "cryptoxorz",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "cyrilxbt",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dale-vaz",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dan-proggg",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dan-riverbendai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "daniel-haida",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "daniel-mac8",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dannyverkissen",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "daverogenmoser",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "davidmarcus",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "davidshulmanfl",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "deebeeeff",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "deifosv",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "demitiyageekzen",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "demonugc",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dengent",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dhanrajdc",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dheepanratnam",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "diamai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dimoff2000",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "djadkison",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dmowlin",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "doubleunplussed",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "drake5112",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dreyk0o0",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "drishtantk",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "drrickio",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dustindavis",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dys-hay",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "dzhohola",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "earthwalkerx17",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "egawa-ai-design",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "egeberkina",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ehsanik",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "eigeorguy",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "eleanorina",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "elitzavasileva",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "elkrispis",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "emollick",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "engmoelgaraihy",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "enhanced-jp",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "envoldev",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ercankeskinx",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "eric-khun",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "essjaykay755",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "everestchris6",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ewashoku",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "explorations-iq",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "eyadnour",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ezshine",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "falcong-j",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "fanfulladev",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "faroukzy",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "federicoaltepo1",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "felipemoller",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "filicroval",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "financeyf5",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "fire-ozgur",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "fleyta88",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "fr-sorrentino",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "fractadev",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "francoxavier33",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "friskyggg",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "froessell",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "fumiyamizuguchi",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "gabzofar",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "garmdotcom",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "gautam-mer1",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "genelab-999",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "generussai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ggsimm",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ghinaiya-nirmal",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "gigabit-million",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "gizakdag",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "gkxspace",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "gmgmgm1545",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "goldiez2599",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "gonzalomacagno",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "goofyninjaaa",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "gorden-sun",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "gouthamjay8",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "grace-sunnyy",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "groundcontrol",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "hahazwei",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "hakimieiqbal",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "happycapyai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "haribuilds",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "helloshiva0801",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "hellovyom",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "henkpoley",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "henkvaness",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "henritoivar",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "henrygsing",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "heyiammallik",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "heyiamnick",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "heymrzak",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "hicallmechai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ho-ba",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "howdevelop",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "howlemont",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "hoyoyoda",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "hsanat",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "hugon001",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "hunzai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "iammukeshm",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "iammxfschr",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "iamshankhadeep",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "iamtanzil",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ik-builds",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "iliareingold",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ilyapion",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "imryven",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "imthatcarlos",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "incognitoprince",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "iniyanai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "inoue-aix",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "irinatoxi",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ishaaqahamed",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "itakahashikun",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "itisrazak",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "itsahmedharoon",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "itsjdraven",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "itsolelehmann",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "itsyashf",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ivysparkleai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "izmaelmag",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jackfriks",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jake11moran",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jakubantowski",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jamee-now",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "janeloic",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "janlaywss",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jarvis11x",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jasondainter",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jasperdeboer",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "javi-llofriu",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jayscambler",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jazzen-chen",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jdverolme",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jhylee95",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jiro-aicompany",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "joao-felixl",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "johncodunayo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "johnmckeownn",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "johnsavage-ai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jrayon",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "jstjs",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "julianpscheid",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "justincooperman",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kadaliao",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kaiyu-ai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kantamk",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kenjiphang",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kepochnik",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kgonia7",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "khlaseek-dsgner",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kikelopezdesign",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "king1818888",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kisaka-ki",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kisalay",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kmasiff",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "koldo2k",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kopert0x",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "koushikde",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ksmialowski",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kum1ta",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kurahu-capten",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "kureshirfan",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "lalulu-create",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ldataengineer",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "leandroriviello",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "leanzubrezki",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "lemcosmos",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "leo114119",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "leowenai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "lepadev",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "lester-tyy",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "lexnlin",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ligayabeebe",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "linearuncle",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "linke1427832",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "lisp-mi",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "listudio",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "lnkiai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "localjulius",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "loicrambo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "lribes4",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "lukasersil",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mablesjoseph",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "macrohou",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "madebyjmayala",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "madhav-xo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "madpencil",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "majidmanzarpour",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "majin-appsheet",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "majorbaguette",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mandelduck",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "manuelogomigo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mappletour",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "marklaunches",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "maruo-0314",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mattbean",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "maxalexweber",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "maxhirsch13",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "maxthelion",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mayuresh-empire",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "meetarno",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mehul4795",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "melvynx",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "miaai-lab",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "michaelraspuzzi",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "michaelzsguo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "micheleharmonic",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "miguel07code",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mileson07",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "milos-gis",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "minochan0824",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "miskinho",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mizugame-22",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mochi-agi",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "modaalbuilder",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "moguzbulbul",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mondemsuraj",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "monokern",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "moritzkremb",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "morse",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mounnna",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mouri45",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mousszy-baby",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mozetech",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mrblock",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mrkindey",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "muhamma61700589",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "mycodecoach",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "myonisto",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "n01ennn",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nakazakifam",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nathanwilbanks",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nehalmax",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nemtudo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nezbuilds",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nicolamanzini",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "niebin-gg",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "niegramotny",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "niirajrshah",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nikolajankovic",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nilou-salehi",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ninjaswebcom",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nischalsharma",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "noah-z-zhang",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nofollowers2023",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nolit64",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nolkeeg",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nonbiri-ai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nqaze",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nummanali",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "nybobs",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "oab10don",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "obydulme",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "okapi-fukugyo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "okazaky",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "oliahmed205",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "onewaysidewalks",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "opener-ai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "otatechie",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "oxpsats",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "pagustafsson",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "palashbagchi11",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "pankajkumar-dev",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "paripune",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "parkerrex",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "paulo-kombucha",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "pbteja1998",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "per-simmons",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "perezalexa23",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "pisajeski",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "piyushaaryan2",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "pluginplay",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "pluvio9yte",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ponzponz15",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "pound75423",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "pradeepxkapoor",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "pranavclickks",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "prasad-pilla",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "prasenx",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "priyansh0327",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "proanaliteg",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "punit-io",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "q970270495",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "qianqiongge",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "qinelke",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "quickdesignio",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rafiroutes",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rakhsh-tech",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rames-jusso",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rammanq",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "raphaelaubryy",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rashadmirza404",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ratheejaisal",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "realfedeuru",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rebutonepress",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "redp314",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "redpersongpt",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "reflex-cloud",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rehan-shei",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "renmu2017",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rishit30g",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "riverroadlabs",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "riyadbkhsh",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "robvjourney",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rohanpaul-ai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ror-fly",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "roundtablespace",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rpa-dake",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rubenssoto-ai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "rush3rx",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ryan-morr",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ryzoft",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "saadpastadev",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sab8a",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sachaarbonel",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sadalbert10",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "safaelmali",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sahilvermaai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "salmanr2d2",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "saltyaom",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "samaote",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "samissudo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sammmaing",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "samuel-spitz",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sanjay-khadka07",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sarut0bisasuke",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "saxxyweb3",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sayan-shanky",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sciencedegens",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "screeendev",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sdinesh91",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "seantiffonnet",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "seri-nonnon",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "shengtang135754",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "shunshu32385143",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "signalz-jp",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "simonasltu1",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "slvdev",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "smallhusk",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "smitjaineditor",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "so-ainsight",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sonali-sahu-09",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "songkeys",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "soumymaheshwri",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "souradip3000",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "souravbhar871",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "spacyapps",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "spearwtf",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "sportyblocks",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "stefanostraus",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "stephanferraro",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "stewchan2",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "stokebuilder",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "subraiz24",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "superalesha",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "supremebeme",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "suryarajendhran",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "syntheticbeef",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "t4k1ra-cg",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tak3sh8",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tankazunori0914",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tarunyadav9761",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "taylorbereiter",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tdinh-me",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "techhalla",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "techtactician",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "techyoutbe",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tejasthange3",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "teleboost-app",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "testlandblog",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tetsu-tetsu333",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thebuggeddev",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thegawdstiles",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thegreatola",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thegrootdev",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thejohnnyhuy",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "theparuchh",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thesethian",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thewevr",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thilina-a",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thinkszyg",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "threeaus",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "thuggy-juice",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "timguignard",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tkz-aiart",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tomandrieu96707",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tonka1981jp",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tonnusos",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tony-tt",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tonysurix",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "triglyceee",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "truenyl",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tstfully",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "tycenjm",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "typingmusou",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "uinerd",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ultimaxbt",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ulyssexbt",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "utsavchopra30",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "vahidf24",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "vectorcrossprod",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "ved-cj",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "verbove",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "vibechine",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "vic305",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "victortaelin",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "vignesh-rav",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "viktoroddy",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "vince-builds",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "voxyz-ai",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "wangyinrec",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "wani-shola",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "waseemkhalo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "washow-cfo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "wilzerjb",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "woojinrad",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "wozu-co",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "wustep",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "wzarok",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "x4b47x",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "x7mdnet",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "xamfonos",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "xanares",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "xanderwow-a",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "xelandre",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "xenit-v0",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "xodud-rkd",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "yama-kiyo",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "yanivm79",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "yankis0x",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "yanliudesign",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "yarhmm",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "yatudou14",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "yunn260414",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "yuyudora622",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "zakisbuilding",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "zeezomb",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "zhang-baoqing",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "zheke",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "zhu185178",
+   "weight": 1,
+   "status": "candidates-seeded"
+  },
+  {
+   "handle": "zigapoto",
+   "weight": 1,
+   "status": "candidates-seeded"
+  }
+ ]
+}
