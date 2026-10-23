@@ -723,3 +723,44 @@ MILESTONE NOTE: no new milestone — this round = gradients already encoded
 §16/§18/19). The one watch-item: measure the funded-share of open vs
 closed at the pilot (the threshold-effect evidence — a receipts question
 we can answer with our own data; add to pilot metrics).
+
+## 21. THE JOINT METER (Gui, 10/23 — project reputation from its people)
+
+His idea: when a project opens with multiple people ("opening a business" =
+co-managing a project), the PROJECT's reputation = the average of its
+members' reputations.
+
+**ALREADY HALF-ON-FILE:** projects carry their OWN receipt-earned
+trust_meters (SPEC-V2 Project object); M12 co-signers = the vouching
+mechanism (co-signs widen claim capacity, stake risk explicitly); the
+M7 doctrine: nobody inherits unearned trust. The AVERAGING = the new part.
+
+**THE THREE BITES ON PLAIN AVERAGING (the pushbacks he asked for):**
+1. STAR-DRAG: the 90-rep veteran who mentors a 30-rep newcomer gets priced
+   at 60 — averaging PUNISHES mentorship, the exact behavior we want more
+   of (the school-group-project problem)
+2. FREE-RIDER RIDE: the newcomer rides UP (30 becomes 60 by proximity) —
+   parasitic joining: borrow a high-rep name, inflate your project
+3. ALLIANCE FARMING: high-rep accounts marry each other's numbers upward —
+   rep-rings (the mutual-averaging game)
+
+**THE REFINement that keeps his core and kills the bites — REPUTATION
+FOLLOWS CONTRIBUTION, NOT MEMBERSHIP:**
+- **The project's reputation = the JOINT METER: earned only by RECEIPTS
+  ITS MEMBERS CO-WROTE** — every co-delivered milestone writes into the
+  project's own meter; the average EMERGES from shared work (both
+  signatures on the receipts), never from identity-math at open-time. A
+  fresh joint project starts NEUTRAL (his "co-fork from day one" thread =
+  exactly this: founding together = authoring receipts together)
+- **The head-start exists anyway, the honest way: M12 co-signing.** A
+  veteran can vouch a newcomer's early claims — at the price of STAKED
+  trust (the co-signer shares the risk if the milestone fails). Vouching
+  = the average's honest cousin: explicit, priced, signed
+- **The roster = the soft signal:** the project page SHOWS its members'
+  standings (visible association, never a merged number)
+- Personal passports stay untouched (their receipts survive any project
+  outcome — §16's law)
+
+**COHERENCE:** this = M4 + M7 + M12 + §16 combined, no new engine — his
+instinct ("the average") is what a joint-authored receipt trail LOOKS
+LIKE from the outside. The number is earned, not averaged.
