@@ -764,3 +764,27 @@ FOLLOWS CONTRIBUTION, NOT MEMBERSHIP:**
 **COHERENCE:** this = M4 + M7 + M12 + §16 combined, no new engine — his
 instinct ("the average") is what a joint-authored receipt trail LOOKS
 LIKE from the outside. The number is earned, not averaged.
+
+### 21.1 THE MENTOR LOOP (his incentive reasoning, answered 10/23)
+
+His story: a high-rep creator forgoes forking solo to join a talented
+ZERO-rep young team; the team seeks him out to lift their project — the
+mentorship MAGNET. That story IS the goal. The question = which math
+keeps the magnet spinning at scale:
+
+- PLAIN AVERAGING = the magnet WITH A MENTORSHIP TAX INSIDE: the veteran's
+  90 dilutes to 60 the moment he joins. The scarce resource (high trust)
+  pays to mentor → fewer and fewer veterans mentor → the magnet weakens
+  exactly when the platform needs it most (zero-sum dilution)
+- JOINT METER + CO-SIGN = the SAME magnet, positive-sum: the young team
+  still seeks the veteran — but what they receive = his CO-SIGN (widened
+  early capacity, staked) + the shared receipt-authoring. And here's the
+  loop that makes it sustain: M4's activity law counts DELIVERING — so
+  co-authored milestones GROW THE VETERAN'S OWN standing. Mentoring makes
+  the mentor richer. The team's meter rises; the mentor's standing
+  compounds; nobody paid a dilution tax. Both sides win or the magnet
+  doesn't spin.
+- THE TRANSPARENCY STAYS (his real want: "average their score in" =
+  association that's VISIBLE): the roster + co-sign receipts on the page =
+  the legible signal, without the fake number. (Goodhart guard: display
+  the true receipts, not a smooth metric people will game toward.)
