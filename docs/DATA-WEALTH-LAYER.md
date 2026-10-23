@@ -599,3 +599,59 @@ planned) + sectional entitlements (GATE+2 L5) + stitch/fork rent (§16 + v0)
 + the M9 votability. The ONLY new object = the threshold→badge→access
 BINDING (a join, not an engine). Zero conflicts with the walls: no profit
 expectation (gift), no cash-out, no license-selling, no securities.
+
+## 19. THE ACQUISITION MANEUVER (Gui, 10/23 — fork→merge replaces the paperwork)
+
+His scenario: a project carries thousands of rigged FF characters; a modder
+of the whole game wants the character SET living inside her project. Her
+maneuver (his design, mid-thought): **fork the characters project → merge
+the fork into my project** — two primitives we already built doing the job
+of a licensing negotiation. He realized mid-stream that "merge then
+unmerge" resolves to: fork ONCE (rent attaches), merge ONCE (lineage
+joins), and never merge the FOLLOW-UP branches (the creator's future FF11
+characters never touch you unless you merge again).
+
+**THE MECHANICS (confirmed against the existing suite):**
+1. FORK = the moment rent attaches (5-20%, default 10, frozen at fork time,
+   one-hop to the characters' custodian — v0 law)
+2. MERGE = the lineage joins: your merged project = two parent edges (yours
+   + the characters'); the rent RIDES the characters-lineage inside your
+   project — yes, you keep paying rent as long as the flows run, because
+   the lineage stays alive as a parent edge, and the SPLIT law (M6) = the
+   clean exit if you ever want it. (His unmerge instinct = the split.)
+3. MERGE FEE: **NONE by default — and that IS the design law.** Cooperation
+   must cost LESS than solo (the game-theory smoothness law, M0). A merge
+   tax = fee-stacking = kills the very maneuver that makes joining cheap.
+   What the merge-into party CAN set: nothing toll-like; review work is a
+   CLAIMED milestone (upstream-merge). Extras = negotiated inside the
+   MERGE CONTRACT (the prenup, §16) when both sides want them — the
+   platform's only cut = the M9-voted share on flows, never a per-action
+   toll.
+
+**THE LICENSE/FLOW LAW (his licensing skepticism, resolved — this is the
+load-bearing sentence):**
+**The license governs the COPY. The platform governs the FLOW.**
+- In-platform: every flow is receipted, metered, and routed (rent /
+  verified-use / patronage) REGARDLESS of license — MIT, GPL, NC, or
+  patchwork all ride the same economic rails. No license-interpretation
+  bureaucracy: intake only checks the publish floor (provenance + "you
+  have the right to publish this")
+- Out-of-platform (personal use, exports): the license's own terms rule —
+  we see nothing, govern nothing
+- The platform's fairness job = NOT the enforcer of licenses, but the
+  ROUTER of value + the DISPLAY of openness: "you took it, you give back"
+  becomes automatic (flows route by receipt) instead of remembered
+  (donations nobody sends)
+- The open-incentive stays: open disclosure = the strongest standing/
+  verified-use signals (C3 flag); default-open publish nudge; restricted
+  licenses work on the same rails but show their closed seal
+
+**THE THREE RAILS, ONE SPINE (the answer to "same mechanism?"):**
+- SPOT = buy ONE receipt/artifact (the data-token, L5) — the one-character
+  want
+- BULK = fork→merge (the ACQUISITION) — the whole-character-set want
+- PERSONAL = donate→badge→access (§18 patron-unlock) — the non-project use
+All three: same provenance spine (receipts+checksums), same rent routes,
+zero new mechanisms. The USER EXPERIENCE = maneuvers (fork / merge /
+claim / fund), not paperwork — his closing instinct, kept verbatim: "you
+maneuver yourself within the platform."
