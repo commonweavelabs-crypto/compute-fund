@@ -376,3 +376,54 @@ THE LEGAL ISSUES he asked about (verified against GDPR Art. 17 guidance):
 WALLS ADDITIONS: the floor means NO fully-anonymous receipts ever (the
 anti-sybil floor above); the platform NEVER publishes payout KYC; tombstones
 are labeled as tombstones (the record remains, visibly archived).
+
+## 14. IDENTITY TOGGLES + TOMBSTONE-REBIRTH (Gui, 10/22 late — his mechanism, upgraded)
+
+**HIS DESIGN (accepted parts):**
+- PUBLIC-FIGURE TOGGLE: attaching your NAME to an account = voluntary, ON/OFF
+  anytime. Name = an overlay the user controls; the platform never mandates it
+- HANDLE ≠ ID: the handle changes freely; the internal account ID never
+  public (his suggestion: the ID rides on the passport binding)
+- ORG-SCOPED REQUIREMENTS: business/org accounts can REQUIRE member configs
+  for members acting in that org's context (his Microsoft/CEO example: the
+  CEO seat = public-handle required, so statements carry identity; leave the
+  seat, go private again). He's right this is common — role-scoped
+  publicness = the norm for prominent roles
+- TEST-UNTIL-SOMETHING-BREAKS: accepted as the working method (this is
+  literally what the clean-room line is FOR)
+
+**THE PUSHBACK (the hole in the forgetting route as described):** toggle the
+name off + change the handle ≠ forgotten. Two reasons:
+1. RETROACTIVE INK: receipts stamped while public stay stamped forever (he
+   acknowledged this) — the old name lives on the old chain entries
+2. CORRELATION DEFEATS COSTUME CHANGES: the SAME account minting new
+   receipts under a new handle links back via the lineage (same projects,
+   same artifacts, same timestamps), content style, and internally via the
+   passport binding. An observer with the old receipts + the new handle's
+   project list re-links them in minutes. Stealth = security theater.
+
+**THE UPGRADE — TOMBSTONE-THEN-REBIRTH PROTOCOL (the honest forgetting):**
+- STEP 1 · RETIRE: invoke the tombstone — the account visibly archives ("this
+  identity retired at T; N receipts sealed under it"), the NAME-link erases
+  (erasure law satisfied), the handle retires permanently (never re-usable)
+- STEP 2 · REBIRTH: the new account = a FRESH passport binding; the platform
+  SEVERS the old↔new correlation AT THE TOMBSTONE (and must never carry
+  internal link data across)
+- RESULT: the work remains (provenance intact, attributed to the tombstone,
+  visibly retired), the human is gone from the new trail. Forgetting becomes
+  a CEREMONY, not a costume change — and ceremonies are auditable, which is
+  the point: the trail shows a retirement happened, never who became whom.
+
+**ORG-OVERRIDE GUARDRAILS (my additions to his org design):**
+- The org requirement binds ONLY org-context receipts minted under that
+  org's projects — never the member's personal account globally
+- EXIT STAYS FREE: leaving the org = one click; the org retains nothing
+  personal but the already-stamped org-context receipts
+- HARASSMENT-AWARE PACKS: controversy-adjacent orgs may run no-forced-public
+  packs (the sealed class covers members when needed) — forced exposure as a
+  loyalty test = an abuse vector to watch
+
+**SCHEMA/HOOKS:** toggles (public_figure, handle_history sealed list, org
+pack memberships, tombstone state) = GATE+2 account-model fields; test order
+in the clean-room: floor stamps → name overlay → handle change → tombstone
+rebind → org pack on a member receipt.
