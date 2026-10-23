@@ -267,3 +267,73 @@ posture.
      custodian tips — winners thank their lineage by receipt-attributed tip,
      no mandate. RECOMMENDATION: (a) default + (c) as a feature; revisit (b)
      only if real market data shows ancestors systematically unpaid.
+
+## 12. STEWARDS + COMPLIANCE-AS-TOGGLES (Gui, 10/22 night) — the positive-pitch law
+
+**THE REFRAME (his, accepted):** never pitch this as fighting evil corporations.
+The negative frame = a culture war; the WIN = smoothness: make cooperative,
+open, receipt-routed resolution CHEAPER than litigation, so cooperation
+happens more often (court systems already drowning = our smooth path is the
+product). The M0 zero-tribunal law extends: we don't shame the hoarders; we
+make the open economy the convenient one. PITCH LANGUAGE LAW: communities,
+stewards, livelihoods, open flow — never villains.
+
+**STEWARDS (his word — adopted as the human name of the custodian role):**
+people who take a project and make it their LIFE'S WORK — paid, a living.
+The portfolio shape is equally honored: "he created this, maintained it for
+20 years, it forked into something better, he moved on" — the record remains
+(M5.1), the passport carries it (M7/pilot). The steward arc = the P1
+maintainer persona's future title (outreach §6 P1: the maintainer becomes
+the steward, with a living).
+
+**USER RECORDS AS WEALTH (his extension — the walls drawn tight):**
+- What CAN trade, with consent: the creator's OWN records — chapters,
+  work-notes, signatures, the [VOICE] layer, artifact datasets — license-
+  gated like every artifact; they list it, they price it, buyers get the
+  LICENSE + attribution-forever (the historian/documentary case: 300 years
+  out, a fraud investigated a century back, checked against exact receipts)
+- What CANNOT trade, ever: the person. Behavioral/surveillance data, private
+  identities, anything resembling watching PEOPLE instead of WORK. The
+  receipts brand = public record of work, not a data-broker of humans. (The
+  passport's selective-disclosure law governs anything user-sensitive.)
+
+**THE COMPLIANCE-AS-TOGGLES MECHANISM (his design — the smart part):**
+- An account-type declares its policy PACK (machine-readable: "gov-pack v1:
+  these toggles required"); different jurisdictions/entities = different
+  packs. No bespoke per-law system — config, not legislation
+- The platform NEVER judges and NEVER penalizes: it mechanically checks
+  toggle-state and PUBLISHES flags ("public stream; the tracking/funding
+  entity gets the head-up"). Penalty = the entity's domain (clawbacks etc.)
+  — outside our hands, so our hands stay clean
+- Receipts minted while a required toggle is OFF = carry the warning flag
+  forever (append-only; retroactive taint is visible)
+- CRITICAL AFFORDANCE TO ADD: TURNING A TOGGLE IS ITSELF RECEIPTED. You can
+  switch compliance off — but the switching shows in the trail (no quiet
+  clearing of lights before acting)
+
+**CONFLICTS OF INTEREST Gui asked me to point out:**
+1. WATCHER-FUNDED: government funds its project AND audits it = auditor and
+   funder are one. Partial fix (his instinct): the FUNDERS watch, but the
+   PUBLIC STREAM is the real corrective — everyone can see, so no watcher
+   can quietly look away. Full fix = the neutral fiscal host publishes
+   compliance state, parties dispute IN PUBLIC with receipts.
+2. PLATFORM TRIPLE-ROLE: we host commerce, sell record access, and publish
+   flags. Guardrails: flags are BOOLEAN machine checks (no editorial
+   judgment = no censor power; M0 survives), the corpus/aggregate stays the
+   commons (never sold as product), per-record sales flow BY THE CREATOR's
+   license choice. We publish state; we never rule.
+3. TOGGLE TRUTH: entities could toggle off precisely when misbehaving —
+   handled by the receipt-the-toggle rule above (the change itself is
+   evidence).
+4. NEW ONE (mine): a "government account" classification is itself an
+   attack surface — anyone claiming pack status gets premium trust. Fix:
+   account-type claims carry VERIFICATION requirements (domain/registry
+   checks) or they're just claims, and the pack still only binds if the
+   FUNDING ACTUALLY CAME through the fiscal host (money proves the type).
+
+**THE HISTORIAN MARKET (his 300-year case — the strongest chain argument):**
+five-year audit = compliance; 300-year provenance = civilization
+infrastructure. The blockchain toggle's real customer isn't the project that
+wants immutability today — it's the FUTURE READER who can otherwise check
+nothing. Optional-first toggle (post-MVP, phase 4+), institutional packs
+later; Cardano/Midnight stamps already on the roadmap = the toggle's backend.
