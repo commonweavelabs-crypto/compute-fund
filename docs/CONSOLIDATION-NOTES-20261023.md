@@ -109,3 +109,34 @@ FLAGGED for review, nothing deleted (append-only culture).*
   heavy), 4) THE FAIRNESS INVARIANTS (plain, descriptive)
 - The two new invariants (#7 courts-are-design-failure, #8 license/flow)
   = flagged as ADDED-BY-BRAINSTORM, subject to the pending SPEC-V2 pass
+
+## C5 UPDATE (same turn) — FORK ELIGIBILITY BY LICENSE (Gui's MVP proposal adopted with 2 refinements)
+
+THE LICENSE-CLASS TRUTH (which types can fork at all):
+- PERMISSIVE (MIT/Apache-2.0/BSD/zlib): fork freely, relicense freely ✓
+- COPYLEFT (GPL family): fork ALLOWED — but the fork must carry the family
+  downstream (relicensing = not allowed without right). Forkable-in-law,
+  complex-in-mechanics (the C5 propagation engine)
+- Weak copyleft (MPL-2.0/LGPL): forkable with file/library-level care
+- NO-DERIVATIVES (CC-BY-ND): CANNOT fork, period (the license says no)
+- NON-COMMERCIAL (CC-BY-NC) on a money-routing platform: fork-restricted —
+  commercial rails + NC = legal gray; treat as not-forkable until counsel
+- SOURCE-AVAILABLE / BUSL / unlicensed-public-code: NOT forkable until the
+  license's change date / never (viewing ≠ forking)
+- LICENSE MISSING (the youpi-pg catch): default = all-rights-reserved = NOT
+  forkable; intake flags it (publish floor already demands right-to-publish)
+
+THE MVP LAW (Gui's simplification, my two refinements):
+- **MVP fork rule = permissive-only**: `forkable = license ∈
+  {MIT, Apache-2.0, BSD, zlib}` (M9-votable set) — one boolean in the
+  schema + the seal display; NO per-license profiles (complexity refused)
+- **Refinement 1 — non-permissive projects remain FULL CITIZENS** minus the
+  fork button: funding, claims, bounties, patronage, receipts all work for
+  GPL/NC/etc. from day one (the maintainer funding wedge = the core pitch;
+  only the fork/merge economics wait for C5). The fork button shows the
+  license seal + the reason ("GPL: fork requires license-family
+  inheritance — coming with C5")
+- **Refinement 2 — license-missing = blocked from fork AND flagged at
+  intake** (a request-to-author path: "add a license and the fork opens")
+- Everything else on this rail already stands: C5 propagation (future
+  milestone), the license/flow law (invariant 8), seals at showcase layer
