@@ -337,3 +337,42 @@ infrastructure. The blockchain toggle's real customer isn't the project that
 wants immutability today — it's the FUTURE READER who can otherwise check
 nothing. Optional-first toggle (post-MVP, phase 4+), institutional packs
 later; Cardano/Midnight stamps already on the roadmap = the toggle's backend.
+
+## 13. THE MINIMUM DISCLOSURE FLOOR (Gui, 10/22 night — "is that personal info?")
+
+**His instinct (correct, formalized):** receipts must be stamped with WHO
+stands behind them — not the legal NAME, the ACCOUNT PROFILE (his words:
+"maybe not necessarily their name, but their profile so it will link to their
+passport"). THE FLOOR (v0, three stamps on every receipt):
+1. THE ACCOUNT STAMP: the stable platform profile (pseudonymous OK — GitHub
+   norms) → links to the passport (Midnight; his self-correction noted)
+2. THE STATE STAMP: toggle/pack state at mint time (§12's compliance layer)
+3. THE LINEAGE STAMP: checksum chain (provenance — the spine)
+
+WHY THE FLOOR IS NOT OPTIONAL: anonymous receipts = worthless provenance —
+the whole product IS attribution. The floor is the minimum *accountability*:
+one persistent, passport-verifiable identity per account (the anti-sybil
+floor), NOT nameness. His pushback-free zone: this is right.
+
+THE LEGAL ISSUES he asked about (verified against GDPR Art. 17 guidance):
+- Profile-stamped receipts = normal social-platform pseudonymity (consented,
+  disclosed, the service itself) — GitHub/npm pattern, low risk
+- PAYOUTS are where law really bites: KYC = the FISCAL HOST's job, PRIVATE,
+  never on a public receipt (money identity ≠ public identity — two rails)
+- ERASURE vs IMMUTABLE RECORDS (the tension): solved with the TOMBSTONE
+  PATTERN — erasure removes linkable human data (identity links, contacts,
+  PII); the receipts keep the pseudonymous account stamp and the account
+  becomes an archived tombstone ("the record remains"). Anonymized work
+  records leave GDPR scope; archiving/historical research is even an
+  explicit Art. 17(3) exemption. Pseudonymity ≠ anonymity: it survives.
+- EDGE CASE — those who need to build quietly (shy builders through
+  whistleblowers): the SEALED RECEIPT CLASS: stamps only "a standing-N
+  passport holder, verified human, unique" (zero-knowledge — the Midnight
+  case) + no profile reveal. Honest cost built in: sealed receipts are
+  WEAKER provenance and the market discounts them — buyers can see it's
+  sealed and price accordingly. Default = open stamp; sealed = the rare
+  escape hatch, never the norm (the brand is attribution).
+
+WALLS ADDITIONS: the floor means NO fully-anonymous receipts ever (the
+anti-sybil floor above); the platform NEVER publishes payout KYC; tombstones
+are labeled as tombstones (the record remains, visibly archived).
