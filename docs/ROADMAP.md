@@ -122,6 +122,25 @@ name candidates, open questions).
   in-platform reuse = stitched-from receipt + rent routed; see
   DATA-WEALTH-LAYER 18
 
+### FOUNDER WATCH-LIST (Gui 10/23: the 4 startup videos, watched AS we build)
+
+Source: by.nwang reel (gate bypassed); all four identified + transcripts
+filed (link-archive/transcripts/). Enforcement = each watch-block = the
+FIRST checklist item of its assigned milestone; no milestone starts until
+its video block is checked. Full mapping: docs/FOUNDER-WATCHLIST.md.
+
+- [ ] WATCH #1 — YC "How to Start a Startup" (CS183B L1) → BEFORE Phase-1
+  (the money-gate build): fundamentals = something people want (the CFQ's
+  spirit, as lecture)
+- [ ] WATCH #2 — The Mom Test (Rob Fitzpatrick 1h talk) → BEFORE OUTREACH-1
+  + pilot creator interviews (the three rules: their life not your idea /
+  specifics in the past / talk less listen more)
+- [ ] WATCH #3 — Stanford CS183F "How to Find Product Market Fit" → BEFORE
+  THE PILOT→LAUNCH TRANSITION (the funded-share/open-vs-closed metrics =
+  PMF operationalized)
+- [ ] READ #4 — Paul Graham "Do Things That Don't Scale" (the essay) → AT
+  LAUNCH WEEK (concierge onboarding for the first creators; Gui = user #0)
+
 ### OUTREACH additions (10/23 morning)
 
 - [ ] LAUNCH-ADS study frame: the Gadzhi hook (IG DeYzgMXMzkG, filed
