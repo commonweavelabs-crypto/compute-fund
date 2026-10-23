@@ -16,6 +16,17 @@ refers to · status: pending-gui-review, none of it ships before his word.*
    CLAIMED ALLOCATION → SPENT (metered) / ESCROWED (bounty) — receipts name
    the state
 6. **No tribunal, no surveillance, no blocking** — market + valves only
+7. **Courts are a design failure** (Gui, 10/23): value must flow by
+   MECHANISM — self-fulfilling within the platform (forks/rent/unlocks/
+   metered flows); a dispute that needs a lawsuit or a tribunal = the
+   design has a hole; we are the transparent smooth path, never a
+   second courtroom (softened per Gui: "make it transparent and simpler,
+   not replace the legal system" — route around, never claim immunity)
+8. **The license governs the COPY; the platform governs the FLOW**
+   (Gui+Hermes, 10/23 DATA-WEALTH §19): in-platform flows route by
+   receipt regardless of license type (license-agnostic economics); the
+   license rules all out-of-platform use; open disclosure = the favored
+   signal, restricted licenses = labeled closed (C3)
 
 ## 1. Object model (the data spine)
 

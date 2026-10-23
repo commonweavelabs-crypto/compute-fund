@@ -79,3 +79,33 @@ FLAGGED for review, nothing deleted (append-only culture).*
 - The harvest runs at the outreach phase (or in a desktop-session idle
   block) — the script is staged, rate-limit-safe (one tree call + light
   parse, no 703-file sweep)
+## ADDED 10/23 (same turn — the license-environment brainstorm)
+
+### C5 — LICENSE PROPAGATION (new flag, future milestone — not MVP)
+- The question that surfaced it: can projects with OTHER licenses coexist?
+  ANSWER: yes — the license/flow law (SPEC-V2 now invariant #8) makes the
+  platform license-AGNOSTIC in-platform. The remaining hole = chains: a
+  fork of a GPL project legally MUST stay GPL-family downstream; a copy-
+  style platform must not let a fork "wash" a license family by relicense
+  without right.
+- PROPOSED (future milestone, phase 3+): **license propagation = the fork
+  and the acquisition maneuver inherit the parent's license FAMILY by
+  default; changing family = declared in the fork/merge contract + an
+  attribution note (and only where the upstream actually allows)**. The
+  license = a DECLARED FIELD (baked now — schema hooks already in), NOT a
+  toggle; the toggles = display/compliance packs (the closed-seal label +
+  pack states = showcase-layer build).
+- Environment answer for Gui: OTHER licenses = same rails, same display
+  law: every artifact shows its license seal; closed ones = market-
+  discounted (Standing favors open disclosure); bake-in now = the field
+  (free) + the law (invariant #8) + labels (showcase layer) + propagation
+  rule (parked above).
+
+### B2 — THE ROOT-BELIEFS NAME (Gui's "another word for our livebys")
+- Candidates pitched ( votable, M9-style): 1) **THE LOAD-BEARING LAWS**
+  (recommended — the constitution invariants = the beams; the rails
+  metaphor matches the doc's own language), 2) **THE LIVEBYS** (his own
+  word — warm, memorable, ours), 3) THE CONSTITUTION (existing, legal-
+  heavy), 4) THE FAIRNESS INVARIANTS (plain, descriptive)
+- The two new invariants (#7 courts-are-design-failure, #8 license/flow)
+  = flagged as ADDED-BY-BRAINSTORM, subject to the pending SPEC-V2 pass
