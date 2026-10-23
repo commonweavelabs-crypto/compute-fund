@@ -41,6 +41,15 @@ back face a bazaar of scattered donation buttons, and when they do give,
 nothing routes to the lineage of work the project stood on. The missing
 piece was never more license terms.
 
+And the asymmetry is worse than forgetfulness. **The Goodwill Wall:** even
+the ones who remember face a choice, and some simply won't donate — and
+they're allowed; goodwill is a virtue, not an economy. No society of
+projects can run on gratitude alone, any more than a city can run on
+volunteer bridge-repair. Openness has never had game theory — incentives
+that fire without needing anyone's mood. That's the actual hole: not
+"people are bad," but **there is no mechanism that makes giving back
+happen *without* anyone choosing it, every time.**
+
 ### III. The two answers we've been reaching for (and why both are friction)
 
 **Answer one: more rules.** More regulation, more enforcement, more court.
@@ -131,6 +140,25 @@ We are not throwing away the system we have. Licenses keep governing
 copies; receipts and their optional blockchain stamps only make provenance
 *searchable* — organized enough, someday, to help the existing legal
 system decide faster, which is a service, not a war.
+
+### VI.5 The platform's own economy (the fee, said plainly)
+
+A platform for fair flows cannot itself run on goodwill — that would
+recreate the very failure it exists to fix. So Compute Fund is built with
+its own economy from day one: **a small, voted share of every flow** —
+transparent, mechanism-borne, and adjustable by the community's votes,
+never a hidden toll or a goodwill appeal. The platform eats from the same
+table it sets: when projects thrive and value routes, the plumbing funds
+itself; when it doesn't, the platform shares the fate instead of taxing
+its way out. That alignment is the point — the fee is game theory too.
+
+And the word for how the whole thing behaves — the paradox Gui named
+between "mechanical" and "organic": **autonomic**. Like the autonomic
+nervous system: involuntary yet alive. The transfers of value happen
+without anyone deciding them each time — not because they're forced, but
+because the environment *is* the mechanism. You exist in the platform;
+the fire moves. No one remembers, no one chooses, no one enforces — and
+nobody has to.
 
 ### VII. The future I foresee (testably short)
 
