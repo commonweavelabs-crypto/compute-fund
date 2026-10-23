@@ -116,6 +116,26 @@ name candidates, open questions).
 
 - [ ] WEALTH-1: data-trade marketplace design (artifact-priced credits +
   escrow) + the receipt-attribution split + the custodian credit layer
+- [ ] WEALTH-2 PATRON-UNLOCK (10/23): project-defined donation thresholds ->
+  badge -> receipt access (donation-with-access-privilege, Patreon mechanics;
+  licenses stay the creator's law); personal use = private/invisible;
+  in-platform reuse = stitched-from receipt + rent routed; see
+  DATA-WEALTH-LAYER 18
+
+### OUTREACH additions (10/23 morning)
+
+- [ ] LAUNCH-ADS study frame: the Gadzhi hook (IG DeYzgMXMzkG, filed
+  gadzhi-ai-income-challenge-funnel): 'why would you start X in 2026?' ->
+  named gap -> dated free event; 17K likes; no returns-promises (our law);
+  study frame for Stage-1 ads + entry link
+- [ ] OPUS-AUTHORS HARVEST: the opus-5.5-videos repo (9.6K stars) credits
+  ~703 prompt authors earning nothing = staged P2 seed list; harvest script
+  writes pilot-targets/opus-video-authors.json (public-data only; a staged
+  file, not contacts.json); runs at outreach phase
+- [ ] CREATOR/PATRON BALANCE (the standing law): creators first (supply
+  builds the showcase), patrons second (demand meets visible supply);
+  OUTREACH-STAGE 6 carries the personas; the balance = sequencing, not
+  separate strategies
 
 ### GATE+1 milestone — THE OUTREACH STAGE (Gui's order, 2026-10-22)
 

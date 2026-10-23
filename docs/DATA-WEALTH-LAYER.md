@@ -558,3 +558,44 @@ cards already 80% there; this extends them)
 3. Disclosure = a choice (open default / sealed class — the receipts law);
 the PAIR = the natural data-token unit; remakes link via stitched-from
 lineage; the wedge stands: 703 credited authors earning nothing.
+
+## 18. PATRON-UNLOCK (Gui, 10/23 morning — the individual-receipt incentive, untangled)
+
+His scenario: a project outputs 40+ rigged FF-style HD characters; a user
+wants ONE — not the fork, not the whole studio: the receipt (or a few). His
+nonprofit-heard mechanic: donate a threshold → unlock a badge → access the
+receipts. He asks: license or output-ownership? personal vs in-project use?
+who gets paid when the model flows onward?
+
+**THE ANSWER — it's a DONATION WITH ACCESS PRIVILEGE (Patreon-tier
+mechanics), not a license sale.** The legal term he was fumbling for: we
+never sell the license; the CREATOR's chosen license stays the law of what
+the receipt allows (the license field on the artifact = the truth layer).
+The donation = a GIFT (no profit expectation = inside the walls) + grants
+ACCESS per the creator's thresholds + a patronage badge (Standing component,
+Phase-2 "Compute Sponsor" badges = already planned). THE MECHANIC:
+- Project defines PATRON-UNLOCK THRESHOLDS (their ask, per project; platform
+  defaults = the existing $25/$100/$500 tiers scaled; credits-denominated
+  thresholds votable under M9)
+- Donate past a threshold → the badge → receipt-access on that project per
+  the receipt's license terms (open license = could've been free anyway —
+  the unlock exists for RESTRICTED-license artifacts + the patronage ethos +
+  convenience; that's why the tiers are honor, not ransom: an open-license
+  receipt never gate-keeps)
+- PERSONAL USE (their own game, offline): not our business — the license's
+  own terms govern (CC-BY-NC etc.); we see nothing, track nothing
+- IN-PLATFORM USE (slotted into their Compute Fund project): receipted by
+  construction — the use event mints the stitched-from lineage mark, and
+  **flows through their project route the stitched-from RENT to the original
+  custodian** (the §16 analog of fork rent, capped, one-hop). So: personal =
+  free+private; platform = attributed+routed. No surveillance needed: only
+  the platform's own economics are visible — nothing external is watched
+- OWNERSHIP: never transfers. Output-ownership + commercial rights = the
+  creator's license alone decides; the unlock = access + privilege, not deed
+
+**COHERENCE CHECK (his "one life form" requirement):** every piece = existing
+rails — donations tiers (Phase 0/1 exist) + community badges (Phase 2
+planned) + sectional entitlements (GATE+2 L5) + stitch/fork rent (§16 + v0)
++ the M9 votability. The ONLY new object = the threshold→badge→access
+BINDING (a join, not an engine). Zero conflicts with the walls: no profit
+expectation (gift), no cash-out, no license-selling, no securities.
