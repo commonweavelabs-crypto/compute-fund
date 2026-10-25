@@ -1,5 +1,14 @@
-# THE SHARED-TRUTH TEMPLATE
-## The PBS "Real Cost of AI" structure, deconstructed as a producer — reusable for Compute Fund videos
+# THE BASIC DOCUMENTARY TEMPLATE
+## a.k.a. The Shared-Truth Structure — the PBS "Real Cost of AI" skeleton, deconstructed as a producer for reusable use
+
+*NAMED by Gui, 10/25: "the Basic Documentary Template" (or something fitting
+— this holds both names). His standing rule additions, 10/25:
+(1) QUOTES AS WITNESSES, upgraded: real quotes from REAL PEOPLE, with the
+speaker named on screen/narration ("this was said by Sam Altman") and either
+their own voice or the narrator reading — a first-class beat, not garnish;
+(2) HUMAN VOICE LAW: scripts must sound organic — research-first, natural
+rhythm, no mechanical AI-cadence. Run any future topic against this template
+on his word: "run it against the template."*
 
 *2026-10-25 · Gui's ask: "deconstruct the structure into a reusable template
 for our videos when talking about Compute Fund." Source: PBS Be Smart, "The
@@ -89,7 +98,11 @@ the mechanics = 60%; the resolution = 10-ish%.
   receipts themselves (the receipts-marketing law: the ledger = the
   video's citations).
 
-### T8 · THE HONEST LIMITS BEAT (the trust peak)
+- QUOTES-AS-WITNESSES (upgraded 10/25, Gui's standing rule): real quotes from
+  REAL PEOPLE are first-class scripting units - named on screen ("said by Sam
+  Altman, January 2025"), delivered by their own voice or THE NARRATOR reading
+  the quote, each traced to a source file. Attributed quotes = the script's
+  receipts, spoken out loud.### T8 · THE HONEST LIMITS BEAT (the trust peak)
 - Mechanics: say ON AIR what nobody can measure yet — "the scientific
   community is nowhere near being able to measure the net effect." The
   audience trusts MORE when the presenter refuses to overclaim. (The
