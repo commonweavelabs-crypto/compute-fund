@@ -150,3 +150,31 @@ transitions (humor every ~3 min; the stakes-question = the single big beat).
    user. And note: the PBS piece pre-audiences our pitch — "who pays for
    AI" is chapter 1; the metering answer is chapter 2. A series shape:
    they asked the question this week; our video answers it next.
+
+---
+
+## ADDENDUM — THE VSAUCE LAYER (2026-10-26: the 2:58 Waco short = the sample Gui promised)
+
+The Basic Documentary Template is SCALE-INVARIANT: the 42-min PBS documentary
+and Vsauce's 2:58 Waco short run the SAME skeleton (mirror/stakes → the
+false-faith detour → the quest → the raw primary → the limits → the meaning
+close → receipts-in-description). What Vsauce ADDS = the FEEL of the beats:
+
+- **R-VS1 · THE SEARCH IS THE SCENE**: show the finding (the dead ends, the
+  wrong timecode, the dated nib from 1995) — not just the found. The
+  research = the content; the audience watches him VERIFY, not assert.
+- **R-VS2 · THE PRIMARY PLAYS RAW**: the actual audio/file/receipt = the
+  emotional payload; reality needs no resoundtracking.
+- **R-VS3 · THE RECEIPTS LIVE IN THE DESCRIPTION**: the C-SPAN link WITH the
+  timestamp + the artist-recreation credited SEPARATELY. The proof layer
+  serves the doubters = the sources-on-record law, native.
+- **R-VS4 · THE SEQUEL-HOOK LOOP**: open on "you asked" (the series
+  contract); close on history ("we still live in this world") — curiosity
+  compounds across the series.
+- **R-VS5 · THE WRONG-ANSWERS MONTAGE**: name the contamination first (the
+  TV-series sound design pretending to be primaries) — the honest map of
+  the fake before delivering the real = the receipts-culture beat.
+
+(All five = extracted from the filed sample: links/vsauce-waco-sound-short.md
+in the archive. The next script that needs the human layer: apply R-VS1..5
+inside the template's beats.)
