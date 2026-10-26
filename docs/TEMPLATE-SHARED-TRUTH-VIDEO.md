@@ -153,28 +153,53 @@ transitions (humor every ~3 min; the stakes-question = the single big beat).
 
 ---
 
-## ADDENDUM — THE VSAUCE LAYER (2026-10-26: the 2:58 Waco short = the sample Gui promised)
+## THE SECOND TEMPLATE — THE INVESTIGATION TEMPLATE (named by Gui, 10/26)
 
-The Basic Documentary Template is SCALE-INVARIANT: the 42-min PBS documentary
-and Vsauce's 2:58 Waco short run the SAME skeleton (mirror/stakes → the
-false-faith detour → the quest → the raw primary → the limits → the meaning
-close → receipts-in-description). What Vsauce ADDS = the FEEL of the beats:
+"a different template... this one sounds more like an investigation" — yes:
+the Waco short = its own TEMPLATE, composable with the documentary one.
 
-- **R-VS1 · THE SEARCH IS THE SCENE**: show the finding (the dead ends, the
-  wrong timecode, the dated nib from 1995) — not just the found. The
-  research = the content; the audience watches him VERIFY, not assert.
-- **R-VS2 · THE PRIMARY PLAYS RAW**: the actual audio/file/receipt = the
-  emotional payload; reality needs no resoundtracking.
-- **R-VS3 · THE RECEIPTS LIVE IN THE DESCRIPTION**: the C-SPAN link WITH the
-  timestamp + the artist-recreation credited SEPARATELY. The proof layer
-  serves the doubters = the sources-on-record law, native.
-- **R-VS4 · THE SEQUEL-HOOK LOOP**: open on "you asked" (the series
-  contract); close on history ("we still live in this world") — curiosity
-  compounds across the series.
-- **R-VS5 · THE WRONG-ANSWERS MONTAGE**: name the contamination first (the
+### THE INVESTIGATION TEMPLATE — beats (the tools-chain genre)
+- I1 · THE SEQUEL-HOOK OPEN: "you asked" (the series contract; curiosity
+  compounding)
+- I2 · THE STAKES-IMAGE STACK: concrete, visceral, named BEFORE explanation
+  (jet planes, chanting, rabbit screams)
+- I3 · THE WRONG-ANSWERS DETOUR: name the contamination first (the
   TV-series sound design pretending to be primaries) — the honest map of
-  the fake before delivering the real = the receipts-culture beat.
+  the fake makes the arrival of the real EARNED
+- I4 · THE HUNT ON SCREEN: the search chain shown live (a dated nib from
+  the press → the archive → the searchable transcript → the WRONG timecode
+  he points out → the watch-through)
+- I5 · THE RAW PAYLOAD: the actual audio/file/clip plays unsweetened —
+  reality needs no re-soundtracking
+- I6 · THE HISTORY ARC CLOSE: the small artifact → the long arc ("we still
+  live in this world")
 
-(All five = extracted from the filed sample: links/vsauce-waco-sound-short.md
-in the archive. The next script that needs the human layer: apply R-VS1..5
-inside the template's beats.)
+### THE CLIP-HUNTING TOOL-CHAIN (Gui's second reason for sharing — filed 10/26)
+- **C-SPAN = a hunting TOOL**: congressional hearings (and program
+  archives) with SEARCHABLE TRANSCRIPTS — keyword search returns the exact
+  timestamp IN the video; the clip = CUTCABLE (the Waco lesson: the
+  built-in timecodes can be wrong — verify by watching; see his
+  optimization tip below)
+- **Gui's keyword-optimization rule (his tip, adopted)**: search the
+  PROCEDURAL phrases ("play the tape", "play the recording", "start the
+  audio"), not the topic nouns — the clerk's vocabulary finds the moment
+  in seconds instead of the full watch-through
+- **YouTube = the same, self-hosted**: the site doesn't expose keyword-in-
+  video search, BUT OUR PIPELINE HAS IT ALREADY: youtube-transcript-api
+  returns timestamped segments — a keyword scan yields exact timestamps ->
+  ffmpeg cuts the snippet. THE MINI-TOOL TO BUILD (any idle block):
+  clip-hunter.py = video-id + keyword -> timestamped hits -> the clip
+  file + the citation metadata (source + timestamp) ready for the
+  description (R-VS3)
+- **FOOTAGE-AS-SOURCES LAW** (the extension of quotes-as-witnesses): our
+  investigation/explainer videos can carry ACTUAL FOOTAGE of people
+  speaking (the sourced clips) — always with the on-screen/printed
+  citation. C-SPAN caveat to verify before building on it: their terms of
+  use for redistribution/clipping (their archive = private copyright with
+  an open-history mission; the DMCA-exception the Waco video cites = the
+  precedent shape — the terms check = the first item of that build)
+- **Status**: the tooling lives in the video-UI lane; the rules live in
+  this template. The wrong-answers detour + the raw payload = the beats
+  that carry the receipts-culture to the audience.
+
+(Reference: links/vsauce-waco-sound-short.md, catalog #671.)
