@@ -157,6 +157,8 @@ its video block is checked. Full mapping: docs/FOUNDER-WATCHLIST.md.
   separate strategies
 
 
+- [ ] DEBUG-SESSION (Wed): the vibe-code liability audit (from adilet, 10/26): (1) the a11y pass: keyboard-nav + alt-text on every interactive element (antislop-human skill); (2) the RLS verify on any Supabase-managed tables IF the auth path uses them (our core DB = SQLite server-side = immune by architecture; verify the auth-side); (3) the budget-alerts note: our cap_credits+spent_credits = the runaway defense ALREADY (the demo to users: the platform natively protects what vibe-coded apps do not!)
+
 #### OUTREACH sub-milestones (broken out per Gui, 2026-10-26 — LAUNCH-PLAYBOOK-STARTER-STORY.md is the strategy source)
 - **OUTREACH-0 (pre-stage ops, starts when D3 lands):** (a) the ONE-channel selection + the daily cadence calendar (S2; the day-50 patience datum = judge at week 7, not week 2); (b) the result-card design (S6 — the shareable receipt cards = the growth loop); (c) the honest comment→DM funnel spec (S11 — the keyword delivers the promised thing, never farms); (d) the creator-filtering prep (S1 — the Mom-Test interview rubric = the filter); (e) the patron-page framing (the Kickstarter-backing language + the legal walls: gifts not returns)
 - **OUTREACH-1 (the stage as planned):** the pilot interviews dual-purpose (S1+S4: the filter = the interviews), the pattern-break formats (S3: show receipts, don't explain), the competitor-keyword SEO pages + the ASA/TikTok tests WITH the intent caveat (S7 honesty note), the revenue-share creator offers (S10)
