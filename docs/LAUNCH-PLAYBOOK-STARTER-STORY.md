@@ -199,3 +199,8 @@ Wire-in: = the Stage-1 outreach ops blueprint (the $500-match era). Claim-flag: 
 - THE INTRINSIC SHARE SURFACE: the product must live SOMEWHERE the user sees it (home-screen class, not swipe-away notifications).
 - THE FRIEND-DEPENDENCY LOOP: the product is useless alone = every new user recruits their friends by design (the TikTok sound-ad wave: 5M views/day made BY the audience).
 Our D3 check: where does a completed receipt LIVE in the user's day? Does a project naturally pull its collaborators in? (receipts shared TO the project's people = the built-in loop.)
+
+### S22 - THE ONE-THING LAW (getripping, transcribed 10/26)
+The trap: the solo founder who CAN do everything never has to pick; the day defaults to building ("nobody can reject a feature") while getting-in-front-of-customers gets the leftovers = nothing. "Too talented to notice they were hiding."
+The law: ask "what is the ONE thing only I can do?" - for Gui = BE THE FACE (the story, the opinions, the voice - already happening: the mission-night voice + the reel-taste pipeline). Everything else = systematized (the agent = the grind).
+**The pushback-note (honesty):** delegation covers the GRIND, never the JUDGMENT - the face still walks into the pilot interviews and the calls (the Mom-Test gate = un-delegable). Delegating judgment = the anti-pattern this playbook exists to prevent.
