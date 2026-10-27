@@ -156,6 +156,12 @@ its video block is checked. Full mapping: docs/FOUNDER-WATCHLIST.md.
   OUTREACH-STAGE 6 carries the personas; the balance = sequencing, not
   separate strategies
 
+
+#### OUTREACH sub-milestones (broken out per Gui, 2026-10-26 — LAUNCH-PLAYBOOK-STARTER-STORY.md is the strategy source)
+- **OUTREACH-0 (pre-stage ops, starts when D3 lands):** (a) the ONE-channel selection + the daily cadence calendar (S2; the day-50 patience datum = judge at week 7, not week 2); (b) the result-card design (S6 — the shareable receipt cards = the growth loop); (c) the honest comment→DM funnel spec (S11 — the keyword delivers the promised thing, never farms); (d) the creator-filtering prep (S1 — the Mom-Test interview rubric = the filter); (e) the patron-page framing (the Kickstarter-backing language + the legal walls: gifts not returns)
+- **OUTREACH-1 (the stage as planned):** the pilot interviews dual-purpose (S1+S4: the filter = the interviews), the pattern-break formats (S3: show receipts, don't explain), the competitor-keyword SEO pages + the ASA/TikTok tests WITH the intent caveat (S7 honesty note), the revenue-share creator offers (S10)
+- **OUTREACH-2 (post-launch growth ops):** the churn-agent law rollout (S5: every recurring user task → agentic), the experiment culture on onboarding (S13: every UI change = a receipted AB), the affiliate program (S15's zero-free-plan debate → our answer = patronage + credits, not freemium), the demographic-balanced creator recruiting (S17), the credits-model validation continues (S15 = our L5 confirmed in the wild)
+
 ### GATE+1 milestone — THE OUTREACH STAGE (Gui's order, 2026-10-22)
 
 Fires when: MVP gate FULLY tested-robust-ready + Guis walkthrough clean.

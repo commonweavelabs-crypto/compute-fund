@@ -82,3 +82,94 @@ Fastlane's tool makes the viral content that sells Fastlane. Ours: the platform'
 ---
 
 *Filed in the archive: ss-starter-story-channel (this report = the strategy distillation; 6 transcripts held in the scratch vault; the reel De-Dd6DSyh0 entry + this report cross-linked).*
+
+---
+
+# WAVE 2 — EIGHT MORE INTERVIEWS VETTED (2026-10-26, same day)
+*Sources: "This Insanely Simple App Makes $50K/Month" (uvIcGuN2iO8, 433K views — Jake) · "I Built Two Apps That Make $120K/Month" (xWnqY2Mav4s — Kyle Fowler, Card Stock + Scanemon) · "I Copied A Huge App. Now I Make $80K/Month" (GQ27QVp3SzQ — Tomer, Israel) · "She Built This $340K/Month App in 60 Days" (Eg93po_DAYo — Sarah Pearl, Stella) · "How I Built This $160K/Month Gym App" (OV09yPLf8BI — Mauro, 22, Symmetry, LATAM) · "I built an app that makes $2K PER DAY" (NuYO7DWzlaM — Rasty, ex-Gmail) · "How I Work: $10M/Year Serial Entrepreneur" (jjUf7lrb_xQ — Pat's own craft) · "I Built A Micro-Version Of A $1B SaaS" (Nnpz1wsTjBI — David, the app-builder). All transcripts filed: link-archive/transcripts/ss/.*
+
+### S10 · THE REVENUE-SHARE CREATOR PROGRAM (Symmetry)
+The gym app's channel evolution: UGC plateaued (~30K downloads) → influencer marketing failed → then **creator-ads where creators get nearly HALF the revenue** → one 17M-view video. Aligned upside beats flat fees.
+**Verification:** ✅ locked multi-source (creator revenue-share = an established 2026 deal structure; the rate-setting doctrine exists). **Use at OUTREACH-1:** the creator deals offer a % of flows their receipts generate = the exact receipts-native variant.
+
+### S11 · THE COMMENT-KEYWORD AUTO-DM FUNNEL (Stella + Jake)
+"Comment 'download' and I send you your custom affirmations" (ManyChat). "Conversions happen in the comments." The pinned comment = the conversion point.
+**Use:** our launch comment-seeds = REAL funnel mechanics (and the receipts-law: our DMs deliver, never farm). ManyChat-class automation = the tool candidate. *Note: we ALREADY document the shady versions of this funnel (the gate codes) — ours = the honest version: the keyword delivers the promised thing.*
+
+### S12 · THE GEO/NEIGHBOR-MARKET ARBITRAGE (Tomer + Mauro + Kyle)
+Take a proven app missing in your market (Tomer: a US fitness app → Israel, "CPMs significantly lower"); or the niche-adjacent version (Kyle: Sports cards app → the SAME app for Pokémon). "Every channel works — the question is which is most efficient for YOUR market."
+**Use for us:** Compute Fund = the proven-CROWD pattern (Kickstarter/GitHub-Sponsors/OpenCollective) transplanted to the AI-compute market = the arbitrage thesis in one line.
+
+### S13 · THE EXPERIMENT CULTURE (Symmetry/Mauro, 22)
+"Adding one screen = +3% retention ⇒ AB-test EVERYTHING"; the paywall AB = the highest-leverage surface; activation screens matter, login screens don't; ambitious OKRs while young ("10% conversion in 90 days is easy early, hard for Netflix").
+**Use:** our onboarding = the experiment surface from day one (D3+); every UI change = an AB with a receipted result (= the receipts-native experiment log!).
+
+### S14 · THE ANTI-TREND SEO LANE (Rasty, $2K/day)
+No TikTok, no paid ads — **SEO + valuable niche content**: "everyone says SEO is dead... this is clearly working." Download→paid: 5.47% day-1, grows with the relationship ($1.99/wk, $19.99/yr, $39.99/lifetime).
+**Use:** our docs/GEO lane: the AI-search-visibility keywords (who pays for AI, agent funding, compute marketplace) = content we ALREADY make (essays/scripts = the SEO body). The low-competition niche-keyword lane = the quiet engine under the loud one.
+
+### S15 · THE CREDITS MODEL, CONFIRMED IN THE WILD (David) ⭐
+An app-builder where **"you pay for credits, which in exchange let you build apps"** — $25/mo entry, 690 paid users, **ZERO free plans** ("we invest the money in the product"). Growth: Product Hunt week-1 MVP → first $50 MRR → then Reddit/SEO/X-only ("we haven't used any paid channels AT ALL"); high-intent SEO = "alternatives to [competitor]"; build-in-public on X: "around day 50, it started working, then things went PARABOLIC."
+**This = our credits economy, already working** (the L5 sectional-entitlement mechanic + the compute-denominated pricing!). The day-50 inflection = the cadence-patience datum (post quietly for ~7 weeks before judging the channel!)
+
+### S16 · THE NATIVE-AD LAW + PERSISTENCE MATH (Jake, $50K/mo in 4 months)
+Creators keep their own style, just get PAID ("too much of an ad → needs more money and a reason"); the DM-outreach = a volume game ("tons of DMs, very few responses").
+**Verification:** ✅ locked multi-source (the UGC→paid graduating playbook = an entire 2026 industry genre). Tool: SideShift (creator sourcing + tracking + payment), Instantly (mass DM/email outreach).
+
+### S17 · THE DISTRIBUTION DEMOGRAPHIC DATUM (Sarah Pearl + Pat's own numbers)
+Pat's channel analytics: 93-94% men; Sarah: "women dominate distribution... the majority of influencers are women" — a $340K/mo app on a 2.8M-follower TikTok brand. The consumer-distribution layer skews FEMALE while the builder-media layer (~ours) skews male.
+**Use:** our creator recruiting for the consumer side = the women-creator lanes get deliberate weight; our own media = the builder niche (fine — different jobs). Honest note: a strong on-air opinion, single-source; test at hire time.
+
+---
+
+## THE TOOL APPENDIX (all named on-air, categorized; each = "recommended/used on Starter Story, episode X, for task Y" — indexed in the archive catalog)
+**Creator/UGC ops:** SideShift (creator sourcing/tracking/payments) · ManyChat (IG comment→DM automation) · Superwall (paywall A/B — 2 episodes)
+**Analytics:** Mixpanel (onboarding tracking) · Data Fetch
+**Email/CRM:** Loops (churn win-backs) · Instantly (mass outreach) · MailerLite (automation)
+**Hosting/dev:** Vercel · Supabase (!!— same as ours, 2 episodes) · Convex · Webflow (landing) · WordPress (SEO/blog)
+**Payments:** Stripe (everywhere)
+**SEO:** Ahrefs (rank monitoring) · WordPress + the competitor-keyword page playbook
+**X ops:** Typefully + X Premium (scheduling/build-in-public)
+**Affiliate:** Tolt (affiliate management)
+**Ads channels named:** Meta ads · TikTok (slideshows + Spark-class) · Apple Search Ads (competitor bidding) · Google
+**People named/companies (guests = recruiting seeds, in contacts.json):** Jake ($50K app), Kyle Fowler (Card Stock/Scanemon), Tomer ($80K Israel), Sarah Pearl (Stella), Mauro (Symmetry LATAM), Rasty (ex-Gmail, $2K/day), David (the credits app-builder), Gaurav (Fastlane), Benji/team-10X (Snag) + the Postiz founder (the OSS rocket).
+
+## THE VERIFICATION MATRIX (the strategies' reality-lock status)
+| # | Strategy | Status |
+|---|----------|--------|
+| S1 | Creator-filtering machine | ✅ MULTI-SOURCE (the UGC→paid playbook genre, 4 independent trade write-ups) |
+| S2 | One-channel cadence | ✅ Multi-instance (2 episodes independently) |
+| S3 | Pattern-break positioning | ⚠️ Single-source (sound reasoning; test cheap at OUTREACH-1) |
+| S4 | 2,000-calls engine | ✅ Corroborated (the Mom Test doctrine = the same law) |
+| S5 | Churn-agent insight | ⚠️ SINGLE-SOURCE — highest-value if true (the Postiz churn chart shown on-air); test on D3+ onboarding |
+| S6 | Share-rate engine | ✅ Multi-instance (the geo-game class + Wordle-class mechanics) |
+| S7 | Competitor-keyword ads/SEO | ✅ MULTI-SOURCE (ASA guides + the comparison-page playbook) — WITH CAVEAT: "most competitor bids lose money, intent works against you" (the honest counter-source; bid only where the intent matches) |
+| S8 | Simplest-version law | ✅ Multi-instance |
+| S9 | Dogfood loop | ✅ (Fastlane + our own doctrine) |
+| S10 | Revenue-share creators | ✅ MULTI-SOURCE (deal-structure doctrine exists) |
+| S11 | Comment→DM funnel | ✅ (ManyChat-standard; our honest-variant law attached) |
+| S12 | Geo/neighbor-market arbitrage | ✅ Multi-instance (3 episodes) |
+| S13 | Experiment culture | ✅ (AB-testing standard practice) |
+| S14 | Anti-trend SEO lane | ⚠️ Single-source (with a real dashboard shown) — cheap to test via our content lane |
+| S15 | Credits model | ✅ CONFIRMED IN THE WILD (a live business priced in credits) |
+| S16 | Native-ad law | ✅ Multi-source |
+| S17 | Distribution demographics | ⚠️ Single-source opinion + Pat's corroborating analytics — test at recruiting |
+| — | The honesty datum | Pat himself: "on Twitter everyone seems like they're killing it; I've seen behind the scenes — the truth is different" (jjUf7lrb_xQ) = the fog is acknowledged BY the channel |
+
+*(✅ = multi-source/the field-agrees · ⚠️ = single-source — still worth trying, tracked as experiments.)*
+
+## §THE PATRONAGE SIDE — the Kickstarter framing (Gui's law, logged 10/26)
+The funding language: people don't "buy" — **they back a project they love, and they unlock perks** (the early-game-backer unlock, the physical items, the named credits). Legal-safe framing law:
+- The word = **patronage/backing**; never purchase/purchase-like promises
+- Perks = fixed, honest unlockables (the early-access seats, the named receipt lines, the beta lanes, the creator-status badges) — GIFTS for backing (gift-law safe), NOT obligations of return-on-money
+- NEVER: equity, profit-share promises, cash returns, "invest"-language (the securities walls, already law)
+- The Kickstarter comparison = the emotional frame people ALREADY understand; our differentiator ON TOP: the receipts (the backer sees exactly what their compute funded — the public ledger = Kickstarter's transparency, permanent)
+→ Riding in OUTREACH-STAGE as the patron-page framing; the creators' perk-pages = the unlock templates (the platform provides the template, the creator fills it).
+
+## THE CHANNEL-COUNT ANSWER (Gui's question)
+Starter Story runs **one main YouTube channel** (@starterstory = the interviews) + the content is cross-cut into IG/TikTok clips from the same tapings; Pat Walls' personal X = the build-in-public layer. (No separate long-form second channel found in the channel-tab listing.)
+
+## THE IMPLEMENTATION SHAPE (the milestone map — also in ROADMAP.md)
+- **OUTREACH-0 (pre-milestone, before the stage opens):** the ONE-channel selection + the cadence calendar (S2/S16's day-50 patience), the result-card design (S6), the honest comment-DM funnel spec (S11), the creator-filtering prep (S1: the interview rubric = the Mom Test rules)
+- **OUTREACH-1 (the stage):** the pilot interviews dual-purpose (S1/S4), the pattern-break formats (S3), the competitor-keyword SEO pages + the ASA/TikTok tests WITH the S7 caveat, the revenue-share creator offers (S10)
+- **OUTREACH-2 (post-launch growth ops):** the churn-agent law rollout (S5), the experiment culture on onboarding (S13), the affiliate/Tolt-class program (S15's zero-free-plan debate → our answer: patronage not freemium), the demographic-balanced recruiting (S17)
