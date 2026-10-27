@@ -204,3 +204,8 @@ Our D3 check: where does a completed receipt LIVE in the user's day? Does a proj
 The trap: the solo founder who CAN do everything never has to pick; the day defaults to building ("nobody can reject a feature") while getting-in-front-of-customers gets the leftovers = nothing. "Too talented to notice they were hiding."
 The law: ask "what is the ONE thing only I can do?" - for Gui = BE THE FACE (the story, the opinions, the voice - already happening: the mission-night voice + the reel-taste pipeline). Everything else = systematized (the agent = the grind).
 **The pushback-note (honesty):** delegation covers the GRIND, never the JUDGMENT - the face still walks into the pilot interviews and the calls (the Mom-Test gate = un-delegable). Delegating judgment = the anti-pattern this playbook exists to prevent.
+
+### S23 - THE COMPOUND LADDER + THE RECEIPTS-AUDIT CASE (getripping #2, the $1.8M exit)
+The ladder: the audience community (FREE, to learn the pains) -> a $9/mo solution -> the revenue feeds the content -> hire experts at $10K/mo -> $97/mo -> $1M/yr. Then the exit: the sale value came from "it ran fully WITHOUT me."
+The honest failure inside: **$290,000 of offshore dev-build that never worked — rebuilt the entire platform with Claude for ~1% of the cost.** (The Recreation-Age datum: the old build-budget = the AI build-budget now.)
+THE RECEIPTS-CASE (the gem): the sale process = 2 attempted business-thefts + a forensic-accounting audit + THOUSANDS of data requests = the nightmare a platform with receipt-complete records would make trivial — the data room gets built AS the business runs. Filed as the pitch-anecdote candidate for the launch content (the sale-horror story = what our receipts delete).
