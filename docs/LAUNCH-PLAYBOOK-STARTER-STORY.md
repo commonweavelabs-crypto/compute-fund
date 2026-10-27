@@ -222,3 +222,17 @@ FIRST TWO MINUTES (BUT-3) = the D3-claims onboarding law.
 honesty-as-structure format (the Investigation Template's receipts-culture
 sibling). OUR POSITION TODAY: between BUT-1 and BUT-2 (the build is going;
 the one-channel cadence = OUTREACH-0's first move).
+
+### S25 - THE THREE-FREEDOM PATHS & THEIR TRAPS (beau norton #4, transcribed)
+Only three business shapes give freedom: (1) low/mid-ticket AUTOMATION - the
+reach-unlimited, the delivery automated; (2) high-ticket WITH DELEGATION -
+the honest warning: without delegation it = the TRAP ("you do all the work,
+the business becomes completely dependent on you" = the service-prison);
+(3) the SUBSCRIPTION - the stabilizer, priced against churn. The combination
+= the real design.
+**The platform mapping:** the Compute Fund = the automation-class delivery
+the receipts/fund/credit flows = the automated high-stakes delivery WITHOUT
+the servitude; the patronage = the subscription-class. THE CREATOR-SIDE
+PROMISE (the marketing-law filed): our platform exists so the creator never
+becomes the servant of the funders - the "high-ticket trap" = what the
+automated flows prevent BY DESIGN. S25.
