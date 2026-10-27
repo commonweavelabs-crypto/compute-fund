@@ -173,3 +173,29 @@ Starter Story runs **one main YouTube channel** (@starterstory = the interviews)
 - **OUTREACH-0 (pre-milestone, before the stage opens):** the ONE-channel selection + the cadence calendar (S2/S16's day-50 patience), the result-card design (S6), the honest comment-DM funnel spec (S11), the creator-filtering prep (S1: the interview rubric = the Mom Test rules)
 - **OUTREACH-1 (the stage):** the pilot interviews dual-purpose (S1/S4), the pattern-break formats (S3), the competitor-keyword SEO pages + the ASA/TikTok tests WITH the S7 caveat, the revenue-share creator offers (S10)
 - **OUTREACH-2 (post-launch growth ops):** the churn-agent law rollout (S5), the experiment culture on onboarding (S13), the affiliate/Tolt-class program (S15's zero-free-plan debate → our answer: patronage not freemium), the demographic-balanced recruiting (S17)
+
+---
+
+# WAVE 3 - THE FOUR NEW STRATEGIES (2026-10-26 evening reel-dump: all audio transcribed locally)
+*Sources: @artem.novitckii (De9LCN9s8VD) - @tom__youngs (DZu-_GiA5rl) - @colintam1 (De2UPTKBqqV) - @restructureai (De8QN5nJ0As); all filed in the archive.*
+
+### S18 - THE LONGEVITY-CHART AD-RESEARCH (artem)
+Point a model at ANY Meta Ad Library -> every ad broken by format/hook/offer/copy -> plotted by DAYS-RUNNING ("nobody keeps paying for an ad that doesn't work" = the run-length = a PUBLIC RECEIPT of creative survival). Hormozi's winners: direct-callout talking-heads (112 days). Cost: 49 cents.
+Wire-in: run the chart on adjacent advertisers + our OWN creatives BEFORE Stage-1 spend; the founder-front format = our ad spec.
+
+### S19 - ONE CORE, MANY ASSETS (tom youngs)
+A 6-part core mini-series -> one email per video = the email course = ALSO the welcome sequence -> the same videos repackaged = the course lead magnet. "Everything here is the creation of lead magnets by doing no extra work."
+Wire-in: our documentary/essay pipeline IS the core - the launch email course = auto-derived (each chapter = an email). NO new content production for the funnel: the funnel re-cuts the core.
+
+### S20 - THE EVERGREEN-IP LAW (tom youngs)
+The core content = intellectual property: STATIC for at least a year; no methodology-flicking. The frame stays; the proofs accumulate around it.
+Wire-in: the Compute Fund story = FIXED for the launch year; the receipts/examples refresh; the narrative doesn't.
+
+### S21 - THE MODULE-STACKED OUTREACH OPS (restructureai; the dealership system)
+Module 1 ADS: the budget split across channels; Claude writes; HeyGen video-izes product photos; THE SIGN-OFF GATE: "no ad goes live until you approve"; auto-kill losers + reflow the money; ~$40/lead. Module 2 SPEED-TO-LEAD: every message answered <1min (photos, answers, bookings); a voice agent picks up = appointments waiting in the morning. Module 3 FOLLOW-UP: the day-2 text, day-5 video, interest-scoring -> humans call only the hot. Spine: Claude Code tracks click->deal + the ONE-PAGE MORNING DIGEST (who's coming, who's close, which ads performed).
+Wire-in: = the Stage-1 outreach ops blueprint (the $500-match era). Claim-flag: $5K->$45K = creator-marketing claim (unverifiable; the pattern = what matters).
+
+### THE TWIN LAWS FROM LOCKET (colintam; fact-checked: Matt Moss, the girlfriend birthday gift = true; #1 App Store Jan 2022; ~91M downloads; 100K paying/15 staff)
+- THE INTRINSIC SHARE SURFACE: the product must live SOMEWHERE the user sees it (home-screen class, not swipe-away notifications).
+- THE FRIEND-DEPENDENCY LOOP: the product is useless alone = every new user recruits their friends by design (the TikTok sound-ad wave: 5M views/day made BY the audience).
+Our D3 check: where does a completed receipt LIVE in the user's day? Does a project naturally pull its collaborators in? (receipts shared TO the project's people = the built-in loop.)
