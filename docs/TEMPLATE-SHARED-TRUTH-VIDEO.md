@@ -203,3 +203,15 @@ the Waco short = its own TEMPLATE, composable with the documentary one.
   that carry the receipts-culture to the audience.
 
 (Reference: links/vsauce-waco-sound-short.md, catalog #671.)
+
+## ADDENDUM - THE HOOK LAYER (R-KW: the Kallaway Triple Hook, transcribed 10/26)
+Every video (either template) opens with the triple hook layered onto beat 1:
+- **R-KW1 - CONTEXT IMMEDIATELY**: the viewer must know what's coming within
+  the first sentence; audio + visuals + caption say it in sync (their data:
+  even delaying context to the back half of sentence one drives the skip).
+- **R-KW2 - THE LEAN**: open the curiosity loop with a proof/stat, a named
+  pain, or a shock - the viewer leans in rather than opts out.
+- **R-KW3 - THE CONTRARIAN SNAPBACK**: yank: pull the leaning viewer
+  sideways (the fishing-hook metaphor). Then the rest of the beats run.
+(v2 script's cold open = verify against R-KW1..3 before render; hooks = the
+template's ignition system.)
