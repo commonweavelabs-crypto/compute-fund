@@ -209,3 +209,16 @@ The law: ask "what is the ONE thing only I can do?" - for Gui = BE THE FACE (the
 The ladder: the audience community (FREE, to learn the pains) -> a $9/mo solution -> the revenue feeds the content -> hire experts at $10K/mo -> $97/mo -> $1M/yr. Then the exit: the sale value came from "it ran fully WITHOUT me."
 The honest failure inside: **$290,000 of offshore dev-build that never worked — rebuilt the entire platform with Claude for ~1% of the cost.** (The Recreation-Age datum: the old build-budget = the AI build-budget now.)
 THE RECEIPTS-CASE (the gem): the sale process = 2 attempted business-thefts + a forensic-accounting audit + THOUSANDS of data requests = the nightmare a platform with receipt-complete records would make trivial — the data room gets built AS the business runs. Filed as the pitch-anecdote candidate for the launch content (the sale-horror story = what our receipts delete).
+
+### S24 - THE LADDER-OF-BUTS (getripping #3, transcribed 10/26)
+The path from 'built' to $1M/yr = a CHAIN of bottlenecks, each solved in
+order, each revealing the next: nobody KNOWS -> nobody SIGNUPS -> nobody PAYS
+-> it BREAKS -> they CANCEL -> the ops bury you -> you can't step away ->
+the operator -> it runs without you. Two fixed points inside: the content =
+the CUSTOMER'S problem, never the features (BUT-2) and THE VALUE IN THE
+FIRST TWO MINUTES (BUT-3) = the D3-claims onboarding law.
+**The copy-format law:** the BUTS-chain = the anti-magic launch copy - no
+"10x your world" promise; the named chain = the credibility. Filed as the
+honesty-as-structure format (the Investigation Template's receipts-culture
+sibling). OUR POSITION TODAY: between BUT-1 and BUT-2 (the build is going;
+the one-channel cadence = OUTREACH-0's first move).
