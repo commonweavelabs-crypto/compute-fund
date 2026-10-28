@@ -289,3 +289,22 @@ unique-data asset (the Data Wealth Layer in miniature) - the launch content
 = fed BY the receipts, not by the market's recycled claims. And the
 offers-metric = the data-validated OUTREACH law: the no's = the
 acquisition data (matches S1's creator-filter + the 50-interviews).
+
+### S29 - THE FOUR-MOMENT PAYWALL (saasyass #2, RevenueCat-data-backed)
+The paywall is not one screen - FOUR moments, each a leak: (1) the
+PRE-PAYWALL: 82% of trial starts happen on INSTALL day -> the onboarding =
+the sales page: ask their goal, give a quick win, head the paywall with
+THEIR stated goal; (2) the LOCK-MOMENT: re-show at the exact locked-feature
+hit (the export = the natural trigger); (3) THE TRANSPARENT TRIAL: remind
+two days before the charge (Blinkist: +23% conversions, fewer complaints -
+"people start trials when they're not scared of forgetting to cancel");
+(4) THE FILTER-LAW: hard-paywall = 10.7% of downloads -> paid vs freemium
+~2% - BUT the same yearly-share a year in: the hard wall = the curiosity
+filter. Found BY NAME = lock it; found by BROWSING = let them try.
+Plus: the decline-save (a different offer + the one why-question; never
+discount every exit - people learn to close) and THE ATOMIC CART: the
+Apple-sheet slide-up-and-cancel = one tap from pay = catch it there
+(the Superwall-class dashboard, no app update).
+**Wire-in:** the D3/claims-port paywall design + the launch-site paywall
+moments; our honest-funnel law applies at every moment (the promise =
+delivered, no dark patterns).
