@@ -236,3 +236,22 @@ the servitude; the patronage = the subscription-class. THE CREATOR-SIDE
 PROMISE (the marketing-law filed): our platform exists so the creator never
 becomes the servant of the funders - the "high-ticket trap" = what the
 automated flows prevent BY DESIGN. S25.
+
+### S26 - THE CONTENT-OPS STACK (kallaway #3, transcribed; 0 -> 150K followers at 5h/week)
+Six self-improving workflows as the content machine: (1) Format Finder - the
+whitespace-format matrix from the niche's channels; (2) the Content
+Positioning Canvas - a BUNDLE OF 8 SKILLS that interviews the founder, maps
+the competitors, distills the winning topics -> the strategy; (3) the
+Audience Bullseye - ALL past videos on a 5-ring broad->narrow map = which
+slice drives the leads; (4) the Hook Machine - the top hooks -> a generator
+that retrains on every new pop-off; (5) the Script Coach - iteratively
+compares new scripts vs the best; (6) the CTA Analyzer - the lead-flow
+monitor on every CTA's language.
+**Wire-in (OUTREACH-0 machinery spec):** we run the same shape on our stack
+- the archive + the transcripts = the competitor/hooks corpus; the
+templates = the format matrix; the receipts-style docs = the content DB.
+The self-improving loops = the fleet's natural strength (the receipts as
+the training data). SIDE-SHIFT'S OFFICE-DATUM (the vendor reel): "Liam,
+you're $6,000 so far" = the per-engineer token-meter as office CULTURE -
+the compute-accountability doctrine = our receipts-thesis in a company's
+walls (cross: tools-append SideShift).
