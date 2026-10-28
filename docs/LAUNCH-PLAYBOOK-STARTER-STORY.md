@@ -308,3 +308,21 @@ Apple-sheet slide-up-and-cancel = one tap from pay = catch it there
 **Wire-in:** the D3/claims-port paywall design + the launch-site paywall
 moments; our honest-funnel law applies at every moment (the promise =
 delivered, no dark patterns).
+
+### S30 - THE UGC-WEALTH CASE: GoPro built a $1.5B company on its users' videos (ColdFusion's collapse anatomy, transcribed 10/28)
+The fall: $12B peak (Oct 2014) -> -98% today. The original engine: "every
+extreme-sports clip on YouTube doubled as a GoPro ad" - the UGC-as-marketing
+at industrial scale, the creators paid in NOTHING. The causes of the fall =
+the classic (the smartphones chipped the pitch; DJI/Insta360 ate the
+category; the drone blunder; the lean company that lost 98% anyway).
+**THE RECEIPTS-PITCH ANECDOTE (the launch-content gold):** GoPro's users
+made the company $1.5B and got nothing in return - and NOBODY can prove
+which clip sold which camera, because no rails existed to route the value
+back or even to attribute it. THAT is the before-picture our after-picture
+replaces: the same creators' clips - receipted, attributed, value-routed
+back on use. Use it verbatim in the launch video (the quotes-as-witnesses
+frame: the case = ColdFusion's filing).
+The 2026 twist (the market-datum): Markiplier became GoPro's largest
+shareholder (8.5%, unnoticed in the SEC filing for 10 days) -> one
+"pivoting into AI" announcement -> +200% stock. The creators now move
+markets - the rails should move value to them, not just attention.
