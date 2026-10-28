@@ -274,3 +274,18 @@ from THEIR cost, not from our pricing page.
 DESIGN; any "done-for-you" lane offering (the pilot-lane's concierge tier,
 the pg-Do-Things-That-Don't-Scale gate) = priced from the buyer's
 alternative cost, NOT from our infrastructure's meter.
+
+### S28 - DATA-AS-MOAT: the unique insights in the free-information world (tom youngs #2, transcribed)
+His Scale-20 dataset: **6M unique datapoints / 131K submissions** from the
+six/seven-figure members. "In a world where information is free, it's the
+UNIQUE INSIGHTS that make your signature intellectual property actually
+hold the value." The 9-month dig found the cash-linked metrics: #1 OFFERS
+MADE (his data-backed rejection-therapy: "stop being scared, go collect a
+shitload of no's"), #2 long-form content view-hours, #3 email-list size.
+**THE DUAL-USE LAW:** the unique data serves TWICE - (a) the members'
+personalized guidance (the retention) + (b) the marketable content (the
+differentiation). THE PLATFORM MAPPING: our receipts = the platform's
+unique-data asset (the Data Wealth Layer in miniature) - the launch content
+= fed BY the receipts, not by the market's recycled claims. And the
+offers-metric = the data-validated OUTREACH law: the no's = the
+acquisition data (matches S1's creator-filter + the 50-interviews).
