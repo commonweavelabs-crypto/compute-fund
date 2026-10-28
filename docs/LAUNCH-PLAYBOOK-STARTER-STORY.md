@@ -255,3 +255,22 @@ the training data). SIDE-SHIFT'S OFFICE-DATUM (the vendor reel): "Liam,
 you're $6,000 so far" = the per-engineer token-meter as office CULTURE -
 the compute-accountability doctrine = our receipts-thesis in a company's
 walls (cross: tools-append SideShift).
+
+### S27 - "SOFTWARE MARGINS, SERVICE PRICES" - the done-for-you tier (saasyass, transcribed)
+The YC-side signal: their list now asks for AI companies where the AGENTS do
+90% of the work and the PEOPLE only check it. The case study: Smartlead
+($39/mo cold-email SaaS) added a "Smart Services" tab: the done-for-you
+outbound - the fresh lists, the buying-signals, the AI-written emails, the
+inboxes run - priced ON A CALL, not on the page. Listkit already sells the
+same ladder (the software $600/mo, the whole-thing $18K/quarter). TWO
+companies in one market = the pattern, not an experiment.
+The economics (the gem): the AGENCIES have the terrible margins because they
+do the work by hand; THE COMPANIES WHO ALREADY OWN THE MACHINE ("the 90% is
+my product, the 10% is your team") = SOFTWARE MARGINS, SERVICE PRICES.
+The pricing law: on the call, ask what the result costs THEM today (the
+salaries, the tools, the time) -> price BELOW that number = the price comes
+from THEIR cost, not from our pricing page.
+**The platform mapping:** the fund/meter/receipts = the 90%-machine BY
+DESIGN; any "done-for-you" lane offering (the pilot-lane's concierge tier,
+the pg-Do-Things-That-Don't-Scale gate) = priced from the buyer's
+alternative cost, NOT from our infrastructure's meter.
