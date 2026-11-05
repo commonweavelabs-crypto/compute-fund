@@ -1,5 +1,10 @@
 # Compute Fund — Roadmap (consolidated 2026-10-07)
 
+> **INFRASTRUCTURE LEDGER: `docs/OPS-MANAGER.md`** — THE document for every managed
+> service (Supabase/Stripe/Gmail/GitHub/domains/tunnel): what it is, where its keys
+> live, how it's managed, its cron. New service = new section there (new-service law,
+> file §8). Read it FIRST when anything with keys/auth/billing acts up.
+
 *Consolidates: current v1 build + David-era corpus (30+ docs: MANIFESTO/ZUCK-ESSAY/Golden
 Ticket/prototype/case study) + Gui's 2026-10-07 direction (deterministic questions, MVP =
 legal money-wire, profiles, project pages). Conflicts resolved per CONSOLIDATION.md.*
