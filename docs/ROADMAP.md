@@ -255,3 +255,13 @@ roadmap voting priority, token-donation credit type, distribution stays external
   awaiting Gui's explicit yes (destructive). Note: Nous-connector OAuth token can never
   list projects (Supabase platform rule) — PAT via CLI is the management road; PAT
   rotate/revoke at dashboard/account/tokens.]**
+- **[SUPABASE PREVENTION 2026-11-04 (Gui: 'this cannot happen again')]:** root cause =
+  free-tier INACTIVITY auto-pause (7-day idle => DNS removed). Prevention, now LIVE:
+  guardian cron `aa401daa9afd` (script-only, zero tokens, every 3 days 9am):
+  `~/AppData/Local/hermes/scripts/supabase-keepalive.sh` = sends real keep-alive traffic
+  (auth health + rest), checks status, AUTO-FIRES restore if INACTIVE, alerts only on
+  failure (silent-when-healthy verified: healthy run = empty stdout, exit 0). PAT at
+  `C:/Users/Guilherme/.config/supabase/pat.txt` (ACL-restricted, never in any repo).
+  Supabase = agent-managed from now on (Gui standing order). Org RENAME/DELETE = dashboard-only
+  (no API route exists) - the 2 empty orgs die via one guided dashboard visit when Gui
+  wants it; the org he keeps = 'commonweavelabs' (holds the live project).
