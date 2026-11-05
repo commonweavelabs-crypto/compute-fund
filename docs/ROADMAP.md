@@ -244,3 +244,14 @@ roadmap voting priority, token-donation credit type, distribution stays external
   9am ET, deliver origin, attach=true) + 28ee17406cc6 = compute.fund RDAP one-shot chain
   kickoff (2026-12-05, self-rescheduling exponential). Weekly sweep = LLM digest per
   cron-job-design self-termination blueprint; renew-or-kill review at the 90-day mark.]**
+- **[SUPABASE CLOSED 2026-11-13→11-04]: project csujyjibtxpccfvlaujm was NOT deleted —
+  Supabase AUTO-PAUSED it (status INACTIVE since ~Oct 27 idle; paused = DNS record
+  removed = the NXDOMAIN mystery). RESTORED via PAT (sbp_* = saved via `supabase login
+  --token`, revocable in dashboard): status now ACTIVE_HEALTHY, DNS resolving, OAuth
+  plumbing verified (authorize -> 302 github.com with PKCE/state/callback chain). The
+  project's org = `commonweavelabs` (primary). DUPLICATE ORGS confirmed EMPTY (a full
+  account projects list shows exactly ONE project): `commonweavelabs- COMPUTE.FUND`
+  (nymhtuggwionmpobiqja) + `compute-fund` (qyrunrmwzsdirdjmozqg) — deletion candidates,
+  awaiting Gui's explicit yes (destructive). Note: Nous-connector OAuth token can never
+  list projects (Supabase platform rule) — PAT via CLI is the management road; PAT
+  rotate/revoke at dashboard/account/tokens.]**
