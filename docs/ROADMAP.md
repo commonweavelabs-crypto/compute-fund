@@ -26,8 +26,8 @@ legal money-wire, profiles, project pages). Conflicts resolved per CONSOLIDATION
 - [ ] SPEC-V2 WRITTEN (docs/SPEC-V2.md): the game-theory layer as data models + valves + phase mapping; 'build it' = section 7 sequence
 - [ ] PILOT PROPOSAL DRAFTED (docs/PILOT-PROPOSAL.md): 'The Fire Pilot' done-for-you tier; awaiting Gui: green light + cap number + target pick + the send
 *Gui's definition adopted: login + legal guardrails + real governed compute + receipts.*
-- [ ] **Project pages (v1.5)** — click a card → creator-authored page: hero, story, roadmap, funding state, receipts, CFQ id. (Current homepage becomes CommonWeave Labs profile page + avatar circle.)
-- [ ] **Platform homepage v1.5 (KS-arrangement, our skin)** — header: logo + mock search + CFQ-domain category strip + "Start a project" + Log in; centered slogan; seasonal/featured **Question-of-the-Month** hero; Featured project (progress line ON the image, meta row "time left • % funded", desc, tag chips incl. location) + "Recommended for you" 2x2 with mini progress-underlines + pagination; "Home Stretch" urgency row; **creator hover-card popup** (X created · Y funded · community-loved count · joined date · mini bio → profile link); creator-guide cards ("Every experiment starts with the same question..." vertical accent bars); Crowdfunding/Compute Tips 4-card row; footer w/ CFQ-domain columns + giant wordmark + language/currency + legal row. **Layout law: arrangement adopted from KS reference shots (Oct 2026), skin 100% ours (Terminal Commons/Carbon Ledger); no KS branding, artwork, or copy.**
+- [ ] **Project pages (v1.5)** — click a card → creator-authored page: hero, story, roadmap, funding state, receipts, CFQ id. [PROGRESS 2026-11-04: hero + one-liner + repo/links + DRAFT/PUBLISH + funding + receipts LIVE; the story/roadmap long-form fields = remaining part of this box] (Current homepage becomes CommonWeave Labs profile page + avatar circle.)
+- [x] **Platform homepage v1.5 (KS-arrangement, our skin)** — header: logo + mock search + CFQ-domain category strip + "Start a project" + Log in; centered slogan; seasonal/featured **Question-of-the-Month** hero; Featured project (progress line ON the image, meta row "time left • % funded", desc, tag chips incl. location) + "Recommended for you" 2x2 with mini progress-underlines + pagination; "Home Stretch" urgency row; **creator hover-card popup** (X created · Y funded · community-loved count · joined date · mini bio → profile link); creator-guide cards ("Every experiment starts with the same question..." vertical accent bars); Crowdfunding/Compute Tips 4-card row; footer w/ CFQ-domain columns + giant wordmark + language/currency + legal row. **Layout law: arrangement adopted from KS reference shots (Oct 2026), skin 100% ours (Terminal Commons/Carbon Ledger); no KS branding, artwork, or copy.** — BUILT 2026-11-04: /api/home + sections live, zero-rows path + a11y pass verified; commit 5c3e8dc
 - [ ] **CFQ intake** — Question Standard enforced at project creation; LLM format-interpreter prompt published; lint = fields 2–7 machine-checked
 - [ ] **Auth & accounts** — signup/login; user account first; org profile second (org = created under a user, linked, TRANSFERABLE to other users, not owned); backer can become creator by creating an org or a project; projects may live under personal profile OR org (both legal, org default-rec)
 - [ ] **Stripe money-in** — David-era pattern reused (checkout + webhook, graceful fallback); receipt per patron incl. priority credit — **[E2E PROVEN 2026-11-04: sandbox account + keys in `app/.env.local` → tunnel (cloudflared) → signup email-auth → $25 checkout session `cs_test_a1JyjN...` → hosted checkout PAID (Stripe API: payment_status=paid) → webhook flipped `demo: 2 → 0` (don_4da0fc4de50549108417) → Big Tok $25.00 real funded. Fix landed with it: `allowedDevOrigins` in next.config.ts (Next 16 blocked /_next/hmr from the tunnel host = site-wide dead hydration). Remaining for MVP gate: Supabase ref csujyjibtxpccfvlaujm NXDOMAIN (project deleted/paused — OAuth pending; email-auth fine in test) + live keys + KYC at go-live.]**
@@ -57,9 +57,9 @@ MVP-sprint impact).
 ### Phase 2 addition — NFX alignment (from NFX-ALIGNMENT.md, 2026-10-19)
 Source: NFX Masterclass Ep.4 "Hidden Patterns of Great Startup Ideas" (full
 transcript analysis; docs/NFX-ALIGNMENT.md). Not in stone:
-- [ ] N-1 Name the network core: docs/NETWORK-CORE.md — receipts-graph as the
+- [x] N-1 Name the network core: docs/NETWORK-CORE.md — receipts-graph as the
   core data-network effect; seed graph = pilot fleet + roster; open/data policy
-- [ ] N-2 docs/RISK-INVENTORY.md: every risk stack (regulatory/payment-geo/
+- [x] N-2 docs/RISK-INVENTORY.md: every risk stack (regulatory/payment-geo/
   provider-dependency/fraud/governance/cold-start/key-person), owner-tagged
 - [ ] N-3 COMPLEXITY FIREWALL (standing law): new mechanisms phase-gated; MVP =
   charter + claim + receipts + ledger only (zero-MVP-impact, now explicit)
@@ -85,16 +85,18 @@ as its first real user (claiming + creating + funding his own work). Doors:
   local fallback, or re-verify email+pw first; his real account = already in
   the Supabase cloud (v4 accounts schema); GitHub login via supabase OAuth = the
   flow he tested
-- [ ] D3-CREATE-FLOW: creator workspace: /create (CFQ lint EXISTS already) +
+- [ ] [x] D3-CREATE-FLOW: creator workspace: /create (CFQ lint EXISTS already) +
   image/logo upload (served statically; no third-party host) + repo/links
   fields + DRAFT state (private, personal-profile workspace) + PUBLISH ->
   public page + org/business-account creation under a user (transferable per
   existing law - org page already renders from data)
-- [ ] D3-TEST: scripted integration tests for the whole create path (the
+- [x] D3-TEST: scripted integration tests for the whole create path (the
   SPRINT-001 stranger-loop test pattern extended); feature/debug PAIRED
-- [ ] D2-CLAIM-FLOW: research-imported projects loaded as UNCLAIMED stubs
+- [x] D2-CLAIM-FLOW: research-imported projects loaded as UNCLAIMED stubs
   (from the link-archive pilot targets: MiroFish/last30days/colibri/tierllama)
-  + claim flow on the project page: maintainer proof -> executor role
+  + claim flow on the project page: maintainer proof -> executor role (DONE
+  2026-11-04: 4 stubs seeded unclaimed; claim = repo-proof gated, ownership
+  TRANSFERS with an ops receipt; tierllama left UNCLAIMED for the pilot; tests all-pass)
 - [ ] D3-PILOT-PIPE-TEST (Stage 0 of PILOT-PROPOSAL): Gui claims HIS dogfood
   project (tierllama bench row already seeded) + self-funds $50-100 + gateway
   run + receipts public = the first REAL receipts story
@@ -165,7 +167,7 @@ its video block is checked. Full mapping: docs/FOUNDER-WATCHLIST.md.
 - [ ] DEBUG-SESSION (Wed): the vibe-code liability audit (from adilet, 10/26): (1) the a11y pass: keyboard-nav + alt-text on every interactive element (antislop-human skill); (2) the RLS verify on any Supabase-managed tables IF the auth path uses them (our core DB = SQLite server-side = immune by architecture; verify the auth-side); (3) the budget-alerts note: our cap_credits+spent_credits = the runaway defense ALREADY (the demo to users: the platform natively protects what vibe-coded apps do not!)
 
 #### OUTREACH sub-milestones (broken out per Gui, 2026-10-26 — LAUNCH-PLAYBOOK-STARTER-STORY.md is the strategy source)
-- **OUTREACH-0 (pre-stage ops, starts when D3 lands):** (a) the ONE-channel selection + the daily cadence calendar (S2; the day-50 patience datum = judge at week 7, not week 2); (b) the result-card design (S6 — the shareable receipt cards = the growth loop); (c) the honest comment→DM funnel spec (S11 — the keyword delivers the promised thing, never farms); (d) the creator-filtering prep (S1 — the Mom-Test interview rubric = the filter); (e) the patron-page framing (the Kickstarter-backing language + the legal walls: gifts not returns)
+- **OUTREACH-0 (pre-stage ops, starts when D3 lands) — DRAFTED 2026-11-04 (docs/OUTREACH-0-DRAFTS.md; every item = DRAFT, DECISION GUI; nothing sent):** (a) the ONE-channel selection + the daily cadence calendar (S2; the day-50 patience datum = judge at week 7, not week 2); (b) the result-card design (S6 — the shareable receipt cards = the growth loop); (c) the honest comment→DM funnel spec (S11 — the keyword delivers the promised thing, never farms); (d) the creator-filtering prep (S1 — the Mom-Test interview rubric = the filter); (e) the patron-page framing (the Kickstarter-backing language + the legal walls: gifts not returns)
 - **OUTREACH-1 (the stage as planned):** the pilot interviews dual-purpose (S1+S4: the filter = the interviews), the pattern-break formats (S3: show receipts, don't explain), the competitor-keyword SEO pages + the ASA/TikTok tests WITH the intent caveat (S7 honesty note), the revenue-share creator offers (S10)
 - **OUTREACH-2 (post-launch growth ops):** the churn-agent law rollout (S5: every recurring user task → agentic), the experiment culture on onboarding (S13: every UI change = a receipted AB), the affiliate program (S15's zero-free-plan debate → our answer = patronage + credits, not freemium), the demographic-balanced creator recruiting (S17), the credits-model validation continues (S15 = our L5 confirmed in the wild)
 
