@@ -18,6 +18,20 @@ export function getDb(): DatabaseSync {
     if (!cols.some((c) => c.name === "supabase_user_id")) {
       _db.exec("ALTER TABLE users ADD COLUMN supabase_user_id TEXT");
     }
+    // D3 create-flow schema drift: draft state, uploads, repo/links, orgs.
+    // (schema.sql runs first above, so the `orgs` CREATE TABLE IF NOT EXISTS lands here.)
+    const conn = _db;
+    const addCol = (table: string, col: string, ddl: string) => {
+      const c2 = conn.prepare(`PRAGMA table_info(${table})`).all() as Array<{ name: string }>;
+      if (!c2.some((c) => c.name === col)) conn.exec(`ALTER TABLE ${table} ADD COLUMN ${ddl}`);
+    };
+    addCol("projects", "status", "status TEXT DEFAULT 'active'"); // active | draft
+    addCol("projects", "logo_path", "logo_path TEXT");
+    addCol("projects", "repo_url", "repo_url TEXT");
+    addCol("projects", "links", "links TEXT"); // JSON array [{label,url}]
+    addCol("projects", "owner_org_id", "owner_org_id TEXT REFERENCES orgs(id)");
+    addCol("users", "avatar_path", "avatar_path TEXT");
+    addCol("users", "bio", "bio TEXT");
   }
   return _db;
 }
@@ -39,7 +53,7 @@ export function findUserByEmail(email: string) {
   return db.prepare("SELECT * FROM users WHERE email = ?").get(email.toLowerCase());
 }
 export function findUserById(id: string) {
-  return db.prepare("SELECT id, email, display_name, role, created_at FROM users WHERE id = ?").get(id);
+  return db.prepare("SELECT id, email, display_name, role, created_at, avatar_path, bio FROM users WHERE id = ?").get(id);
 }
 export function createUser(email: string, pwHash: string, displayName: string) {
   const id = newId("usr");
@@ -84,6 +98,56 @@ export function nextCfqId(): string {
   const year = new Date().getFullYear();
   const row = db.prepare("SELECT COUNT(*) AS n FROM projects").get() as { n: number };
   return `CFQ-${year}-${String(row.n + 1).padStart(3, "0")}`;
+}
+
+// -- orgs (MVP create-flow; TRANSFERABLE law: owner may move projects) ---------
+export function insertOrg(o: Record<string, unknown>) {
+  db.prepare("INSERT INTO orgs (id, slug, name, owner_id, avatar_path, bio) VALUES (@id, @slug, @name, @owner_id, @avatar_path, @bio)").run(o as never);
+}
+export function orgsOwnedBy(userId: string) {
+  return db.prepare("SELECT id, slug, name, avatar_path, bio FROM orgs WHERE owner_id = ? ORDER BY created_at").all(userId);
+}
+export function orgBySlug(slug: string) {
+  return db.prepare("SELECT id, slug, name, avatar_path, bio FROM orgs WHERE slug = ?").get(slug);
+}
+export function orgProjects(orgId: string) {
+  return db.prepare("SELECT id, cfq_id, slug, name, one_liner, status FROM projects WHERE owner_org_id = ? AND status != 'draft' ORDER BY created_at DESC").all(orgId);
+}
+export function userBySlugForOrg(userId: string) { return orgsOwnedBy(userId); }
+export function setOrgFields(orgId: string, fields: Record<string, unknown>) {
+  const allowed = ["name", "avatar_path", "bio"];
+  const sets: string[] = [];
+  const vals: Record<string, unknown> = { id: orgId };
+  for (const k of allowed) if (k in fields) { sets.push(`${k} = @${k}`); vals[k] = fields[k]; }
+  if (!sets.length) return;
+  db.prepare(`UPDATE orgs SET ${sets.join(", ")} WHERE id = @id`).run(vals as never);
+}
+
+// -- projects extend (draft/publish/transfer) ---------------------------------
+export function projectBySlug(slug: string) {
+  return db.prepare("SELECT * FROM projects WHERE slug = ?").get(slug);
+}
+export function setProjectStatus(id: string, status: string) {
+  db.prepare("UPDATE projects SET status = ? WHERE id = ?").run(status, id);
+}
+export function setProjectOrg(id: string, orgId: string | null) {
+  db.prepare("UPDATE projects SET owner_org_id = ? WHERE id = ?").run(orgId, id);
+}
+export function setProjectFields(id: string, fields: Record<string, unknown>) {
+  const allowed = ["logo_path", "repo_url", "links", "one_liner"];
+  const sets: string[] = [];
+  const vals: Record<string, unknown> = { id };
+  for (const k of allowed) if (k in fields) { sets.push(`${k} = @${k}`); vals[k] = fields[k]; }
+  if (!sets.length) return;
+  db.prepare(`UPDATE projects SET ${sets.join(", ")} WHERE id = @id`).run(vals as never);
+}
+export function updateProfile(userId: string, fields: Record<string, unknown>) {
+  const allowed = ["display_name", "avatar_path", "bio"];
+  const sets: string[] = [];
+  const vals: Record<string, unknown> = { id: userId };
+  for (const k of allowed) if (k in fields) { sets.push(`${k} = @${k}`); vals[k] = fields[k]; }
+  if (!sets.length) return;
+  db.prepare(`UPDATE users SET ${sets.join(", ")} WHERE id = @id`).run(vals as never);
 }
 
 // -- donations ---------------------------------------------------------------

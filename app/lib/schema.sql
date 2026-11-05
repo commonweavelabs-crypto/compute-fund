@@ -73,5 +73,18 @@ CREATE TABLE IF NOT EXISTS virtual_keys (
   created_at    TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
+CREATE TABLE IF NOT EXISTS orgs (
+  id            TEXT PRIMARY KEY,
+  slug          TEXT NOT NULL UNIQUE,
+  name          TEXT NOT NULL,
+  owner_id      TEXT NOT NULL REFERENCES users(id),
+  avatar_path   TEXT,
+  bio           TEXT,
+  created_at    TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Projects may live under the creator's personal profile OR under an org
+-- (org default-recommended; orgs are TRANSFERABLE per standing law). owner_id
+-- stays the human who created it; owner_org_id = the public holder when set.
 CREATE INDEX IF NOT EXISTS idx_receipts_project ON receipts(project_id, ts);
 CREATE INDEX IF NOT EXISTS idx_donations_project ON donations(project_id);

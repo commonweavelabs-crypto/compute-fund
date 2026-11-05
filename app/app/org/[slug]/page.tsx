@@ -2,20 +2,29 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { projects, orgs } from "../../../lib/data";
+
+// Org page, rendered from DATA (the /api/puborg/[slug] DB rail; the static
+// lib/data demo orgs stay for the seed home page only).
+type OrgData = { org: { slug: string; name: string; avatar_path: string | null; bio: string | null }; projects: { slug: string; name: string; cfq_id: string; one_liner: string; funded_usd: number }[] };
 
 function OrgPageInner() {
   const { slug } = useParams<{ slug: string }>();
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [data, setData] = useState<OrgData | null>(null);
+  const [missing, setMissing] = useState(false);
   useEffect(() => {
     const id = requestAnimationFrame(() => document.documentElement.setAttribute("data-theme", theme));
     return () => cancelAnimationFrame(id);
   }, [theme]);
-  const org = orgs[slug as string];
-  const mine = projects.filter(p => p.org === slug);
+  useEffect(() => {
+    if (!slug) return;
+    fetch(`/api/puborg/${slug}`).then(r => r.json()).then(d => { if (d.error) setMissing(true); else setData(d); }).catch(() => setMissing(true));
+  }, [slug]);
   const money = (n: number) => n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-  if (!org) return <main className="wrap"><h1 className="nf">Unknown profile.</h1></main>;
-  const total = mine.reduce((a, p) => a + p.raised_usd, 0);
+  if (missing) return <main className="wrap"><h1 className="nf">Unknown profile.</h1></main>;
+  if (!data) return <main className="wrap"><p className="onedim">loading…</p></main>;
+  const org = data.org;
+  const total = data.projects.reduce((a, p) => a + p.funded_usd, 0);
   return (
     <>
       <header className="top">
@@ -28,24 +37,20 @@ function OrgPageInner() {
       </header>
       <main className="wrap">
         <section className="orgpage">
-          <div className="bigavatar">{org.avatar}</div>
+          <div className="bigavatar">{org.avatar_path ? <img src={org.avatar_path} alt={`${org.name} logo`} style={{ width: 64, borderRadius: 8 }} /> : <span>&#9619;</span>}</div>
           <h1>{org.name}</h1>
-          <div className="pmeta center">{mine.length} projects created • {money(total)} raised • joined {org.joined.slice(0,7)} • {org.location}</div>
-          <p className="popbio center">{org.bio}</p>
-          <nav className="socials center">
-            <a href={org.links.x} target="_blank" rel="noopener noreferrer">X</a>
-            <a href={org.links.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
-            <a href={org.links.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-          </nav>
+          <div className="pmeta center">{data.projects.length} projects created • {money(total)} raised</div>
+          <p className="popbio center">{org.bio ?? "An organization on the fund."}</p>
         </section>
         <section className="grid" aria-label="projects by this org">
-          {mine.map(p => (
-            <Link key={p.slug} href={`/project/${p.slug}`} className="card" style={{ color: "inherit" }}>
-              <div className="tags">{p.tags.map(t => <span key={t} className={`tag${t === "LIVE" ? " live" : ""}`}>{t}</span>)}</div>
+          {data.projects.map(p => (
+            <Link key={p.slug} href={`/p/${p.slug}`} className="card" style={{ color: "inherit" }}>
+              <div className="tags"><span className="tag">{p.cfq_id}</span><span className="tag">{money(p.funded_usd)} funded</span></div>
               <h2>{p.name}</h2>
-              <p className="one">{p.one}</p>
+              <p className="one">{p.one_liner}</p>
             </Link>
           ))}
+          {data.projects.length === 0 && <p className="onedim">No public projects yet.</p>}
         </section>
       </main>
       <footer className="bottom big"><div className="footrow">
