@@ -32,6 +32,13 @@ export function getDb(): DatabaseSync {
     addCol("projects", "owner_org_id", "owner_org_id TEXT REFERENCES orgs(id)");
     addCol("users", "avatar_path", "avatar_path TEXT");
     addCol("users", "bio", "bio TEXT");
+    // orgs table: existing DBs opened before the D3 schema landed need the table
+    // even when a schema.exec already ran in this process — CREATE IF NOT EXISTS
+    // is idempotent and matches schema.sql verbatim.
+    _db.exec(`CREATE TABLE IF NOT EXISTS orgs (
+      id TEXT PRIMARY KEY, slug TEXT NOT NULL UNIQUE, name TEXT NOT NULL,
+      owner_id TEXT NOT NULL REFERENCES users(id), avatar_path TEXT, bio TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')))`);
   }
   return _db;
 }
@@ -89,10 +96,14 @@ export function insertProject(p: Record<string, unknown>) {
   db.prepare(`INSERT INTO projects
     (id, cfq_id, owner_id, slug, name, one_liner, question, data_inputs, method,
      deliverable, done_criteria, falsified_by, review_process, budget_credits,
-     deadline, assumptions)
+     deadline, assumptions, status, logo_path, repo_url, links, owner_org_id)
     VALUES (@id, @cfq_id, @owner_id, @slug, @name, @one_liner, @question, @data_inputs,
      @method, @deliverable, @done_criteria, @falsified_by, @review_process,
-     @budget_credits, @deadline, @assumptions)`).run(p as never);
+     @budget_credits, @deadline, @assumptions, @status, @logo_path, @repo_url,
+     @links, @owner_org_id)`).run({
+    status: "active", logo_path: null, repo_url: null, links: null, owner_org_id: null,
+    ...p,
+  } as never);
 }
 export function nextCfqId(): string {
   const year = new Date().getFullYear();
@@ -108,7 +119,7 @@ export function orgsOwnedBy(userId: string) {
   return db.prepare("SELECT id, slug, name, avatar_path, bio FROM orgs WHERE owner_id = ? ORDER BY created_at").all(userId);
 }
 export function orgBySlug(slug: string) {
-  return db.prepare("SELECT id, slug, name, avatar_path, bio FROM orgs WHERE slug = ?").get(slug);
+  return db.prepare("SELECT id, slug, name, avatar_path, bio, owner_id FROM orgs WHERE slug = ?").get(slug);
 }
 export function orgProjects(orgId: string) {
   return db.prepare("SELECT id, cfq_id, slug, name, one_liner, status FROM projects WHERE owner_org_id = ? AND status != 'draft' ORDER BY created_at DESC").all(orgId);
