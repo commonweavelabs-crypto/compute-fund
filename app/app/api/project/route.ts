@@ -41,6 +41,7 @@ export async function POST(req: Request) {
     budget_credits: draft.budget_credits, deadline: draft.deadline, assumptions: draft.assumptions,
     status, logo_path: body.logo_path ?? null, repo_url: body.repo_url ?? null,
     links: body.links ? JSON.stringify(body.links) : null, owner_org_id: ownerOrgId,
+    story: body.story ?? null, roadmap: body.roadmap ?? null,
   });
   return NextResponse.json({ ok: true, slug, cfq_id: cfqId, status });
 }

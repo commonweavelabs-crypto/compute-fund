@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import LiveProjectPanel from "../../../components/LiveProjectPanel";
 
-type Meta = { cfq_id: string; name: string; question: string; deliverable: string; done_criteria: string; falsified_by: string; deadline: string; status?: string; logo_path?: string | null; repo_url?: string | null; links?: { label: string; url: string }[]; one_liner?: string };
+type Meta = { cfq_id: string; name: string; question: string; deliverable: string; done_criteria: string; falsified_by: string; deadline: string; status?: string; logo_path?: string | null; repo_url?: string | null; links?: { label: string; url: string }[]; one_liner?: string; story?: string | null; roadmap?: string | null };
 
 // Renders a DB-born project (created through the CFQ form). Seed projects keep their
 // hand-built pages under /project/[slug]; both link types coexist during the sprint.
@@ -59,6 +59,13 @@ function DbProjectInner() {
         <p className="cfqf">{meta.done_criteria}</p>
         <div className="cfqhead"><span>FALSIFIED BY</span></div>
         <p className="cfqf">{meta.falsified_by}</p>
+        {meta.story && (<div><div className="cfqhead"><span>THE STORY</span></div><p className="cfqf">{meta.story}</p></div>)}
+        {meta.roadmap && (<div><div className="cfqhead"><span>THE BUILD PLAN</span></div><p className="cfqf" style={{ whiteSpace: "pre-line" }}>{meta.roadmap}</p></div>)}
+        {meta.links && meta.links.length > 0 && (
+          <div className="links-row" style={{ marginTop: 12 }}>
+            {meta.links.map((l, i) => <a key={i} className="tag" href={l.url} rel="noopener noreferrer">{l.label || l.url}</a>)}
+          </div>
+        )}
       </section>
       <LiveProjectPanel slug={String(slug ?? "")} isOwner={isOwner} />
       <p className="backline"><Link href="/">← the fund</Link></p>

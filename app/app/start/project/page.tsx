@@ -22,6 +22,8 @@ export default function ProjectStartPage() {
   const [deadline, setDeadline] = useState("");
   const [repoUrl, setRepoUrl] = useState("");
   const [links, setLinks] = useState("");
+  const [story, setStory] = useState("");
+  const [roadmap, setRoadmap] = useState("");
   const [logoPath, setLogoPath] = useState("");
   const [orgs, setOrgs] = useState<{ slug: string; name: string }[]>([]);
   const [orgSlug, setOrgSlug] = useState("");
@@ -54,7 +56,9 @@ export default function ProjectStartPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: slugName, one_liner: oneLiner, budget_credits: Number(budget), deadline,
-        repo_url: repoUrl, links: links ? links.split("\n").map(l => { const [label, url] = l.split("|"); return { label: (label ?? "").trim(), url: (url ?? "").trim() }; }).filter(x => x.url) : [],
+        repo_url: repoUrl,
+        links: links ? links.split("\n").map(l => { const [label, url] = l.split("|"); return { label: (label ?? "").trim(), url: (url ?? "").trim() }; }).filter(x => x.url) : [],
+        story: story, roadmap: roadmap,
         logo_path: logoPath || undefined, status: asDraft ? "draft" : "active",
         org_slug: orgSlug || undefined, ...fields,
       }),
@@ -142,6 +146,12 @@ export default function ProjectStartPage() {
           </div>
           <label className="lbl">links (one per line: label|url)
             <textarea className="inp" rows={2} value={links} onChange={(e) => setLinks(e.target.value)} placeholder="Code|https://github.com/you/the-work" />
+          </label>
+          <label className="lbl">the story
+            <textarea className="inp" rows={4} value={story} onChange={(e) => setStory(e.target.value)} placeholder="What this is and why it matters — your words, your page." />
+          </label>
+          <label className="lbl">the build plan
+            <textarea className="inp" rows={4} value={roadmap} onChange={(e) => setRoadmap(e.target.value)} placeholder="One milestone per line. People fund plans they can check." />
           </label>
           {orgs.length > 0 && (
             <label className="lbl">held by

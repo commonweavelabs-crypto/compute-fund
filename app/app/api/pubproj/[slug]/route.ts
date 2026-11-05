@@ -6,7 +6,7 @@ import { currentUser } from "../../../../lib/auth";
 // DRAFT projects are private: they 404 here unless the caller is the owner.
 export async function GET(_req: Request, ctx: { params: Promise<{ slug: string }> }) {
   const { slug } = await ctx.params;
-  const project = db.prepare("SELECT id, cfq_id, slug, name, one_liner, question, deliverable, done_criteria, falsified_by, deadline, status, logo_path, repo_url, links, owner_org_id FROM projects WHERE slug = ?")
+  const project = db.prepare("SELECT id, cfq_id, slug, name, one_liner, question, deliverable, done_criteria, falsified_by, deadline, status, logo_path, repo_url, links, owner_org_id, story, roadmap FROM projects WHERE slug = ?")
     .get(slug) as Record<string, string | null> | undefined;
   if (!project) return NextResponse.json({ error: "Unknown project." }, { status: 404 });
   if (project.status === "draft") {
@@ -31,6 +31,6 @@ export async function GET(_req: Request, ctx: { params: Promise<{ slug: string }
     funded_usd: fundedRow.usd, donors: fundedRow.n, receipts,
     status: project.status ?? "active", logo_path: project.logo_path,
     repo_url: project.repo_url, links: project.links ? JSON.parse(project.links as string) : [],
-    one_liner: project.one_liner,
+    one_liner: project.one_liner, story: project.story, roadmap: project.roadmap,
   });
 }

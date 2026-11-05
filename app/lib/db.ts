@@ -30,8 +30,14 @@ export function getDb(): DatabaseSync {
     addCol("projects", "repo_url", "repo_url TEXT");
     addCol("projects", "links", "links TEXT"); // JSON array [{label,url}]
     addCol("projects", "owner_org_id", "owner_org_id TEXT REFERENCES orgs(id)");
+    addCol("projects", "story", "story TEXT"); // creator long-form: what/why
+    addCol("projects", "roadmap", "roadmap TEXT"); // creator long-form: build plan milestones
     addCol("users", "avatar_path", "avatar_path TEXT");
     addCol("users", "bio", "bio TEXT");
+    // D2 claim-flow: unclaimed research-imported stubs. Existing projects default
+    // to claimed=1 (true — they were created by their owners); only seeded stubs
+    // carry claimed=0 until a maintainer claims (claim moves REAL ownership).
+    addCol("projects", "claimed", "claimed INTEGER NOT NULL DEFAULT 1");
     // orgs table: existing DBs opened before the D3 schema landed need the table
     // even when a schema.exec already ran in this process — CREATE IF NOT EXISTS
     // is idempotent and matches schema.sql verbatim.
@@ -96,14 +102,16 @@ export function insertProject(p: Record<string, unknown>) {
   db.prepare(`INSERT INTO projects
     (id, cfq_id, owner_id, slug, name, one_liner, question, data_inputs, method,
      deliverable, done_criteria, falsified_by, review_process, budget_credits,
-     deadline, assumptions, status, logo_path, repo_url, links, owner_org_id)
-    VALUES (@id, @cfq_id, @owner_id, @slug, @name, @one_liner, @question, @data_inputs,
-     @method, @deliverable, @done_criteria, @falsified_by, @review_process,
-     @budget_credits, @deadline, @assumptions, @status, @logo_path, @repo_url,
-     @links, @owner_org_id)`).run({
-    status: "active", logo_path: null, repo_url: null, links: null, owner_org_id: null,
-    ...p,
-  } as never);
+     deadline, assumptions, status, logo_path, repo_url, links, owner_org_id,
+      story, roadmap)
+     VALUES (@id, @cfq_id, @owner_id, @slug, @name, @one_liner, @question, @data_inputs,
+      @method, @deliverable, @done_criteria, @falsified_by, @review_process,
+      @budget_credits, @deadline, @assumptions, @status, @logo_path, @repo_url,
+      @links, @owner_org_id, @story, @roadmap)`).run({
+     status: "active", logo_path: null, repo_url: null, links: null, owner_org_id: null,
+     story: null, roadmap: null,
+     ...p,
+     } as never);
 }
 export function nextCfqId(): string {
   const year = new Date().getFullYear();
@@ -145,7 +153,7 @@ export function setProjectOrg(id: string, orgId: string | null) {
   db.prepare("UPDATE projects SET owner_org_id = ? WHERE id = ?").run(orgId, id);
 }
 export function setProjectFields(id: string, fields: Record<string, unknown>) {
-  const allowed = ["logo_path", "repo_url", "links", "one_liner"];
+  const allowed = ["logo_path", "repo_url", "links", "one_liner", "story", "roadmap"];
   const sets: string[] = [];
   const vals: Record<string, unknown> = { id };
   for (const k of allowed) if (k in fields) { sets.push(`${k} = @${k}`); vals[k] = fields[k]; }
@@ -194,4 +202,68 @@ export function virtualKeyByKeyHash(hash: string) {
 }
 export function addSpend(keyId: string, credits: number) {
   db.prepare("UPDATE virtual_keys SET spent_credits = spent_credits + ? WHERE id = ?").run(credits, keyId);
+}
+
+// -- D2 claim-flow: UNCLAIMED research-imported stubs + the claim move ----------
+// Law: a claim moves REAL ownership. Unclaimed stubs are held by the system user
+// ('cf_system', auth-impossible sentinel); claiming flips claimed 0 -> 1 and
+// owner_id -> the claimant's user id (TRANSFERABLE law), receipted as kind='ops'.
+export const SYSTEM_USER_EMAIL = "claims+noreply@commonweavelabs.com";
+const SYSTEM_PW_SENTINEL = "oauth-no-local-password"; // no salt$hash pair => verifyPassword is impossible
+
+export function ensureSystemUser(): { id: string } {
+  const existing = db.prepare("SELECT id FROM users WHERE email = ?").get(SYSTEM_USER_EMAIL) as
+    { id: string } | undefined;
+  if (existing) return existing;
+  const id = newId("usr");
+  db.prepare("INSERT INTO users (id, email, pw_hash, display_name, role) VALUES (?, ?, ?, ?, ?)")
+    .run(id, SYSTEM_USER_EMAIL, SYSTEM_PW_SENTINEL, "CommonWeave Labs System", "system");
+  return { id };
+}
+
+// Seed insert: same shape as insertProject plus the claim state (claimed=0,
+// owner = the system user). Idempotency is enforced by the CALLER (skip if slug exists).
+export function insertStubProject(p: Record<string, unknown>) {
+  db.prepare(`INSERT INTO projects
+    (id, cfq_id, owner_id, slug, name, one_liner, question, data_inputs, method,
+     deliverable, done_criteria, falsified_by, review_process, budget_credits,
+     deadline, assumptions, status, logo_path, repo_url, links, owner_org_id, claimed)
+    VALUES (@id, @cfq_id, @owner_id, @slug, @name, @one_liner, @question, @data_inputs,
+     @method, @deliverable, @done_criteria, @falsified_by, @review_process,
+     @budget_credits, @deadline, @assumptions, @status, @logo_path, @repo_url,
+     @links, @owner_org_id, @claimed)`).run({
+    status: "active", logo_path: null, links: null, owner_org_id: null, claimed: 0,
+    ...p,
+  } as never);
+}
+
+export function projectClaimState(slug: string) {
+  return db.prepare("SELECT id, slug, name, one_liner, repo_url, claimed, status, cfq_id, owner_id FROM projects WHERE slug = ?").get(slug) as
+    { id: string; slug: string; name: string; one_liner: string; repo_url: string | null; claimed: number; status: string; cfq_id: string; owner_id: string } | undefined;
+}
+
+// The claim move itself: atomic on the claimed=0 guard (duplicate claims race to
+// the same UPDATE and only one wins), then the 'ops' receipt. If the receipt
+// write fails, the ownership move is reverted (no receipt-less transfer).
+export function claimProjectBySlug(slug: string, claimantId: string, proofHash: string):
+  { ok: true; owner_id: string; receipt_id: string } | { ok: false; reason: "not-found" | "already-claimed" | "receipt-failed" } {
+  const p = projectClaimState(slug);
+  if (!p) return { ok: false, reason: "not-found" };
+  if (p.claimed) return { ok: false, reason: "already-claimed" };
+  const res = db.prepare("UPDATE projects SET claimed = 1, owner_id = ? WHERE id = ? AND claimed = 0")
+    .run(claimantId, p.id) as { changes: number };
+  if (res.changes === 0) return { ok: false, reason: "already-claimed" };
+  const receiptId = newId("rcp");
+  try {
+    insertReceipt({
+      id: receiptId, project_id: p.id, cfq_id: p.cfq_id, ts: new Date().toISOString(),
+      model: "claim-flow", kind: "ops", tokens_in: 0, tokens_out: 0, cost_usd: 0,
+      outcome: "success", output_hash: proofHash, api_key_id: null,
+    });
+  } catch {
+    // revert: ownership without its receipt is not a valid move (audit law)
+    db.prepare("UPDATE projects SET claimed = 0, owner_id = ? WHERE id = ?").run(p.owner_id, p.id);
+    return { ok: false, reason: "receipt-failed" };
+  }
+  return { ok: true, owner_id: claimantId, receipt_id: receiptId };
 }

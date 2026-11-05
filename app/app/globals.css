@@ -503,3 +503,6 @@ a.pr:hover, a.pr:focus-visible { border-color: var(--accent); color: var(--accen
   .guide4 { grid-template-columns: 1fr; }
   .stretch { grid-auto-columns: minmax(210px, 240px); }
 }
+
+/* a11y/fix: page-level horizontal overflow (108px on / + /guide; the category strip scrolls horizontally BY DESIGN inside its own container now) */
+html, body { overflow-x: clip; }
