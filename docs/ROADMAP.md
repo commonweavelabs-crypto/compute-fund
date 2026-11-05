@@ -25,7 +25,7 @@ legal money-wire, profiles, project pages). Conflicts resolved per CONSOLIDATION
 - [ ] **Platform homepage v1.5 (KS-arrangement, our skin)** — header: logo + mock search + CFQ-domain category strip + "Start a project" + Log in; centered slogan; seasonal/featured **Question-of-the-Month** hero; Featured project (progress line ON the image, meta row "time left • % funded", desc, tag chips incl. location) + "Recommended for you" 2x2 with mini progress-underlines + pagination; "Home Stretch" urgency row; **creator hover-card popup** (X created · Y funded · community-loved count · joined date · mini bio → profile link); creator-guide cards ("Every experiment starts with the same question..." vertical accent bars); Crowdfunding/Compute Tips 4-card row; footer w/ CFQ-domain columns + giant wordmark + language/currency + legal row. **Layout law: arrangement adopted from KS reference shots (Oct 2026), skin 100% ours (Terminal Commons/Carbon Ledger); no KS branding, artwork, or copy.**
 - [ ] **CFQ intake** — Question Standard enforced at project creation; LLM format-interpreter prompt published; lint = fields 2–7 machine-checked
 - [ ] **Auth & accounts** — signup/login; user account first; org profile second (org = created under a user, linked, TRANSFERABLE to other users, not owned); backer can become creator by creating an org or a project; projects may live under personal profile OR org (both legal, org default-rec)
-- [ ] **Stripe money-in** — David-era pattern reused (checkout + webhook, graceful fallback); receipt per patron incl. priority credit
+- [ ] **Stripe money-in** — David-era pattern reused (checkout + webhook, graceful fallback); receipt per patron incl. priority credit — **[BLOCKER CLEARED 2026-11-04: Sandbox account "CommonWeave Labs" created; sk_test_ + pk_test_ in `app/.env.local` (STRIPE_SECRET_KEY / STRIPE_PUBLISHABLE_KEY), git-ignored; /v1/balance probe 200 livemode=false. Business verification = deferred to go-live.]**
 - [ ] **LiteLLM gateway money-out** — virtual keys per project, hard cap = donated amount, model allowlist, endpoint scoping, audit log = receipts → replaces demo data (schema already matches)
 - [ ] **ToS stack** — non-transferable/non-cash-out wall, Howey wall ("not an investment"), no-deduction clause, CFQ release/revoke clause; email+phone ID, OFAC screening
 - [ ] **MVP gate:** one stranger signs up, funds a CFQ-passing project with a card, platform dispenses capped compute against that question, receipts post publicly. Nothing else counts.
@@ -214,3 +214,33 @@ Full thesis + market research: `../link-archive/brainstorms/modding-tokens-compu
 (DO NOT copy contents here — pointers only. Feature pressure recorded in the brainstorm:
 roadmap voting priority, token-donation credit type, distribution stays external.)
 
+
+## DOMAINS lane (added 2026-11-04, Gui request)
+- [ ] **Domain negotiation outreach (send-when-Gmail-connected):** drafts live in
+  `docs/DOMAIN-NEGOTIATION-2026-11-04.md` - one to the commonweave.org holder (registered
+  2012, GoDaddy, empty 114-byte stub; quiet-buy window), one to the compute.fund holder
+  (registered Jan 2024, Tucows, 'Coming Soon' stub). NO SEND without Gui's sign-off
+  (Sign-off class).
+  D1-verdicts: computefund.com/.org/.ai all TAKEN; compute-fund.com/.org AVAILABLE
+  (~$10-15/yr); compute.fund.io AVAILABLE; .fund fresh retail = ~$30-45/yr.
+- [ ] **compute.fund expiry watch: RDAP says EXPIRES 2027-01-22 (NOT Jan 2026 - Gui's
+  'January 27th' was this-expiry confusion). Follow-up cadence: check RDAP monthly from
+  2026-12; the drop-catch attempt = immediately after it lapses if un-negotiated. Owner is
+  privacy-protected; if negotiation dies, re-check RDAP after 2027-01-22 for the 30-day
+  redemption window and beyond.**
+- [ ] **EMAIL CAPABILITY (must - Gui 2026-11-04):** the agent (Hermes) must be able to
+  READ/SEND the CommonWeave Labs Gmail - weekly inbox sweep, follow-ups with negotiated
+  parties, notifications to Gui for anything he must see directly. INVESTIGATED 2026-11-04:
+  hosted Gmail connector NOT in this gateway's connector catalog (status list verified);
+  SENDER IDENTITY = commonweavelabs@gmail.com (set in stone 2026-11-04, in memory + negotiation doc); reliable path = `himalaya` CLI skill (IMAP + app-password = stable, no OAuth re-connect
+  churn). Setup after the Stripe session: (1) Gui enables 2FA + App Password on the
+  CommonWeave Labs Google account; (2) hermes installs himalaya + writes config with the
+  app password via keyring; (3) weekly inbox-sweep cron (no_agent triage script + agent
+  digest + Telegram/desktop notification for must-see items).
+  **[DONE 2026-11-04 evening]: himalaya v2.2.1 at C:/Users/Guilherme/bin/himalaya.exe
+  (bin on PATH-collisions: full path always). Config C:/Users/Guilherme/.config/himalaya/config.toml
+  (v2 schema: imap.sasl.plain.*, smtp.server smtps://...:465). VERIFIED END-TO-END: mailbox
+  list OK, self-email sent AND received. CRON JOBS: bd75db84085b = weekly sweep (Mondays
+  9am ET, deliver origin, attach=true) + 28ee17406cc6 = compute.fund RDAP one-shot chain
+  kickoff (2026-12-05, self-rescheduling exponential). Weekly sweep = LLM digest per
+  cron-job-design self-termination blueprint; renew-or-kill review at the 90-day mark.]**
