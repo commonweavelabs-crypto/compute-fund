@@ -919,14 +919,14 @@ header.top {
 .cf0-topbtn[aria-expanded="true"] { color: var(--accent); border-bottom-color: var(--accent-dim); }
 .cf0-topbtn:focus-visible { outline: 2px solid var(--accent-dim); outline-offset: 2px; }
 
-/* drawer + THE THREE-ACT OPEN (Gui 2026-11-06 v4):
-   ACT 1 .cf0-phase-seed — the drawer box is invisible; the two green brackets
-   sit together at the top-left (one at the corner, one beside it = the little
-   square, on-brand step motif) and hold ~480ms (timer in chrome.tsx).
-   ACT 2 .cf0-phase-open — the box scales out OF the anchored corner while the
-   second bracket rolls the diagonal to the bottom-right; the drawer grows as
-   the bracket arrives ("blowing out of the brackets").
-   ACT 3 — the sub-links fade in last, lightly staggered. Close = 450ms fade. */
+/* drawer + THE THREE-ACT OPEN (Gui 2026-11-06 v5):
+   ACT 1 .cf0-phase-seed — a tight touching cluster of two green brackets (the
+   logo's ▚ step motif) at the top-left; box unborn. Hold ~250ms, quicker.
+   ACT 2 .cf0-phase-open — the box GROWS FROM NOTHING in lockstep with the BR
+   bracket's diagonal roll (same duration + easing = they are glued); the TL
+   bracket stays anchored at its corner the whole time.
+   ACT 3 — text fades in last. Then the brackets keep softly blinking while
+   the drawer is open — alive markers, not decorations. Close = 450ms fade. */
 .cf0-drawer {
   position: absolute; top: calc(100% + 8px); left: -6px;
   min-width: 380px; max-width: min(560px, calc(100vw - 48px));
@@ -940,12 +940,13 @@ header.top {
   pointer-events: none; /* the box itself is unborn in ACT 1 — only the brackets show */
 }
 .cf0-phase-open {
-  animation: cf0-drawer-in 380ms ease both;
+  /* grow FROM NOTHING, glued to the traveler: same 560ms + same easing */
+  animation: cf0-drawer-in 560ms cubic-bezier(0.3, 0.7, 0.3, 1) both 40ms;
   background: var(--bg-panel); border-color: var(--line);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 @keyframes cf0-drawer-in {
-  from { opacity: 0; transform: scale(0.94); }
+  from { opacity: 0.02; transform: scale(0.045); }
   to { opacity: 1; transform: none; }
 }
 .cf0-drawer.cf0-closing {
@@ -956,39 +957,51 @@ header.top {
   from { opacity: 1; }
   to { opacity: 0; }
 }
-/* TL bracket = THE ANCHOR: pops in with the seed, stays at its corner forever */
+/* TL bracket = THE ANCHOR: pops in with the seed, never moves. After the acts
+   it keeps blinking softly (the later-in-list opacity animation wins). */
 .cf0-drawer::before,
 .cf0-drawer::after {
-  content: ""; position: absolute; width: 13px; height: 13px; pointer-events: none;
+  content: ""; pointer-events: none; width: 9px; height: 9px; position: absolute;
 }
 .cf0-drawer::before {
   left: -1px; top: -1px;
   border-top: 2px solid var(--accent); border-left: 2px solid var(--accent);
-  animation: cf0-corner-tl 220ms ease-out both;
 }
-@keyframes cf0-corner-tl {
-  from { opacity: 0; width: 6px; height: 6px; }
-  55% { opacity: 1; }
-  to { opacity: 1; width: 13px; height: 13px; }
+.cf0-phase-seed::before {
+  animation: cf0-corner-pop 180ms ease-out both;
 }
-/* BR bracket = born next to the anchor (the square reads whole in ACT 1),
-   then in ACT 2 rolls the diagonal while growing — the box follows it */
+.cf0-phase-open::before {
+  animation: cf0-corner-pop 180ms ease-out both, cf0-corner-blink 2.6s linear 900ms infinite;
+}
+@keyframes cf0-corner-pop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes cf0-corner-blink {
+  0%, 42% { opacity: 1; }
+  55% { opacity: 0.12; }
+  70%, 100% { opacity: 1; }
+}
+/* BR bracket = born NEXT TO the anchor (the two marks SHARE an edge point and
+   read as one tight little square — the touching ▚), then rolls the diagonal */
 .cf0-drawer::after {
-  left: 11px; top: 11px;
+  left: 6px; top: 6px; /* 6px offset over an overlapping 1px = physically touching */
   border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent);
 }
-.cf0-phase-seed::after { animation: cf0-corner-tl 220ms ease-out both; }
+.cf0-phase-seed::after { animation: cf0-corner-pop 180ms ease-out both 70ms; }
 .cf0-phase-open::after {
-  animation: cf0-corner-travel 560ms cubic-bezier(0.3, 0.7, 0.3, 1) both 40ms;
+  animation: cf0-corner-travel 560ms cubic-bezier(0.3, 0.7, 0.3, 1) both 40ms,
+    cf0-corner-blink 2.6s linear 960ms infinite;
+  left: 6px; top: 6px;
 }
 @keyframes cf0-corner-travel {
-  from { left: 11px; top: 11px; width: 13px; height: 13px; }
-  to { left: calc(100% - 12px); top: calc(100% - 12px); width: 13px; height: 13px; }
+  from { left: 6px; top: 6px; width: 9px; height: 9px; }
+  to { left: calc(100% - 10px); top: calc(100% - 10px); width: 9px; height: 9px; }
 }
 /* ACT 3: the text rides last — hidden through the seed + the first beat of
    the open, fading in while the bracket finishes its roll */
 .cf0-phase-seed .cf0-subgrid { opacity: 0; }
-.cf0-phase-open .cf0-subgrid { animation: cf0-subtext-in 320ms ease both 260ms; }
+.cf0-phase-open .cf0-subgrid { animation: cf0-subtext-in 320ms ease both 300ms; }
 @keyframes cf0-subtext-in {
   from { opacity: 0; }
   to { opacity: 1; }

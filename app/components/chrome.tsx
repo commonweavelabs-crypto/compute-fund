@@ -103,7 +103,7 @@ export function AppHeader() {
     phaseTimer.current = setTimeout(() => {
       phaseTimer.current = null;
       setDrawerPhase("open");
-    }, 480);
+    }, 250);
   }, []);
   const openTopNow = useCallback((top: string) => {
     if (pendingCloseRef.current) {
