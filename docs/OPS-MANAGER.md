@@ -115,3 +115,10 @@ Stripe sandbox account + keys + webhook + E2E paid loop PROVEN · hydration root
 fixed (allowedDevOrigins) · Next security upgrade 16.4.5 (build-verified, merged) · email
 capability live (himalaya + sweeps) · domain negotiation drafts + RDAP chain armed ·
 Supabase auto-pause mystery solved (NOT deletion) + restored + guardian deployed.
+
+## STABLE URL — LIVE 2026-11-06 (commit of record: this file + .env.local update)
+- DOMAIN: computefund.dev — registered IN Cloudflare (Registrar, at-cost: $8.20 first yr / $12.20 auto-renew; expires 2027-11-06; WHOIS redacted; commonweavelabs.dev also available but NOT yet bought).
+- NAMED TUNNEL: `compute-fund` id 9f42eed9-4354-4f46-bf6a-3166acde43de; cert.pem + tunnel JSON in C:/Users/Guilherme/.cloudflared (KEEP SECRET). config.yml routes computefund.dev -> http://localhost:8872. Daemon = background cloudflared tunnel run compute-fund (proc id changes per boot: relaunch with `cd ~/bin && ./cloudflared.exe tunnel run compute-fund`).
+- STRIPE: exactly ONE webhook endpoint we_1UYtEBLMEsbbCbMwjgbLcUxc -> https://computefund.dev/api/webhook/stripe (all old quick-tunnel endpoints deleted). .env.local CF_PUBLIC_URL=https://computefund.dev (do NOT rotate with deploys anymore — the domain is permanent).
+- CLOUDFLARE ACCOUNT ACCESS: OAuth via Cloudflare MCP (hermes mcp config; browser-authorized 2026-11-06, offline_access). Skills suite installed. cf-login cert = for the CLI only.
+- REGISTRAR RENEW-WATCH: expiry 2027-11-06; the RDAP cron (28ee17406cc6) covers it.
