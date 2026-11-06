@@ -90,6 +90,11 @@ export type HomeCard = {
   // the signals have not happened — a card never carries an invented score).
   velocity: number;
   follows: number;
+  // Header pass v2 (layered rail): the category columns ride the card only
+  // where the board builder selects them (the /discover board does; /api/home
+  // does not enrich them today) — optional so both builders share the type.
+  category?: string | null;
+  subcategory?: string | null;
 };
 
 export type HomeBoard = {

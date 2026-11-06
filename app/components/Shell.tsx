@@ -1,13 +1,14 @@
 "use client";
 // Site chrome on every route (Kickstarter law: quiet corner sign-in everywhere, browsable
-// everywhere). Home page has its own AppHeader mount; pages without one get this shell.
-import { AppHeader, AppFooter, useTheme } from "./chrome";
+// everywhere). Header pass v2: AppHeader is self-sufficient (client-side
+// /api/session probe + rail state) — no theme props; the Shell no longer
+// mounts useTheme, so the row1 toggle-free terminal stays dark via CSS :root.
+import { AppHeader, AppFooter } from "./chrome";
 
 export default function Shell({ children }: { children: React.ReactNode }) {
-  const theme = useTheme();
   return (
     <>
-      <AppHeader theme={theme.theme} toggle={theme.toggle} />
+      <AppHeader />
       {children}
       <AppFooter />
     </>

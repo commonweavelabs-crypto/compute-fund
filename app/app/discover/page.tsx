@@ -16,12 +16,30 @@
 // (7-day fund×10/follow×3/view×1, lib/discover.ts), community = follows count
 // desc with the velocity rollup as tiebreak (the M6.1 seed). Card counts stay
 // mirrored with /api/home (velocityBySlug/followsBySlug are the same SQL).
-import { Suspense } from "react";
+// Header pass v2 (Gui-approved): ?cat=<top>&sub=<sub> (slugified link params
+// from the rail drawers) filter the board. LAW: when a category filter is
+// present it takes PRECEDENCE over the tab ORDER — the category board renders
+// newest-first, and the tab form carries the filter as hidden inputs (the
+// tabs stay reachable; the status line states what actually ordered the grid).
+// The heading carries the filter ("Gaming" instead of "Discover").
+// Streaming law (set by /p/[slug], 2026-11-06): header pass v2 hit the
+// /discover Suspense-hole's dev fill aborting out-of-place (stale shell +
+// content appended inert after the scripts — the "runs TWICE per request in
+// dev" double-pass the /p comment already warned about). The board is a
+// BLOCKING route now, same as /p: `instant = false` + a top-level headers()
+// await = ONE runtime pass per request, nothing at build time, normal
+// in-place hydration; the Suspense hole is gone (no fallback needed).
+import { headers } from "next/headers";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { db } from "../../lib/db";
 import { velocityBySlug, followsBySlug } from "../../lib/discover";
 import type { HomeCard, TabId } from "../api/home/route";
+import { CATEGORY_TAXONOMY, normCat, prettyLabel, slugify } from "../../lib/categories";
+// DaysLeft = the hydration-safe "x days left" chip (browser clock in an
+// effect — see the file header; a bare Date.now() in the hole aborts the
+// cacheComponents fill with blocking-prerender-current-time).
+import { DaysLeft } from "./DaysLeft";
 // Art treatment = the homepage's: themed art per slug, served as the prebuilt
 // 800px jpg thumbs (lazy, explicit width/height), via artThumb + art-map.
 import { artFor, artThumb, THUMB_W, THUMB_H } from "../../lib/art-map";
@@ -31,6 +49,10 @@ export const metadata: Metadata = {
   description:
     "The live catalog of projects seeking patronage: trending, newest, ending soon, community priority. Every run posts a public receipt.",
 };
+
+// Request-keyed blocking route (the /p/[slug] cacheComponents law): one
+// runtime pass per request, no prerender, no hole.
+export const instant = false;
 
 // Tab ids/labels mirror the homepage TABS line-for-line (server twin).
 const TABS: Array<{ id: TabId; label: string }> = [
@@ -72,35 +94,15 @@ const TAB_SORTS: Record<TabId, (a: HomeCard, b: HomeCard) => number> = {
 const money = (n: number) =>
   n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
-const timeLeft = (deadline: string): string => {
-  if (!deadline) return "—";
-  const d = Math.ceil((new Date(deadline).getTime() - Date.now()) / 86400000);
-  if (d > 1) return `${d} days left`;
-  if (d === 1) return "1 day left";
-  if (d === 0) return "final day";
-  return "ended";
-};
-
 type SP = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 
-export default function DiscoverPage({ searchParams }: SP) {
-  // cacheComponents law: uncached reads (the searchParams await + the DB read
-  // keyed to it) must sit inside a Suspense hole — the static shell prerenders
-  // with the fallback and the board streams on the request path. (The build
-  // proved the law for us: without the boundary the /discover prerender
-  // errored with blocking-prerender-dynamic.)
+export default async function DiscoverPage({ searchParams }: SP) {
+  // The top-level headers() await is the request-time opt-out — after it the
+  // board can read searchParams + the DB inline (single pass, no hole).
+  await headers();
   return (
     <main className="wrap">
-      <section className="hero center dhead">
-        <h1>Discover</h1>
-        <p className="sub center">
-          The live catalog of projects seeking patronage — sorted by the same four orders as the
-          homepage board. Money in, compute out, public receipts.
-        </p>
-      </section>
-      <Suspense fallback={<p className="boot" role="status">▚ loading the catalog…</p>}>
-        <DiscoverBoard searchParams={searchParams} />
-      </Suspense>
+      <DiscoverBoard searchParams={searchParams} />
     </main>
   );
 }
@@ -114,6 +116,24 @@ async function DiscoverBoard({
   const raw = Array.isArray(sp.tab) ? sp.tab[0] : sp.tab;
   const tab = parseTab(raw);
 
+  // -- header pass v2: ?cat= / ?sub= (slug params from the rail) --------------
+  // The rail links carry SLUGS (slugify), the DB rows carry display forms
+  // ("recomp ports", "decision-models") — the two meet only through normCat
+  // (lowercase, dashes <-> spaces), the same tolerant compare /api/categories
+  // uses, so ?cat=gaming&sub=recomp-ports and a ?sub=recomp%20ports variant
+  // both resolve. Unknown cats still filter (honestly empty).
+  const rawCat = Array.isArray(sp.cat) ? sp.cat[0] : sp.cat;
+  const rawSub = Array.isArray(sp.sub) ? sp.sub[0] : sp.sub;
+  const catSlug = slugify(String(rawCat ?? ""));
+  const subSlug = slugify(String(rawSub ?? ""));
+  const catNorm = catSlug ? normCat(catSlug) : "";
+  const subNorm = subSlug ? normCat(subSlug) : "";
+  const taxTop = catNorm ? CATEGORY_TAXONOMY.find((t) => normCat(t.top) === catNorm) : undefined;
+  const taxSub = taxTop && subNorm ? taxTop.subs.find((s) => normCat(s) === subNorm) : undefined;
+  const catLabel = taxTop ? taxTop.top : catSlug ? catSlug.replace(/-/g, " ") : "";
+  const subLabel = taxSub ? taxSub : subNorm ? subSlug.replace(/-/g, " ") : "";
+  const hasCat = catNorm !== "";
+
   let cards: HomeCard[] = [];
   let dbFailed = false;
   try {
@@ -122,7 +142,7 @@ async function DiscoverBoard({
     const rows = db
       .prepare(
         `SELECT p.slug, p.name, p.one_liner, p.cfq_id, p.budget_credits, p.deadline,
-                p.logo_path, p.repo_url, p.created_at,
+                p.logo_path, p.repo_url, p.created_at, p.category, p.subcategory,
                 COALESCE(d.usd, 0) AS funded_usd, COALESCE(d.n, 0) AS donors,
                 o.slug AS org_slug, o.name AS org_name
          FROM projects p
@@ -155,9 +175,25 @@ async function DiscoverBoard({
           org_name: (r.org_name as string | null) || null,
           velocity: vel[String(r.slug ?? "")] ?? 0,
           follows: fols[String(r.slug ?? "")] ?? 0,
+          category: (r.category as string | null) ?? null,
+          subcategory: (r.subcategory as string | null) ?? null,
         };
       })
-      .sort(TAB_SORTS[tab]);
+      // Header pass v2: the category/sub WHERE-equivalents, applied here in JS
+      // — the board already reads the full active slice for the rollups, and
+      // the tolerant compare has to normalize both sides anyway (the DB may
+      // store "decision-models" while the taxonomy top says "decision models").
+      .filter((c) => (catNorm ? normCat(c.category ?? "") === catNorm : true))
+      .filter((c) => (subNorm ? normCat(c.subcategory ?? "") === subNorm : true));
+
+    if (hasCat) {
+      // cat precedence (the documented law above): a filtered category board is
+      // ALWAYS newest-first, regardless of ?tab — the tab form stays reachable
+      // but a filtered category cannot be reordered by tab.
+      cards.sort((a, b) => b.created_at.localeCompare(a.created_at));
+    } else {
+      cards = cards.sort(TAB_SORTS[tab]);
+    }
   } catch (err) {
     // Hard DB failure degrades to the honest empty state — never an error page
     // (the same degrade law as /api/home).
@@ -165,14 +201,46 @@ async function DiscoverBoard({
     dbFailed = true;
   }
 
-  const activeTab = TABS.find((t) => t.id === tab) ?? TABS[1];
+  const activeTab = hasCat
+    ? TABS.find((t) => t.id === "newest") ?? TABS[1] // honest: the render IS newest-first
+    : TABS.find((t) => t.id === tab) ?? TABS[1];
+
+  const shownCount = cards.length;
+  const filterTail = subNorm
+    ? `category: ${prettyLabel(catLabel)} · sub: ${prettyLabel(subLabel)}`
+    : hasCat
+      ? `category: ${prettyLabel(catLabel)}`
+      : "";
 
   return (
     <>
+      {/* hero: the heading carries the filter ("Gaming" instead of "Discover") */}
+      <section className="hero center dhead">
+        <h1>
+          {hasCat ? prettyLabel(catLabel) : "Discover"}
+          {subLabel ? <span className="hl"> · {prettyLabel(subLabel)}</span> : null}
+        </h1>
+        <p className="sub center">
+          {hasCat
+            ? "One category of the live catalog, newest first — the rail's sub links land here with the sub pre-filtered. Money in, compute out, public receipts."
+            : "The live catalog of projects seeking patronage — sorted by the same four orders as the homepage board. Money in, compute out, public receipts."}
+        </p>
+        {hasCat && (
+          <p className="cf0-clearfilter">
+            <Link href="/discover">× clear the {prettyLabel(catLabel)} filter — the full catalog</Link>
+          </p>
+        )}
+      </section>
+
       {/* tab list = plain GET form: real <button role=tab> semantics that work
           with scripts off; the active tab is aria-selected, the grid below is
-          its tabpanel. */}
+          its tabpanel. With a category filter the cat/sub ride along as hidden
+          inputs (the filter takes precedence over the tab ORDER — see the law
+          comment above; the selected tab stays "newest" because that is what
+          actually rendered). */}
       <form method="get" action="/discover" className="tabform">
+        {hasCat && <input type="hidden" name="cat" value={catSlug} />}
+        {hasCat && subSlug && <input type="hidden" name="sub" value={subSlug} />}
         <div className="tabs" role="tablist" aria-label="discover sort order">
           {TABS.map((t) => (
             <button
@@ -183,8 +251,8 @@ async function DiscoverBoard({
               role="tab"
               id={`dtab-${t.id}`}
               aria-controls="discover-panel"
-              aria-selected={t.id === tab}
-              tabIndex={t.id === tab ? 0 : -1}
+              aria-selected={t.id === activeTab.id}
+              tabIndex={t.id === activeTab.id ? 0 : -1}
               className="tab"
             >
               {t.label}
@@ -194,8 +262,11 @@ async function DiscoverBoard({
       </form>
 
       <div className="dmeta" role="status">
-        {cards.length} active project{cards.length === 1 ? "" : "s"} · sorted by{" "}
-        {activeTab.label.toLowerCase()}
+        {shownCount} active project{shownCount === 1 ? "" : "s"}
+        {filterTail ? ` · ${filterTail}` : ""} · sorted by{" "}
+        {hasCat
+          ? "newest (category filter takes precedence over the tab order)"
+          : activeTab.label.toLowerCase()}
       </div>
 
       {dbFailed ? (
@@ -206,7 +277,7 @@ async function DiscoverBoard({
           </p>
         </div>
       ) : cards.length ? (
-        <div className="recomm" id="discover-panel" role="tabpanel" aria-labelledby={`dtab-${tab}`}>
+        <div className="recomm" id="discover-panel" role="tabpanel" aria-labelledby={`dtab-${activeTab.id}`}>
           {cards.map((p) => (
             <article className="rcard" key={p.slug}>
               {/* same art treatment as the homepage cards: thumb + lazy + dims */}
@@ -245,7 +316,7 @@ async function DiscoverBoard({
                 <span>·</span>
                 <span>{p.pct}% funded</span>
                 <span>·</span>
-                <span>{timeLeft(p.deadline)}</span>
+                <DaysLeft deadline={p.deadline} />
                 {p.org_slug && (
                   <>
                     <span>·</span>
@@ -258,6 +329,18 @@ async function DiscoverBoard({
               </div>
             </article>
           ))}
+        </div>
+      ) : hasCat ? (
+        // honest filtered empty state (header pass v2): "<cat> is warming"
+        <div className="warm" role="status">
+          <p>
+            {prettyLabel(catLabel)}{subLabel ? ` · ${prettyLabel(subLabel)}` : ""} is warming —
+            nothing here yet.
+          </p>
+          <p>
+            <Link href="/start">Start a project →</Link> ·{" "}
+            <Link href="/discover">the full catalog →</Link>
+          </p>
         </div>
       ) : (
         <div className="warm" role="status">

@@ -866,3 +866,125 @@ html, body { overflow-x: clip; }
   display: block; width: 100%; height: 150px; object-fit: cover;
   border: 1px solid var(--line); border-radius: var(--radius); margin: 0 0 4px;
 }
+
+/* ══════ header pass v2 (Gui-approved): sticky identity bar + layered rail ══
+   Row1 = identity only (logo/badge left, actions right) and STICKS to the top;
+   Row2 = the layered category rail, which scrolls away normally. Overrides are
+   APPENDED (never edited into the legacy blocks above): header.top loses its
+   border-bottom so there is NO line between row1 and row2 — the one hairline
+   above the content now sits on the rail's bottom edge. Legacy .search /
+   .theme-toggle / .catrow / .catwrap CSS above stays (unused, other pages'
+   furniture untouched). cf0- prefix = must not clash. */
+header.top {
+  position: sticky; top: 0; z-index: 60;
+  background: var(--bg);
+  border-bottom: 0;
+}
+
+/* row2 rail: one hairline below, same padding rhythm as the old catrow */
+.cf0-railwrap {
+  position: relative; z-index: 40; background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.cf0-railrow { display: flex; align-items: center; gap: 16px; padding: 9px 20px; flex-wrap: wrap; }
+.cf0-all { color: var(--ink); font-size: 12.5px; letter-spacing: 0.5px; white-space: nowrap; }
+.cf0-all:hover, .cf0-all:focus-visible { color: var(--accent); }
+.cf0-all:focus-visible { outline: 2px solid var(--accent-dim); outline-offset: 2px; }
+
+/* top-level category buttons */
+.cf0-cat { position: relative; }
+.cf0-topbtn {
+  background: none; border: 0; padding: 3px 1px;
+  color: var(--ink-dim); font-family: var(--font-body); font-size: 13px;
+  letter-spacing: 0.5px; white-space: nowrap; cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+.cf0-topbtn:hover,
+.cf0-topbtn:focus-visible,
+.cf0-topbtn[aria-expanded="true"] { color: var(--accent); border-bottom-color: var(--accent-dim); }
+.cf0-topbtn:focus-visible { outline: 2px solid var(--accent-dim); outline-offset: 2px; }
+
+/* drawer: dark panel, 1px line, card corner-notch, 120ms fade + 2px slide */
+.cf0-drawer {
+  position: absolute; top: calc(100% + 8px); left: -6px;
+  min-width: 380px; max-width: min(560px, calc(100vw - 48px));
+  background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 12px 14px; z-index: 50;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  animation: cf0-drawer-in 120ms ease both;
+}
+@keyframes cf0-drawer-in {
+  from { opacity: 0; transform: translateY(2px); }
+  to { opacity: 1; transform: none; }
+}
+.cf0-drawer.cf0-closing { animation: cf0-drawer-out 100ms ease both; pointer-events: none; }
+@keyframes cf0-drawer-out {
+  from { opacity: 1; transform: none; }
+  to { opacity: 0; transform: translateY(2px); }
+}
+.cf0-drawer::before {
+  content: ""; position: absolute; top: -1px; left: -1px; width: 11px; height: 11px;
+  border-top: 2px solid var(--accent); border-left: 2px solid var(--accent);
+}
+
+/* sub links: mono-ish label left, REAL project count in amber right (0s render) */
+.cf0-subgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.cf0-sub {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+  padding: 6px 8px; border-radius: var(--radius);
+}
+.cf0-sublabel {
+  font-family: var(--font-display); font-size: 12px; letter-spacing: 0.3px;
+  color: var(--ink); white-space: nowrap;
+}
+.cf0-subcount { color: var(--accent-signal); font-size: 11px; font-family: var(--font-body); }
+.cf0-sub:hover { background: var(--bg-raised); }
+.cf0-sub:hover .cf0-sublabel { color: var(--accent); }
+.cf0-sub:focus-visible { outline: 2px solid var(--accent-dim); outline-offset: -2px; }
+
+/* row1 auth-aware: avatar chip + account menu (same design language as [C]) */
+.cf0-user { position: relative; }
+.cf0-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: none; border: 1px solid var(--line); border-radius: 20px;
+  padding: 3px 10px 3px 3px; color: var(--ink); cursor: pointer;
+  font-family: var(--font-body); font-size: 12px; white-space: nowrap;
+}
+.cf0-chip:hover, .cf0-chip:focus-visible { border-color: var(--accent); color: var(--accent); }
+.cf0-chip:focus-visible { outline: 2px solid var(--accent-dim); outline-offset: 2px; }
+.cf0-chipava {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--bg-raised); border: 1px solid var(--line);
+  color: var(--accent); font-size: 11.5px; letter-spacing: 1px;
+}
+.cf0-usermenu {
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 70;
+  min-width: 230px; background: var(--bg-panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  animation: cf0-drawer-in 120ms ease both;
+}
+.cf0-usermenu .cf0-menuitem {
+  display: block; width: 100%; text-align: left;
+  background: none; border: 0; padding: 7px 8px; border-radius: var(--radius);
+  color: var(--ink); font-family: var(--font-body); font-size: 12px;
+  cursor: pointer; white-space: nowrap;
+}
+.cf0-usermenu .cf0-menuitem:hover { background: var(--bg-raised); color: var(--accent); }
+.cf0-usermenu .cf0-menuitem:focus-visible { outline: 2px solid var(--accent-dim); outline-offset: -2px; }
+
+/* the "clear category filter" line under a filtered /discover heading */
+.cf0-clearfilter { margin: 6px 0 0; font-size: 11px; letter-spacing: 0.5px; }
+.cf0-clearfilter a { color: var(--ink-dim); }
+.cf0-clearfilter a:hover, .cf0-clearfilter a:focus-visible { color: var(--accent); }
+
+@media (max-width: 720px) {
+  .cf0-railrow { row-gap: 2px; }
+  .cf0-drawer { left: -6px; min-width: 300px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf0-drawer, .cf0-drawer.cf0-closing, .cf0-usermenu { animation: none; }
+  .cf0-drawer.cf0-closing { opacity: 0; } /* reduced motion: close is instant */
+}

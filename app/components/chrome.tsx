@@ -1,7 +1,27 @@
-// Shared layout primitives (header w/ search + categories, footer, theme toggle, hover cards)
+// Shared layout primitives (header = sticky identity bar + layered category
+// rail, footer, theme toggle hook, hover cards). Header pass v2 (Gui-approved):
+// row1 is identity only — logo mark + COMPUTE FUND + investors badge left,
+// auth-aware actions right (Start a project + Log in when logged out; Start a
+// project + avatar chip/dropdown when logged in). The disabled fake search
+// input and the "terminal — switch" theme toggle were removed from row1
+// (their CSS stays in globals.css untouched); row2 is the layered category
+// rail with drawers + REAL counts from /api/categories.
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { cfqDomains, orgs } from "../lib/data";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { orgs } from "../lib/data";
+import { CATEGORY_TAXONOMY, slugify } from "../lib/categories";
+
+// -- /api/session + /api/categories payloads ---------------------------------
+type SessionUser = { username: string | null; email: string | null; name: string | null };
+type TaxonomyCounts = { tops: Array<{ top: string; count: number; subs: Array<{ sub: string; count: number }> }> };
+
+const initialsOf = (u: SessionUser | null): string => {
+  const seed = (u?.name || u?.username || u?.email || "?").trim();
+  const words = seed.split(/\s+/).filter(Boolean);
+  if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+  return seed.slice(0, 2).toUpperCase();
+};
 
 export function useTheme() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -18,9 +38,188 @@ export function useTheme() {
   return { theme, toggle: () => setTheme(t => (t === "dark" ? "light" : "dark")) };
 }
 
-export function AppHeader({ theme, toggle }: { theme: string; toggle: () => void }) {
+export function AppHeader() {
+  const router = useRouter();
+  // session: header renders the LOGGED-OUT default first (SSR and first client
+  // paint agree — no mismatch), /api/session promotes it on mount when a
+  // cf_session cookie resolves to a reader.
+  const [user, setUser] = useState<SessionUser | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // -- rail state ------------------------------------------------------------
+  const [openTop, setOpenTop] = useState<string | null>(null);
+  const [leavingTop, setLeavingTop] = useState<string | null>(null); // closing-animation holder
+  const [counts, setCounts] = useState<TaxonomyCounts | null>(null);
+  const countsFetched = useRef(false);
+  const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const topBtnRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  // mirror of openTop for event handlers (stale-closure safety)
+  const openTopRef = useRef<string | null>(null);
+  openTopRef.current = openTop;
+
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/session", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("session"))))
+      .then((j) => {
+        if (alive && j && j.user) setUser(j.user as SessionUser);
+      })
+      .catch(() => {}); // an unreadable session is an anonymous header, never a 500
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const clearLeaveTimer = () => {
+    if (leaveTimer.current) {
+      clearTimeout(leaveTimer.current);
+      leaveTimer.current = null;
+    }
+  };
+  // One drawer open at a time: opening a top wins over any closing animation.
+  const openTopNow = useCallback((top: string) => {
+    clearLeaveTimer();
+    setLeavingTop(null);
+    setOpenTop((cur) => (cur === top ? cur : top));
+  }, []);
+  const closeTopSoon = useCallback((top: string) => {
+    // 120ms close transition, then unmount (reduced-motion hides it at once
+    // via CSS — see .cf0-drawer.cf0-closing).
+    setOpenTop((cur) => (cur === top ? null : cur));
+    setLeavingTop(top);
+    clearLeaveTimer();
+    leaveTimer.current = setTimeout(() => setLeavingTop(null), 120);
+  }, []);
+
+  // Counts arrive lazily: the FIRST open of any drawer fetches /api/categories
+  // exactly once (no-store), then every drawer reads the same payload.
+  useEffect(() => {
+    if (openTop === null || countsFetched.current) return;
+    countsFetched.current = true;
+    fetch("/api/categories", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("categories"))))
+      .then((j) => setCounts(j as TaxonomyCounts))
+      .catch(() => {}); // degraded -> keep the loading ellipsis, never fake numbers
+  }, [openTop]);
+
+  // close on outside click (rail drawers + avatar menu)
+  useEffect(() => {
+    if (openTop === null && !menuOpen) return;
+    const onDocMouseDown = (e: MouseEvent) => {
+      const t = e.target as HTMLElement | null;
+      if (openTop !== null && t && !t.closest(".cf0-cat")) closeTopSoon(openTop);
+      if (menuOpen && t && !t.closest(".cf0-user")) setMenuOpen(false);
+    };
+    document.addEventListener("mousedown", onDocMouseDown);
+    return () => document.removeEventListener("mousedown", onDocMouseDown);
+  }, [openTop, menuOpen, closeTopSoon]);
+
+  // rail keyboard roster: ArrowLeft/Right between tops, ArrowDown/Up enter the
+  // subs, Enter activates a link natively (the top button's click navigates to
+  // the category board), Home/End jump within the drawer, Escape closes and
+  // returns focus to the top button.
+  const railKeyDown = (e: React.KeyboardEvent, idx: number) => {
+    const isOnBtn = (e.target as HTMLElement).classList.contains("cf0-topbtn");
+    const group = e.currentTarget as HTMLElement;
+    const subs = () => Array.from(group.querySelectorAll<HTMLElement>(".cf0-sub"));
+    const posIn = () => {
+      const list = subs();
+      const i = list.findIndex((el) => el === document.activeElement);
+      return { list, i };
+    };
+    if (e.key === "Escape") {
+      e.preventDefault();
+      // close the focused top's drawer; if a STALE one is somehow open
+      // (another top), close that too — Esc always collapses the rail
+      closeTopSoon(CATEGORY_TAXONOMY[idx].top);
+      if (openTopRef.current && openTopRef.current !== CATEGORY_TAXONOMY[idx].top) {
+        closeTopSoon(openTopRef.current);
+      }
+      topBtnRefs.current[idx]?.focus();
+      return;
+    }
+    if (isOnBtn) {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        e.preventDefault();
+        const next =
+          e.key === "ArrowLeft"
+            ? Math.max(0, idx - 1)
+            : Math.min(CATEGORY_TAXONOMY.length - 1, idx + 1);
+        topBtnRefs.current[next]?.focus();
+      } else if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        subs()[0]?.focus(); // focus already opened the drawer
+      }
+      return;
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const { list, i } = posIn();
+      (list[Math.min(list.length - 1, i + 1)] ?? list[0])?.focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const { list, i } = posIn();
+      if (i <= 0) topBtnRefs.current[idx]?.focus();
+      else list[i - 1]?.focus();
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      subs()[0]?.focus();
+    } else if (e.key === "End") {
+      e.preventDefault();
+      subs()[subs().length - 1]?.focus();
+    }
+  };
+
+  // avatar menu: roster keyboard (Down/Up cycle items, Home/End first/last),
+  // Escape closes and returns focus to the chip.
+  const userMenuRef = useRef<HTMLDivElement | null>(null);
+  const userKeyDown = (e: React.KeyboardEvent) => {
+    const items = () =>
+      Array.from((e.currentTarget as HTMLElement).querySelectorAll<HTMLElement>(".cf0-menuitem"));
+    const posIn = () => {
+      const list = items();
+      return { list, i: list.findIndex((el) => el === document.activeElement) };
+    };
+    if (e.key === "Escape") {
+      e.preventDefault();
+      setMenuOpen(false);
+      (e.currentTarget as HTMLElement).querySelector<HTMLButtonElement>(".cf0-chip")?.focus();
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const { list, i } = posIn();
+      (list[Math.min(list.length - 1, i + 1)] ?? list[0])?.focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const { list, i } = posIn();
+      (list[Math.max(0, i - 1)] ?? list[list.length - 1])?.focus();
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      items()[0]?.focus();
+    } else if (e.key === "End") {
+      e.preventDefault();
+      const list = items();
+      list[list.length - 1]?.focus();
+    }
+  };
+  const closeUserMenu = (refocus: boolean) => {
+    setMenuOpen(false);
+    if (refocus) userMenuRef.current?.querySelector<HTMLButtonElement>(".cf0-chip")?.focus();
+  };
+  const logOut = async () => {
+    closeUserMenu(true);
+    // POST /api/auth/logout exists (the auth port's own route: it clears the
+    // cf_session cookie); the header then drops to the logged-out row.
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch {}
+    setUser(null);
+    router.refresh();
+  };
+
   return (
     <>
+      {/* ROW 1 = sticky identity bar. The sticky element IS header.top: it
+          pins while the rail (row2) and the page scroll away under it. */}
       <header className="top">
         <div className="wrap inner">
           <Link href="/" className="brand" aria-label="Compute Fund home">
@@ -28,31 +227,117 @@ export function AppHeader({ theme, toggle }: { theme: string; toggle: () => void
             <b>COMPUTE&nbsp;FUND</b>
           </Link>
           <span className="badge-none">investors: none</span>
-          <input
-            className="search"
-            type="search"
-            placeholder="search projects"
-            aria-label="search projects (coming in v2)"
-            disabled
-            title="Search arrives in v2 — Phase 2 of the roadmap"
-          />
           <div className="actions">
             <Link className="ghost" href="/start">Start a project</Link>
-            <Link className="ghost" href="/login">Log in</Link>
-            <button className="theme-toggle" type="button" onClick={toggle}>
-              {theme === "dark" ? "☾ terminal" : "☀ ledger"} — switch
-            </button>
+            {user ? (
+              <div
+                className="cf0-user"
+                ref={userMenuRef}
+                onKeyDown={userKeyDown}
+                onBlurCapture={(e) => {
+                  if (!e.currentTarget.contains(e.relatedTarget as Node)) setMenuOpen(false);
+                }}
+              >
+                <button
+                  type="button"
+                  className="cf0-chip"
+                  aria-haspopup="menu"
+                  aria-expanded={menuOpen}
+                  onClick={() => setMenuOpen((o) => !o)}
+                >
+                  <span className="cf0-chipava" aria-hidden="true">{initialsOf(user)}</span>
+                  <span className="cf0-chipname">{user.name || user.username}</span>
+                </button>
+                {menuOpen && (
+                  <div className="cf0-usermenu" role="menu" aria-label="Account">
+                    <Link role="menuitem" className="cf0-menuitem" href="/account" onClick={() => setMenuOpen(false)}>
+                      My projects &amp; dashboard
+                    </Link>
+                    {/* platform settings anchor: /account carries no #settings
+                        section yet — the anchor-safe landing is plain /account. */}
+                    <Link role="menuitem" className="cf0-menuitem" href="/account" onClick={() => setMenuOpen(false)}>
+                      Platform settings
+                    </Link>
+                    <button role="menuitem" type="button" className="cf0-menuitem" onClick={logOut}>
+                      Log out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link className="ghost" href="/login">Log in</Link>
+            )}
           </div>
         </div>
-        <nav className="catwrap" aria-label="cfq domains">
-          <div className="wrap catrow">
-            {cfqDomains.map(d => (
-              <Link key={d} href={`/discover?domain=${d}`} className="catlink">{d}</Link>
-            ))}
-            <Link href="/discover" className="catlink strong">discover</Link>
-          </div>
-        </nav>
       </header>
+
+      {/* ROW 2 = the layered category rail (scrolls away normally; the single
+          hairline between header and content sits on its bottom edge). */}
+      <nav className="cf0-railwrap" aria-label="project categories">
+        <div className="wrap cf0-railrow">
+          <Link href="/discover" className="cf0-all">All projects</Link>
+          {CATEGORY_TAXONOMY.map((t, i) => {
+            const open = openTop === t.top;
+            const leaving = leavingTop === t.top;
+            const catEntry = counts?.tops.find((x) => x.top === t.top);
+            return (
+              <div
+                key={t.top}
+                className="cf0-cat"
+                onMouseEnter={() => openTopNow(t.top)}
+                onMouseLeave={() => closeTopSoon(t.top)}
+                onFocusCapture={() => openTopNow(t.top)}
+                onBlurCapture={(e) => {
+                  if (!e.currentTarget.contains(e.relatedTarget as Node)) closeTopSoon(t.top);
+                }}
+                onKeyDown={(e) => railKeyDown(e, i)}
+              >
+                <button
+                  type="button"
+                  ref={(el) => {
+                    topBtnRefs.current[i] = el;
+                  }}
+                  className="cf0-topbtn"
+                  aria-expanded={open}
+                  aria-haspopup="menu"
+                  aria-controls={open ? `cf0-drawer-${i}` : undefined}
+                  onClick={() => router.push(`/discover?cat=${slugify(t.top)}`)}
+                >
+                  {t.top}
+                </button>
+                {(open || leaving) && (
+                  <div
+                    id={`cf0-drawer-${i}`}
+                    role="menu"
+                    aria-label={`${t.top} subcategories`}
+                    className={"cf0-drawer" + (open ? "" : " cf0-closing")}
+                  >
+                    <div className="cf0-subgrid">
+                      {t.subs.map((s) => {
+                        const subCount = catEntry?.subs.find((x) => x.sub === s)?.count ?? 0;
+                        return (
+                          <Link
+                            key={s}
+                            role="menuitem"
+                            className="cf0-sub"
+                            href={`/discover?cat=${slugify(t.top)}&sub=${slugify(s)}`}
+                            onClick={() => closeTopSoon(t.top)}
+                          >
+                            <span className="cf0-sublabel">{s}</span>
+                            <span className="cf0-subcount" title="active projects in this sub">
+                              {counts ? subCount : "…"}
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </nav>
     </>
   );
 }

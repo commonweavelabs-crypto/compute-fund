@@ -54,6 +54,11 @@ export function getDb(): DatabaseSync {
     // carried created_at since Sprint-001, so this is dead code in practice).
     addCol("projects", "staff_pick", "staff_pick INTEGER NOT NULL DEFAULT 0");
     addCol("projects", "category", "category TEXT");
+    // Header pass v2 (Gui-approved layered rail): projects.subcategory TEXT —
+    // nullable, NO default (an unclassifiable sub is an honest NULL, the rail
+    // renders a real 0 for that bin, never a guessed number). Same ALTER-able
+    // drift pattern as the D5 category column above.
+    addCol("projects", "subcategory", "subcategory TEXT");
     const projCols = conn.prepare("PRAGMA table_info(projects)").all() as Array<{ name: string }>;
     if (!projCols.some((c) => c.name === "created_at")) {
       // backfill = slug timestamp: created_at takes the slug itself as a stable,
@@ -62,6 +67,7 @@ export function getDb(): DatabaseSync {
       conn.exec(`UPDATE projects SET created_at = 'slug:' || slug WHERE created_at = ''`);
     }
     backfillCategories(conn);
+    backfillSubcategories(conn);
   }
   return _db;
 }
@@ -93,6 +99,85 @@ function backfillCategories(conn: DatabaseSync) {
   for (const r of rows) {
     const cat = guessCategory(r.question, r.one_liner);
     if (cat) conn.prepare(`UPDATE projects SET category = ? WHERE id = ? AND category IS NULL`).run(cat, r.id);
+  }
+}
+
+// -- header pass v2: projects.subcategory (lib/categories taxonomy) -----------
+// Same commented v1-heuristic law as the category fill above: guess the SUB
+// from question + one_liner keywords, constrained to the row's (already
+// guessed) category. Deliberately naive; NULL stays "unclassified" — the
+// drawer renders a real 0 for that bin. Idempotent: only fills NULLs, so the
+// lazy init can re-run it on every open without rewriting curated rows.
+// Keys are normCat()-forms of the taxonomy tops (the v1 category fill stores
+// "decision-models" with a dash; the taxonomy says "decision models").
+const SUBCATEGORY_KEYWORDS: Record<string, Array<[string, string[]]>> = {
+  gaming: [
+    ["decomp & preservation", ["decomp", "disassembl", "preserv"]],
+    ["recomp ports", ["recomp", " ports"]],
+    ["mod loaders", ["mod loader", "modload", " mod "]],
+    ["retro tooling", ["retro", "emulat"]],
+  ],
+  modding: [
+    ["trainers & overlays", ["trainer", "overlay", "cheat"]],
+    ["asset extractors", ["asset", "extract", "unpack"]],
+    ["scripting/patching", ["script", "patch"]],
+    ["community maps", ["map ", "level editor", "custom level"]],
+  ],
+  video: [
+    ["captions & transcription", ["caption", "transcri", "subtitle"]],
+    ["upscaling & restoration", ["upscale", "upscal", "restor", "remaster", "denois"]],
+    ["editing & tooling", ["edit", "pipeline", "composit", "tooling"]],
+    ["creation", ["creat", "film", "record", "shoot"]],
+  ],
+  infrastructure: [
+    ["inference serving", ["serving", "infer"]],
+    ["GPU scheduling", ["gpu", "schedul", "fleet", "queue"]],
+    ["storage & caching", ["storage", "caching", "cache"]],
+    ["network proxies", ["proxy", "gateway", "load balan"]],
+  ],
+  "decision models": [
+    ["routers", ["router", "routing", "route", "decision", "policy"]],
+    ["evaluation harnesses", ["eval", "harness", "bench"]],
+    ["guardrails", ["guardrail", "safety", "moderation", "red-team", "redteam"]],
+  ],
+  research: [
+    ["benchmarks", ["bench", "golden set", "eval"]],
+    ["corpora & datasets", ["corpus", "dataset", "corpora"]],
+    ["replication", ["replic", "reproduc", "re-ru"]],
+    ["papers-to-code", ["paper", "arxiv"]],
+  ],
+  wellness: [
+    ["focus & habits", ["focus", "habit", "pomodoro"]],
+    ["tracking", ["track", "metric"]],
+    ["sound & sleep", ["sleep", "sound", "noise", "audi"]],
+  ],
+  tools: [
+    ["agent skills", ["skill"]],
+    ["CLIs & automation", ["cli", "automation", "automate"]],
+    ["scrapers", ["scrap", "crawl", "spider"]],
+    ["design", ["design", "figma", "typography", "logo"]],
+  ],
+};
+export function guessSubcategory(
+  category: string | null,
+  question: string | null,
+  oneLiner: string | null
+): string | null {
+  const subs = SUBCATEGORY_KEYWORDS[String(category ?? "").toLowerCase().trim().replace(/[^a-z0-9]+/g, " ").trim()];
+  if (!subs) return null; // unknown top -> no sub guess (honest NULL)
+  const hay = `${question ?? ""} ${oneLiner ?? ""}`.toLowerCase();
+  for (const [sub, words] of subs) {
+    if (words.some((w) => hay.includes(w))) return sub; // first hit wins, v1 law
+  }
+  return null;
+}
+function backfillSubcategories(conn: DatabaseSync) {
+  const rows = conn
+    .prepare(`SELECT id, category, question, one_liner FROM projects WHERE subcategory IS NULL AND category IS NOT NULL`)
+    .all() as Array<{ id: string; category: string; question: string; one_liner: string }>;
+  for (const r of rows) {
+    const sub = guessSubcategory(r.category, r.question, r.one_liner);
+    if (sub) conn.prepare(`UPDATE projects SET subcategory = ? WHERE id = ? AND subcategory IS NULL`).run(sub, r.id);
   }
 }
 
@@ -167,12 +252,26 @@ export function insertProject(p: Record<string, unknown>) {
      ...p,
      } as never);
   // category: never left NULL when the naive heuristic can name it (affinity
-  // joins on this column; an explicit override wins).
+  // joins on this column; an explicit override wins). Same insert-time law for
+  // subcategory (header pass v2) — the guess is constrained to the row's
+  // category, so NULL category rows keep an honest NULL sub.
   if (!p.category) {
     db.prepare(`UPDATE projects SET category = ? WHERE id = ? AND category IS NULL`).run(
       guessCategory(p.question as string | null, p.one_liner as string | null),
       String(p.id ?? ""),
     );
+  }
+  if (!p.subcategory) {
+    // The sub guess is constrained to the row's EFFECTIVE category (an explicit
+    // p.category, or the one the block above just guessed) — read it back.
+    const rowCat = db.prepare(`SELECT category, subcategory FROM projects WHERE id = ?`).get(String(p.id ?? "")) as
+      { category: string | null; subcategory?: string | null } | undefined;
+    if (rowCat && rowCat.subcategory == null) {
+      db.prepare(`UPDATE projects SET subcategory = ? WHERE id = ? AND subcategory IS NULL`).run(
+        guessSubcategory(rowCat.category, p.question as string | null, p.one_liner as string | null),
+        String(p.id ?? ""),
+      );
+    }
   }
 }
 export function nextCfqId(): string {
@@ -297,12 +396,24 @@ export function insertStubProject(p: Record<string, unknown>) {
     status: "active", logo_path: null, links: null, owner_org_id: null, claimed: 0,
     ...p,
   } as never);
-  // Same category rule as insertProject (v1 heuristic, see guessCategory).
+  // Same category rule as insertProject (v1 heuristic, see guessCategory), and
+  // the same subcategory mirror on top (header pass v2): the sub guess reads
+  // the row's EFFECTIVE category back (guessed or explicit).
   if (!p.category) {
     db.prepare(`UPDATE projects SET category = ? WHERE id = ? AND category IS NULL`).run(
       guessCategory(p.question as string | null, p.one_liner as string | null),
       String(p.id ?? ""),
     );
+  }
+  if (!p.subcategory) {
+    const rowCat = db.prepare(`SELECT category, subcategory FROM projects WHERE id = ?`).get(String(p.id ?? "")) as
+      { category: string | null; subcategory?: string | null } | undefined;
+    if (rowCat && rowCat.subcategory == null) {
+      db.prepare(`UPDATE projects SET subcategory = ? WHERE id = ? AND subcategory IS NULL`).run(
+        guessSubcategory(rowCat.category, p.question as string | null, p.one_liner as string | null),
+        String(p.id ?? ""),
+      );
+    }
   }
 }
 
