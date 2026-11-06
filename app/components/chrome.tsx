@@ -78,6 +78,33 @@ export function AppHeader() {
     }
   };
   // One drawer open at a time: opening a top wins over any closing animation.
+  // Gui's three-act open (2026-11-06): ACT 1 'seed' = the two brackets sit
+  // together at the top-left (~480ms, box hidden) → ACT 2 = phase 'open' (box
+  // scales out of the anchor while the BR bracket rolls the diagonal; text
+  // fades last via CSS delay). Reduced-motion users jump straight to 'open'.
+  const [drawerPhase, setDrawerPhase] = useState<"seed" | "open">("seed");
+  const phaseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const clearPhaseTimer = () => {
+    if (phaseTimer.current) {
+      clearTimeout(phaseTimer.current);
+      phaseTimer.current = null;
+    }
+  };
+  const startSeedPhase = useCallback(() => {
+    clearPhaseTimer();
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setDrawerPhase("open"); // reduced motion: no acts, straight to the final state
+      return;
+    }
+    setDrawerPhase("seed");
+    phaseTimer.current = setTimeout(() => {
+      phaseTimer.current = null;
+      setDrawerPhase("open");
+    }, 480);
+  }, []);
   const openTopNow = useCallback((top: string) => {
     if (pendingCloseRef.current) {
       clearTimeout(pendingCloseRef.current.timer);
@@ -85,8 +112,10 @@ export function AppHeader() {
     }
     clearLeaveTimer();
     setLeavingTop(null);
+    const isNew = openTopRef.current !== top;
     setOpenTop((cur) => (cur === top ? cur : top));
-  }, []);
+    if (isNew) startSeedPhase();
+  }, [startSeedPhase]);
   // Pointer grace (Gui 2026-11-06): leaving the word must NOT kill the drawer
   // instantly — the pointer crosses an 8-10px dead strip to reach the box.
   // closeTopSoon schedules the real close 450ms later; re-entering (openTopNow)
@@ -109,6 +138,7 @@ export function AppHeader() {
       clearTimeout(pendingCloseRef.current.timer);
       pendingCloseRef.current = null;
     }
+    clearPhaseTimer();
     clearLeaveTimer();
     setOpenTop((cur) => (cur === top ? null : cur));
     setLeavingTop(top);
@@ -333,8 +363,12 @@ export function AppHeader() {
                   <div
                     id={`cf0-drawer-${i}`}
                     role="menu"
+                    className={
+                      "cf0-drawer" +
+                      (open ? ` cf0-phase-${drawerPhase}` : "") +
+                      (open ? "" : " cf0-closing")
+                    }
                     aria-label={`${t.top} subcategories`}
-                    className={"cf0-drawer" + (open ? "" : " cf0-closing")}
                   >
                     <div className="cf0-subgrid">
                       {t.subs.map((s) => {
