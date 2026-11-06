@@ -18,6 +18,9 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { HomeCard, TabId } from "../app/api/home/route";
+// Prebuilt art thumbs (800px jpgs, ~30-75KB) + intrinsic dims for the img
+// width/height attributes — the ~1.2MB pngs stay only for print-time swaps.
+import { artFor, artThumb, THUMB_W, THUMB_H, HERO_THUMB } from "../lib/art-map";
 
 export type Cf0Card = HomeCard & {
   claimed?: number; // 1 | 0 | undefined (unknown on tab-fetched cards → resolved via claimedMap)
@@ -66,6 +69,113 @@ function useCountUp(target: number, durationMs = 900) {
   return value;
 }
 
+/* ── hero typed-terminal headline (white → phosphor green, 12-sentence cycle) ── */
+
+// Copy verbatim: [white part, green part] — the flat line is the full sentence.
+const HERO_SENTENCES: ReadonlyArray<readonly [string, string]> = [
+  ["Fund the work that", "moves us forward."],
+  ["Back real builders,", "not marketing decks."],
+  ["Compute for the commons,", "receipts for everyone."],
+  ["Patronage, not promises —", "proof on the record."],
+  ["Park your tokens,", "watch the work ship."],
+  ["Every dollar becomes", "machine-time on the record."],
+  ["Open source deserves", "a funding model that works."],
+  ["The ledger is public.", "The receipts are the product."],
+  ["No investors, no equity —", "just people funding work."],
+  ["Fund the tools you use,", "then use the tools you funded."],
+  ["Claims get verified.", "Runs get receipted."],
+  ["A community effort,", "on the public record."],
+];
+const HERO_FLAT: ReadonlyArray<string> = HERO_SENTENCES.map(([w, g]) => `${w} ${g}`);
+// Zero-layout-shift law: an invisible sizer carries the widest line so the h1
+// reserves the longest sentence's full wrapped height at every breakpoint.
+const HERO_SIZER = HERO_FLAT.reduce((a, b) => (b.length > a.length ? b : a));
+const TYPE_MS = 30; // per-char in
+const HOLD_MS = 3500; // full-sentence hold
+const ERASE_MS = 12; // fast out-delete
+const SWAP_MS = 320; // caret-dark beat between sentences
+const H1_STATIC_TITLE = "Fund compute, not promises - Compute Fund";
+
+type TypePhase = "type" | "hold" | "erase" | "swap";
+
+export function HeroTyping() {
+  // SSR paints sentence 1 whole (hydration-safe, no-js fallback, SEO reads it);
+  // the machine takes over on mount: type → hold → fast out-delete → swap.
+  const [sentIdx, setSentIdx] = useState(0);
+  const [n, setN] = useState(HERO_FLAT[0].length);
+  const [phase, setPhase] = useState<TypePhase>("hold");
+  const [reduced, setReduced] = useState(false);
+
+  // Reduced-motion law: resolve once mounted (server + first client paint agree),
+  // then every sentence renders whole and instantly — no animation, just swaps.
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+      setReduced(true);
+  }, []);
+
+  useEffect(() => {
+    if (reduced) {
+      // Instant full sentence → hold → instant next (erase/typing are skipped).
+      const full = HERO_FLAT[sentIdx].length;
+      if (n !== full) {
+        setN(full);
+        return;
+      }
+      const t = setTimeout(() => setSentIdx((s) => (s + 1) % HERO_SENTENCES.length), HOLD_MS);
+      return () => clearTimeout(t);
+    }
+    if (phase === "type") {
+      if (n < HERO_FLAT[sentIdx].length) {
+        const t = setTimeout(() => setN((c) => c + 1), TYPE_MS);
+        return () => clearTimeout(t);
+      }
+      setPhase("hold");
+      return;
+    }
+    if (phase === "hold") {
+      const t = setTimeout(() => setPhase("erase"), HOLD_MS);
+      return () => clearTimeout(t);
+    }
+    if (phase === "erase") {
+      if (n > 0) {
+        const t = setTimeout(() => setN((c) => c - 1), ERASE_MS);
+        return () => clearTimeout(t);
+      }
+      setPhase("swap");
+      return;
+    }
+    // swap: caret dark for one beat, then the next sentence starts typing.
+    const t = setTimeout(() => {
+      setSentIdx((s) => (s + 1) % HERO_SENTENCES.length);
+      setN(0);
+      setPhase("type");
+    }, SWAP_MS);
+    return () => clearTimeout(t);
+  }, [reduced, sentIdx, n, phase]);
+
+  const whiteLen = HERO_SENTENCES[sentIdx][0].length;
+  const white = HERO_FLAT[sentIdx].slice(0, Math.min(n, whiteLen));
+  const green = n > whiteLen ? HERO_FLAT[sentIdx].slice(whiteLen, n) : "";
+  return (
+    <h1 className="cf0-h1 cf0-display">
+      {/* The accessible name stays stable for screen readers: the sr-only static
+          title is the only copy AT reads. The typed copy below is aria-hidden
+          (nothing to announce mid-type) and carries aria-live="off" per the law. */}
+      <span className="cf0-h1-static" aria-hidden="false">
+        {H1_STATIC_TITLE}
+      </span>
+      <span className="cf0-h1-size" aria-hidden="true">
+        {HERO_SIZER}
+      </span>
+      <span className="cf0-h1-type" aria-hidden="true" aria-live="off" data-phase={phase}>
+        <span className="cf0-h1-white">{white}</span>
+        <span className="cf0-h1-em">{green}</span>
+        {phase !== "swap" && <span className={phase === "hold" ? "cf0-caret cf0-caret-blink" : "cf0-caret"} />}
+      </span>
+    </h1>
+  );
+}
+
 /* ── hero photo panel ─────────────────────────────────────────────────────── */
 
 export function HeroFilm() {
@@ -82,11 +192,19 @@ export function HeroFilm() {
   }, []);
   return (
     <div className="cf0-hero-photo">
-      <img src="/project-art/hero.png" alt="" className="cf0-hero-img" />
+      <img
+        src={HERO_THUMB.src}
+        alt=""
+        className="cf0-hero-img"
+        width={HERO_THUMB.w}
+        height={HERO_THUMB.h}
+        loading="eager"
+        decoding="async"
+      />
       <video
         className="cf0-hero-video"
         src="/project-art/hero-loop.mp4"
-        poster="/project-art/hero.png"
+        poster={HERO_THUMB.src}
         ref={(el) => {
           vidRef.current = el;
           // React skips the muted ATTRIBUTE; set the property directly.
@@ -100,11 +218,6 @@ export function HeroFilm() {
         tabIndex={-1}
       />
       <div className="cf0-hero-scrim" aria-hidden="true" />
-      <span className="cf0-stamp cf0-display">
-        a more open future
-        <br />
-        is a community effort
-      </span>
     </div>
   );
 }
@@ -146,7 +259,17 @@ export function FeaturedRotator({
         aria-label={`open ${featured.name} — featured project`}
         key={featured.slug}
       >
-        <img key={featured.slug} src={featured.art} alt="" className="cf0-feat-img cf0-anim-fadein" />
+        {/* thumbs stay for the featured slot too (eager per the featured law) */}
+        <img
+          key={featured.slug}
+          src={artThumb(featured.art ?? artFor(featured.slug))}
+          alt=""
+          className="cf0-feat-img cf0-anim-fadein"
+          width={THUMB_W}
+          height={THUMB_H}
+          loading="eager"
+          decoding="async"
+        />
         <div className="cf0-feat-fade" aria-hidden="true" />
         <div className="cf0-feat-badges">
           <span className="cf0-badge mono">
@@ -264,7 +387,15 @@ export function MediaCard({
     <article className="cf0-mcard">
       <div className="cf0-mcard-media">
         {/* art = decorative; the title link carries the card's accessible name */}
-        <img src={p.art} alt="" className="cf0-mcard-img" />
+        <img
+          src={artThumb(p.art ?? artFor(p.slug))}
+          alt=""
+          className="cf0-mcard-img"
+          width={THUMB_W}
+          height={THUMB_H}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
       <div className="cf0-mcard-strip mono">
         <span>

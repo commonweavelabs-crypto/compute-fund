@@ -34,3 +34,23 @@ export function artFor(slug: string): string {
   }
   return `/project-art/${ART_DEFAULT}`;
 }
+
+// Thumb helper: any art web path (/project-art/<file>.png) → its prebuilt lazy
+// thumb (/project-art/thumb/<file>.jpg — 800px wide, ~30-75KB vs ~1.2MB png).
+// Accepts the artFor() web path so callers never touch file names directly;
+// the hero thumb (800x363) carries its own dedicated constant below.
+export function artThumb(webPath?: string | null): string {
+  const file = (webPath ?? "").split("/").pop() || ART_DEFAULT;
+  const stem = file.replace(/\.[a-z0-9]+$/i, "");
+  return `/project-art/thumb/${stem}.jpg`;
+}
+
+// Intrinsic thumb dimensions for the img width/height attributes (CLS law):
+// every project-art thumb renders at 800x547; hero.jpg is the 800x363 crop.
+export const THUMB_W = 800;
+export const THUMB_H = 547;
+export const HERO_THUMB = {
+  src: "/project-art/thumb/hero.jpg",
+  w: 800,
+  h: 363,
+} as const;

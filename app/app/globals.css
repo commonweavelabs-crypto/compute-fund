@@ -652,14 +652,35 @@ html, body { overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) {
   .cf0-anim-fadein, .cf0-cascade-line { animation: none; }
   .cf0-hero-video { display: none; }
+  /* the caret stays a solid block — no blink under the reduced-motion law */
+  .cf0-caret-blink { animation: none; }
 }
 
 /* ── hero (v0 archive 644-706) ── */
 .cf0-hero { display: grid; grid-template-columns: 1.05fr 1fr; border: 1px solid var(--line); background: var(--panel); }
 .cf0-hero-copy { padding: 48px 24px; }
 .cf0-eyebrow { margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--amber); }
-.cf0-h1 { margin: 16px 0 0; font-size: 48px; font-weight: 600; line-height: 1.08; letter-spacing: -0.02em; color: var(--tx); }
+.cf0-h1 { position: relative; margin: 16px 0 0; font-size: 48px; font-weight: 600; line-height: 1.08; letter-spacing: -0.02em; color: var(--tx); }
 .cf0-h1-em { color: var(--phos); }
+
+/* typed-terminal h1 cycle (C-9): the sr-only static title keeps the heading's
+   accessible name stable; an invisible sizer span (visibility:hidden, in flow)
+   reserves the LONGEST sentence's full wrapped height — zero layout shift at
+   every breakpoint — and the typed overlay draws over it. */
+.cf0-h1-static {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  clip: rect(0, 0, 0, 0); clip-path: inset(50%); overflow: hidden;
+  white-space: nowrap; border: 0;
+}
+.cf0-h1-size { visibility: hidden; }
+.cf0-h1-type { position: absolute; inset: 0; }
+.cf0-caret {
+  display: inline-block; width: 0.48em; height: 0.9em; margin-left: 0.14em;
+  transform: translateY(0.085em);
+  background: var(--phos); box-shadow: 0 0 6px rgba(92, 255, 157, 0.55); /* same glow as the .cf0-live dot */
+}
+@keyframes cf0-caret-blink { 0%, 49.9% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.cf0-caret-blink { animation: cf0-caret-blink 1.05s linear infinite; }
 .cf0-sub { margin: 20px 0 0; max-width: 36rem; font-size: 13px; line-height: 28px; color: var(--tx-dim); }
 .cf0-ctas { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
 .cf0-btn {
@@ -684,10 +705,8 @@ html, body { overflow-x: clip; }
 .cf0-hero-img, .cf0-hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .cf0-hero-video { opacity: 0.95; }
 .cf0-hero-scrim { position: absolute; inset: 0; background: linear-gradient(90deg, var(--panel), transparent 30%); }
-.cf0-stamp {
-  position: absolute; right: 24px; top: 24px; transform: rotate(-3deg);
-  text-align: right; font-size: 18px; font-style: italic; color: var(--amber); opacity: 0.9;
-}
+/* (the rotated amber stamp was removed C-9 — Gui: out of place, not professional;
+   the photo panel stays full-bleed and clean) */
 
 /* ── featured project (auto-rotating; v0 archive 705-837) ── */
 .cf0-feat { margin-top: 16px; display: grid; grid-template-columns: 1.4fr 1fr; border: 1px solid var(--line); background: var(--panel); }
@@ -838,4 +857,12 @@ html, body { overflow-x: clip; }
 /* stacks below the 1024 split (v0 used one column under lg) */
 @media (max-width: 1023px) {
   .cf0-hero, .cf0-feat { grid-template-columns: 1fr; }
+}
+
+/* /discover card art (C-9): the same project-art thumbs the homepage cards use
+   (lazy 800px jpgs, explicit width/height from lib/art-map.ts), now atop the
+   rcard text stack so the catalog reads like the hero board. */
+.rcard-art {
+  display: block; width: 100%; height: 150px; object-fit: cover;
+  border: 1px solid var(--line); border-radius: var(--radius); margin: 0 0 4px;
 }

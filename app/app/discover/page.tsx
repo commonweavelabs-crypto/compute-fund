@@ -16,6 +16,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { db } from "../../lib/db";
 import type { HomeCard, TabId } from "../api/home/route";
+// Art treatment = the homepage's: themed art per slug, served as the prebuilt
+// 800px jpg thumbs (lazy, explicit width/height), via artThumb + art-map.
+import { artFor, artThumb, THUMB_W, THUMB_H } from "../../lib/art-map";
 
 export const metadata: Metadata = {
   title: "Discover — Compute Fund",
@@ -191,6 +194,16 @@ async function DiscoverBoard({
         <div className="recomm" id="discover-panel" role="tabpanel" aria-labelledby={`dtab-${tab}`}>
           {cards.map((p) => (
             <article className="rcard" key={p.slug}>
+              {/* same art treatment as the homepage cards: thumb + lazy + dims */}
+              <img
+                src={artThumb(artFor(p.slug))}
+                alt=""
+                className="rcard-art"
+                width={THUMB_W}
+                height={THUMB_H}
+                loading="lazy"
+                decoding="async"
+              />
               <h3>
                 <Link href={`/project/${p.slug}`} className="cardlink">
                   {p.name}

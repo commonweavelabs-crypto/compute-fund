@@ -1,11 +1,14 @@
 // C-8 DESIGN REVERSAL — mainline homepage rebuilt in the v0 approved design
 // language (compute-fund-v0/src/app/archive/page.tsx 642-950, Gui's approved
 // hero/featured/recommended/strip/values sections) with LIVE board data.
-// Section order is v0's: hero (eyebrow / display h1 / mono sub / CTAs /
-// 3 real HeroMetrics / living photo panel with the amber stamp) → auto-rotating
+// Section order is v0's: hero (eyebrow / typed-terminal display h1 / mono sub /
+// CTAs / 3 real HeroMetrics / living photo panel) → auto-rotating
 // featured photo-card (stats side panel + receipt cascade + dots) →
 // "Recommended for you" behind the EXISTING 4 tabs (the C-4 aria work kept;
-// v0 tab styling) → "Open for funding" strip (v0 B-style with vbar) → the v0
+// v0 tab styling; the heading lives inside the client component so it renders
+// exactly once) → "Open for funding" strip (v0 B-style with vbar) → three
+// Kickstarter-style discovery rows (Nearly funded / Just launched / Open for
+// claims, ≥2 qualifying projects each, same server board read) → the v0
 // value-prop trio. The global Shell (header + footer) stays mounted by the root
 // layout; this page never mounts chrome (C-3 law).
 //
@@ -35,10 +38,12 @@ export const instant = false;
 import Link from "next/link";
 import { db } from "../lib/db";
 import { TAB_SORTS, type TabId } from "./api/home/route";
-import { artFor } from "../lib/art-map";
+import { artFor, artThumb, THUMB_W, THUMB_H } from "../lib/art-map";
 import {
   HeroFilm,
+  HeroTyping,
   FeaturedRotator,
+  MediaCard,
   RecommendedTabs,
   type Cf0Card,
   type ReceiptLine,
@@ -61,6 +66,11 @@ type Board = {
   pool: Cf0Card[];
   recommended: Cf0Card[];
   strip: Cf0Card[];
+  // Kickstarter-style discovery rows (each an honest slice of the SAME board
+  // read — duplicates across curation rows are fine, no dedup law):
+  nearly: Cf0Card[]; // pct 60..99, deadline asc
+  launched: Cf0Card[]; // newest created first
+  claims: Cf0Card[]; // unclaimed mirrors (CLAIM IT), newest first
   receipts: ReceiptLine[];
   claimedMap: Record<string, number>;
   totals: { funded: number; patrons: number; runs: number };
@@ -75,7 +85,8 @@ function claimOf(p: Cf0Card, map: Record<string, number>): number {
 
 async function loadBoard(): Promise<Board> {
   const empty: Board = {
-    cards: [], pool: [], recommended: [], strip: [], receipts: [],
+    cards: [], pool: [], recommended: [], strip: [],
+    nearly: [], launched: [], claims: [], receipts: [],
     claimedMap: {}, totals: { funded: 0, patrons: 0, runs: 0 },
   };
   try {
@@ -158,6 +169,22 @@ async function loadBoard(): Promise<Board> {
       .sort(TAB_SORTS[DEFAULT_TAB])
       .slice(0, 3);
 
+    // Kickstarter-style discovery rows — three more honest slices of this same
+    // board read (duplicates across curation rows are fine; NO dedup law):
+    //   nearly  = 60% ≤ pct < 100, deadline asc — urgency first, TAB_SORTS.ending
+    //   launched = newest created first, TAB_SORTS.newest
+    //   claims  = unclaimed mirror stubs (owner_org_id IS NULL → claimed 0),
+    //             newest first; MediaCard keeps the CLAIM IT badge visible
+    const nearly = cards
+      .filter((p) => p.pct >= 60 && p.pct < 100)
+      .sort(TAB_SORTS["ending"])
+      .slice(0, 4);
+    const launched = [...cards].sort(TAB_SORTS["newest"]).slice(0, 4);
+    const claims = cards
+      .filter((p) => claimOf(p, {}) === 0)
+      .sort(TAB_SORTS["newest"])
+      .slice(0, 4);
+
     // v0 receipt cascade → the real receipts table tail (public data).
     const receipts = (
       db
@@ -185,7 +212,7 @@ async function loadBoard(): Promise<Board> {
       runs: (db.prepare("SELECT COUNT(*) AS n FROM receipts").get() as { n: number }).n,
     };
 
-    return { cards, pool, recommended, strip, receipts, claimedMap, totals };
+    return { cards, pool, recommended, strip, nearly, launched, claims, receipts, claimedMap, totals };
   } catch (err) {
     // Hard DB failure degrades to the honest empty board (never an error page).
     console.error("home board read failed:", err);
@@ -199,15 +226,24 @@ export default async function Home() {
   const board = await loadBoard();
   const { totals, claimedMap, receipts } = board;
 
+  // Discovery rows render only when ≥2 qualifying projects exist (never an
+  // invented card): nearly-funded → ending tab, just-launched → newest,
+  // open-for-claims → community tab (the outreach angle).
+  const discoveryRows = (
+    [
+      { id: "nearly-funded", title: "Nearly funded", tab: "ending", cards: board.nearly },
+      { id: "just-launched", title: "Just launched", tab: "newest", cards: board.launched },
+      { id: "open-for-claims", title: "Open for claims", tab: "community", cards: board.claims },
+    ] as const
+  ).filter((row) => row.cards.length >= 2);
+
   return (
     <main className="wrap cf0-main cf0">
       {/* ── hero (v0 archive 644-706) ── */}
       <section className="cf0-hero">
         <div className="cf0-hero-copy">
           <p className="cf0-eyebrow mono">patronage only · receipts are the product</p>
-          <h1 className="cf0-h1 cf0-display">
-            Fund the work that <span className="cf0-h1-em">moves us forward.</span>
-          </h1>
+          <HeroTyping />
           <p className="cf0-sub mono">
             &gt; real open-source projects, mirrored for the commons. fund the tools you
             believe in — every claim verified, every run receipted, every token
@@ -244,18 +280,15 @@ export default async function Home() {
         <FeaturedRotator pool={board.pool} receipts={receipts} claimedMap={claimedMap} />
       )}
 
-      {/* ── recommended for you (tabs + photo grid) ── */}
-      <section className="cf0-section" aria-label="recommended for you">
-        <div className="cf0-rowhead">
-          <h2 className="cf0-h2 cf0-display">Recommended for you</h2>
-        </div>
-        <RecommendedTabs
+      {/* ── recommended for you (tabs + photo grid; the section + heading live
+          inside RecommendedTabs — page-level wrapper removed C-9: the heading
+          used to render twice) ── */}
+      <RecommendedTabs
         tabs={TABS}
         initial={board.recommended}
         initialTab={DEFAULT_TAB}
         claimedMap={claimedMap}
       />
-      </section>
 
       {/* ── open for funding strip (v0 B-style) ── */}
       <section className="cf0-section" aria-label="open for funding">
@@ -274,7 +307,15 @@ export default async function Home() {
                 className="cf0-scard"
                 aria-label={`open ${p.name} — project page`}
               >
-                <img src={p.art} alt="" className="cf0-scard-img" />
+                <img
+                  src={artThumb(p.art)}
+                  alt=""
+                  className="cf0-scard-img"
+                  width={THUMB_W}
+                  height={THUMB_H}
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="cf0-scard-body">
                   <div className="cf0-scard-line mono">
                     <span className={claimOf(p, claimedMap) ? "cf0-dimmono" : "cf0-amber-s"}>
@@ -314,6 +355,24 @@ export default async function Home() {
           </div>
         )}
       </section>
+
+      {/* ── discovery rows (Kickstarter-style slices of the same board read;
+          a row renders only when ≥2 qualifying projects exist) ── */}
+      {discoveryRows.map((row) => (
+        <section key={row.id} className="cf0-section" aria-label={row.id}>
+          <div className="cf0-rowhead">
+            <h2 className="cf0-h2 cf0-display">{row.title}</h2>
+            <Link href={`/discover?tab=${row.tab}`} className="cf0-seeall mono">
+              see all →
+            </Link>
+          </div>
+          <div className="cf0-cards">
+            {row.cards.map((p, i) => (
+              <MediaCard key={p.slug} p={p} idx={i} claimedMap={claimedMap} />
+            ))}
+          </div>
+        </section>
+      ))}
 
       {/* ── value props (v0 archive 935-966, exact copy) ── */}
       <section className="cf0-values" aria-label="how the fund works">
