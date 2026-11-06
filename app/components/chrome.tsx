@@ -31,7 +31,7 @@ export function AppHeader({ theme, toggle }: { theme: string; toggle: () => void
           <input
             className="search"
             type="search"
-            placeholder="search projects, creators, categories…"
+            placeholder="search projects"
             aria-label="search projects (coming in v2)"
             disabled
             title="Search arrives in v2 — Phase 2 of the roadmap"
