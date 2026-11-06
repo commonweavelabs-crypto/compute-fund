@@ -370,6 +370,9 @@ export function AppHeader() {
                     }
                     aria-label={`${t.top} subcategories`}
                   >
+                    {/* THE SEED SQUARE: brackets + fill share ONE bounding box —
+                        geometry guarantees a closed square in ACT 1 */}
+                    <span className="cf0-seedfill" aria-hidden="true" />
                     <div className="cf0-subgrid">
                       {t.subs.map((s) => {
                         const subCount = catEntry?.subs.find((x) => x.sub === s)?.count ?? 0;
