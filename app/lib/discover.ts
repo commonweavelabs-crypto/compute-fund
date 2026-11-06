@@ -419,3 +419,22 @@ export function affinity(userId?: string | null): string[] {
   for (const slug of buzzing()) push(slug);
   return out;
 }
+
+// GUI'S LAW (2026-11-06 walkthrough): engineering-probe projects (the scripted
+// D3/D5/dbg/loop/full-loop test rows) are ledger history, not front-page
+// content. Curation surfaces on the HOMEPAGE exclude them; /discover keeps the
+// honest full board. The seeded pilot projects (CFQ corpus, claim stubs) stay.
+export const DEMO_SLUG_PREFIXES = [
+  "d3-test", "d5", "dbg-run", "loop-verify", "full-loop",
+];
+export const DEMO_NAME_PREFIXES = [
+  "D3 Test", "D5 ", "DBG ", "Loop Verify", "Full Loop",
+];
+export function isDemoProject(p: { slug?: string | null; name?: string | null }): boolean {
+  const slug = (p.slug ?? "").toLowerCase();
+  const name = p.name ?? "";
+  return (
+    DEMO_SLUG_PREFIXES.some((d) => slug.startsWith(d)) ||
+    DEMO_NAME_PREFIXES.some((d) => name.startsWith(d))
+  );
+}

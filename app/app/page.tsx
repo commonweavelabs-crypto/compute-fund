@@ -47,7 +47,7 @@ import { db } from "../lib/db";
 import { TAB_SORTS, type TabId } from "./api/home/route";
 import {
   buzzing as buzzingSlugs, forkingReady, communityPicks, mostFunded30d, staffPicks,
-  velocityBySlug, followsBySlug,
+  velocityBySlug, followsBySlug, isDemoProject,
 } from "../lib/discover";
 import { artFor, artThumb, THUMB_W, THUMB_H } from "../lib/art-map";
 import {
@@ -182,13 +182,16 @@ async function loadBoard(): Promise<Board> {
         ]
       : [];
 
-    const recommended = cards
+    // (Gui's law: curation surfaces exclude the engineering-probe demos.)
+    const curation = cards.filter((p) => !isDemoProject(p));
+
+    const recommended = curation
       .filter((p) => !featured || p.slug !== featured.slug)
       .sort(TAB_SORTS[DEFAULT_TAB])
       .slice(0, 4);
 
     // Open-for-funding strip = v0's tabProjects("Newest").slice(0, 3).
-    const strip = cards
+    const strip = curation
       .filter((p) => !featured || p.slug !== featured.slug)
       .sort(TAB_SORTS[DEFAULT_TAB])
       .slice(0, 3);
@@ -199,12 +202,12 @@ async function loadBoard(): Promise<Board> {
     //   launched = newest created first, TAB_SORTS.newest
     //   claims  = unclaimed mirror stubs (owner_org_id IS NULL → claimed 0),
     //             newest first; MediaCard keeps the CLAIM IT badge visible
-    const nearly = cards
+    const nearly = curation
       .filter((p) => p.pct >= 60 && p.pct < 100)
       .sort(TAB_SORTS["ending"])
       .slice(0, 4);
-    const launched = [...cards].sort(TAB_SORTS["newest"]).slice(0, 4);
-    const claims = cards
+    const launched = [...curation].sort(TAB_SORTS["newest"]).slice(0, 4);
+    const claims = curation
       .filter((p) => claimOf(p, {}) === 0)
       .sort(TAB_SORTS["newest"])
       .slice(0, 4);
@@ -223,10 +226,10 @@ async function loadBoard(): Promise<Board> {
     // buzzing() is already velocity-desc; the keep is belt-and-braces on the
     // board join (budget>0 cards only — a buzzing zero-budget project has no
     // card to show and the row is honest about fewer entries).
-    const buzzing = byOrder(buzzingSlugs(), (c) => c.velocity > 0);
+    const buzzing = byOrder(buzzingSlugs(), (c) => c.velocity > 0 && !isDemoProject(c));
     const forking = byOrder(forkingReady());
-    const picks = byOrder(communityPicks().map((c) => c.slug));
-    const funded30 = byOrder(mostFunded30d().map((c) => c.slug));
+    const picks = byOrder(communityPicks().map((c2) => c2.slug), (c) => !isDemoProject(c));
+    const funded30 = byOrder(mostFunded30d().map((c2) => c2.slug), (c) => !isDemoProject(c));
     const staff = byOrder(staffPicks());
 
     // v0 receipt cascade → the real receipts table tail (public data).

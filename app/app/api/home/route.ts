@@ -18,7 +18,7 @@ import { db } from "../../../lib/db";
 // /api/home?tab=X; the featured slot is never repeated in any tab's grid (its
 // card stays above the tabs). Types stay exported so the homepage client and
 // the /discover server page keep one card shape.
-import { velocityBySlug, followsBySlug } from "../../../lib/discover";
+import { velocityBySlug, followsBySlug, isDemoProject } from "../../../lib/discover";
 
 export type Creator = {
   slug: string;
@@ -163,12 +163,14 @@ export async function GET(req: Request) {
     // (never repeated — the featured card stays fixed above the tabs).
     const tab = parseTab(new URL(req.url).searchParams.get("tab"));
     const recommended = cards
+      .filter((p) => !isDemoProject(p))
       .filter((p) => !featured || p.slug !== featured.slug)
       .sort(TAB_SORTS[tab])
       .slice(0, 4);
 
     // Home Stretch = past 55% funded, ending first (urgency order).
     const home_stretch = cards
+      .filter((p) => !isDemoProject(p))
       .filter((p) => p.fraction > 0.55)
       .sort(
         (a, b) =>
