@@ -506,3 +506,81 @@ a.pr:hover, a.pr:focus-visible { border-color: var(--accent); color: var(--accen
 
 /* a11y/fix: page-level horizontal overflow (108px on / + /guide; the category strip scrolls horizontally BY DESIGN inside its own container now) */
 html, body { overflow-x: clip; }
+
+/* ---------- C-3/C-4 consolidation (docs/CONSOLIDATION-PLAN-20261104.md)
+   values trio band + recommended tabs + living hero — tokens only,
+   no new colors; appended, never spliced. ---------- */
+
+/* C-4: values trio band (verbatim v0 copy, our palette) */
+.values3 {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  margin: 24px 0 4px;
+}
+.vcard {
+  display: flex; gap: 12px;
+  background: var(--bg-panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 15px 16px;
+}
+.vglyph {
+  font-size: 18px; color: var(--accent); flex: 0 0 40px;
+  width: 40px; height: 40px; display: inline-flex;
+  align-items: center; justify-content: center;
+  background: var(--bg-raised); border: 1px solid var(--accent-dim);
+  border-radius: var(--radius);
+}
+.vbody { min-width: 0; }
+.vcard h3 { font-family: var(--font-display); font-size: 13.5px; margin: 0 0 4px; }
+.vcard p { font-size: 12px; color: var(--ink-dim); line-height: 1.55; margin: 0; }
+
+/* C-4: recommended tabs (role=tablist/tab) */
+.tabform { margin: 10px 0 2px; }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.tab {
+  font-family: var(--font-display); font-size: 12px; letter-spacing: 0.5px;
+  background: var(--bg-panel); color: var(--ink-dim);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 6px 14px; cursor: pointer;
+}
+.tab:hover { border-color: var(--accent-dim); color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--accent); border-color: var(--accent-dim); background: var(--bg-raised); }
+.tab:focus-visible { outline: 2px solid var(--accent-dim); outline-offset: 1px; }
+
+/* C-4: living featured hero — poster under an LTX-2.5 loop; the project's own
+   art floats framed above the scrim. Featbar/chip keep their seats above the
+   film. prefers-reduced-motion: drop the video, the poster alone stands in
+   (the v0 reduced-motion fallback law). */
+.featposter, .featvideo {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+}
+.featscrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(100deg, var(--bg-panel) 10%, transparent 58%);
+}
+.featcontent {
+  position: relative; z-index: 2; display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center; gap: 12px;
+  height: 100%; padding: 20px;
+}
+.featcontent .featframe { padding: 0; height: auto; }
+.featcontent .featframe .featslogan, .featcontent .featframe .featq, .featcontent .featframe .featsub { display: block; }
+.featlogo-frame {
+  width: min(300px, 62%); aspect-ratio: 16 / 9; object-fit: cover;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.featart .featbar, .featart .chip { z-index: 3; }
+@media (prefers-reduced-motion: reduce) {
+  .featvideo { display: none; }
+}
+
+/* C-3/C-4: /discover rebuild (single Shell; GET-form tab list) */
+.dhead { padding: 40px 0 20px; }
+.dmeta {
+  color: var(--ink-dim); font-size: 11.5px; letter-spacing: 0.5px;
+  padding: 2px 0 10px;
+}
+
+@media (max-width: 900px) {
+  .values3 { grid-template-columns: 1fr; }
+}

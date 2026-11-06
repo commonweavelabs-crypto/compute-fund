@@ -8,6 +8,14 @@ import { db } from "../../../lib/db";
 // live. Funding math mirrors /api/pubproj/[slug] so the homepage and project
 // pages can never disagree: usd = SUM(amount_cents)/100, pct = funded/
 // budget_credits.
+//
+// C-4 tabs: ?tab= selects the "Recommended for you" ordering — trending
+// (highest funded/budget ratio), newest (created_at desc, the pre-tab default),
+// ending (deadline asc, nothing excluded — already-funded stays visible),
+// community (alphabetical slug order, the M6.1 stand-in for the community
+// vote). Tab click = GET /api/home?tab=X; the featured slot is never repeated
+// in any tab's grid (its card stays above the tabs). Types stay exported so
+// the homepage client and the /discover server page keep one card shape.
 export type Creator = {
   slug: string;
   name: string;
@@ -16,6 +24,40 @@ export type Creator = {
   created_count: number;
   funded_usd: number;
   joined: string;
+};
+
+export type TabId = "trending" | "newest" | "ending" | "community";
+
+// Tab id normalization: "ending_soon", "ending-soon" and "endingsoon" all sort
+// the same set; unknown values fall back to newest (the old default board).
+export function parseTab(raw: string | null | undefined): TabId {
+  const v = (raw ?? "").toLowerCase().replace(/[^a-z]/g, "");
+  if (v === "trending") return "trending";
+  if (v === "endingsoon" || v === "ending") return "ending";
+  if (v === "community" || v === "communitypriority") return "community";
+  return "newest";
+}
+
+// One comparator per tab, all off existing columns (C-4: "each = one
+// sort/limit on existing columns"). Deterministic tie-breaks so the board
+// never flickers between otherwise-equal rows.
+export const TAB_SORTS: Record<TabId, (a: HomeCard, b: HomeCard) => number> = {
+  // trending: highest funded/budget ratio, then most funded, then oldest.
+  trending: (a, b) =>
+    b.fraction - a.fraction ||
+    b.funded_usd - a.funded_usd ||
+    a.created_at.localeCompare(b.created_at),
+  // newest: created_at desc (the pre-tab main-line order).
+  newest: (a, b) => b.created_at.localeCompare(a.created_at),
+  // ending soon: deadline asc, nothing excluded — already-funded projects stay
+  // visible (the grid is a sort, not a filter, per the C-4 keep-funded law).
+  ending: (a, b) =>
+    a.deadline.localeCompare(b.deadline) ||
+    b.fraction - a.fraction ||
+    a.created_at.localeCompare(b.created_at),
+  // community priority: alphabetical slug order — MVP stand-in for the M6.1
+  // community-vote column (labeled here so the real wiring is findable).
+  community: (a, b) => a.slug.localeCompare(b.slug),
 };
 
 export type HomeCard = {
@@ -37,13 +79,14 @@ export type HomeCard = {
 };
 
 export type HomeBoard = {
+  tab: TabId;
   featured: HomeCard | null;
   recommended: HomeCard[];
   home_stretch: HomeCard[];
   creators: Creator[];
 };
 
-const EMPTY: HomeBoard = { featured: null, recommended: [], home_stretch: [], creators: [] };
+const EMPTY: HomeBoard = { tab: "newest", featured: null, recommended: [], home_stretch: [], creators: [] };
 
 export async function GET(req: Request) {
   // Touching the request (headers read = dynamic API access) is what excludes
@@ -97,10 +140,12 @@ export async function GET(req: Request) {
           a.created_at.localeCompare(b.created_at)
       )[0] ?? null;
 
-    // Recommended = 4 newest active, minus the featured slot (never repeated).
+    // Recommended = the tab-selected set (4 rows), minus the featured slot
+    // (never repeated — the featured card stays fixed above the tabs).
+    const tab = parseTab(new URL(req.url).searchParams.get("tab"));
     const recommended = cards
       .filter((p) => !featured || p.slug !== featured.slug)
-      .sort((a, b) => b.created_at.localeCompare(a.created_at))
+      .sort(TAB_SORTS[tab])
       .slice(0, 4);
 
     // Home Stretch = past 55% funded, ending first (urgency order).
@@ -140,7 +185,7 @@ export async function GET(req: Request) {
       })
     );
 
-    return NextResponse.json({ featured, recommended, home_stretch, creators }, {
+    return NextResponse.json({ tab, featured, recommended, home_stretch, creators }, {
       headers: { "Cache-Control": "no-store" },
     });
   } catch (err) {
