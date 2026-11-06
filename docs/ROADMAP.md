@@ -284,3 +284,5 @@ roadmap voting priority, token-donation credit type, distribution stays external
   Supabase = agent-managed from now on (Gui standing order). Org RENAME/DELETE = dashboard-only
   (no API route exists) - the 2 empty orgs die via one guided dashboard visit when Gui
   wants it; the org he keeps = 'commonweavelabs' (holds the live project).
+
+- [x] **D5 — Discoverability engine v1** — [DONE 2026-11-06, commit 9f260f5] metric event stream (view/fund/follow/claim) + velocity-7d rollup (fund×10+follow×3+view×1) + ready-for-forking detector (funded ∧ unclaimed ∧ 14d quiet) + follows → community picks + staff_pick flag (Gui-owned) + affinity-first recommender; homepage rows mechanism-backed + auto-hiding (law: no hand-curated rows, no synthetic events). v2 (ML/collab-filter, A/B) waits for real event volume.
