@@ -100,10 +100,10 @@ export function AppHeader() {
       setOpenTop((cur) => (cur === top ? null : cur));
       setLeavingTop(top);
       clearLeaveTimer();
-      leaveTimer.current = setTimeout(() => setLeavingTop(null), 120);
-    }, 450);
-    pendingCloseRef.current = { top, timer };
-  }, []);
+      leaveTimer.current = setTimeout(() => setLeavingTop(null), 480);
+      }, 450);
+      pendingCloseRef.current = { top, timer };
+      }, []);
   const closeTopNow = useCallback((top: string) => {
     if (pendingCloseRef.current) {
       clearTimeout(pendingCloseRef.current.timer);
@@ -112,7 +112,7 @@ export function AppHeader() {
     clearLeaveTimer();
     setOpenTop((cur) => (cur === top ? null : cur));
     setLeavingTop(top);
-    leaveTimer.current = setTimeout(() => setLeavingTop(null), 120);
+    leaveTimer.current = setTimeout(() => setLeavingTop(null), 480);
   }, []);
 
   // Counts arrive lazily: the FIRST open of any drawer fetches /api/categories

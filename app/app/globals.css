@@ -919,28 +919,29 @@ header.top {
 .cf0-topbtn[aria-expanded="true"] { color: var(--accent); border-bottom-color: var(--accent-dim); }
 .cf0-topbtn:focus-visible { outline: 2px solid var(--accent-dim); outline-offset: 2px; }
 
-/* drawer: dark panel, 1px line, card corner-notch, 120ms fade + 2px slide */
+/* drawer: grows out of the anchored top-left bracket (Gui 2026-11-06 v3):
+   the box fades/scales in FROM that corner while the second bracket rolls
+   diagonally to the bottom-right — opening reads as the bracket unzipping
+   the container open. Close = a real ~450ms fade, no translate. */
 .cf0-drawer {
   position: absolute; top: calc(100% + 8px); left: -6px;
   min-width: 380px; max-width: min(560px, calc(100vw - 48px));
   background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 12px 14px; z-index: 50;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-  animation: cf0-drawer-in 120ms ease both;
+  transform-origin: top left;
+  animation: cf0-drawer-in 260ms ease both;
 }
 @keyframes cf0-drawer-in {
-  from { opacity: 0; transform: translateY(2px); }
+  from { opacity: 0; transform: scale(0.965); }
   to { opacity: 1; transform: none; }
 }
-.cf0-drawer.cf0-closing { animation: cf0-drawer-out 100ms ease both; pointer-events: none; }
+.cf0-drawer.cf0-closing { animation: cf0-drawer-out 450ms ease both; pointer-events: none; }
 @keyframes cf0-drawer-out {
-  from { opacity: 1; transform: none; }
-  to { opacity: 0; transform: translateY(2px); }
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
-/* THE CORNER SPLIT (Gui 2026-11-06): two tiny green brackets start side by
-   side near the middle-left (reading as one little square) and split apart to
-   the drawer's top-left and bottom-right corners — same 2px stroke throughout,
-   the logo's step motif animating into place. TL leads; BR follows 60ms later. */
+/* TL bracket = ANCHORED: grows in place at the top-left corner, never travels */
 .cf0-drawer::before,
 .cf0-drawer::after {
   content: ""; position: absolute; width: 13px; height: 13px; pointer-events: none;
@@ -948,22 +949,24 @@ header.top {
 .cf0-drawer::before {
   left: -1px; top: -1px;
   border-top: 2px solid var(--accent); border-left: 2px solid var(--accent);
-  animation: cf0-corner-tl 340ms ease-out both;
-}
-.cf0-drawer::after {
-  right: -1px; bottom: -1px;
-  border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent);
-  animation: cf0-corner-br 340ms ease-out both 60ms;
+  animation: cf0-corner-tl 420ms ease-out both;
 }
 @keyframes cf0-corner-tl {
-  from { left: 34%; top: 30%; width: 7px; height: 7px; opacity: 0; }
-  25% { opacity: 1; }
-  to { left: -1px; top: -1px; width: 13px; height: 13px; opacity: 1; }
+  from { width: 6px; height: 6px; opacity: 0; }
+  30% { opacity: 1; }
+  to { width: 13px; height: 13px; opacity: 1; }
+}
+/* BR bracket = THE TRAVELER: starts beside the TL anchor, rolls the diagonal
+   to the bottom-right corner while growing — the box-opening stroke */
+.cf0-drawer::after {
+  left: 2px; top: 2px;
+  border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent);
+  animation: cf0-corner-br 520ms ease-out both 60ms;
 }
 @keyframes cf0-corner-br {
-  from { right: 34%; bottom: 30%; width: 7px; height: 7px; opacity: 0; }
+  from { left: 2px; top: 2px; width: 7px; height: 7px; opacity: 0; }
   25% { opacity: 1; }
-  to { right: -1px; bottom: -1px; width: 13px; height: 13px; opacity: 1; }
+  to { left: calc(100% - 12px); top: calc(100% - 12px); width: 13px; height: 13px; opacity: 1; }
 }
 
 /* sub links: mono-ish label left, REAL project count in amber right (0s render) */
