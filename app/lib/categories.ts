@@ -38,3 +38,26 @@ export function normCat(raw: string | null | undefined): string {
 export function prettyLabel(raw: string): string {
   return raw.replace(/[a-z][a-z']*/g, (w) => w[0].toUpperCase() + w.slice(1));
 }
+
+// One-line copy for the /discover category template header (?cat=…). Honest,
+// patronage tone — never investor language. Keyed by normCat(top) so the DB's
+// dash-forms ("decision-models") and link slugs resolve the same entry; the
+// fallback covers an unknown ?cat= so the header still speaks honestly.
+export const CATEGORY_BLURBS: Record<string, string> = {
+  gaming: "Games preserved, rebuilt and ported by the people who play them — every claim verified, every run receipted.",
+  modding: "Players extending the games they own — trainers, extractors and patching tools built in the open, funded in machine-time.",
+  video: "For people who make and repair video: editing, captions, transcription and restoration, patron-funded and receipted.",
+  infrastructure: "The shared machinery — inference serving, GPU scheduling, caching and proxies — public receipts for every run.",
+  "decision models": "Routers, evaluation harnesses and guardrails that decide which model answers — open to verify, not to trust.",
+  research: "Benchmarks, corpora and replications, so results can be checked rather than claimed.",
+  wellness: "Small tools for focus and rest, funded directly by the people who use them.",
+  tools: "Agent skills, CLIs, scrapers and design utilities — everyday automation on the public record.",
+};
+export const FALLBACK_BLURB =
+  "One slice of the live catalog at the sort of the tabs below — fund the work, and every run posts a public receipt.";
+
+// The blurb for a category top ("" -> the catalog fallback line).
+export function categoryBlurb(top: string): string {
+  if (!top) return FALLBACK_BLURB;
+  return CATEGORY_BLURBS[normCat(top)] ?? FALLBACK_BLURB;
+}

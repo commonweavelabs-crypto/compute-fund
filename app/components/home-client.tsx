@@ -21,6 +21,10 @@ import type { HomeCard, TabId } from "../app/api/home/route";
 // Prebuilt art thumbs (800px jpgs, ~30-75KB) + intrinsic dims for the img
 // width/height attributes — the ~1.2MB pngs stay only for print-time swaps.
 import { artFor, artThumb, THUMB_W, THUMB_H, HERO_THUMB } from "../lib/art-map";
+// The /discover board's hydration-safe "x days left" chip (browser clock in an
+// effect — see that file). MediaCard renders it ONLY when the server page opts
+// in (deadlineLive); the homepage keeps the static deadline text unchanged.
+import { DaysLeft } from "../app/discover/DaysLeft";
 
 export type Cf0Card = HomeCard & {
   claimed?: number; // 1 | 0 | undefined (unknown on tab-fetched cards → resolved via claimedMap)
@@ -377,10 +381,14 @@ export function MediaCard({
   p,
   idx,
   claimedMap,
+  deadlineLive,
 }: {
   p: Cf0Card;
   idx: number;
   claimedMap: Record<string, number>;
+  // /discover keeps the live "x days left" chip (DaysLeft, browser-clock in an
+  // effect); the homepage board passes nothing and renders the static date.
+  deadlineLive?: boolean;
 }) {
   const claimed = claimOf(p, claimedMap);
   return (
@@ -430,7 +438,7 @@ export function MediaCard({
           </div>
           <div className="cf0-mcard-sub">
             <span>{p.donors} patron{p.donors === 1 ? "" : "s"}</span>
-            <span>{p.deadline || "open"}</span>
+            <span>{deadlineLive ? <DaysLeft deadline={p.deadline} /> : p.deadline || "open"}</span>
           </div>
           <div className="cf0-mcard-chips">
             <span className="cf0-tagchip mono">open source</span>

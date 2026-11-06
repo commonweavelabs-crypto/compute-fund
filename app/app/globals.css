@@ -819,15 +819,25 @@ html, body { overflow-x: clip; }
 }
 .cf0-tagchip-amber { color: var(--amber); border-color: var(--amber); }
 
-/* ── open-for-funding strip (v0 B-style) ── */
-.cf0-strip { margin-top: 20px; display: grid; gap: 12px; grid-template-columns: 1fr; }
-@media (min-width: 1024px) { .cf0-strip { grid-template-columns: repeat(3, 1fr); } }
+/* ── open-for-funding strip (v0 B-style) ──
+   Overflow fix (2026-11-06, Gui's pixel report): bare 1fr = minmax(auto, 1fr)
+   let every track grow to the card's min-content (~398px = the fixed 112px
+   thumb + the nowrap mono meta lines), so the 3rd card escaped .wrap by ~78px
+   and its right border/progress bar clipped at the viewport. minmax(0, 1fr)
+   pins the track to exactly 1/3 (2 cols <=1000px, 1 col <=640px); the nowrap
+   status/meta lines ellipsize INSIDE the card instead of widening the track. */
+.cf0-strip { margin-top: 20px; display: grid; gap: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1000px) { .cf0-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .cf0-strip { grid-template-columns: minmax(0, 1fr); } }
 .cf0-scard { display: flex; align-items: stretch; gap: 12px; border: 1px solid var(--line); background: var(--panel); padding: 12px; }
 .cf0-scard:hover { border-color: var(--phos); }
 .cf0-scard-img { height: auto; min-height: 92px; width: 112px; flex-shrink: 0; object-fit: cover; }
 .cf0-scard-body { min-width: 0; flex: 1; }
 .cf0-scard-line { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 10px; color: var(--tx-dim); }
-.cf0-scard-line span { white-space: nowrap; }
+/* status + amount lines: nowrap values truncate INSIDE the card (long "ends…"
+   dates / "$x / $y" never widen the track or clip at the card border) */
+.cf0-scard-line span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.cf0-scard-meta span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .cf0-scard-title { margin: 4px 0 0; font-size: 14px; font-weight: 600; color: var(--tx); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cf0-scard-meta { margin-top: 8px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--tx-dim); }
 .cf0-scard .cf0-vbar { margin-top: 8px; }
@@ -988,3 +998,40 @@ header.top {
   .cf0-drawer, .cf0-drawer.cf0-closing, .cf0-usermenu { animation: none; }
   .cf0-drawer.cf0-closing { opacity: 0; } /* reduced motion: close is instant */
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   /discover = the standard category template page (v0 design language).
+   The page <main> carries .cf0 (v0 tokens) — same design feel as the homepage.
+   Rendered server-side: v0 header block (eyebrow / display h1 / one-line copy),
+   count chip + sibling-sub filter chips (current sub = phos-highlighted), the
+   4-col MediaCard grid, and GET-form pagination styled like the tab buttons.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.cf0-cathead { margin-top: 14px; }
+.cf0-cath1 {
+  margin: 10px 0 0; font-size: 34px; font-weight: 600; line-height: 1.12;
+  letter-spacing: -0.02em; color: var(--tx);
+}
+.cf0-catdot { color: var(--phos); }
+.cf0-catdesc { margin: 12px 0 0; font-size: 12px; line-height: 20px; color: var(--tx-dim); max-width: 72ch; }
+.cf0-chiprow { margin-top: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.cf0-countchip {
+  border: 1px solid var(--line); background: var(--panel2); color: var(--tx-dim);
+  padding: 5px 10px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap;
+}
+.cf0-countchip.on { border-color: var(--phos); background: rgba(92, 255, 157, 0.1); color: var(--phos); }
+.cf0-fchip {
+  border: 1px solid var(--line); background: none; color: var(--tx-dim);
+  padding: 5px 10px; font-size: 11px; letter-spacing: 0.3px; white-space: nowrap;
+}
+.cf0-fchip:hover, .cf0-fchip:focus-visible { border-color: var(--phos); color: var(--tx); outline: none; }
+.cf0-fchip.on { border-color: var(--phos); background: rgba(92, 255, 157, 0.1); color: var(--phos); }
+.cf0-fcount { margin-left: 8px; font-size: 10px; opacity: 0.75; }
+.cf0-pages { margin-top: 26px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.cf0-page {
+  display: inline-block; border: 1px solid var(--line); background: var(--panel2);
+  color: var(--tx-dim); padding: 8px 14px; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer;
+}
+.cf0-page:hover, .cf0-page:focus-visible { border-color: var(--phos); color: var(--tx); outline: none; }
+.cf0-page-off { opacity: 0.4; pointer-events: none; }
+.cf0-pageinfo { font-size: 10px; letter-spacing: 0.12em; color: var(--tx-dim); text-transform: uppercase; }
