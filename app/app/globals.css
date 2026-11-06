@@ -903,6 +903,11 @@ header.top {
 
 /* top-level category buttons */
 .cf0-cat { position: relative; }
+/* hover bridge (Gui 2026-11-06): the 8px strip between the word and the box
+   belongs to the category, so the pointer never "leaves" while crossing */
+.cf0-cat::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 10px;
+}
 .cf0-topbtn {
   background: none; border: 0; padding: 3px 1px;
   color: var(--ink-dim); font-family: var(--font-body); font-size: 13px;
@@ -932,9 +937,33 @@ header.top {
   from { opacity: 1; transform: none; }
   to { opacity: 0; transform: translateY(2px); }
 }
+/* THE CORNER SPLIT (Gui 2026-11-06): two tiny green brackets start side by
+   side near the middle-left (reading as one little square) and split apart to
+   the drawer's top-left and bottom-right corners — same 2px stroke throughout,
+   the logo's step motif animating into place. TL leads; BR follows 60ms later. */
+.cf0-drawer::before,
+.cf0-drawer::after {
+  content: ""; position: absolute; width: 13px; height: 13px; pointer-events: none;
+}
 .cf0-drawer::before {
-  content: ""; position: absolute; top: -1px; left: -1px; width: 11px; height: 11px;
+  left: -1px; top: -1px;
   border-top: 2px solid var(--accent); border-left: 2px solid var(--accent);
+  animation: cf0-corner-tl 340ms ease-out both;
+}
+.cf0-drawer::after {
+  right: -1px; bottom: -1px;
+  border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent);
+  animation: cf0-corner-br 340ms ease-out both 60ms;
+}
+@keyframes cf0-corner-tl {
+  from { left: 34%; top: 30%; width: 7px; height: 7px; opacity: 0; }
+  25% { opacity: 1; }
+  to { left: -1px; top: -1px; width: 13px; height: 13px; opacity: 1; }
+}
+@keyframes cf0-corner-br {
+  from { right: 34%; bottom: 30%; width: 7px; height: 7px; opacity: 0; }
+  25% { opacity: 1; }
+  to { right: -1px; bottom: -1px; width: 13px; height: 13px; opacity: 1; }
 }
 
 /* sub links: mono-ish label left, REAL project count in amber right (0s render) */
@@ -995,7 +1024,7 @@ header.top {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cf0-drawer, .cf0-drawer.cf0-closing, .cf0-usermenu { animation: none; }
+  .cf0-drawer, .cf0-drawer.cf0-closing, .cf0-usermenu, .cf0-drawer::before, .cf0-drawer::after { animation: none; }
   .cf0-drawer.cf0-closing { opacity: 0; } /* reduced motion: close is instant */
 }
 

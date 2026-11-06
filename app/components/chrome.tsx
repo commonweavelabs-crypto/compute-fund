@@ -52,6 +52,7 @@ export function AppHeader() {
   const [counts, setCounts] = useState<TaxonomyCounts | null>(null);
   const countsFetched = useRef(false);
   const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingCloseRef = useRef<{ top: string; timer: ReturnType<typeof setTimeout> } | null>(null);
   const topBtnRefs = useRef<Array<HTMLButtonElement | null>>([]);
   // mirror of openTop for event handlers (stale-closure safety)
   const openTopRef = useRef<string | null>(null);
@@ -78,16 +79,39 @@ export function AppHeader() {
   };
   // One drawer open at a time: opening a top wins over any closing animation.
   const openTopNow = useCallback((top: string) => {
+    if (pendingCloseRef.current) {
+      clearTimeout(pendingCloseRef.current.timer);
+      pendingCloseRef.current = null;
+    }
     clearLeaveTimer();
     setLeavingTop(null);
     setOpenTop((cur) => (cur === top ? cur : top));
   }, []);
+  // Pointer grace (Gui 2026-11-06): leaving the word must NOT kill the drawer
+  // instantly — the pointer crosses an 8-10px dead strip to reach the box.
+  // closeTopSoon schedules the real close 450ms later; re-entering (openTopNow)
+  // or landing in the drawer's bridge cancels it. Deliberate intents (Esc,
+  // outside mousedown, link click) close immediately via closeTopNow.
   const closeTopSoon = useCallback((top: string) => {
-    // 120ms close transition, then unmount (reduced-motion hides it at once
-    // via CSS — see .cf0-drawer.cf0-closing).
+    if (pendingCloseRef.current?.top === top) return;
+    if (pendingCloseRef.current) clearTimeout(pendingCloseRef.current.timer);
+    const timer = setTimeout(() => {
+      pendingCloseRef.current = null;
+      setOpenTop((cur) => (cur === top ? null : cur));
+      setLeavingTop(top);
+      clearLeaveTimer();
+      leaveTimer.current = setTimeout(() => setLeavingTop(null), 120);
+    }, 450);
+    pendingCloseRef.current = { top, timer };
+  }, []);
+  const closeTopNow = useCallback((top: string) => {
+    if (pendingCloseRef.current) {
+      clearTimeout(pendingCloseRef.current.timer);
+      pendingCloseRef.current = null;
+    }
+    clearLeaveTimer();
     setOpenTop((cur) => (cur === top ? null : cur));
     setLeavingTop(top);
-    clearLeaveTimer();
     leaveTimer.current = setTimeout(() => setLeavingTop(null), 120);
   }, []);
 
@@ -107,7 +131,7 @@ export function AppHeader() {
     if (openTop === null && !menuOpen) return;
     const onDocMouseDown = (e: MouseEvent) => {
       const t = e.target as HTMLElement | null;
-      if (openTop !== null && t && !t.closest(".cf0-cat")) closeTopSoon(openTop);
+      if (openTop !== null && t && !t.closest(".cf0-cat")) closeTopNow(openTop);
       if (menuOpen && t && !t.closest(".cf0-user")) setMenuOpen(false);
     };
     document.addEventListener("mousedown", onDocMouseDown);
@@ -129,11 +153,11 @@ export function AppHeader() {
     };
     if (e.key === "Escape") {
       e.preventDefault();
-      // close the focused top's drawer; if a STALE one is somehow open
-      // (another top), close that too — Esc always collapses the rail
-      closeTopSoon(CATEGORY_TAXONOMY[idx].top);
+      // Esc = deliberate intent: close immediately (no pointer grace).
+      // If a STALE one is somehow open (another top), close it too.
+      closeTopNow(CATEGORY_TAXONOMY[idx].top);
       if (openTopRef.current && openTopRef.current !== CATEGORY_TAXONOMY[idx].top) {
-        closeTopSoon(openTopRef.current);
+        closeTopNow(openTopRef.current);
       }
       topBtnRefs.current[idx]?.focus();
       return;
