@@ -19,6 +19,10 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
   const [note, setNote] = useState<React.ReactNode>("");
   const [key, setKey] = useState("");
   const [busy, setBusy] = useState("");
+  // D5 follow button: state from GET /api/follow (truth, not a guess), then an
+  // optimistic toggle (flip immediately, revert on failure; 401 = sign-in note).
+  const [following, setFollowing] = useState<boolean | null>(null);
+  const [followCount, setFollowCount] = useState<number | null>(null);
   // The claim moves real ownership: right after it lands, the claimant is the owner
   // even before the page's next /api/ownerof round-trip picks it up.
   const ownerNow = isOwner || iClaimed;
@@ -35,7 +39,39 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
         if (d.repo_url) setProofRepo(d.repo_url);
       }
     });
+    fetch(`/api/follow?slug=${encodeURIComponent(slug)}`).then(r => r.json()).then(d => {
+      setFollowing(!!d.following);
+      setFollowCount(Number(d.count ?? 0));
+    }).catch(() => { setFollowing(false); });
   }, [slug]);
+
+  async function toggleFollow() {
+    // Optimistic: flip at click-time; a failed request reverts and notes why.
+    const next = !following;
+    setFollowing(next);
+    setFollowCount((c) => Math.max(0, (c ?? 0) + (next ? 1 : -1)));
+    try {
+      const res = await fetch("/api/follow", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug }),
+      });
+      const d = await res.json().catch(() => ({}));
+      if (res.ok) {
+        setFollowing(!!d.following);
+        setFollowCount(Number(d.count ?? 0));
+      } else {
+        setFollowing(!next);
+        setFollowCount((c) => Math.max(0, (c ?? 0) + (next ? -1 : 1)));
+        if (res.status === 401) {
+          setNote(<>Sign in to follow this project — <a href={`/login?next=${encodeURIComponent(`/p/${slug}`)}`}>you come right back</a>.</>);
+        } else setNote(d.error ?? "Follow failed.");
+      }
+    } catch {
+      setFollowing(!next);
+      setFollowCount((c) => Math.max(0, (c ?? 0) + (next ? -1 : 1)));
+      setNote("The follow did not stick — try again in a moment.");
+    }
+  }
 
   async function fund(tier: "25" | "100" | "500") {
     setBusy(tier);
@@ -103,6 +139,22 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
     <section className="cfq">
       <div className="cfqhead"><span>LIVE FUNDING</span>{live && <span className="cfqid">donors: {live.donors}</span>}</div>
       <p className="cfqq">{live ? `$${live.funded_usd.toFixed(2)} funded` : "loading…"}</p>
+      {/* D5: compact follow button — a real <button> (keyboard reachable), the
+          aria-pressed state mirrors the ledger, count is the project's real
+          follows total (community-picks signal). */}
+      <div className="tier-row" style={{ marginTop: 8 }}>
+        <button
+          type="button"
+          className="btn ghost"
+          aria-pressed={!!following}
+          aria-label={following ? `Following this project — ${followCount ?? 0} followers total` : `Follow this project — ${followCount ?? 0} followers total`}
+          onClick={toggleFollow}
+          disabled={following === null}
+        >
+          {following === null ? "…" : following ? "★ following" : "☆ follow"}
+          {followCount ? ` · ${followCount}` : ""}
+        </button>
+      </div>
       <div className="tier-row">
         {(["25","100","500"] as const).map(t => (
           <button key={t} className="tier-btn" onClick={() => fund(t)} disabled={busy === t} aria-label={`Fund ${t} dollars, demo`}>

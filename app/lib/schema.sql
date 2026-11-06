@@ -88,3 +88,27 @@ CREATE TABLE IF NOT EXISTS orgs (
 -- stays the human who created it; owner_org_id = the public holder when set.
 CREATE INDEX IF NOT EXISTS idx_receipts_project ON receipts(project_id, ts);
 CREATE INDEX IF NOT EXISTS idx_donations_project ON donations(project_id);
+
+-- D5 discovery engine v1: one real-signal event stream + follows ledger.
+-- events = view / fund / follow / claim facts ONLY, all written by the app path
+-- that caused them (page render, confirmed checkout, claim move, follow toggle).
+-- Weights (fund*10 + follow*3 + view*1) are hardcoded AT QUERY TIME in
+-- lib/discover.ts and are never stored. No event is ever synthesized.
+CREATE TABLE IF NOT EXISTS events (
+  id            TEXT PRIMARY KEY,             -- crypto.randomUUID (request-local)
+  at            TEXT NOT NULL,                -- ISO-8601 UTC (new Date().toISOString())
+  kind          TEXT NOT NULL CHECK(kind IN ('view','fund','follow','claim')),
+  project_id    TEXT REFERENCES projects(id), -- null-able (e.g. view of unknown slug skipped, never stored without one)
+  user_id       TEXT                          -- session user when the moment has one (anon views = null)
+);
+CREATE INDEX IF NOT EXISTS idx_events_project ON events(project_id, at);
+CREATE INDEX IF NOT EXISTS idx_events_user ON events(user_id, at);
+
+-- follows: ONE row per (user, project) — a toggle deletes it, never negates.
+CREATE TABLE IF NOT EXISTS follows (
+  user_id       TEXT NOT NULL,
+  project_id    TEXT NOT NULL REFERENCES projects(id),
+  at            TEXT NOT NULL,
+  PRIMARY KEY(user_id, project_id)
+);
+CREATE INDEX IF NOT EXISTS idx_follows_project ON follows(project_id);

@@ -6,10 +6,17 @@
 // featured photo-card (stats side panel + receipt cascade + dots) →
 // "Recommended for you" behind the EXISTING 4 tabs (the C-4 aria work kept;
 // v0 tab styling; the heading lives inside the client component so it renders
-// exactly once) → "Open for funding" strip (v0 B-style with vbar) → three
-// Kickstarter-style discovery rows (Nearly funded / Just launched / Open for
-// claims, ≥2 qualifying projects each, same server board read) → the v0
-// value-prop trio. The global Shell (header + footer) stays mounted by the root
+// exactly once) → "Open for funding" strip (v0 B-style with vbar) → the
+// Kickstarter-style discovery rows: first the D5 MECHANISM rows (staff picks =
+// ONLY the Gui-owned staff_pick flag; then What's buzzing now / Ready for
+// forking / Community picks / Most funded this month, each one rollup in
+// lib/discover.ts against real events/follows/donations), then the three v0
+// board slices (Nearly funded / Just launched / Open for claims) — every row
+// auto-hides unless ≥2 qualifying projects (staff picks ≥1; an empty mechanism
+// is an honest empty, never an invented card), and each see-all lands on the
+// closest /discover tab (velocity → trending, follows/claims → community) →
+// the v0 value-prop trio. The global Shell (header + footer) stays mounted by
+// the root
 // layout; this page never mounts chrome (C-3 law).
 //
 // Data = the live SQLite board, read the EXACT /api/home way: the route's GET
@@ -38,6 +45,10 @@ export const instant = false;
 import Link from "next/link";
 import { db } from "../lib/db";
 import { TAB_SORTS, type TabId } from "./api/home/route";
+import {
+  buzzing as buzzingSlugs, forkingReady, communityPicks, mostFunded30d, staffPicks,
+  velocityBySlug, followsBySlug,
+} from "../lib/discover";
 import { artFor, artThumb, THUMB_W, THUMB_H } from "../lib/art-map";
 import {
   HeroFilm,
@@ -71,6 +82,12 @@ type Board = {
   nearly: Cf0Card[]; // pct 60..99, deadline asc
   launched: Cf0Card[]; // newest created first
   claims: Cf0Card[]; // unclaimed mirrors (CLAIM IT), newest first
+  // D5 mechanism rows (same board read + the SQL rollups in lib/discover):
+  buzzing: Cf0Card[]; // velocity > 0 over the last 7d, velocity desc
+  forking: Cf0Card[]; // forkingReady() law (unclaimed + wanted + compute-quiet)
+  picks: Cf0Card[]; // follows count desc (≥1 follow)
+  funded30: Cf0Card[]; // SUM donations last 30d desc (≥1 donation row)
+  staff: Cf0Card[]; // ONLY the Gui-owned staff_pick flag (≥1 → row shows)
   receipts: ReceiptLine[];
   claimedMap: Record<string, number>;
   totals: { funded: number; patrons: number; runs: number };
@@ -86,10 +103,15 @@ function claimOf(p: Cf0Card, map: Record<string, number>): number {
 async function loadBoard(): Promise<Board> {
   const empty: Board = {
     cards: [], pool: [], recommended: [], strip: [],
-    nearly: [], launched: [], claims: [], receipts: [],
+    nearly: [], launched: [], claims: [],
+    buzzing: [], forking: [], picks: [], funded30: [], staff: [], receipts: [],
     claimedMap: {}, totals: { funded: 0, patrons: 0, runs: 0 },
   };
   try {
+    // D5 rollup maps first — cards get velocity/follows at build time so every
+    // sort downstream (incl. TAB_SORTS.trending/community) sorts a full card.
+    const vel = velocityBySlug();
+    const fols = followsBySlug();
     const rows = db
       .prepare(
         `SELECT p.slug, p.name, p.one_liner, p.cfq_id, p.budget_credits, p.deadline,
@@ -129,6 +151,8 @@ async function loadBoard(): Promise<Board> {
         unit: String(42 + i).padStart(4, "0"),
         art: artFor(String(r.slug ?? "")),
         receipts: Number(r.receipts) || 0,
+        velocity: vel[String(r.slug ?? "")] ?? 0,
+        follows: fols[String(r.slug ?? "")] ?? 0,
       };
     });
 
@@ -185,6 +209,26 @@ async function loadBoard(): Promise<Board> {
       .sort(TAB_SORTS["newest"])
       .slice(0, 4);
 
+    // D5 mechanism rows — the mechanisms are SQL rollups in lib/discover.ts; the
+    // composition here only maps their slug order onto THIS board's cards.
+    // Every row auto-hides when it has <2 qualifying projects (staff picks hide
+    // under 1 — one pick is a curation, not a crowd). Empty mechanisms stay
+    // hidden: the fund shows only what really happened, never invented rows.
+    const byOrder = (order: string[], keep?: (c: Cf0Card) => boolean): Cf0Card[] =>
+      order
+        .map((s) => cards.find((c) => c.slug === s))
+        .filter((c): c is Cf0Card => !!c)
+        .filter((c) => (keep ? keep(c) : true))
+        .slice(0, 4);
+    // buzzing() is already velocity-desc; the keep is belt-and-braces on the
+    // board join (budget>0 cards only — a buzzing zero-budget project has no
+    // card to show and the row is honest about fewer entries).
+    const buzzing = byOrder(buzzingSlugs(), (c) => c.velocity > 0);
+    const forking = byOrder(forkingReady());
+    const picks = byOrder(communityPicks().map((c) => c.slug));
+    const funded30 = byOrder(mostFunded30d().map((c) => c.slug));
+    const staff = byOrder(staffPicks());
+
     // v0 receipt cascade → the real receipts table tail (public data).
     const receipts = (
       db
@@ -212,7 +256,7 @@ async function loadBoard(): Promise<Board> {
       runs: (db.prepare("SELECT COUNT(*) AS n FROM receipts").get() as { n: number }).n,
     };
 
-    return { cards, pool, recommended, strip, nearly, launched, claims, receipts, claimedMap, totals };
+    return { cards, pool, recommended, strip, nearly, launched, claims, buzzing, forking, picks, funded30, staff, receipts, claimedMap, totals };
   } catch (err) {
     // Hard DB failure degrades to the honest empty board (never an error page).
     console.error("home board read failed:", err);
@@ -228,14 +272,23 @@ export default async function Home() {
 
   // Discovery rows render only when ≥2 qualifying projects exist (never an
   // invented card): nearly-funded → ending tab, just-launched → newest,
-  // open-for-claims → community tab (the outreach angle).
+  // open-for-claims → community tab (the outreach angle). D5 rows join them in
+  // v0-strip order — staff picks first (curation beats algorithms; the flag is
+  // Gui-owned, so its row hides entirely while the flag is 0 everywhere), then
+  // the four mechanisms, each see-all mapping to its closest /discover tab
+  // (buzzing/most-funded → trending = velocity, forking/picks → community).
   const discoveryRows = (
     [
-      { id: "nearly-funded", title: "Nearly funded", tab: "ending", cards: board.nearly },
-      { id: "just-launched", title: "Just launched", tab: "newest", cards: board.launched },
-      { id: "open-for-claims", title: "Open for claims", tab: "community", cards: board.claims },
+      { id: "staff-picks", title: "Staff picks", tab: "", min: 1, cards: board.staff },
+      { id: "buzzing-now", title: "What's buzzing now", tab: "trending", min: 2, cards: board.buzzing },
+      { id: "ready-for-forking", title: "Ready for forking", tab: "community", min: 2, cards: board.forking },
+      { id: "community-picks", title: "Community picks", tab: "community", min: 2, cards: board.picks },
+      { id: "most-funded-30d", title: "Most funded this month", tab: "trending", min: 2, cards: board.funded30 },
+      { id: "nearly-funded", title: "Nearly funded", tab: "ending", min: 2, cards: board.nearly },
+      { id: "just-launched", title: "Just launched", tab: "newest", min: 2, cards: board.launched },
+      { id: "open-for-claims", title: "Open for claims", tab: "community", min: 2, cards: board.claims },
     ] as const
-  ).filter((row) => row.cards.length >= 2);
+  ).filter((row) => row.cards.length >= row.min);
 
   return (
     <main className="wrap cf0-main cf0">
@@ -357,12 +410,16 @@ export default async function Home() {
       </section>
 
       {/* ── discovery rows (Kickstarter-style slices of the same board read;
-          a row renders only when ≥2 qualifying projects exist) ── */}
+          a row renders only when ≥2 qualifying projects exist — staff picks
+          ≥1; D5 rows see-all → the closest /discover tab) ── */}
       {discoveryRows.map((row) => (
         <section key={row.id} className="cf0-section" aria-label={row.id}>
           <div className="cf0-rowhead">
             <h2 className="cf0-h2 cf0-display">{row.title}</h2>
-            <Link href={`/discover?tab=${row.tab}`} className="cf0-seeall mono">
+            <Link
+              href={row.tab ? `/discover?tab=${row.tab}` : "/discover"}
+              className="cf0-seeall mono"
+            >
               see all →
             </Link>
           </div>

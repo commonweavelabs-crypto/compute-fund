@@ -36,6 +36,18 @@ legal money-wire, profiles, project pages). Conflicts resolved per CONSOLIDATION
 - [ ] **MVP gate:** one stranger signs up, funds a CFQ-passing project with a card, platform dispenses capped compute against that question, receipts post publicly. Nothing else counts.
 
 ## Phase 2 — Profiles, Copy-Project, community surfaces
+- [x] **D5 discovery engine v1 (BUILT 2026-11-06, dev-verified): the SHOWCASE layer's data
+  spine — one real event stream (events: view/fund/follow/claim, weights fund×10/follow×3/view×1
+  hardcoded at query time, never stored) + follows ledger (per-user toggle, /api/follow) +
+  SQL rollups in lib/discover.ts (velocity7d / buzzing / forkingReady abandonment law /
+  communityPicks / mostFunded30d / affinity v1 with naive projects.category backfill) wired
+  into the homepage mechanism rows (Staff picks = Gui-owned staff_pick flag, still 0
+  everywhere; What's buzzing now / Ready for forking / Community picks / Most funded this
+  month) and /api/home + /discover tabs (trending = velocity; community priority = follows
+  + velocity tiebreak, the real M6.1 seed). Every row auto-hides under 2 qualifying projects
+  (staff picks: 1) — an empty mechanism is an honest empty, NEVER a synthesized event.
+  Tests: app/scripts/d5_discover_test.py (42 checks, rollup rules run the REAL lib against
+  a seeded DB COPY; live wiring verified read-only + scratch-session HTTP).**
 - [ ] Copy-Project button ("adopt and rename" — the bootstrap mechanic)
 - [ ] Search + discovery (deliberately non-addictive: weekly top list, optional swipe mode, never a slot machine)
 - [ ] SHOWCASE LAYER (Gui 10/18): weekly top-EXCITEMENT projects featured on the landing hero (computed: donation velocity + Standing-weighted engagement); discover page: categories + filter/search algorithms (Kickstarter-style taxonomy; research at milestone execution) + the M6.1 OPEN-GATES section (mismatch/up-for-grabs feed — see game-theory doc)

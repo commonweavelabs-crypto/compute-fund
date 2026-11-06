@@ -45,8 +45,62 @@ export function getDb(): DatabaseSync {
       id TEXT PRIMARY KEY, slug TEXT NOT NULL UNIQUE, name TEXT NOT NULL,
       owner_id TEXT NOT NULL REFERENCES users(id), avatar_path TEXT, bio TEXT,
       created_at TEXT NOT NULL DEFAULT (datetime('now')))`);
+    // (schema.sql above now carries events/follows + their indexes — the
+    // schema.exec line applied them to every existing DB on this first open.)
+    // D5 discovery-engine schema drift: staff-pick flag (Gui-owned, see
+    // setStaffPick below), category (powers affinity(); backfilled below by a
+    // NAIVE keyword pass, commented v1 heuristic), and a created_at guard for
+    // hypothetical projects whose row predates the column (schema.sql has
+    // carried created_at since Sprint-001, so this is dead code in practice).
+    addCol("projects", "staff_pick", "staff_pick INTEGER NOT NULL DEFAULT 0");
+    addCol("projects", "category", "category TEXT");
+    const projCols = conn.prepare("PRAGMA table_info(projects)").all() as Array<{ name: string }>;
+    if (!projCols.some((c) => c.name === "created_at")) {
+      // backfill = slug timestamp: created_at takes the slug itself as a stable,
+      // sortable-from-the-row string (no invented dates). Ordering-only fidelity.
+      conn.exec(`ALTER TABLE projects ADD COLUMN created_at TEXT NOT NULL DEFAULT ''`);
+      conn.exec(`UPDATE projects SET created_at = 'slug:' || slug WHERE created_at = ''`);
+    }
+    backfillCategories(conn);
   }
   return _db;
+}
+
+// -- D5 categories (projects.category TEXT) -----------------------------------
+// v1 HEURISTIC, deliberately naive and commented as such: classify a project
+// into one of the cfqDomains (the homepage category strip in lib/data.ts:
+// decision-models / research / video / infrastructure / wellness / tools) from
+// keyword hits on the question + one_liner. Affinity joins on this column;
+// when projects carry real category data someday, this pass retires.
+const CATEGORY_KEYWORDS: Array<[string, string[]]> = [
+  ["decision-models", ["decision", "router", "routing", "vote", "voting", "governance", "policy", "forecast", "jev", "classifier"]],
+  ["research", ["research", "study", "benchmark", "analysis", "science", "falsif", "corpus", "evaluation", "dataset", "paper", "reproduc"]],
+  ["video", ["video", "film", "documentary", "animation", "youtube", "thumbnail", "render", "caption"]],
+  ["infrastructure", ["infrastructure", "infra", "agent", "gateway", "api", "library", "framework", "protocol", "compute", "llm", "open-source", "tooling"]],
+  ["wellness", ["wellness", "health", "sleep", "fitness", "nutrition", "wellbeing"]],
+  ["tools", ["tool ", "utility", "plugin", "extension", "editor", "app"]],
+];
+export function guessCategory(question: string | null, oneLiner: string | null): string | null {
+  const hay = `${question ?? ""} ${oneLiner ?? ""}`.toLowerCase();
+  for (const [cat, words] of CATEGORY_KEYWORDS) {
+    if (words.some((w) => hay.includes(w))) return cat;
+  }
+  return null; // unclassified is honest: affinity just skips the category lift
+}
+function backfillCategories(conn: DatabaseSync) {
+  const rows = conn.prepare(`SELECT id, question, one_liner FROM projects WHERE category IS NULL`).all() as
+    Array<{ id: string; question: string; one_liner: string }>;
+  for (const r of rows) {
+    const cat = guessCategory(r.question, r.one_liner);
+    if (cat) conn.prepare(`UPDATE projects SET category = ? WHERE id = ? AND category IS NULL`).run(cat, r.id);
+  }
+}
+
+// Staff picks: the flag is Gui-owned (a human curation, never computed). Set it
+// via plain SQL (UPDATE projects SET staff_pick = 1 WHERE slug = '…') or this
+// helper; the flag is 0 everywhere until he names picks — no default picks.
+export function setStaffPick(slug: string, pick: number) {
+  db.prepare(`UPDATE projects SET staff_pick = ? WHERE slug = ?`).run(pick ? 1 : 0, slug);
 }
 // Convenience proxy so callers can keep using `db.prepare(...)`.
 export const db = new Proxy({} as DatabaseSync, {
@@ -112,6 +166,14 @@ export function insertProject(p: Record<string, unknown>) {
      story: null, roadmap: null,
      ...p,
      } as never);
+  // category: never left NULL when the naive heuristic can name it (affinity
+  // joins on this column; an explicit override wins).
+  if (!p.category) {
+    db.prepare(`UPDATE projects SET category = ? WHERE id = ? AND category IS NULL`).run(
+      guessCategory(p.question as string | null, p.one_liner as string | null),
+      String(p.id ?? ""),
+    );
+  }
 }
 export function nextCfqId(): string {
   const year = new Date().getFullYear();
@@ -235,6 +297,13 @@ export function insertStubProject(p: Record<string, unknown>) {
     status: "active", logo_path: null, links: null, owner_org_id: null, claimed: 0,
     ...p,
   } as never);
+  // Same category rule as insertProject (v1 heuristic, see guessCategory).
+  if (!p.category) {
+    db.prepare(`UPDATE projects SET category = ? WHERE id = ? AND category IS NULL`).run(
+      guessCategory(p.question as string | null, p.one_liner as string | null),
+      String(p.id ?? ""),
+    );
+  }
 }
 
 export function projectClaimState(slug: string) {

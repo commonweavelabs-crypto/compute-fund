@@ -5,16 +5,22 @@
 // own chrome.
 // Data = a tiny server-side lib/db read (same active board slice + donations
 // sum as /api/home, so homepage and catalog can never disagree), sorted by the
-// SAME four tabs as the homepage (?tab=): trending (highest funded/budget
-// ratio) / newest (default) / ending soon (deadline asc, nothing excluded —
-// funded stays visible) / community priority (alphabetical slug order — the
-// M6.1 community-vote stand-in). The tab list is a plain GET form of real
+// SAME four tabs as the homepage (?tab=): trending (D5: the velocity rollup —
+// 7-day fund×10/follow×3/view×1) / newest (default) / ending soon (deadline
+// asc, nothing excluded — funded stays visible) / community priority (D5:
+// follows count desc with the velocity rollup as tiebreak — the real M6.1
+// seed). The tab list is a plain GET form of real
 // <button role=tab> semantics that navigates without any client JS; the active
 // tab is aria-selected and the grid is its tabpanel.
+// D5: the two mechanism tabs are now REAL — trending = the velocity rollup
+// (7-day fund×10/follow×3/view×1, lib/discover.ts), community = follows count
+// desc with the velocity rollup as tiebreak (the M6.1 seed). Card counts stay
+// mirrored with /api/home (velocityBySlug/followsBySlug are the same SQL).
 import { Suspense } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { db } from "../../lib/db";
+import { velocityBySlug, followsBySlug } from "../../lib/discover";
 import type { HomeCard, TabId } from "../api/home/route";
 // Art treatment = the homepage's: themed art per slug, served as the prebuilt
 // 800px jpg thumbs (lazy, explicit width/height), via artThumb + art-map.
@@ -45,8 +51,9 @@ function parseTab(raw: string | null | undefined): TabId {
   return "newest";
 }
 const TAB_SORTS: Record<TabId, (a: HomeCard, b: HomeCard) => number> = {
+  // D5 trending: velocity desc (the rollup), then most funded, then oldest.
   trending: (a, b) =>
-    b.fraction - a.fraction ||
+    (b.velocity ?? 0) - (a.velocity ?? 0) ||
     b.funded_usd - a.funded_usd ||
     a.created_at.localeCompare(b.created_at),
   newest: (a, b) => b.created_at.localeCompare(a.created_at),
@@ -54,8 +61,12 @@ const TAB_SORTS: Record<TabId, (a: HomeCard, b: HomeCard) => number> = {
     a.deadline.localeCompare(b.deadline) ||
     b.fraction - a.fraction ||
     a.created_at.localeCompare(b.created_at),
-  // M6.1 stand-in: the community-vote column will replace this ordering.
-  community: (a, b) => a.slug.localeCompare(b.slug),
+  // D5 community priority: follows desc, velocity tiebreak, slug determinism
+  // (mirrors /api/home TAB_SORTS exactly — the M6.1 seed is now the real move).
+  community: (a, b) =>
+    (b.follows ?? 0) - (a.follows ?? 0) ||
+    (b.velocity ?? 0) - (a.velocity ?? 0) ||
+    a.slug.localeCompare(b.slug),
 };
 
 const money = (n: number) =>
@@ -106,6 +117,8 @@ async function DiscoverBoard({
   let cards: HomeCard[] = [];
   let dbFailed = false;
   try {
+    const vel = velocityBySlug();
+    const fols = followsBySlug();
     const rows = db
       .prepare(
         `SELECT p.slug, p.name, p.one_liner, p.cfq_id, p.budget_credits, p.deadline,
@@ -140,6 +153,8 @@ async function DiscoverBoard({
           created_at: String(r.created_at ?? ""),
           org_slug: (r.org_slug as string | null) || null,
           org_name: (r.org_name as string | null) || null,
+          velocity: vel[String(r.slug ?? "")] ?? 0,
+          follows: fols[String(r.slug ?? "")] ?? 0,
         };
       })
       .sort(TAB_SORTS[tab]);

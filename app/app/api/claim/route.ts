@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createHash } from "node:crypto";
 import { claimProjectBySlug, projectClaimState } from "../../../lib/db";
+import { recordClaim } from "../../../lib/discover";
 import { currentUser } from "../../../lib/auth";
 
 // D2-CLAIM-FLOW: maintainer proof -> executor role.
@@ -64,6 +65,8 @@ export async function POST(req: Request) {
     .digest("hex").slice(0, 16);
   const res = claimProjectBySlug(slug, uid, proofHash);
   if (res.ok) {
+    // D5: the ownership move happened — a real 'claim' event (project id + claimant).
+    recordClaim(p.id, uid);
     return NextResponse.json({
       ok: true, claimed: true, slug: p.slug, owner_id: res.owner_id, receipt_id: res.receipt_id,
       next: "Executor role unlocked: issue the governed key. The claim moves real ownership; commit-hash verification lands later.",

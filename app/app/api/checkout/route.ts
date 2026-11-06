@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { db, newId, insertDonation } from "../../../lib/db";
+import { recordFund } from "../../../lib/discover";
 import { currentUser } from "../../../lib/auth";
 import { stripeMode, createCheckoutSession } from "../../../lib/stripe";
 
@@ -22,6 +23,9 @@ export async function POST(req: Request) {
   if (stripeMode() === "off") {
     const id = newId("don");
     insertDonation({ id, user_id: (user as { id: string }).id, project_id: project.id, amount_cents: cents, tier, demo: 1, stripe_ref: `demo_${Date.now()}` });
+    // D5: demo money is real at this moment (no webhook to confirm it) — the
+    // fund event lands here, not at the row insert.
+    recordFund(project.id, (user as { id: string }).id);
     return NextResponse.json({ ok: true, demo: true, donationId: id });
   }
 

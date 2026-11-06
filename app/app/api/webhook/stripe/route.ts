@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "../../../../lib/db";
+import { recordFund } from "../../../../lib/discover";
 import { verifyStripeSignature } from "../../../../lib/stripe";
 
 // Stripe webhook: the ONLY place a pending donation (demo: 2) becomes real (demo: 0).
@@ -28,5 +29,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ received: true, awaiting_payment: session.payment_status });
   }
   db.prepare("UPDATE donations SET demo = 0 WHERE id = ?").run(row.id);
+  // D5: the pending donation just became REAL money (demo 2 -> 0) — that is the
+  // moment it counts. user_id/project_id ride the donation row (the webhook has
+  // no session); the donation row carries both.
+  const don = db.prepare("SELECT user_id, project_id FROM donations WHERE id = ?").get(row.id) as
+    { user_id: string; project_id: string } | undefined;
+  if (don) recordFund(don.project_id, don.user_id);
   return NextResponse.json({ received: true, confirmed: row.id });
 }

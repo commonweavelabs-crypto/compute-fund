@@ -10,12 +10,16 @@ import { db } from "../../../lib/db";
 // budget_credits.
 //
 // C-4 tabs: ?tab= selects the "Recommended for you" ordering — trending
-// (highest funded/budget ratio), newest (created_at desc, the pre-tab default),
+// (D5: the velocity rollup — 7-day fund×10/follow×3/view×1 — replaced the
+// funded/budget ratio), newest (created_at desc, the pre-tab default),
 // ending (deadline asc, nothing excluded — already-funded stays visible),
-// community (alphabetical slug order, the M6.1 stand-in for the community
-// vote). Tab click = GET /api/home?tab=X; the featured slot is never repeated
-// in any tab's grid (its card stays above the tabs). Types stay exported so
-// the homepage client and the /discover server page keep one card shape.
+// community (D5: follows count desc with the velocity rollup as tiebreak — the
+// REAL M6.1 seed, replacing the alphabetical stand-in). Tab click = GET
+// /api/home?tab=X; the featured slot is never repeated in any tab's grid (its
+// card stays above the tabs). Types stay exported so the homepage client and
+// the /discover server page keep one card shape.
+import { velocityBySlug, followsBySlug } from "../../../lib/discover";
+
 export type Creator = {
   slug: string;
   name: string;
@@ -40,11 +44,14 @@ export function parseTab(raw: string | null | undefined): TabId {
 
 // One comparator per tab, all off existing columns (C-4: "each = one
 // sort/limit on existing columns"). Deterministic tie-breaks so the board
-// never flickers between otherwise-equal rows.
+// never flickers between otherwise-equal rows. D5: the two mechanism tabs read
+// velocity/follows from the card itself (both board builders enrich every card
+// with the SQL rollups in lib/discover.ts before sorting).
 export const TAB_SORTS: Record<TabId, (a: HomeCard, b: HomeCard) => number> = {
-  // trending: highest funded/budget ratio, then most funded, then oldest.
+  // trending: the D5 velocity rollup (7-day fund×10 + follow×3 + view×1), then
+  // most funded, then oldest submission (the old funded/budget ratio is gone).
   trending: (a, b) =>
-    b.fraction - a.fraction ||
+    (b.velocity ?? 0) - (a.velocity ?? 0) ||
     b.funded_usd - a.funded_usd ||
     a.created_at.localeCompare(b.created_at),
   // newest: created_at desc (the pre-tab main-line order).
@@ -55,9 +62,12 @@ export const TAB_SORTS: Record<TabId, (a: HomeCard, b: HomeCard) => number> = {
     a.deadline.localeCompare(b.deadline) ||
     b.fraction - a.fraction ||
     a.created_at.localeCompare(b.created_at),
-  // community priority: alphabetical slug order — MVP stand-in for the M6.1
-  // community-vote column (labeled here so the real wiring is findable).
-  community: (a, b) => a.slug.localeCompare(b.slug),
+  // community priority (D5 / real M6.1 seed): most-followed first, velocity as
+  // the tiebreak, then the old alphabetical slug order for perfect determinism.
+  community: (a, b) =>
+    (b.follows ?? 0) - (a.follows ?? 0) ||
+    (b.velocity ?? 0) - (a.velocity ?? 0) ||
+    a.slug.localeCompare(b.slug),
 };
 
 export type HomeCard = {
@@ -76,6 +86,10 @@ export type HomeCard = {
   created_at: string;
   org_slug: string | null;
   org_name: string | null;
+  // D5 rollups, enriched by every board builder from lib/discover.ts (0 when
+  // the signals have not happened — a card never carries an invented score).
+  velocity: number;
+  follows: number;
 };
 
 export type HomeBoard = {
@@ -93,6 +107,9 @@ export async function GET(req: Request) {
   // this handler from build-time prerender under cacheComponents.
   req.headers.get("user-agent");
   try {
+    // D5 rollup maps, each one SQL statement (velocity + follows by slug).
+    const vel = velocityBySlug();
+    const fols = followsBySlug();
     const rows = db
       .prepare(
         `SELECT p.slug, p.name, p.one_liner, p.cfq_id, p.budget_credits, p.deadline,
@@ -127,6 +144,8 @@ export async function GET(req: Request) {
         created_at: String(r.created_at ?? ""),
         org_slug: (r.org_slug as string | null) || null,
         org_name: (r.org_name as string | null) || null,
+        velocity: vel[String(r.slug ?? "")] ?? 0,
+        follows: fols[String(r.slug ?? "")] ?? 0,
       };
     });
 
