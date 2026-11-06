@@ -85,3 +85,23 @@ until a creator uploads their own.
 **C-10 — footer fidelity + centering fix:** the FULL footer (all columns + items
 verified 2026-11-04) is restyled into the v0 skin and the giant wordmark clipping/
 centering bug is fixed (no cut-out glyphs anywhere, centered layout per element).
+
+## DISCOVERY ENGINE v1 (2026-11-06 — Gui's order, built same-day)
+
+**The law (Gui verbatim intent):** "These categories can't just be a static thing we pick —
+they have to actually have a mechanism behind it." → *A discovery row may auto-hide
+when unqualified, but it may never be hand-curated in code. Rows surface via real
+signals only: money in, follows, views, claims. No synthetic events, ever.*
+
+Mechanisms: events stream (view/fund/follow/claim) → velocity 7d (fund×10+follow×3+view×1)
+= What's buzzing / trending tab; funded-but-dormant-unclaimed detector (14d no receipts)
+= Ready for forking; follows desc = Community picks + M6.1 community priority;
+Σ 30d donations = Most funded this month; staff_pick flag = Staff picks (Gui-owned,
+unset until he names picks — nothing fake). Recommended-for-you v1 = velocity+ratio+recency
+blend; signed-in personalization = their own interactions first (v1 limit, honest).
+
+**Roadmap M-DISCOVER v2 (NOT now, needs real volume):** category embedding / collab
+filtering (LightFM-class) once events >> thousands; A/B on the recommender; search
+index. Open-source recsys libs exist but need data volume we don't have yet — honest
+answer to "is there an algorithm out there we can use": at our scale the hand-rolled
+auditable scoring IS the right algorithm, and it upgrades cleanly.
