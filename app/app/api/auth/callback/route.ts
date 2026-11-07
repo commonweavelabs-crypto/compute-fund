@@ -52,7 +52,13 @@ export async function GET(req: NextRequest) {
 
   const { data, error } = await authDb.auth.exchangeCodeForSession(code);
   if (error || !data?.user) {
-    return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Sign-in exchange failed — try again.")}`);
+    // TEMPORARY diagnostics (2026-11-07): surface the exchange failure reason
+    // server-side in the log + as a short cause hint on the login redirect.
+    // Supabase error messages are non-secret; the code/verifier are not echoed.
+    const cause = error?.message ?? "no user in exchange response";
+    console.error("[auth/callback] exchange failed:", cause);
+    const short = cause.split(/[.;]/)[0].slice(0, 120);
+    return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Sign-in exchange failed — try again.")}&cause=${encodeURIComponent(short)}`);
   }
   const su = data.user;
   const email = (su.email ?? "").toLowerCase();
