@@ -16,7 +16,7 @@
 // All data arrives via serializable props from the server page — no fetch on
 // mount, no Date.now()-dependent SSR text (hydration-safe).
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { HomeCard, TabId } from "../app/api/home/route";
 // Prebuilt art thumbs (800px jpgs, ~30-75KB) + intrinsic dims for the img
 // width/height attributes — the ~1.2MB pngs stay only for print-time swaps.
@@ -194,21 +194,43 @@ export function HeroFilm() {
     const p = el.play();
     if (p && typeof p.catch === "function") p.catch(() => {});
   }, []);
+  // Hero variant rotation (Gui directive 2026-11-06: the single 5s loop read
+  // artificial and soft; three new living-photograph renders (LTX-2.5, 1280x720,
+  // rendered locally) join the original. Uniform pick per mount = every
+  // page-load shows a variant; NO mid-session swap (no visual glitch). The
+  // originals stay on disk untouched. Poster = the variant's own still.
+  const HERO_VARIANTS = useMemo(
+    () => [
+      { src: "/project-art/hero-loop.mp4", poster: HERO_THUMB.src, w: HERO_THUMB.w, h: HERO_THUMB.h },
+      { src: "/project-art/hero-v2.mp4", poster: "/project-art/hero-v2.png", w: 1280, h: 720 },
+      { src: "/project-art/hero-v3.mp4", poster: "/project-art/hero-v3.png", w: 1280, h: 720 },
+      { src: "/project-art/hero-v4.mp4", poster: "/project-art/hero-v4.png", w: 1280, h: 720 },
+    ],
+    [],
+  );
+  // Lazy pick: the first paint can be server-rendered with v0; the client
+  // then swaps to its random variant before/at hydration effect time.
+  const [heroIdx, setHeroIdx] = useState(0);
+  useEffect(() => {
+    setHeroIdx(Math.floor(Math.random() * HERO_VARIANTS.length));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const hero = HERO_VARIANTS[heroIdx];
   return (
     <div className="cf0-hero-photo">
       <img
-        src={HERO_THUMB.src}
+        src={hero.poster}
         alt=""
         className="cf0-hero-img"
-        width={HERO_THUMB.w}
-        height={HERO_THUMB.h}
+        width={hero.w}
+        height={hero.h}
         loading="eager"
         decoding="async"
       />
       <video
         className="cf0-hero-video"
-        src="/project-art/hero-loop.mp4"
-        poster={HERO_THUMB.src}
+        src={hero.src}
+        poster={hero.poster}
         ref={(el) => {
           vidRef.current = el;
           // React skips the muted ATTRIBUTE; set the property directly.

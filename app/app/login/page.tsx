@@ -114,9 +114,14 @@ export default function LoginPage() {
         <h1 className="auth-h">Back to the fund.</h1>
         {supaConfigured && (
           <div className="oauth-row">
-            <button type="button" className="btn btn-primary" onClick={() => oauth("github")}>
+            {/* SERVER-SIDE OAuth START (2026-11-07 fix): the client-side
+                supabase-js PKCE dance died silently in real browsers (async
+                chunk loader never resolving = dead button). This anchor does
+                the whole start handshake on the server via /api/auth/start —
+                no client JS to break. */}
+            <a type="button" className="btn btn-primary" href="/api/auth/start?provider=github">
               Continue with GitHub
-            </button>
+            </a>
           </div>
         )}
         <form onSubmit={submit} className="auth-form">
