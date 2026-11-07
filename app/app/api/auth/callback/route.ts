@@ -35,32 +35,29 @@ export async function GET(req: NextRequest) {
   if (!pkce) {
     return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Sign-in was cancelled or the link expired — try again.")}`);
   }
-  const { createClient } = await import("@supabase/supabase-js");
   const SURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const SKEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!SURL || !SKEY) {
-    return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Auth provider unavailable — try again.")}`);
+    return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Auth provider unavailable — use email sign-in.")}`);
   }
-  const shim = {
-    getItem: (k: string) => (k.endsWith("-code-verifier") ? pkce : null),
-    setItem: () => {},
-    removeItem: () => {},
-  };
-  const authDb = createClient(SURL, SKEY, {
-    auth: { flowType: "pkce", persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storage: shim as never },
+  // SERVER-SIDE DIRECT PKCE EXCHANGE (2026-11-07): bundled supabase-js throws
+  // "PKCE code verifier not found in storage" before ever consulting a custom
+  // storage shim (its own per-flow lookup contract). The token endpoint itself
+  // takes {auth_code, code_verifier} directly — same grant, zero storage:
+  const tkRes = await fetch(`${SURL}/auth/v1/token?grant_type=pkce`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", apikey: SKEY, Authorization: `Bearer ${SKEY}` },
+    body: JSON.stringify({ auth_code: code, code_verifier: pkce }),
   });
-
-  const { data, error } = await authDb.auth.exchangeCodeForSession(code);
-  if (error || !data?.user) {
-    // TEMPORARY diagnostics (2026-11-07): surface the exchange failure reason
-    // server-side in the log + as a short cause hint on the login redirect.
-    // Supabase error messages are non-secret; the code/verifier are not echoed.
-    const cause = error?.message ?? "no user in exchange response";
-    console.error("[auth/callback] exchange failed:", cause);
-    const short = cause.split(/[.;]/)[0].slice(0, 120);
-    return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Sign-in exchange failed — try again.")}&cause=${encodeURIComponent(short)}`);
+  const tkJson = (await tkRes.json().catch(() => null)) as
+    | { access_token?: string; user?: { email?: string | null; id?: string } | null; error_description?: string; error?: string; msg?: string }
+    | null;
+  if (!tkRes.ok || !tkJson?.access_token || !tkJson?.user) {
+    const causeShort = (tkJson?.error_description || tkJson?.msg || tkJson?.error || `token endpoint HTTP ${tkRes.status}`).split(/[.;]/)[0].slice(0, 120);
+    console.error("[auth/callback] direct pkce exchange failed:", causeShort);
+    return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Sign-in exchange failed — try again.")}&cause=${encodeURIComponent(causeShort)}`);
   }
-  const su = data.user;
+  const su = tkJson.user as { email?: string | null; id?: string; user_metadata?: Record<string, unknown> | null };
   const email = (su.email ?? "").toLowerCase();
   if (!email) {
     return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("The connected account exposes no email — is your OAuth email public?")}`);
