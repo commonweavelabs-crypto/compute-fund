@@ -70,10 +70,16 @@ export default function LoginPage() {
         return;
       }
       const projectRef = SUPA_URL.replace(/^https?:\/\/([^.]+)\..*/, "$1");
-      const verifKey = `sb-${projectRef}-auth-token-code-verifier`;
+      // auth-js stores the verifier in a flow slot: sb-<ref>-auth-token-flow-<flowId>-code-verifier
+      // (signInWithOAuth RETURNS the flowId). Server exchange (no flowId) reads the
+      // legacy `-code-verifier` key — our cookie shim serves it there.
+      const flowId = (authData as unknown as { flowId?: string })?.flowId;
+      const verifKey = flowId
+        ? `sb-${projectRef}-auth-token-flow-${flowId}-code-verifier`
+        : `sb-${projectRef}-auth-token-code-verifier`;
       const verifier = window.localStorage.getItem(verifKey) ?? "";
       document.cookie = `cf_pkce=${encodeURIComponent(verifier)}; Max-Age=600; Path=/; SameSite=Lax` + (location.protocol === "https:" ? "; Secure" : "");
-      window.location.href = authData.url;
+      window.location.href = authData.url!;
     });
   }
 
