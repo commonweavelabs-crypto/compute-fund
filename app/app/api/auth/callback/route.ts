@@ -8,7 +8,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabase, isSupabaseConfigured } from "../../../../lib/supabase";
 import { findUserByEmail, ensureUserByEmail } from "../../../../lib/db";
-import { setSessionCookie, sessionTokenFor } from "../../../../lib/auth";
+import { sessionTokenFor } from "../../../../lib/auth";
 
 export async function GET(req: NextRequest) {
   // Public origin: behind the cloudflared tunnel req.url is the LOCAL url; the
@@ -73,8 +73,15 @@ export async function GET(req: NextRequest) {
     user = ensured as unknown as { id: string; pw_hash: string };
   }
 
-  await setSessionCookie(sessionTokenFor(user.id));
+  // THE COOKIE HOPS ON THE RETURNED RESPONSE (2026-11-07): cookies().set()
+  // inside a handler is DROPPED when you return your own NextResponse redirect
+  // in Next 16 — set it directly on the redirect object. secure is on because
+  // the domain is https-only behind Cloudflare.
   const done = NextResponse.redirect(`${origin}${safeNext}`);
+  done.cookies.set("cf_session", sessionTokenFor(user.id), {
+    httpOnly: true, sameSite: "lax", secure: true, path: "/",
+    maxAge: 30 * 24 * 60 * 60,
+  });
   done.cookies.delete("cf_pkce");
   return done;
 }
