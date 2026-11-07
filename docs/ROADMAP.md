@@ -169,6 +169,41 @@ opt-in TOGGLE (per project/user), designed-for now, integration later — never 
   Done criteria: negative test passes + one positive claim via verified identity;
   falsified by: a non-owner claiming an imported upstream.
 
+### A-series — AGENT-PAYMENTS UNLOCKS (Gui directive 2026-11-06: spec + milestone; spec = docs/AGENT-PAYMENTS-UNLOCKS.md)
+
+The Stripe agent-to-agent rail (business pays business by handle; an agent executes
+once the human says yes) is the natural payment shape for the most agent-native
+platform on the internet. ALL items are gated on R1 receipts + the Stripe agent-pay
+API VERIFICATION (read the real docs first — the reel's claims stay UNVERIFIED until
+checked against Stripe's published API; verification rides the FOUNDER-WATCHLIST pass).
+
+- [ ] **A-VERIFY STRIPE AGENT-PAY** — read Stripe's published agent-payments docs/API;
+  confirm: by-handle B2B payments, agent-scoped authorization, refund/dispute path.
+  Output = a one-page verdict appended to docs/AGENT-PAYMENTS-UNLOCKS.md (GO / NO-GO /
+  SHAPE-CHANGED). Falsified by: any A1-A4 build starting before this verdict exists.
+- [ ] **A1 AGENT PATRONS** — subscribe-once auto-funding of a project's new milestones
+  (per-project + monthly hard caps, charter gate on eligible milestones, kill switch,
+  `funded-by-agent` provenance on every receipt). Charter-shaped acceptance: a
+  subscribed agent funds exactly one in-cap milestone; revoke stops everything; the
+  receipt chain shows instruction -> payment -> run.
+- [ ] **A2 AUTOMATIC UPSTREAM RENT** — rides R5: rent to a fork's parent custodian
+  routes through Stripe (incl. the agent rail) automatically on funded flows; the
+  rea-video upstream case is the acceptance fixture (funded fork emits the rent
+  receipt to the parent's current custodian, cf_system until claimed).
+- [ ] **A3 AGENT COMPUTE MARKETPLACE** — opt-in provider registry; funded projects buy
+  compute by handle; ledger records funder -> builder -> provider chain as matching
+  public receipt pairs (DATA-WEALTH §16.4 logic). Phase-2 scope.
+- [ ] **A4 AUTO-REPLENISH PATRON POOLS** — Stripe recurring: standing monthly
+  patronage tops up a low pool within a hard cap; one top-up per event + receipt.
+- [ ] **D-TAKEDOWN REQUEST PATH (Gui 11/6, import-law addendum)** — every UNCLAIMED
+  import page carries a "request takedown" affordance (identity-protected form ->
+  platform inbox); platform action = hide the import within 48h pending license
+  check. Toggle law (DATA-WEALTH §12): takedown HIDES the page, never deletes
+  receipt provenance. Open-source forks remain lawful per the upstream LICENSE.
+  Done criteria: an unclaimed import can be hidden by platform action with the
+  takedown receipt visible; falsified by: deletion of provenance, or no affordance
+  on unclaimed pages.
+
 ### ### GATE+2 milestone — THE DATA WEALTH LAYER (Gui's second architecture, 2026-10-22; after OUTREACH-1)
 
 The thesis: all platform-generated data is WEALTH — open, value-generating for
