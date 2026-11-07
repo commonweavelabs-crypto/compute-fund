@@ -1,0 +1,905 @@
+{
+ "1038lab/comfyui-flashvsr": {
+  "stars": 168,
+  "license": "GPL-3.0",
+  "pushed": "2025-11-17",
+  "archived": false,
+  "desc": "Powerful ComfyUI custom node built on the FlashVSR V1.1 model, facilitating real-time diffusion-base"
+ },
+ "AhmadHassan-BTed/Jantt": {
+  "stars": 6221,
+  "license": "MIT",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "The AI-native JSON Gantt chart engine. Dependency-free interactive timelines with React, script-tag,"
+ },
+ "AlexsJones/llmfit": {
+  "stars": 38735,
+  "license": "MIT",
+  "pushed": "2026-11-05",
+  "archived": false,
+  "desc": "Hundreds of models & providers. One command to find what runs on your hardware."
+ },
+ "Anil-matcha/Open-Generative-AI": {
+  "stars": 32918,
+  "license": "MIT",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "Unrestricted Open-source alternative to AI video platforms \u2014 Free AI image & video generation studio"
+ },
+ "Donchitos/Claude-Code-Game-Studios": {
+  "stars": 36407,
+  "license": "MIT",
+  "pushed": "2026-10-19",
+  "archived": false,
+  "desc": "Turn Claude Code into a full game dev studio \u2014 49 AI agents, 72 workflow skills, and a complete coor"
+ },
+ "DonkeyCut/Donkey": {
+  "stars": 336,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "Open source CapCut alternative."
+ },
+ "FlashML-org/FreeVideo": {
+  "stars": 2830,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Make videos on the computer you already own. FreeVideo runs MiniMax H3 in as little as 8 GB of VRAM "
+ },
+ "FoundationVision/LlamaGen": {
+  "stars": 1972,
+  "license": "MIT",
+  "pushed": "2024-08-15",
+  "archived": false,
+  "desc": "Autoregressive Model Beats Diffusion: \ud83e\udd99 Llama for Scalable Image Generation"
+ },
+ "FoundationVision/VAR": {
+  "stars": 8765,
+  "license": "MIT",
+  "pushed": "2025-11-10",
+  "archived": false,
+  "desc": "[NeurIPS 2024 Best Paper Award][GPT beats diffusion\ud83d\udd25] [scaling laws in visual generation\ud83d\udcc8] Official "
+ },
+ "HKUDS/RAG-Anything": {
+  "stars": 24453,
+  "license": "MIT",
+  "pushed": "2026-11-02",
+  "archived": false,
+  "desc": "\"RAG-Anything: All-in-One RAG Framework\""
+ },
+ "InukaAsith/TwinDesk": {
+  "stars": 3688,
+  "license": "GPL-3.0",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": " All your computers and your phone, working as one desk. Screens, apps, files, clipboard, calls, tex"
+ },
+ "Ivan-Ayub97/Warlock-Studio": {
+  "stars": 258,
+  "license": "MIT",
+  "pushed": "2026-03-17",
+  "archived": false,
+  "desc": "Suite for Windows with Real-ESRGAN, RealESRNet, RealESRAnime, BSRGAN , IRCNN, GFPGAN & RIFE. Upscali"
+ },
+ "JuneYaooo/rea-video": {
+  "stars": 3538,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Reverse-engineer any video, shot by shot: tells whether each shot was filmed, AI-generated or coded,"
+ },
+ "KnockOutEZ/wigolo": {
+  "stars": 5531,
+  "license": "NOASSERTION",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "The go-to web for your AI coding agent \u2014 local-first search, fetch, crawl & research over MCP. No AP"
+ },
+ "KyaniteLabs/kinocut": {
+  "stars": 253,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-04",
+  "archived": false,
+  "desc": "Guardrailed video editing MCP server for AI agents. FFmpeg, Hyperframes, repurposing tools, Python c"
+ },
+ "Leonxlnx/earshot": {
+  "stars": 4139,
+  "license": "MIT",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "Ears for coding agents: let AI hear, review and make sound. CPU-only, open source."
+ },
+ "NVIDIA/Audio2Face-3D": {
+  "stars": 549,
+  "license": null,
+  "pushed": "2025-09-24",
+  "archived": false,
+  "desc": " repo collection for NVIDIA Audio2Face-3D models and tools"
+ },
+ "NVlabs/motionbricks": {
+  "stars": 943,
+  "license": "NOASSERTION",
+  "pushed": "2026-10-26",
+  "archived": false,
+  "desc": "Official implementation of MotionBricks: Scalable Real-Time Motions with Modular Latent Generative M"
+ },
+ "NiazMorshed2007/reanimate": {
+  "stars": 1352,
+  "license": "MIT",
+  "pushed": "2026-10-31",
+  "archived": false,
+  "desc": "A Claude Code skill that reverse-engineers any animation frame by frame, then proves the copy moves "
+ },
+ "Nutlope/hallmark": {
+  "stars": 50037,
+  "license": "MIT",
+  "pushed": "2026-11-05",
+  "archived": false,
+  "desc": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex."
+ },
+ "PKU-YuanGroup/Helios": {
+  "stars": 2255,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-01",
+  "archived": false,
+  "desc": "[TPAMI 2026\ud83d\udd25] Helios: Real Real-Time Long Video Generation Model"
+ },
+ "PRIV-Creation/Awesome-Controllable-T2I-Diffusion-Models": {
+  "stars": 1111,
+  "license": "MIT",
+  "pushed": "2026-11-02",
+  "archived": false,
+  "desc": "A collection of resources on controllable generation with text-to-image diffusion models."
+ },
+ "PixiEditor/PixiEditor": {
+  "stars": 8128,
+  "license": "LGPL-3.0",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "PixiEditor is a Universal Editor for all your 2D needs"
+ },
+ "QwenLM/Qwen2.5-Omni": {
+  "stars": 4095,
+  "license": "Apache-2.0",
+  "pushed": "2025-06-12",
+  "archived": false,
+  "desc": "Qwen2.5-Omni is an end-to-end multimodal model by Qwen team at Alibaba Cloud, capable of understandi"
+ },
+ "Robbyant/lingbot-map": {
+  "stars": 18568,
+  "license": "Apache-2.0",
+  "pushed": "2026-10-14",
+  "archived": false,
+  "desc": "[ECCV 2026 Best Paper Award Candidate] LingBot-Map: Geometric Context Transformer for Streaming 3D R"
+ },
+ "RodZill4/material-maker": {
+  "stars": 6233,
+  "license": "MIT",
+  "pushed": "2026-10-25",
+  "archived": false,
+  "desc": "A procedural textures authoring and 3D model painting tool based on the Godot game engine"
+ },
+ "Tencent-Hunyuan/AuK": {
+  "stars": 1585,
+  "license": "NOASSERTION",
+  "pushed": "2026-10-27",
+  "archived": false,
+  "desc": "AuK: An Open-Source Foundational Model for Speech Generation and Editing"
+ },
+ "Tencent-Hunyuan/HunyuanImage-2.1": {
+  "stars": 676,
+  "license": "NOASSERTION",
+  "pushed": "2025-10-14",
+  "archived": false,
+  "desc": "HunyuanImage-2.1: An Efficient Diffusion Model for High-Resolution (2K) Text-to-Image Generation\u200b"
+ },
+ "Tencent-Hunyuan/HunyuanVideo": {
+  "stars": 12738,
+  "license": "NOASSERTION",
+  "pushed": "2026-10-08",
+  "archived": false,
+  "desc": "HunyuanVideo: A Systematic Framework For Large Video Generation Model"
+ },
+ "Tencent-Hunyuan/HunyuanVideo-1.5": {
+  "stars": 4592,
+  "license": "NOASSERTION",
+  "pushed": "2026-04-10",
+  "archived": false,
+  "desc": "HunyuanVideo-1.5: A leading lightweight video generation model"
+ },
+ "TencentCloud/TencentDB-Agent-Memory": {
+  "stars": 30613,
+  "license": "NOASSERTION",
+  "pushed": "2026-11-04",
+  "archived": false,
+  "desc": "TencentDB Agent Memory is a team-level memory hub for AI Agents \u2014 turning conversations, docs, and c"
+ },
+ "The-Swarm-Corporation/AutoHedge": {
+  "stars": 6641,
+  "license": "MIT",
+  "pushed": "2026-05-11",
+  "archived": false,
+  "desc": "Build your autonomous hedge fund in minutes. AutoHedge harnesses the power of swarm intelligence and"
+ },
+ "Vchitect/LaVie": {
+  "stars": 949,
+  "license": "Apache-2.0",
+  "pushed": "2024-11-13",
+  "archived": false,
+  "desc": "[IJCV 2024] LaVie: High-Quality Video Generation with Cascaded Latent Diffusion Models"
+ },
+ "Vincentwei1021/mg-styles-15": {
+  "stars": 3221,
+  "license": "MIT",
+  "pushed": "2026-10-05",
+  "archived": false,
+  "desc": "15 motion design styles, each made by Claude Opus 5.5 writing code from one prompt: watch the films,"
+ },
+ "VoltAgent/awesome-design-md": {
+  "stars": 125992,
+  "license": "MIT",
+  "pushed": "2026-10-28",
+  "archived": false,
+  "desc": "A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project"
+ },
+ "adambenhassen/minimax-music-ui": {
+  "stars": 96,
+  "license": "MIT",
+  "pushed": "2026-10-25",
+  "archived": false,
+  "desc": "Suno-style web UI for a self-hosted MiniMax-Music3 inference server"
+ },
+ "adobe-research/MoviEdit-Bench": {
+  "stars": 18,
+  "license": "NOASSERTION",
+  "pushed": "2026-11-03",
+  "archived": false,
+  "desc": "MoviEdit: Long-form Multi-Shot Video Editing Made Easy"
+ },
+ "agalwood/Motrix": {
+  "stars": 57927,
+  "license": "NOASSERTION",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "A full-featured download manager."
+ },
+ "agricidaniel/on-page-seo": {
+  "stars": 278,
+  "license": "MIT",
+  "pushed": "2026-06-06",
+  "archived": false,
+  "desc": "On-Page SEO Analyzer - Analyze your website's SEO performance"
+ },
+ "ali-vilab/VGen": {
+  "stars": 3153,
+  "license": null,
+  "pushed": "2025-01-10",
+  "archived": false,
+  "desc": "Official repo for VGen: a holistic video generation ecosystem for video generation building on diffu"
+ },
+ "alvinunreal/lazyskills": {
+  "stars": 336,
+  "license": "MIT",
+  "pushed": "2026-09-26",
+  "archived": false,
+  "desc": "mission control for agent skills"
+ },
+ "amirhossein-kz/Awesome-Diffusion-Models-in-Medical-Imaging": {
+  "stars": 2116,
+  "license": "MIT",
+  "pushed": "2025-11-17",
+  "archived": false,
+  "desc": "Diffusion Models in Medical Imaging (Published in Medical Image Analysis Journal)"
+ },
+ "apekshik/anyscene": {
+  "stars": 325,
+  "license": "MIT",
+  "pushed": "2026-11-04",
+  "archived": false,
+  "desc": "Photoreal Blender scenes from a one-paragraph brief, built by AI agents: image\u21923D props on fal, scri"
+ },
+ "bergside/design-md-chrome": {
+  "stars": 3150,
+  "license": "MIT",
+  "pushed": "2026-05-25",
+  "archived": false,
+  "desc": "Chrome extension to extract styles from any website and generate DESIGN.md files and design skills f"
+ },
+ "bilawalsidhu/gods-eye-view": {
+  "stars": 63339,
+  "license": "NOASSERTION",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "A spy satellite simulator in your browser, except the data is real. Live open source spatial intelli"
+ },
+ "browser-use/jev-ultrafast": {
+  "stars": 24250,
+  "license": "MIT",
+  "pushed": "2026-11-03",
+  "archived": false,
+  "desc": "Fastest and cheapest web agent"
+ },
+ "bytedance/LatentSync": {
+  "stars": 6255,
+  "license": "Apache-2.0",
+  "pushed": "2025-06-20",
+  "archived": false,
+  "desc": "Taming Stable Diffusion for Lip Sync!"
+ },
+ "caezium/Burrow": {
+  "stars": 1713,
+  "license": "MIT",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "\ud83d\udc39 Cleanup, app management, maintenance, disk analysis, and live status in one free, open-source, nat"
+ },
+ "calesthio/OpenMontage": {
+  "stars": 78089,
+  "license": "AGPL-3.0",
+  "pushed": "2026-11-03",
+  "archived": false,
+  "desc": "World's first open-source, agentic video production system. 12 production pipelines, 100+ tools, 700"
+ },
+ "cathrynlavery/diagram-design": {
+  "stars": 65628,
+  "license": "MIT",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "Editorial diagram design for Claude Code, Codex, GitHub Copilot, Cursor, Factory Droid, Qoder, and P"
+ },
+ "codedthemes/mantis-free-react-admin-template": {
+  "stars": 968,
+  "license": "MIT",
+  "pushed": "2026-09-29",
+  "archived": false,
+  "desc": "Mantis is React Dashboard Template having combine tone of 2 popular react component library - MUI an"
+ },
+ "codewithMUHILAN/Lightswind-UI-Library": {
+  "stars": 1269,
+  "license": "MIT",
+  "pushed": "2026-10-30",
+  "archived": false,
+  "desc": "The AI-native CLI-first React component library. 160+ animated, accessible, production-ready compone"
+ },
+ "context-dot-dev/webdog": {
+  "stars": 113,
+  "license": "MIT",
+  "pushed": "2026-10-19",
+  "archived": false,
+  "desc": "AI native website change monitoring"
+ },
+ "context-labs/HALO": {
+  "stars": 1208,
+  "license": null,
+  "pushed": "2026-10-26",
+  "archived": false,
+  "desc": "Hierarchal Agent Loop Optimizer"
+ },
+ "dashersw/liquid-glass-js": {
+  "stars": 1708,
+  "license": "MIT",
+  "pushed": "2025-06-12",
+  "archived": false,
+  "desc": "Liquid Glass UI - Apple-Inspired Glass Effects Library"
+ },
+ "debpalash/VoiceStudio": {
+  "stars": 103550,
+  "license": "AGPL-3.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "VoiceStudio is the open-source, fully-local ElevenLabs alternative \u2014 voice cloning, voice design, vi"
+ },
+ "deepseek-ai/DeepInfer": {
+  "stars": 25588,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-03",
+  "archived": false,
+  "desc": "DeepInfer: High-performance, large-scale inference framework for DeepSeek models"
+ },
+ "deepseek-ai/open-infra-index": {
+  "stars": 8133,
+  "license": "CC0-1.0",
+  "pushed": "2025-05-15",
+  "archived": false,
+  "desc": "Production-tested AI infrastructure tools for efficient AGI development and community-driven innovat"
+ },
+ "designfuchen/word-atlas": {
+  "stars": 4383,
+  "license": "NOASSERTION",
+  "pushed": "2026-10-31",
+  "archived": false,
+  "desc": "\u8bcd\u5149 \u00b7 Word Atlas \u2014 Illustrated IELTS vocabulary with 7,298 words, UK/US audio and FSRS review. Open-s"
+ },
+ "dilums/hexapod-robot-simulator": {
+  "stars": 52,
+  "license": null,
+  "pushed": "2025-11-06",
+  "archived": false,
+  "desc": ""
+ },
+ "dottxt-ai/outlines": {
+  "stars": 16005,
+  "license": "Apache-2.0",
+  "pushed": "2026-09-21",
+  "archived": false,
+  "desc": "Structured Outputs"
+ },
+ "dramaclaw/dramaclaw": {
+  "stars": 7374,
+  "license": "NOASSERTION",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "A general-purpose AIGC video engine: script to finished film in one pipeline \u2014 dramas, ads, product "
+ },
+ "elberacasa/facet": {
+  "stars": 2,
+  "license": "MIT",
+  "pushed": "2026-07-22",
+  "archived": false,
+  "desc": "Copy-paste 3D components for React. 30 production-ready React Three Fiber components with a CLI and "
+ },
+ "elder-plinius/CL4R1T4S": {
+  "stars": 51814,
+  "license": "AGPL-3.0",
+  "pushed": "2026-09-22",
+  "archived": false,
+  "desc": "LEAKED SYSTEM PROMPTS FOR CHATGPT, CLAUDE, GEMINI, GROK, PERPLEXITY, CURSOR, LOVABLE, REPLIT, AND MO"
+ },
+ "elripalda/RecompLauncher": {
+  "stars": 264,
+  "license": "GPL-3.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "PC recomps, all in one place. Find, install, update and play PC recomps from one launcher."
+ },
+ "erincatto/box3d": {
+  "stars": 6748,
+  "license": "MIT",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Box3D is a 3D physics engine for games"
+ },
+ "eternityspring/shuohao-skills": {
+  "stars": 6207,
+  "license": "Apache-2.0",
+  "pushed": "2026-10-26",
+  "archived": false,
+  "desc": "AI \u77ed\u5267\u5236\u4f5c\u7684 skill \u96c6\u5408\uff1a\u62c6\u89d2\u8272\u3001\u6392\u5927\u7eb2\u3001\u51fa\u573a\u666f\u4e0e\u9053\u5177\u8bbe\u5b9a\u3001\u5199\u5267\u672c\u3001\u5207\u5206\u955c | Agent skills for AI short-drama production \u2014 character "
+ },
+ "featherless-ai/simple-jev": {
+  "stars": 647,
+  "license": "Apache-2.0",
+  "pushed": "2026-10-07",
+  "archived": false,
+  "desc": "Turn any open model into a classifier/jev endpoint"
+ },
+ "figranium/figranium": {
+  "stars": 784,
+  "license": "GPL-3.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Stack blocks visually to build complex browser workflows and execute them via API"
+ },
+ "gamedev-skills/awesome-gamedev-agent-skills": {
+  "stars": 7498,
+  "license": "Apache-2.0",
+  "pushed": "2026-10-28",
+  "archived": false,
+  "desc": "77 game-dev skills for AI coding agents \u2014 Godot, Unity, Unreal, Phaser, PixiJS, three.js, Bevy, pyga"
+ },
+ "genmoai/mochi": {
+  "stars": 3764,
+  "license": "Apache-2.0",
+  "pushed": "2026-10-22",
+  "archived": false,
+  "desc": "The best OSS video generation models, created by Genmo"
+ },
+ "gitroomhq/postiz-app": {
+  "stars": 41068,
+  "license": "AGPL-3.0",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "\ud83d\udce8 The ultimate agentic social media scheduling tool \ud83e\udd16"
+ },
+ "goauthentik/authentik": {
+  "stars": 26266,
+  "license": "NOASSERTION",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "The authentication glue you need."
+ },
+ "google/GNM": {
+  "stars": 1627,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "An open ecosystem of parametric human models and perception stacks, starting with GNM Head."
+ },
+ "govijr/terminal-mac": {
+  "stars": 2217,
+  "license": "MIT",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Entire MacOS running in your terminal."
+ },
+ "haydenschmitty/floorplan": {
+  "stars": 3134,
+  "license": "MIT",
+  "pushed": "2026-11-02",
+  "archived": false,
+  "desc": "See how your app actually fits together. An interactive, plain-English map of your codebase, drawn b"
+ },
+ "heydamir/unslop": {
+  "stars": 11167,
+  "license": "CC-BY-4.0",
+  "pushed": "2026-11-01",
+  "archived": false,
+  "desc": "A Claude skill that turns vibecoded, AI-looking UI into a designed interface"
+ },
+ "huggingface/diffusers": {
+  "stars": 34883,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "\ud83e\udd17 Diffusers: State-of-the-art diffusion models for image, video, and audio generation in PyTorch."
+ },
+ "hypit-ai/hypit": {
+  "stars": 28409,
+  "license": "NOASSERTION",
+  "pushed": "2026-11-05",
+  "archived": false,
+  "desc": "Clone any viral video with AI agents. Not just a script, the whole workflow: swap the face, the word"
+ },
+ "ig-imanish/mx-icons": {
+  "stars": 185,
+  "license": "MIT",
+  "pushed": "2026-10-03",
+  "archived": false,
+  "desc": "A modern, lightweight React icon library with beautiful SVG icons"
+ },
+ "img2threejs/img2threejs": {
+  "stars": 20533,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-05",
+  "archived": false,
+  "desc": "Rebuild the object in a reference image as a code-only, procedural, quality-gated, animation-ready T"
+ },
+ "jub0t/Concat": {
+  "stars": 15143,
+  "license": "AGPL-3.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Beta: The truly free, open-source, local-first, cross-platform video editor. Scriptable through a JS"
+ },
+ "kalkman-code/beamer": {
+  "stars": 937,
+  "license": "GPL-3.0",
+  "pushed": "2026-11-03",
+  "archived": false,
+  "desc": "One keyboard and mouse for a Mac and a Windows PC over the local network, in either direction."
+ },
+ "kandinskylab/kandinsky-5": {
+  "stars": 844,
+  "license": "MIT",
+  "pushed": "2026-08-07",
+  "archived": false,
+  "desc": "Kandinsky 5.0: A family of diffusion models for Video & Image generation"
+ },
+ "kaomei/stickman-video-director": {
+  "stars": 4858,
+  "license": "MIT",
+  "pushed": "2026-11-04",
+  "archived": false,
+  "desc": "Turn any script into viral, multi-style animated stickman videos for Faceless YouTube Channels. Auto"
+ },
+ "karuvanan/minimax-h3-director-cut-studio": {
+  "stars": 153,
+  "license": "NOASSERTION",
+  "pushed": "2026-10-19",
+  "archived": false,
+  "desc": "Premiere-inspired PySide6 director studio for MiniMax H3 Ref2VA with AI shot planning, semantic medi"
+ },
+ "keycloak/keycloak": {
+  "stars": 37744,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Open Source Identity and Access Management For Modern Applications and Services"
+ },
+ "kgoedecke/doop": {
+  "stars": 1826,
+  "license": "AGPL-3.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "The open-source alternative to Paper.design. A multiplayer design canvas where humans and AI agents "
+ },
+ "latent-spaces/brag": {
+  "stars": 20640,
+  "license": "MIT",
+  "pushed": "2026-10-23",
+  "archived": false,
+  "desc": "You built it. Now brag. Turn the project you just created into a short, shareable launch video with "
+ },
+ "lemomo-ai/lemo-opuscar": {
+  "stars": 13284,
+  "license": "MIT",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "A toolbox of film styles made in code for Claude Code: 66 ready to use, and your own. Each style is "
+ },
+ "leo-lilinxiao/codex-autoresearch": {
+  "stars": 3144,
+  "license": "MIT",
+  "pushed": "2026-09-12",
+  "archived": false,
+  "desc": "Codex Autoresearch Skill \u2014 A self-directed iterative system for Codex that continuously cycles throu"
+ },
+ "letuandat131/whiteboard-animation-vi": {
+  "stars": 303,
+  "license": "CC0-1.0",
+  "pushed": "2026-10-13",
+  "archived": false,
+  "desc": "Whiteboard animations with subject-first coloring, ink-aware color clusters, animated real hands, an"
+ },
+ "lucidrains/video-diffusion-pytorch": {
+  "stars": 1392,
+  "license": "MIT",
+  "pushed": "2024-05-03",
+  "archived": false,
+  "desc": "Implementation of Video Diffusion Models, Jonathan Ho's new paper extending DDPMs to Video Generatio"
+ },
+ "lyogavin/airllm": {
+  "stars": 41908,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "AirLLM 2.8T LLM inference with single 4GB GPU"
+ },
+ "makeplane/plane": {
+  "stars": 62120,
+  "license": "AGPL-3.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "\ud83d\udd25\ud83d\udd25\ud83d\udd25 Open-source Jira, Linear, Monday, and ClickUp alternative. Plane is a modern project management "
+ },
+ "microsoft/skill-recorder": {
+  "stars": 5707,
+  "license": "MIT",
+  "pushed": "2026-11-04",
+  "archived": false,
+  "desc": "Desktop app that records your on-screen work session and uses the GitHub Copilot SDK to reconstruct "
+ },
+ "mukul975/Anthropic-Cybersecurity-Skills": {
+  "stars": 35740,
+  "license": "Apache-2.0",
+  "pushed": "2026-08-31",
+  "archived": false,
+  "desc": "817 structured cybersecurity skills for AI agents \u00b7 Mapped to 6 frameworks: MITRE ATT&CK, NIST CSF 2"
+ },
+ "nvlabs/longlive": {
+  "stars": 2873,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "Long Video Gen / World Model / World Action Model (Embodied) Infrastructure"
+ },
+ "only-cli/oc": {
+  "stars": 551,
+  "license": "MIT",
+  "pushed": "2026-11-03",
+  "archived": false,
+  "desc": "Turn any website into a compact CLI tailored for AI agents. Browse the web in hundreds of tokens, no"
+ },
+ "open-mmlab/mmagic": {
+  "stars": 7479,
+  "license": "Apache-2.0",
+  "pushed": "2024-08-06",
+  "archived": false,
+  "desc": "OpenMMLab Multimodal Advanced, Generative, and Intelligent Creation Toolbox. Unlock the magic \ud83e\ude84: Gen"
+ },
+ "openfilm/openfilm": {
+  "stars": 5186,
+  "license": "MIT",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "The open source AI video agent: turns any coding agent into a video agent, with an editor to change "
+ },
+ "opensandbox-group/OpenSandbox": {
+  "stars": 16494,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Secure, Fast, and Extensible Sandbox runtime for AI agents."
+ },
+ "oscar-soirey/Raven": {
+  "stars": 2059,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "A lightweight, multithreaded GUI library in C for editors and tools. For C, Rust, C++, C#, Java, Pyt"
+ },
+ "paper-design/liquid-logo": {
+  "stars": 1420,
+  "license": "NOASSERTION",
+  "pushed": "2026-04-20",
+  "archived": false,
+  "desc": "Turn your logo into liquid metal with Paper Shaders"
+ },
+ "patch-gg/pixelfx": {
+  "stars": 5773,
+  "license": "MIT",
+  "pushed": "2026-10-31",
+  "archived": false,
+  "desc": "244 pixel art effects, every one a small piece of code. Plus a Claude Code skill to make your own."
+ },
+ "plausible/analytics": {
+  "stars": 29789,
+  "license": "AGPL-3.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Open source, privacy-first web analytics. Lightweight, cookie-free Google Analytics alternative. Sel"
+ },
+ "ruucm/shadergradient": {
+  "stars": 3093,
+  "license": null,
+  "pushed": "2026-09-23",
+  "archived": false,
+  "desc": "Create beautiful moving gradients on Framer, Figma and React"
+ },
+ "sapientinc/praxist": {
+  "stars": 5527,
+  "license": "NOASSERTION",
+  "pushed": "2026-09-23",
+  "archived": false,
+  "desc": "Autonomous research system for measurable, computer-executable research."
+ },
+ "schollz/croc": {
+  "stars": 40877,
+  "license": "MIT",
+  "pushed": "2026-11-04",
+  "archived": false,
+  "desc": "Easily and securely send things from one computer to another :crocodile: :package:"
+ },
+ "sharonzhou/long_stable_diffusion": {
+  "stars": 688,
+  "license": null,
+  "pushed": "2022-10-30",
+  "archived": false,
+  "desc": "Long-form text-to-images generation, using a pipeline of deep generative models (GPT-3 and Stable Di"
+ },
+ "showlab/Awesome-Video-Diffusion": {
+  "stars": 5831,
+  "license": null,
+  "pushed": "2026-10-27",
+  "archived": false,
+  "desc": "A curated list of recent diffusion models for video generation, editing, and various other applicati"
+ },
+ "showlab/Show-1": {
+  "stars": 1148,
+  "license": "NOASSERTION",
+  "pushed": "2025-09-13",
+  "archived": false,
+  "desc": "[IJCV] Show-1: Marrying Pixel and Latent Diffusion Models for Text-to-Video Generation"
+ },
+ "showlab/Tune-A-Video": {
+  "stars": 4359,
+  "license": "Apache-2.0",
+  "pushed": "2023-10-25",
+  "archived": false,
+  "desc": "[ICCV 2023] Tune-A-Video: One-Shot Tuning of Image Diffusion Models for Text-to-Video Generation"
+ },
+ "silverstein/minutes": {
+  "stars": 1593,
+  "license": "MIT",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "Open-source, local-first Granola/Otter alternative that Claude Code, Codex, Cursor, and any MCP clie"
+ },
+ "speridlabs/idol-sdk": {
+  "stars": 882,
+  "license": "Apache-2.0",
+  "pushed": "2026-10-29",
+  "archived": false,
+  "desc": "Idol: a single image to 3D Gaussians. Inference SDK and demo."
+ },
+ "ssssssanjiu/gleaner": {
+  "stars": 120,
+  "license": "MIT",
+  "pushed": "2026-09-30",
+  "archived": false,
+  "desc": "Gleaner (\u62fe\u7a57) \u2014 collect full-resolution images, video with sound, and audio from any web page. Zero t"
+ },
+ "st-tech/ppf-contact-solver": {
+  "stars": 4595,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-05",
+  "archived": false,
+  "desc": "A contact solver for physics-based simulations involving \ud83d\udc5a shells, \ud83e\udeb5 solids, \ud83e\udea2 rods, \ud83e\uddf1 rigid bodies "
+ },
+ "thedotmack/claude-mem": {
+  "stars": 114316,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Persistent Context Across Sessions for Every Agent \u2013  Captures everything your agent does during ses"
+ },
+ "timoncool/videosos": {
+  "stars": 1395,
+  "license": "NOASSERTION",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "AI video production in the browser \u2014 text-to-video, image-to-video, lip sync, 100+ models. Google Ve"
+ },
+ "topoteretes/cognee": {
+  "stars": 33122,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Cognee is the open-source AI memory platform for agents. Give your AI agents persistent long-term me"
+ },
+ "unclecode/crawl4ai": {
+  "stars": 87042,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-04",
+  "archived": false,
+  "desc": "Official Crawl4AI Cloud: a hosted web scraping, extraction, and search API for AI agents. Free API k"
+ },
+ "vectorize-io/hindsight": {
+  "stars": 59663,
+  "license": "MIT",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "Hindsight: Agent Memory That Learns"
+ },
+ "vitali87/code-graph-rag": {
+  "stars": 5341,
+  "license": "MIT",
+  "pushed": "2026-11-07",
+  "archived": false,
+  "desc": "The ultimate RAG for your monorepo. Query, understand, and edit multi-language codebases with the po"
+ },
+ "wesbos/3d-model-anything": {
+  "stars": 2834,
+  "license": "NOASSERTION",
+  "pushed": "2026-10-27",
+  "archived": false,
+  "desc": "Capture iPhone LiDAR and photos, reconstruct editable Three.js rooms, and explore them in a browser."
+ },
+ "wotschofsky/domain-digger": {
+  "stars": 1539,
+  "license": "AGPL-3.0",
+  "pushed": "2026-11-06",
+  "archived": false,
+  "desc": "Full Toolkit for Next-Level Domain Analysis"
+ },
+ "wquguru/shisei": {
+  "stars": 460,
+  "license": "Apache-2.0",
+  "pushed": "2026-11-02",
+  "archived": false,
+  "desc": "\ud83d\udc83 Free CC0 mannequin pose reference library for AI image tools (Nano Banana, ChatGPT, ComfyUI, Midjo"
+ },
+ "xianfei/SysMocap": {
+  "stars": 3250,
+  "license": "MPL-2.0",
+  "pushed": "2026-06-10",
+  "archived": false,
+  "desc": "A real-time motion capture system for 3D virtual character animating."
+ },
+ "yihui-dev/awesome-opus5-5-videos": {
+  "stars": 14005,
+  "license": "MIT",
+  "pushed": "2026-10-13",
+  "archived": false,
+  "desc": "A growing collection of viral videos made with Claude Opus 5.5 and the prompts behind them. Watch ea"
+ },
+ "zeenie-ai/opencompany": {
+  "stars": 1075,
+  "license": "MIT",
+  "pushed": "2026-11-05",
+  "archived": false,
+  "desc": "Self-improving AI Employees for everyone"
+ }
+}

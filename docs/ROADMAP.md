@@ -306,6 +306,28 @@ content prices in the DM). The lookout order: MORE two-lane creators
 - [ ] Open GPU pools / democratic allocation (only if community carries it)
 - [ ] "Central bank of the agent economy" currency framing: defer; the unit of value stays the receipt, not a token
 
+### PILOT SEED GOAL — 1,000 PRE-IMPORTED PROJECTS AT LAUNCH (Gui directive 2026-11-06)
+
+Launch bar: AT MINIMUM 1,000 open-source projects pre-imported as unclaimed stubs
+("pre-load everything; the creator just hits claim"). No creator contact until launch
+(sign-in/claim must work first). The pipeline is DOCUMENTED, SEARCHABLE, DURABLE:
+
+- **Creators list (the master leads file):** docs/PILOT-PIPELINE-LEADS-2026-11-06.md
+  (human report: grades, tables, contact lanes) + docs/leads-2026-11-06.json (machine:
+  129 A+B leads w/ repo provenance flags) + scripts/leads-github-meta.json (GitHub API
+  snapshot 2026-11-06). Every future vetted lead APPENDS here — never regenerate.
+- **Import machinery:** scripts/import-leads-2026-11-06.ts (idempotent, DB-ground-truth
+  dedupe, charter-shaped adopt-first-milestone stubs, takedown law in assumptions).
+  Batch 1 executed 2026-11-06: 42 active grade-A evaluated -> 41 imported (CFQ-2026-028
+  .. CFQ-2026-068), 11 deduped (already in engine). Engine: 68 rows / 47 unclaimed.
+- **Growth sources for the remaining ~930 (Gui ask: best approach):** 1) GitHub-first
+  direct sourcing — topic/star/license/activity queries via API (highest volume, best
+  metadata, zero scraping-law risk; license + activity filters keep quality); 2) IG
+  reviewer accounts (already proven: gittrend.io et al. — reach their catalog pages +
+  reels; gives us the CREATOR LANE with the project); 3) modding communities (Nexus et
+  al.) for non-git artifact projects later. Contact points accumulate lawfully ONLY:
+  public repos/handles + creator-published emails/socials recorded in contacts.json.
+
 ## Standing laws (every phase)
 1. Patronage framing only — never invest/equity/return/share language (Howey wall)
 2. Receipts: money in / compute out, public; demo data always labeled
