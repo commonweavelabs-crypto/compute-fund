@@ -19,6 +19,7 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
   const [note, setNote] = useState<React.ReactNode>("");
   const [key, setKey] = useState("");
   const [busy, setBusy] = useState("");
+  const [me, setMe] = useState<{ display_name?: string } | null>(null);
   // D5 follow button: state from GET /api/follow (truth, not a guess), then an
   // optimistic toggle (flip immediately, revert on failure; 401 = sign-in note).
   const [following, setFollowing] = useState<boolean | null>(null);
@@ -31,7 +32,14 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
     fetch(`/api/pubproj/${slug}`).then(r => r.json()).then(setLive);
   }
   useEffect(refresh, [slug]);
-  useEffect(() => {
+    useEffect(() => {
+    let alive = true;
+    fetch("/api/session").then(r => (r.ok ? r.json() : null)).then(d => {
+      if (alive && d?.user) setMe({ display_name: d.user.display_name });
+    }).catch(() => {});
+    return () => { alive = false; };
+  }, []);
+useEffect(() => {
     if (!slug) return;
     fetch(`/api/claim?slug=${encodeURIComponent(slug)}`).then(r => r.json()).then(d => {
       if (!d.error) {
@@ -116,7 +124,17 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
     const d = await res.json().catch(() => ({}));
     setBusy("");
     if (res.status === 401) {
-      setNote(<>Sign in to claim — <a href={`/login?next=${encodeURIComponent(`/p/${slug}`)}`}>you come right back</a>.</>);
+      setNote(
+        <>
+          <b>Before you claim — connect your GitHub.</b>
+          <br />Claims here are bound to real maintainers, so builders trust
+          them. One click and you&apos;re right back on this page.
+          <br />
+          <a className="cf0-btn" href={`/login?next=${encodeURIComponent(`/p/${slug}`)}`}>Connect GitHub ↗</a>
+          <br />
+          <small>You&apos;ll need to be signed in with the GitHub account that owns this project&apos;s repository — your handle has to match the maintainer&apos;s. That&apos;s how we keep claims honest.</small>
+        </>
+      );
       return;
     }
     if (res.status === 409) {
@@ -174,12 +192,18 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
       {claim && !claim.claimed && (
         <div style={{ marginTop: 14 }}>
           <div className="cfqhead"><span>MAINTAINERSHIP — UNCLAIMED</span>{claim.repo_url && <a className="cfqid" href={claim.repo_url} rel="noopener noreferrer">repo ↗</a>}</div>
-          <p className="cfqq">UNCLAIMED — are you its maintainer? Claim it.</p>
+          {me === null ? (
+            <p className="cfqq">UNCLAIMED — are you its maintainer? Claim it.</p>
+          ) : me ? (
+            <p className="cfqq">UNCLAIMED — are you its maintainer, {me.display_name ?? "friend"}? Claim it.</p>
+          ) : null}
           <p className="onedim">
             Research-imported stubs wait here until the real maintainer claims them. Claiming moves
             real ownership to you (an ops receipt is written). MVP proof: the project's repo URL
             (must match exactly) plus a maintainership statement; commit-hash verification lands later.
           </p>
+          {me !== null && (
+          <>
           <div className="tier-row" style={{ marginTop: 8 }}>
             <input
               className="inp" type="url" value={proofRepo}
@@ -200,6 +224,23 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
               {busy === "claim" ? "claiming…" : "Claim as maintainer"}
             </button>
           </div>
+          </>
+          )}
+          {me === null && (
+            <div className="tier-row" style={{ marginTop: 8 }}>
+              <a className="btn btn-primary" href={`/login?next=${encodeURIComponent(`/p/${slug}`)}`}>Connect GitHub to claim ↗</a>
+              <p className="onedim" style={{ marginTop: 6 }}>
+                <b>Before you claim — connect your GitHub.</b> Claims here are bound to real
+                maintainers, so builders trust them. One click and you&apos;re right back on this page.
+                <br />
+                <small>
+                  You&apos;ll need to be signed in with the GitHub account that owns this project&apos;s
+                  repository — your handle has to match the maintainer&apos;s. That&apos;s how we keep claims
+                  honest.
+                </small>
+              </p>
+            </div>
+          )}
         </div>
       )}
       {ownerNow && (
