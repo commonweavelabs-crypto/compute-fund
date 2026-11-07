@@ -11,6 +11,7 @@
 // ledger's view resolution = one row per distinct request-fingerprint per
 // minute (see lib/discover.ts — never overcounts, never invents).
 import { headers } from "next/headers";
+import { connection } from "next/server";
 
 export const instant = false;
 import { recordView, viewFingerprint } from "../../../lib/discover";
@@ -21,6 +22,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   // fingerprint identifies THE REQUEST (stable across StrictMode re-renders):
   // slug itself plus the headers that actually vary client-to-client.
   const h = await headers();
+  // cacheComponents: Date.now() inside recordView is unstable for prerender;
+  // force request-time execution before touching it (per the compiler's own fix).
+  await connection();
   const { slug } = await params;
   try {
     // fire-and-forget: a failed INSERT is a lost view, never a broken page.
