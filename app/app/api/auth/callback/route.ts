@@ -26,10 +26,31 @@ export async function GET(req: NextRequest) {
   if (!code) {
     return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Sign-in was cancelled or the link expired — try again.")}`);
   }
-  const db = getSupabase();
-  if (!db) return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Auth provider unavailable — try again.")}`);
+  // PKCE server-exchange bridge: the browser hands us the verifier via a
+  // short-lived cookie (cf_pkce) set right before the GitHub redirect; auth-js
+  // reads its `-code-verifier` storage key, so we serve it from the cookie via
+  // a one-shot storage shim. Cookie cleared after use.
+  const pkceRaw = req.cookies.get("cf_pkce")?.value;
+  const pkce = pkceRaw ? decodeURIComponent(pkceRaw) : "";
+  if (!pkce) {
+    return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Sign-in was cancelled or the link expired — try again.")}`);
+  }
+  const { createClient } = await import("@supabase/supabase-js");
+  const SURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const SKEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!SURL || !SKEY) {
+    return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Auth provider unavailable — try again.")}`);
+  }
+  const shim = {
+    getItem: (k: string) => (k.endsWith("-code-verifier") ? pkce : null),
+    setItem: () => {},
+    removeItem: () => {},
+  };
+  const authDb = createClient(SURL, SKEY, {
+    auth: { flowType: "pkce", persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storage: shim as never },
+  });
 
-  const { data, error } = await db.auth.exchangeCodeForSession(code);
+  const { data, error } = await authDb.auth.exchangeCodeForSession(code);
   if (error || !data?.user) {
     return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent("Sign-in exchange failed — try again.")}`);
   }
@@ -50,5 +71,7 @@ export async function GET(req: NextRequest) {
   }
 
   await setSessionCookie(sessionTokenFor(user.id));
-  return NextResponse.redirect(`${origin}${safeNext}`);
+  const done = NextResponse.redirect(`${origin}${safeNext}`);
+  done.cookies.delete("cf_pkce");
+  return done;
 }

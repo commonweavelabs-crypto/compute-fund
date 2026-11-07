@@ -44,16 +44,27 @@ export default function LoginPage() {
         return;
       }
       const next = new URLSearchParams(window.location.search).get("next");
-      const redirectTo =
+      const callbackUrl =
         `${window.location.origin}/api/auth/callback` + (next && next.startsWith("/") ? `?next=${encodeURIComponent(next)}` : "");
-      const { data: authData, error: oauthError } = await createClient(SUPA_URL, SUPA_ANON, {
-        auth: { persistSession: false, autoRefreshToken: false },
-      }).auth.signInWithOAuth({ provider, options: { redirectTo } });
-      if (oauthError) {
+      // PKCE + server-exchange law: the code verifier lives in the browser, but
+      // the exchange happens on OUR server (callback route). Default storage is
+      // deliberately used (persistSession:false would keep the verifier in
+      // memory and kill it on the GitHub redirect). We hand the verifier to the
+      // server via a short-lived cookie it reads at the callback.
+      const { data: authData, error: oauthError } = await createClient(SUPA_URL, SUPA_ANON).auth.signInWithOAuth({
+        provider,
+        options: { redirectTo: callbackUrl, skipBrowserRedirect: true },
+      });
+      if (oauthError || !authData?.url) {
         setStatus("error");
-        setMessage(oauthError.message || "OAuth failed — try again.");
+        setMessage(oauthError?.message || "OAuth failed — try again.");
+        return;
       }
-      // success: the browser navigates away; nothing else to render
+      const projectRef = SUPA_URL.replace(/^https?:\/\/([^.]+)\..*/, "$1");
+      const verifKey = `sb-${projectRef}-auth-token-code-verifier`;
+      const verifier = window.localStorage.getItem(verifKey) ?? "";
+      document.cookie = `cf_pkce=${encodeURIComponent(verifier)}; Max-Age=600; Path=/; SameSite=Lax` + (location.protocol === "https:" ? "; Secure" : "");
+      window.location.href = authData.url;
     });
   }
 
