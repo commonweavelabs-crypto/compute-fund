@@ -20,9 +20,33 @@ export default function LoginPage() {
 
   // Callback-route surface: show ?error= messages on load (they were invisible
   // before — that's why failures looked like "nothing happened").
+  // IMPLICIT leg: if the OAuth response arrived as access_token in the hash
+  // fragment (implicit flow — e.g. cached/legacy client bundles), hand it to
+  // /api/auth/implicit, which validates it server-side and issues cf_session.
   useEffect(() => {
     const err = new URLSearchParams(window.location.search).get("error");
-    if (err) { setStatus("error"); setMessage(err); }
+    if (err) { setStatus("error"); setMessage(err); return; }
+    const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    const at = hash.get("access_token");
+    if (!at) return;
+    setStatus("submitting");
+    fetch(`/api/auth/implicit?next=${encodeURIComponent(new URLSearchParams(window.location.search).get("next") ?? "")}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ access_token: at, refresh_token: hash.get("refresh_token") ?? "" }),
+    })
+      .then(async (r) => ({ ok: r.ok, data: await r.json().catch(() => ({})) }))
+      .then(({ ok, data }) => {
+        if (ok) {
+          // Kickstarter law: return to where the interaction started.
+          window.location.href = data.next && data.next.startsWith("/") ? data.next : "/account";
+        } else {
+          setStatus("error");
+          setMessage(data.error ?? "Sign-in failed — try again.");
+          history.replaceState(null, "", window.location.pathname);
+        }
+      })
+      .catch(() => { setStatus("error"); setMessage("Sign-in failed — try again."); });
   }, []);
 
   async function submit(e: React.FormEvent) {
