@@ -117,7 +117,59 @@ as its first real user (claiming + creating + funding his own work). Doors:
 
 Build order: D1 -> D3 -> D2 -> tests -> Gui's walkthrough -> Stage 0 -> launch.
 
-### GATE+2 milestone — THE DATA WEALTH LAYER (Gui's second architecture, 2026-10-22; after OUTREACH-1)
+### R-series — THE RECEIPTS ENGINE (Gui directive 2026-11-06: MVP-critical, "the core of our engine")
+
+Gui's standing correction 11/6: collecting money without a real receipt engine is
+unacceptable — receipts ARE the offer. Modular law applies: the engine = backend
+modules, swappable front-end; every receipt = platform DB row, append-only, public,
+timestamped, hash-carrying, tying funder -> builder -> output. Blockchain anchoring =
+opt-in TOGGLE (per project/user), designed-for now, integration later — never MVP-gated.
+
+- [ ] **R1 RECEIPTS-CORE (solidify the spine):** receipts schema hardened + append-only
+  law enforced at the DB level (no UPDATE/DELETE path in code), receipt kinds enumerated
+  (ops / payment / milestone / artifact / commit / review / rent), provenance fields
+  (actor, artifact sha256, external link, CFQ id, timestamps UTC), public receipts page
+  per project (exists — carry forward), export endpoint (JSON, per project + per user
+  passport view), demo-labeled test rows quarantined (carry the demo law). Done criteria:
+  scripted test mints every kind + public pages render + exports verified; falsified by:
+  any mutation path on a settled receipt, or a receipt kind invisible on the public page.
+- [ ] **R2 RECEIPTS-INGEST-GITHUB:** project links its repo (D1-verified first); poller +
+  webhook intake for commits/releases/issues tagged with the CFQ id (commit message or
+  branch convention documented on the charter), idempotent minting (dedupe key = repo+sha),
+  rate-limit-safe, toggle per project. GitHub = evidence source, NOT the ledger: our rows,
+  our hashes. Done criteria: one real commit on a linked repo auto-mints exactly one
+  receipt (idempotent on re-poll); falsified by: duplicate receipts or unverified commits
+  minting rows. (Nexus Mods + other hosts ride the same intake interface — no special cases.)
+- [ ] **R3 RECEIPTS-ARTIFACTS (non-git outputs):** the upload + verify flow for outputs
+  living outside GitHub: artifact upload -> server-side sha256 -> receipt row -> external
+  host link (Nexus Mods pattern, connector templates per host: nexus/itch/sketchfab
+  generic shape) + peer-rating rollup attaches judgments to the receipt. Modular
+  connector interface so new hosts plug in without engine changes. Done criteria: modder
+  flow (upload artifact, link host, peers rate) produces a judged receipt end to end;
+  falsified by: any output class needing a code branch outside the connector interface.
+- [ ] **R4 RECEIPTS-ANCHOR (toggle-aware design):** hash-chain the receipt ledger
+  (prev-hash rows), periodic Merkle root per project, OPTIONAL anchoring toggle (public
+  chain, later); passport tie-in = personal receipts survive merges (DATA-WEALTH §16.4).
+  MVP scope = the hash chain + toggle plumbing and one export format; NO chain integration.
+  Done criteria: tamper-evident verification script (drop a row -> chain breaks visibly);
+  falsified by: silent editability anywhere in the chain.
+- [ ] **R5 FORK-RENT PORT (from compute-fund-v0; the D-port item, pulled forward as
+  MVP per Gui 11/6):** port forks.ts + plugin_splits from v0 (fork edge, fork_rent_pct
+  5-20 default 10 frozen at fork time, one-hop, capped-max inheritance on merge), fork
+  buttons on project pages (forkable even when parent UNCLAIMED — payee = parent's
+  current custodian, cf_system until claimed), fork-of-fork cascade = one-hop only,
+  receipts for rent events; upstream-import law respected (fork the platform record,
+  not just the git URL). Done criteria: fork an unclaimed import on-platform ->
+  split row visible + receipt minted on first funded flow through the fork; falsified
+  by: any cascade paying grandparent-level rent, or fork paying a frozen-rate violator.
+- [ ] **R-dep D1-EXPAND CLAIM OWNERSHIP CHECK (expands existing D1-AUTH):** claim proof
+  upgrades from string-match to GitHub ownership verification (claimant's GitHub identity
+  linked, repo owner check via API: claimant must own/admin the repo OR fork from it
+  per fork law); the negative test: claiming JuneYaooo/rea-video by a non-owner FAILS.
+  Done criteria: negative test passes + one positive claim via verified identity;
+  falsified by: a non-owner claiming an imported upstream.
+
+### ### GATE+2 milestone — THE DATA WEALTH LAYER (Gui's second architecture, 2026-10-22; after OUTREACH-1)
 
 The thesis: all platform-generated data is WEALTH — open, value-generating for
 the PEOPLE (custodians/maintainers/creators), never concentrated (the HEPHAESTUS
