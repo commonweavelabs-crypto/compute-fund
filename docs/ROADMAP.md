@@ -395,3 +395,7 @@ roadmap voting priority, token-donation credit type, distribution stays external
   wants it; the org he keeps = 'commonweavelabs' (holds the live project).
 
 - [x] **D5 — Discoverability engine v1** — [DONE 2026-11-06, commit 9f260f5] metric event stream (view/fund/follow/claim) + velocity-7d rollup (fund×10+follow×3+view×1) + ready-for-forking detector (funded ∧ unclaimed ∧ 14d quiet) + follows → community picks + staff_pick flag (Gui-owned) + affinity-first recommender; homepage rows mechanism-backed + auto-hiding (law: no hand-curated rows, no synthetic events). v2 (ML/collab-filter, A/B) waits for real event volume.
+
+- [x] **D1 — GitHub login verified by Gui** — [DONE 2026-11-07] Gui signed in live on computefund.dev as CommonWeave Labs; session issued, header chip works.
+- [x] **LIVE-CLAIM verified (Gui = user #0)** — [DONE 2026-11-07] Gui claimed a real project (ComfyUI Video UI) on computefund.dev end-to-end; ownership transfer + dashboard (my projects) verified in the live ledger.
+- [ ] **M-AUTH-REFINE: account-type onboarding + multi-org linking** — new milestone, Gui specified 2026-11-07: at sign-in ask "person or entity"; a user account links MULTIPLE organizations; org/person distinction flows through profiles, dashboard, and claims. Scope after the funding gate.
