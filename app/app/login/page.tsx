@@ -119,7 +119,19 @@ export default function LoginPage() {
                 chunk loader never resolving = dead button). This anchor does
                 the whole start handshake on the server via /api/auth/start —
                 no client JS to break. */}
-            <a type="button" className="btn btn-primary" href="/api/auth/start?provider=github">
+            <a
+              type="button"
+              className="btn btn-primary"
+              href="/api/auth/start?provider=github"
+              onMouseDown={(e) => {
+                // bring the user back to where they were after signing in
+                try {
+                  const r = new URL(document.referrer);
+                  if (r.host === window.location.host && r.pathname !== "/login")
+                    e.currentTarget.href = `/api/auth/start?provider=github&next=${encodeURIComponent(r.pathname + r.search)}`;
+                } catch {}
+              }}
+            >
               Continue with GitHub
             </a>
           </div>
