@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 // Real sign-in. Errors name the cause; no invented success states.
@@ -17,6 +17,13 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "error" | "ok">("idle");
   const [message, setMessage] = useState("");
+
+  // Callback-route surface: show ?error= messages on load (they were invisible
+  // before — that's why failures looked like "nothing happened").
+  useEffect(() => {
+    const err = new URLSearchParams(window.location.search).get("error");
+    if (err) { setStatus("error"); setMessage(err); }
+  }, []);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -51,7 +58,9 @@ export default function LoginPage() {
       // deliberately used (persistSession:false would keep the verifier in
       // memory and kill it on the GitHub redirect). We hand the verifier to the
       // server via a short-lived cookie it reads at the callback.
-      const { data: authData, error: oauthError } = await createClient(SUPA_URL, SUPA_ANON).auth.signInWithOAuth({
+      const { data: authData, error: oauthError } = await createClient(SUPA_URL, SUPA_ANON, {
+        auth: { flowType: "pkce" },
+      }).auth.signInWithOAuth({
         provider,
         options: { redirectTo: callbackUrl, skipBrowserRedirect: true },
       });
