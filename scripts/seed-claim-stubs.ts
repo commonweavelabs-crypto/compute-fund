@@ -43,7 +43,7 @@ for (const stub of PILOT_TARGET_STUBS) {
 }
 
 // Final state readback from the DB itself (ground truth, not console hopes).
-const rows = getDb().prepare("SELECT slug, name, claimed, status, repo_url FROM projects WHERE slug IN ('tierllama','colibri','last30days','mirofish') ORDER BY slug").all();
+const rows = getDb().prepare(`SELECT slug, name, claimed, status, repo_url FROM projects WHERE slug IN (${PILOT_TARGET_STUBS.map(s => `'${s.slug}'`).join(",")}) ORDER BY slug`).all();
 console.log("\nREADBACK");
 for (const r of rows) console.log(`  ${r.slug}  claimed=${r.claimed} status=${r.status} repo=${r.repo_url}`);
 const missing = PILOT_TARGET_STUBS.filter(s => !rows.find(r => r.slug === s.slug));
