@@ -41,6 +41,8 @@ export function getDb(): DatabaseSync {
     // orgs table: existing DBs opened before the D3 schema landed need the table
     // even when a schema.exec already ran in this process — CREATE IF NOT EXISTS
     // is idempotent and matches schema.sql verbatim.
+
+    try { _db.exec(`ALTER TABLE users ADD COLUMN github_handle TEXT`); } catch {}
     _db.exec(`CREATE TABLE IF NOT EXISTS orgs (
       id TEXT PRIMARY KEY, slug TEXT NOT NULL UNIQUE, name TEXT NOT NULL,
       owner_id TEXT NOT NULL REFERENCES users(id), avatar_path TEXT, bio TEXT,
@@ -446,4 +448,14 @@ export function claimProjectBySlug(slug: string, claimantId: string, proofHash: 
     return { ok: false, reason: "receipt-failed" };
   }
   return { ok: true, owner_id: claimantId, receipt_id: receiptId };
+}
+// 2026-11-07 claim-proof: persist the logged-in GitHub handle at provision/login.
+export function setGithubHandle(userId: string, handle: string) {
+  if (!_db) return;
+  _db.prepare("UPDATE users SET github_handle = ? WHERE id = ?").run(handle.replace(/^@/, ""), userId);
+}
+export function getGithubHandle(userId: string): string | null {
+  if (!_db) return null;
+  const row = _db.prepare("SELECT github_handle AS h FROM users WHERE id = ?").get(userId) as { h: string | null } | undefined;
+  return (row?.h ?? null);
 }

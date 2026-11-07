@@ -127,8 +127,17 @@ export default function LiveProjectPanel({ slug, isOwner }: { slug: string; isOw
       setNote(<>Proof rejected: {d.error ?? "the repo URL must match this project's repo exactly."} MVP proof = the exact repo URL + your maintainership statement; commit-hash verification lands later.</>);
       return;
     }
+    if (res.status === 403) {
+      // MAINTAINER-PROOF LAW (2026-11-07): the maintainer's identity is bound to
+      // the claim — surface the exact reason (e.g. misdirected claim attempts).
+      setNote(<>Claim refused: {d.error ?? "the maintainer's GitHub identity does not match."}</>);
+      return;
+    }
     if (res.ok) {
       setIClaimed(true);
+      // stale-UI fix (Gui 2026-11-07): the ownership moved server-side —
+      // refresh so every surface (panel, homepage, receipts) reflects it.
+      fetch("/api/session").then(() => window.location.reload());
       setNote(`Claim recorded ✓ — ownership moved to you (receipt ${d.receipt_id ?? ""}). Executor role unlocked below; on your next visit the page recognizes you as the owner.`);
       refresh();
       fetch(`/api/claim?slug=${encodeURIComponent(slug)}`).then(r => r.json()).then(setClaim);

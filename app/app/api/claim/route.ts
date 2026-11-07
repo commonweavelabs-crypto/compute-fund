@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createHash } from "node:crypto";
 import { claimProjectBySlug, projectClaimState } from "../../../lib/db";
 import { recordClaim } from "../../../lib/discover";
+import { getGithubHandle } from "../../../lib/db";
 import { currentUser } from "../../../lib/auth";
 
 // D2-CLAIM-FLOW: maintainer proof -> executor role.
@@ -58,6 +59,21 @@ export async function POST(req: Request) {
   const offered = normalizeRepo(repo);
   if (offered !== target) {
     return NextResponse.json({ error: "Proof does not name the project's repo." }, { status: 422 });
+  }
+
+  // MAINTAINER-PROOF LAW (Gui, 2026-11-07): a claim moves REAL ownership — the
+  // logged-in GitHub identity must be the repo's GitHub owner. The handle comes
+  // from the login identity (not user input), so it cannot be faked in the form.
+  const handle = getGithubHandle(uid);
+  const repoOwner = target.split("/")[1];
+  if (!handle) {
+    return NextResponse.json({ error: "Proof requires a GitHub identity — sign in with GitHub and try again." }, { status: 403 });
+  }
+  if (repoOwner && handle.toLowerCase() !== repoOwner.toLowerCase()) {
+    return NextResponse.json(
+      { error: `This repo is maintained by @${repoOwner} — claims are proof-bound to the maintainer's GitHub identity. You are @${handle}.` },
+      { status: 403 },
+    );
   }
 
   const proofHash = createHash("sha256")

@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSupabase, isSupabaseConfigured } from "../../../../lib/supabase";
 import { findUserByEmail, ensureUserByEmail } from "../../../../lib/db";
 import { sessionTokenFor } from "../../../../lib/auth";
+import { setGithubHandle } from "../../../../lib/db";
 
 export async function GET(req: NextRequest) {
   // Public origin: behind the cloudflared tunnel req.url is the LOCAL url; the
@@ -72,6 +73,10 @@ export async function GET(req: NextRequest) {
     }
     user = ensured as unknown as { id: string; pw_hash: string };
   }
+
+  // 2026-11-07 claim-proof law: persist the GitHub handle from the identity.
+  const ghHandle = (su.user_metadata?.user_name ?? (su.user_metadata as { login?: string } | null)?.login ?? "") as string;
+  if (ghHandle) setGithubHandle(String(user.id), ghHandle);
 
   // THE COOKIE HOPS ON THE RETURNED RESPONSE (2026-11-07): cookies().set()
   // inside a handler is DROPPED when you return your own NextResponse redirect
