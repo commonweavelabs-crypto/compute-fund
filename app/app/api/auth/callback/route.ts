@@ -74,8 +74,16 @@ export async function GET(req: NextRequest) {
     user = ensured as unknown as { id: string; pw_hash: string };
   }
 
-  // 2026-11-07 claim-proof law: persist the GitHub handle from the identity.
-  const ghHandle = (su.user_metadata?.user_name ?? (su.user_metadata as { login?: string } | null)?.login ?? "") as string;
+  // 2026-11-07 claim-proof law: persist the GitHub handle — read from
+  // identities[].identity_data (set BY GitHub's provider during OAuth, NOT from
+  // user_metadata, which is user-editable via updateUser on email accounts).
+  const ghIdentity = Array.isArray((su as { identities?: { provider?: string; identity_data?: { user_name?: string } }[] | null }).identities)
+    ? ((su as { identities?: { provider?: string; identity_data?: { user_name?: string } }[] | null }).identities ?? [])
+        .find((x) => x.provider === "github")
+    : null;
+  const ghHandle = ((ghIdentity?.identity_data?.user_name
+    ?? (ghIdentity?.identity_data as { login?: string } | null)?.login
+    ?? "") as string);
   if (ghHandle) setGithubHandle(String(user.id), ghHandle);
 
   // THE COOKIE HOPS ON THE RETURNED RESPONSE (2026-11-07): cookies().set()
