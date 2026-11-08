@@ -19,7 +19,7 @@ const ART_MAP: ReadonlyArray<readonly [string, string]> = [
   ["mirofish", "cf-foundationvision-var.png"],
   // live board rows (test-funded + create-flow projects)
   ["full-loop-", "cf-genmoai-mochi.png"],
-  ["big-tok-", "sandcastle.png"],
+  ["big-tok-", "cf-big-tok-qb5n.png"],
   ["cap-drain-", "cf-nvlabs-longlive.png"],
   ["loop-verify-s2-", "cf-microsoft-skill-recorder.png"],
   ["dbg-run-", "cf-leo-lilinxiao-codex-autoresear.png"],

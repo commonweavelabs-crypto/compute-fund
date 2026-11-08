@@ -156,9 +156,15 @@ async function loadBoard(): Promise<Board> {
       };
     });
 
+    // (Gui's law: curation surfaces exclude the engineering-probe demos.)
+    const curation = cards.filter((p) => !isDemoProject(p));
+
     // Featured = /api/home's featured rule (most funded, soonest deadline, oldest).
+    // (Gui 11/8 demo-leak report: the featured rotator drew from `cards`, letting
+    // engineering-probe rows like big-tok headline the hero — featured + pool now
+    // draw from the same curation set as every other homepage surface.)
     const featured =
-      [...cards].sort(
+      [...curation].sort(
         (a, b) =>
           b.funded_usd - a.funded_usd ||
           a.deadline.localeCompare(b.deadline) ||
@@ -170,7 +176,7 @@ async function loadBoard(): Promise<Board> {
     const pool: Cf0Card[] = featured
       ? [
           featured,
-          ...cards
+          ...curation
             .filter((p) => p.slug !== featured.slug)
             .sort(
               (a, b) =>
@@ -182,55 +188,62 @@ async function loadBoard(): Promise<Board> {
         ]
       : [];
 
-    // (Gui's law: curation surfaces exclude the engineering-probe demos.)
-    const curation = cards.filter((p) => !isDemoProject(p));
-
-    const recommended = curation
-      .filter((p) => !featured || p.slug !== featured.slug)
-      .sort(TAB_SORTS[DEFAULT_TAB])
-      .slice(0, 4);
-
-    // Open-for-funding strip = v0's tabProjects("Newest").slice(0, 3).
-    const strip = curation
-      .filter((p) => !featured || p.slug !== featured.slug)
-      .sort(TAB_SORTS[DEFAULT_TAB])
-      .slice(0, 3);
-
-    // Kickstarter-style discovery rows — three more honest slices of this same
-    // board read (duplicates across curation rows are fine; NO dedup law):
-    //   nearly  = 60% ≤ pct < 100, deadline asc — urgency first, TAB_SORTS.ending
-    //   launched = newest created first, TAB_SORTS.newest
-    //   claims  = unclaimed mirror stubs (owner_org_id IS NULL → claimed 0),
-    //             newest first; MediaCard keeps the CLAIM IT badge visible
-    const nearly = curation
-      .filter((p) => p.pct >= 60 && p.pct < 100)
-      .sort(TAB_SORTS["ending"])
-      .slice(0, 4);
-    const launched = [...curation].sort(TAB_SORTS["newest"]).slice(0, 4);
-    const claims = curation
-      .filter((p) => claimOf(p, {}) === 0)
-      .sort(TAB_SORTS["newest"])
-      .slice(0, 4);
-
-    // D5 mechanism rows — the mechanisms are SQL rollups in lib/discover.ts; the
-    // composition here only maps their slug order onto THIS board's cards.
-    // Every row auto-hides when it has <2 qualifying projects (staff picks hide
-    // under 1 — one pick is a curation, not a crowd). Empty mechanisms stay
-    // hidden: the fund shows only what really happened, never invented rows.
+    // Kickstarter-style discovery rows — honest slices of this same board read.
+    // (Gui 11/8 replaced the old "no dedup law": the same project must not fill
+    // five rows down the page. Rows now consume one shared seen-set IN RENDER
+    // ORDER — hero (featured + rotation pool) → Recommended → Open-for-funding
+    // strip → staff → buzzing → forking → picks → most-funded → nearly →
+    // just-launched → open-for-claims — so every card gets its first shot in the
+    // row whose mechanism fits it best. A row still auto-hides when fewer than
+    // its min survive dedupe (honest empty, never a filler card), and the
+    // honest full board on /discover is untouched. The name-set also keeps two
+    // same-titled rows (e.g. the corpus pass re-runs) from stacking in one row.)
+    const seenSlugs = new Set<string>(pool.map((p) => p.slug));
+    const seenNames = new Set<string>(pool.map((p) => p.name));
+    const take = (list: Cf0Card[], n: number, keep?: (c: Cf0Card) => boolean): Cf0Card[] => {
+      const out: Cf0Card[] = [];
+      for (const c of list) {
+        if (keep && !keep(c)) continue;
+        if (seenSlugs.has(c.slug) || seenNames.has(c.name)) continue;
+        out.push(c);
+        seenSlugs.add(c.slug);
+        seenNames.add(c.name);
+        if (out.length >= n) break;
+      }
+      return out;
+    };
+    const takeSorted = (n: number, sort: (a: Cf0Card, b: Cf0Card) => number, keep?: (c: Cf0Card) => boolean): Cf0Card[] =>
+      take([...curation].sort(sort), n, keep);
     const byOrder = (order: string[], keep?: (c: Cf0Card) => boolean): Cf0Card[] =>
-      order
-        .map((s) => cards.find((c) => c.slug === s))
-        .filter((c): c is Cf0Card => !!c)
-        .filter((c) => (keep ? keep(c) : true))
-        .slice(0, 4);
-    // buzzing() is already velocity-desc; the keep is belt-and-braces on the
-    // board join (budget>0 cards only — a buzzing zero-budget project has no
-    // card to show and the row is honest about fewer entries).
+      take(
+        [...new Set(order)].map((s) => cards.find((c) => c.slug === s)).filter((c): c is Cf0Card => !!c),
+        4,
+        keep
+      );
+
+    const recommended = takeSorted(4, TAB_SORTS[DEFAULT_TAB], (p) => !featured || p.slug !== featured.slug);
+
+    // Open-for-funding strip = the next 3 after Recommended (the old shape
+    // re-sorted the same slice and duplicated Recommended's cards verbatim).
+    const strip = takeSorted(3, TAB_SORTS[DEFAULT_TAB], (p) => !featured || p.slug !== featured.slug);
+
+    // D5 mechanism rows FIRST (they render first among the discovery rows):
+    // the mechanisms are SQL rollups in lib/discover.ts; the composition here
+    // only maps their slug order onto THIS board's cards. Every row auto-hides
+    // when it has <2 qualifying projects (staff picks hide under 1 — one pick
+    // is a curation, not a crowd). Empty mechanisms stay hidden: the fund shows
+    // only what really happened, never invented rows.
+    const staff = byOrder(staffPicks());
     const buzzing = byOrder(buzzingSlugs(), (c) => c.velocity > 0 && !isDemoProject(c));
-    const forking = byOrder(forkingReady());
+    const forking = byOrder(forkingReady(), (c) => !isDemoProject(c));
     const picks = byOrder(communityPicks().map((c2) => c2.slug), (c) => !isDemoProject(c));
     const funded30 = byOrder(mostFunded30d().map((c2) => c2.slug), (c) => !isDemoProject(c));
-    const staff = byOrder(staffPicks());
+
+    // The three v0 board slices render after the mechanism rows — they consume
+    // the seen-set next, in the same order.
+    const nearly = takeSorted(4, TAB_SORTS["ending"], (p) => p.pct >= 60 && p.pct < 100);
+    const launched = takeSorted(4, TAB_SORTS["newest"]);
+    const claims = takeSorted(4, TAB_SORTS["newest"], (p) => claimOf(p, {}) === 0);
 
     // v0 receipt cascade → the real receipts table tail (public data).
     const receipts = (
