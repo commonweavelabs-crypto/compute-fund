@@ -179,7 +179,7 @@ async function DiscoverBoard({
          LEFT JOIN (SELECT project_id, SUM(amount_cents) / 100.0 AS usd, COUNT(*) AS n
                     FROM donations GROUP BY project_id) d ON d.project_id = p.id
          LEFT JOIN orgs o ON o.id = p.owner_org_id
-         WHERE p.status = 'active' AND p.budget_credits > 0`
+         WHERE p.status = 'active'`
       )
       .all() as Array<Record<string, unknown>>;
     // Same card math as /api/home + the homepage board (usd = SUM/100,

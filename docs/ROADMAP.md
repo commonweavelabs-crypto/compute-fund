@@ -320,6 +320,27 @@ Launch bar: AT MINIMUM 1,000 open-source projects pre-imported as unclaimed stub
   dedupe, charter-shaped adopt-first-milestone stubs, takedown law in assumptions).
   Batch 1 executed 2026-11-06: 42 active grade-A evaluated -> 41 imported (CFQ-2026-028
   .. CFQ-2026-068), 11 deduped (already in engine). Engine: 68 rows / 47 unclaimed.
+- **Batch 1b (2026-11-08, Gui's "make them live" ask):** the 2 INACTIVE grade-A leads
+  batch-1's 6-month filter skipped are now imported unclaimed — latentsync ⭐6255
+  (bytedance/LatentSync, Apache-2.0) + warlock-studio ⭐258 (Ivan-Ayub97/Warlock-Studio,
+  MIT) as CFQ-2026-069/070 via scripts/import-leads-batch1b.ts (same shape law). The
+  grade-A import wave is COMPLETE: 44/44 accounted (41 batch + 1 D2 dedupe + 2 batch-1b).
+  Engine after batch-1b: 70 rows / 48 unclaimed.
+- **Import images completed (2026-11-08, Gui's "are the images completed?" ask):** the
+  art agent's per-slug plates (cf-<slug>.png, 41 import plates on file) are WIRED into
+  app/lib/art-map.ts (12 hand entries + 41 slug entries = 53 mapped) and 78 thumbs
+  regenerated (make_art_thumbs.py, ~2.3MB thumb layer). On default plate until generated
+  locally: comfyui-video-ui, latentsync, rea-video, warlock-studio. Board verified live:
+  /discover = 69 active projects, import cards render their own art.
+- **Base-board gate fix (2026-11-08):** the shared active-board query gated
+  `AND p.budget_credits > 0` — a CFQ-question-era filter that made every import stub
+  invisible on /discover AND every homepage discovery row (including the Open-for-claims
+  row that exists to showcase them). Dropped in discovery/page.tsx + app/page.tsx +
+  api/home/route.ts (status='active' only). /discover went 26 -> 69 active; homepage
+  Open-for-claims row lit (14 CLAIM IT badges); demo-curation law unchanged (verified:
+  zero demo rows leak into homepage surfaces; /discover keeps the honest full board per
+  its own page comment law). D5 live-write regression run (dev 8872) deferred to the
+  next consolidation pass — it injects throwaway rows into the live DB by design.
 - **Growth sources for the remaining ~930 (Gui ask: best approach):** 1) GitHub-first
   direct sourcing — topic/star/license/activity queries via API (highest volume, best
   metadata, zero scraping-law risk; license + activity filters keep quality); 2) IG
