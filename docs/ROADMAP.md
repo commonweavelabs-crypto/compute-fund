@@ -336,7 +336,7 @@ Launch bar: AT MINIMUM 1,000 open-source projects pre-imported as unclaimed stub
   scripts/render-sprint-art.py + scripts/gh_meta_backfill.py.
 - **SPRINT-200 (2026-11-08, Gui's "do 200 — GO" — DONE, 372-row engine):** 20-lane
   GitHub sweep (2 passes) -> 1,091 raw -> 197 imported after the top-tier trim
-  (Kept star floor 2255; junk/mirror/list/教程 screens; dedupe pool 312 known URLs;
+  (Kept star floor 2255; junk/mirror/list/tutorial screens; dedupe pool 312 known URLs;
   dropped 27 sub-2255 rows stay in docs/candidates-sprint200-raw2.json for the
   400 run). Distribution after both sprints: tools 69, modding 59, infra 48, video
   45, gaming 39, wellness 50, research 31, security 14, decision models 16.
