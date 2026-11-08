@@ -13,11 +13,18 @@ export const CATEGORY_TAXONOMY: CategoryTaxonomy[] = [
   { top: "modding", subs: ["trainers & overlays", "asset extractors", "scripting/patching", "community maps"] },
   { top: "video", subs: ["creation", "editing & tooling", "captions & transcription", "upscaling & restoration"] },
   { top: "infrastructure", subs: ["inference serving", "GPU scheduling", "storage & caching", "network proxies"] },
-  { top: "decision models", subs: ["routers", "evaluation harnesses", "guardrails"] },
+  { top: "decision models", subs: ["routers", "evaluation harnesses", "guardrails", "gateways"] },
   { top: "research", subs: ["benchmarks", "corpora & datasets", "replication", "papers-to-code"] },
   { top: "wellness", subs: ["focus & habits", "tracking", "sound & sleep"] },
   { top: "tools", subs: ["agent skills", "CLIs & automation", "scrapers", "design"] },
   { top: "security", subs: ["reverse engineering", "decompilation", "static analysis"] },
+  { top: "audio", subs: ["production & daw", "instruments & synths"] },
+  { top: "home", subs: ["hubs & automation", "cameras & detection"] },
+  { top: "education", subs: ["study & flashcards", "classroom & lms"] },
+  { top: "finance", subs: ["personal finance", "business & erp"] },
+  { top: "commons", subs: ["open knowledge", "preservation", "fonts & design"] },
+  { top: "artcraft", subs: ["photo & light", "vector & design", "film & motion", "documents & grid", "materials & 3d"] },
+  { top: "jev", subs: ["routed agents", "brains & routers", "jev tools"] },
 ];
 
 // slugify: lowercase, every non-alphanumeric run becomes one dash
@@ -54,6 +61,13 @@ export const CATEGORY_BLURBS: Record<string, string> = {
   wellness: "Small tools for focus and rest, funded directly by the people who use them.",
   tools: "Agent skills, CLIs, scrapers and design utilities — everyday automation on the public record.",
   security: "Decompilers, disassemblers and reverse-engineering work in the open — preservation and analysis on the public record.",
+  audio: "Synths, DAWs and sound engines built in the open — make and repair sound with receipts.",
+  home: "The self-hosted smart home: hubs, automations and cameras that answer only to you.",
+  education: "Study tools and classrooms in the open — learning that stays yours.",
+  finance: "Ledgers, budgets and open business books — your money, on the record.",
+  commons: "Open knowledge and preservation — fonts, archives and public-domain culture, kept alive by the community.",
+  artcraft: "The ArtCraft suite: clean-room creative apps written from scratch in pure Rust — every Adobe-class tool, open, with receipts.",
+  jev: "The Jev ecosystem: routed agents, Jev-class brains and the tools they run — decision models in production.",
 };
 export const FALLBACK_BLURB =
   "One slice of the live catalog at the sort of the tabs below — fund the work, and every run posts a public receipt.";

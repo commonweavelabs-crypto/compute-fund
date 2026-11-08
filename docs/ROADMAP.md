@@ -345,6 +345,40 @@ Launch bar: AT MINIMUM 1,000 open-source projects pre-imported as unclaimed stub
   rounds — ALL SHIP; art-map 360 plates / 388 thumbs / discover 371 active 47 pages.
   Pipeline law added: fetch_output picks the NEWEST _000NN_ suffix (first-match
   returned a stale render on blendertools — fresh take was _00003_).
+- **CATEGORY EXPANSION + FLAGSHIP LAWS (Gui 11/8 evening, voice):**
+  1. NEW CATEGORIES created from clusters (create-category-not-drop law): audio,
+     home, education, finance, commons, artcraft, jev (+ subs in categories.ts).
+     400-run imported 399 (+78 games/jev batch +20 artcraft) -> engine 868/846.
+  2. ARTCRAFT SHOWCASE LAW (Gui): the storytold suite (Apache-2.0 clean-room Rust:
+     PhotoCraft ⭐78K, artcraft ⭐40K, WordCraft/DeckCraft/GridCraft/PdfCraft/
+     FilmCraft/LightCraft/VectorCraft/EffectCraft/CADCraft/SoundCraft/...) = its own
+     category 'artcraft' + front-page shelf via staff_pick=1 on all 19 rows +
+     logo_path = the suite's own dual-licensed icons (assets/app-icons, Apache/MIT;
+     files at public/u/artcraft-*.png, LICENSE copies in docs/). Excluded per license
+     law: artcraft-services (NOASSERTION), unlicensed repos. Fork duty: new name+art.
+  3. CLEAN-ROOM LAW (Gui's Adobe question): reimplementation-from-scratch with no
+     copied code/assets/trademarks is lawful (Sony v. ConnecTix / Sega v. Accolade
+     doctrine) — importable when (a) its own FOSS license, (b) no upstream
+     trademarks/logos/assets, (c) takedown honored. ArtCraft = the template case.
+  4. PUBLIC-DOMAIN / OPEN-IP DIRECTION (Gui: "dive deep"): category commons hosts
+     preservation; a dedicated sourcing pass for PD content campaigns (archive.org
+     metadata API — curated, PD-verified per item, no trademarks/modern brandings —
+     e.g. Steamboat Willie-era pre-1930 works; "fund a cartoon, receive the
+     restored episodes as receipts") = M-PDCAMPAIGNS milestone, needs Gui walkthrough
+     before first campaigns go live.
+  5. GAMES LAW: playable open-source games import to gaming (18 imported: veloren,
+     wesnoth, shattered-pixel-dungeon, shapez...). Recomp/preservation already in
+     decomp & preservation/recomp ports subs (legal: clean-room decomp — no
+     proprietary assets).
+  6. JEV CATEGORY (Gui: "just for Jev"): top 'jev' (routed agents / brains &
+     routers / jev tools) — 60 imported (jev-chat, jevgrep, OpenJev, fast-jev-
+     compaction...). Watch: topic coverage spotty; keyword lane used.
+- **M-SEARCH (MILESTONE, Gui green-lit):** platform search = FTS5 over projects
+  (name/one_liner/topics/category) — state.db already runs FTS5; better-sqlite3
+  carries it. Scope: /api/search + header search box (the disabled-search-box law
+  lifts once real search ships) + category/sub filters compose acceptably (AND).
+  Acceptance: query<latency 50ms on 1k rows, no-auth (public pages law), results
+  ranked star-weighted. NEXT build milestone, not in the sprint-400 window.
 - **Batch 1b (2026-11-08, Gui's "make them live" ask):** the 2 INACTIVE grade-A leads
   batch-1's 6-month filter skipped are now imported unclaimed — latentsync ⭐6255
   (bytedance/LatentSync, Apache-2.0) + warlock-studio ⭐258 (Ivan-Ayub97/Warlock-Studio,

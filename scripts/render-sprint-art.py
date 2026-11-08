@@ -69,6 +69,15 @@ LEX = [
  (("astronomy","telescope"),"a star field with a soft nebula in deep teal and amber"),
  (("note","markdown"),"a neat stack of clean paper sheets with soft edge light"),
  (("keyboard","mechanical"),"a backlit mechanical keyboard with soft green glow"),
+ (("synth","daw","audio-edit"),"a vintage synthesizer with glowing soft keys in a dark studio"),
+ (("midi","piano"),"glowing piano keys bathed in teal light in a dark room"),
+ (("smart-home","home-assistant","iot"),"a glowing smart-home control panel on a wooden wall, defocused"),
+ (("camera","security-cam"),"a small modern security camera with a single soft status light"),
+ (("flashcard","study"),"a neat grid of glowing study cards floating above a desk"),
+ (("dictionary","book"),"an open hardcover book with soft glowing edges on a wooden stand"),
+ (("ledger","budget","account"),"a clean leather ledger book with softly glowing page edges"),
+ (("archive","wiki","library"),"endless rows of softly glowing library shelves receding into dark"),
+ (("font","typeface"),"large typographic letter shapes carved in soft glowing acrylic, no letters legible"),
  ("default","an elegant desk scene with soft ambient light and subtle glowing accents"),
 ]
 
@@ -84,9 +93,7 @@ def build_prompts():
     con = sqlite3.connect(DB)
     cur = con.cursor()
     rows = cur.execute("""SELECT slug, name, one_liner, category, subcategory FROM projects
-        WHERE status='active' AND claimed=0 AND (logo_path IS NULL OR logo_path='')
-          AND category IN ('wellness','modding','security','gaming','research','infrastructure',
-                           'decision models','decision-models','tools','video')""").fetchall()
+        WHERE status='active' AND claimed=0""").fetchall()
     con.close()
     out = []
     for slug, name, one_liner, cat, sub in rows:
