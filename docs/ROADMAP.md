@@ -320,6 +320,20 @@ Launch bar: AT MINIMUM 1,000 open-source projects pre-imported as unclaimed stub
   dedupe, charter-shaped adopt-first-milestone stubs, takedown law in assumptions).
   Batch 1 executed 2026-11-06: 42 active grade-A evaluated -> 41 imported (CFQ-2026-028
   .. CFQ-2026-068), 11 deduped (already in engine). Engine: 68 rows / 47 unclaimed.
+- **SPRINT-105 (2026-11-08, Gui's "+100" order — DONE, 175-row engine):** GitHub-API
+  sweep across 17 topic lanes -> 177 quality candidates -> 50 wellness + 50 modding +
+  5 security imported (CFQ-2026-071..175); the quality RE/decompilation leads the
+  category filter dropped got a NEW CATEGORY instead of the bin (create-category
+  law: security = reverse engineering / decompilation / static analysis). Full
+  GitHub meta per project + `project_github_meta` table backfilled LIVE for 155
+  unique repos (stars/forks/license/language/topics/handle/homepage/pushed — the
+  seed-rating source until real user signals exist). Art: 119 plates rendered
+  locally (Z-Image-Turbo via the Comfy Desktop server, name-free prompts after the
+  ~23% garble lesson, per-project thematic anchors + 5-style rotation incl. 2 flat
+  illustration styles), 3 contact-sheet QA passes + 1 surgical regen round ->
+  ALL SHIP; 187 thumbs; art-map 163 plates; discover = 174 active / 22 pages.
+  Recipe + pipeline saved for future sprints: references/art-recipes.md +
+  scripts/render-sprint-art.py + scripts/gh_meta_backfill.py.
 - **Batch 1b (2026-11-08, Gui's "make them live" ask):** the 2 INACTIVE grade-A leads
   batch-1's 6-month filter skipped are now imported unclaimed — latentsync ⭐6255
   (bytedance/LatentSync, Apache-2.0) + warlock-studio ⭐258 (Ivan-Ayub97/Warlock-Studio,
