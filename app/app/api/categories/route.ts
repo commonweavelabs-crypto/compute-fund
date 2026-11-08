@@ -9,11 +9,17 @@
 // cacheComponents (Next 16) law — same as /api/home: route segment configs
 // (force-dynamic) are ILLEGAL in this repo; a plain handler runs per request
 // and Cache-Control: no-store keeps the response uncacheable.
-import { NextResponse } from "next/server";
+import { NextResponse, connection } from "next/server";
 import { db } from "../../../lib/db";
 import { CATEGORY_TAXONOMY, normCat } from "../../../lib/categories";
 
 export async function GET() {
+  // cacheComponents law: a plain GET handler is static-by-default and its
+  // response rides the Next route cache (x-nextjs-cache: HIT even under
+  // Cache-Control: no-store — proven 2026-11-08 when freshly imported and
+  // hand-recategorised rows never moved the rail counts). `await connection()`
+  // is the per-request opt-out the repo relies on (segment configs are banned).
+  await connection();
   const noStore = { "cache-control": "no-store" } as const;
   try {
     // Query 1/2: the top-level bins — every distinct (normalized) category with

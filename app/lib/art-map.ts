@@ -68,6 +68,12 @@ const ART_MAP: ReadonlyArray<readonly [string, string]> = [
   ["terminal-mac", "cf-terminal-mac.png"],
   ["twindesk", "cf-twindesk.png"],
   ["voicestudio", "cf-voicestudio.png"],
+  // batch 1b + claim-era rows generated 2026-11-08 (Z-Image-Turbo, dark-tech
+  // themed per project; QA-passed, no text/logos per the no-logo law)
+  ["latentsync", "cf-latentsync.png"],
+  ["warlock-studio", "cf-warlock-studio.png"],
+  ["rea-video", "cf-rea-video.png"],
+  ["comfyui-video-ui", "cf-comfyui-video-ui.png"],
 ];
 
 // Returns a web path under /project-art/ for any slug; never throws, falls
