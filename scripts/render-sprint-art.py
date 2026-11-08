@@ -51,6 +51,24 @@ LEX = [
  (("mood","ambient","sound"),"over-ear headphones floating among glowing sound arcs"),
  (("track","metric","stat"),"a clean dashboard of glowing minimal bar charts, defocused"),
  (("photo","image","pixel"),"a vintage camera glowing softly on layered colored papers"),
+ (("emulat","rom-handheld"),"a vintage handheld console with a warm glowing screen and a cartridge slot"),
+ (("godot","game-engine","engine"),"an abstract scene graph of glowing connected nodes floating in dark space"),
+ (("self-hosted","home-server","server-rack"),"a tidy home server shelf with soft glowing status lights"),
+ (("observ","monitor","uptime"),"a wall of soft glowing status dots in neat rows, all defocused"),
+ (("proxy","gateway","router"),"flowing light streams merging into single bright thread"),
+ (("backup","storage","vault"),"a neat vault of glowing translucent archive boxes"),
+ (("quantiz","inference"),"glowing layers of translucent parallel light sheets compressing in depth"),
+ (("broadcast","stream-live"),"a broadcast studio with a glowing on-air lamp and soft colored light"),
+ (("podcast","microphone"),"a professional studio microphone with soft warm glow"),
+ (("subtitle","caption"),"rows of clean rounded caption chips floating above a dark cinema screen"),
+ (("screenshot","clipboard"),"a neat stack of glowing translucent photo cards fanned on a desk"),
+ (("firmware","disassembl"),"a glowing silicon die macro shot with circuit traces catching the light"),
+ (("harden","threat","pentest"),"a shield silhouette rendered in soft green light on dark ground"),
+ (("simulation","science"),"glowing particle trails curving through a dark chamber"),
+ (("genomics","genetics"),"a glowing helix rendered as smooth light ribbons"),
+ (("astronomy","telescope"),"a star field with a soft nebula in deep teal and amber"),
+ (("note","markdown"),"a neat stack of clean paper sheets with soft edge light"),
+ (("keyboard","mechanical"),"a backlit mechanical keyboard with soft green glow"),
  ("default","an elegant desk scene with soft ambient light and subtle glowing accents"),
 ]
 
@@ -66,7 +84,9 @@ def build_prompts():
     con = sqlite3.connect(DB)
     cur = con.cursor()
     rows = cur.execute("""SELECT slug, name, one_liner, category, subcategory FROM projects
-        WHERE status='active' AND claimed=0 AND category IN ('wellness','modding','security')""").fetchall()
+        WHERE status='active' AND claimed=0 AND (logo_path IS NULL OR logo_path='')
+          AND category IN ('wellness','modding','security','gaming','research','infrastructure',
+                           'decision models','decision-models','tools','video')""").fetchall()
     con.close()
     out = []
     for slug, name, one_liner, cat, sub in rows:
@@ -108,22 +128,33 @@ def api_run():
     return r.returncode
 
 def fetch_output(prefix, wait_s=90):
+    """Fetch the NEWEST file for this prefix (the server reuses _000NN_ suffixes —
+    a first-match walk returns a STALE prior render; proven 11/8 on blendertools:
+    the fresh vector take was _00003_, first-match returned the old _00001_).
+    Pick the max numeric suffix across history, polling until it appears."""
     deadline = time.time() + wait_s
-    last = None
+    best = None
     while time.time() < deadline:
         time.sleep(3)
         try:
-            with urllib.request.urlopen(f"{SERVER}/history?max_items=10", timeout=30) as r:
+            with urllib.request.urlopen(f"{SERVER}/history?max_items=12", timeout=30) as r:
                 hist = json.loads(r.read())
-        except Exception as e:
-            last = str(e)[:60]; continue
+        except Exception:
+            continue
         for pid, h in hist.items():
-            outs = (h.get("outputs") or {})
-            for nid, o in outs.items():
+            for nid, o in (h.get("outputs") or {}).items():
                 for img in (o.get("images") or []):
-                    if img.get("filename", "").startswith(prefix):
-                        return img["filename"]
-    print(f"  fetch timed out for {prefix} (last: {last})")
+                    f = img.get("filename", "")
+                    if not f.startswith(prefix):
+                        continue
+                    import re as _re
+                    m = _re.search(r"_(\d+)_", f)
+                    num = int(m.group(1)) if m else 0
+                    if best is None or num > best[0]:
+                        best = (num, f)
+        if best:
+            return best[1]
+    print(f"  fetch timed out for {prefix}")
     return None
 
 def download(filename, dst):
