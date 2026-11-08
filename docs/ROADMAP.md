@@ -334,6 +334,17 @@ Launch bar: AT MINIMUM 1,000 open-source projects pre-imported as unclaimed stub
   ALL SHIP; 187 thumbs; art-map 163 plates; discover = 174 active / 22 pages.
   Recipe + pipeline saved for future sprints: references/art-recipes.md +
   scripts/render-sprint-art.py + scripts/gh_meta_backfill.py.
+- **SPRINT-200 (2026-11-08, Gui's "do 200 — GO" — DONE, 372-row engine):** 20-lane
+  GitHub sweep (2 passes) -> 1,091 raw -> 197 imported after the top-tier trim
+  (Kept star floor 2255; junk/mirror/list/教程 screens; dedupe pool 312 known URLs;
+  dropped 27 sub-2255 rows stay in docs/candidates-sprint200-raw2.json for the
+  400 run). Distribution after both sprints: tools 69, modding 59, infra 48, video
+  45, gaming 39, wellness 50, research 31, security 14, decision models 16.
+  project_github_meta = 352 refs. 199 plates rendered via the pipeline (18 new
+  motif anchors for the new domains), 7 contact-sheet QA passes + 2 surgical regen
+  rounds — ALL SHIP; art-map 360 plates / 388 thumbs / discover 371 active 47 pages.
+  Pipeline law added: fetch_output picks the NEWEST _000NN_ suffix (first-match
+  returned a stale render on blendertools — fresh take was _00003_).
 - **Batch 1b (2026-11-08, Gui's "make them live" ask):** the 2 INACTIVE grade-A leads
   batch-1's 6-month filter skipped are now imported unclaimed — latentsync ⭐6255
   (bytedance/LatentSync, Apache-2.0) + warlock-studio ⭐258 (Ivan-Ayub97/Warlock-Studio,
