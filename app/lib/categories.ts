@@ -17,6 +17,7 @@ export const CATEGORY_TAXONOMY: CategoryTaxonomy[] = [
   { top: "research", subs: ["benchmarks", "corpora & datasets", "replication", "papers-to-code"] },
   { top: "wellness", subs: ["focus & habits", "tracking", "sound & sleep"] },
   { top: "tools", subs: ["agent skills", "CLIs & automation", "scrapers", "design"] },
+  { top: "security", subs: ["reverse engineering", "decompilation", "static analysis"] },
 ];
 
 // slugify: lowercase, every non-alphanumeric run becomes one dash
@@ -52,6 +53,7 @@ export const CATEGORY_BLURBS: Record<string, string> = {
   research: "Benchmarks, corpora and replications, so results can be checked rather than claimed.",
   wellness: "Small tools for focus and rest, funded directly by the people who use them.",
   tools: "Agent skills, CLIs, scrapers and design utilities — everyday automation on the public record.",
+  security: "Decompilers, disassemblers and reverse-engineering work in the open — preservation and analysis on the public record.",
 };
 export const FALLBACK_BLURB =
   "One slice of the live catalog at the sort of the tabs below — fund the work, and every run posts a public receipt.";

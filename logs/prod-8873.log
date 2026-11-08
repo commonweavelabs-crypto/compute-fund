@@ -1,0 +1,41 @@
+stdin is not a tty
+▲ Next.js 16.4.5
+- Local:         http://127.0.0.1:8873
+- Network:       http://127.0.0.1:8873
+✓ Ready in 2.9s
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\Guilherme because it is outside the current Git repository (C:\Users\Guilherme\AppData\Local\hermes\projects\compute-fund).
+ To use this directory, set `outputFileTracingRoot` in your Next.js config.
+
+✓ Running next.config.ts took 517ms
+▲ Next.js 16.4.5
+- Local:         http://127.0.0.1:8873
+- Network:       http://127.0.0.1:8873
+✓ Ready in 191ms
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\Guilherme because it is outside the current Git repository (C:\Users\Guilherme\AppData\Local\hermes\projects\compute-fund).
+ To use this directory, set `outputFileTracingRoot` in your Next.js config.
+
+✓ Running next.config.ts took 42ms
+▲ Next.js 16.4.5
+- Local:         http://127.0.0.1:8873
+- Network:       http://127.0.0.1:8873
+✓ Ready in 167ms
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\Guilherme because it is outside the current Git repository (C:\Users\Guilherme\AppData\Local\hermes\projects\compute-fund).
+ To use this directory, set `outputFileTracingRoot` in your Next.js config.
+
+✓ Running next.config.ts took 43ms
+▲ Next.js 16.4.5
+- Local:         http://127.0.0.1:8873
+- Network:       http://127.0.0.1:8873
+✓ Ready in 162ms
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\Guilherme because it is outside the current Git repository (C:\Users\Guilherme\AppData\Local\hermes\projects\compute-fund).
+ To use this directory, set `outputFileTracingRoot` in your Next.js config.
+
+✓ Running next.config.ts took 42ms
+▲ Next.js 16.4.5
+- Local:         http://127.0.0.1:8873
+- Network:       http://127.0.0.1:8873
+✓ Ready in 157ms
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\Guilherme because it is outside the current Git repository (C:\Users\Guilherme\AppData\Local\hermes\projects\compute-fund).
+ To use this directory, set `outputFileTracingRoot` in your Next.js config.
+
+✓ Running next.config.ts took 40ms
