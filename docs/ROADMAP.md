@@ -479,3 +479,39 @@ roadmap voting priority, token-donation credit type, distribution stays external
 - [x] **D1 — GitHub login verified by Gui** — [DONE 2026-11-07] Gui signed in live on computefund.dev as CommonWeave Labs; session issued, header chip works.
 - [x] **LIVE-CLAIM verified (Gui = user #0)** — [DONE 2026-11-07] Gui claimed a real project (ComfyUI Video UI) on computefund.dev end-to-end; ownership transfer + dashboard (my projects) verified in the live ledger.
 - [ ] **M-AUTH-REFINE: account-type onboarding + multi-org linking** — new milestone, Gui specified 2026-11-07: at sign-in ask "person or entity"; a user account links MULTIPLE organizations; org/person distinction flows through profiles, dashboard, and claims. Scope after the funding gate.
+
+## SPREAD-400 (planned 2026-11-08, Gui: "report first, then GO") — run-400 + new categories + image overhaul
+**Gui decisions locked 2026-11-08:**
+- Birth of a Nation STAYS OUT (optics law); community may add it later through the
+  create-flow — never pre-seeded by us.
+- SPOT IMPORTS (velocity add, below-star-floor Gui exception): crest (andrealo20/crest,
+  GPL-3.0, 97⭐, reel-vetted DfSbiADARWE) + openbar (MF-DEEV/Openbar, the AI-agent
+  dashboard sibling) — both now live in the NEW productivity category.
+- NEW categories (created this commit): productivity (desktop apps / launchers & widgets /
+  notes & docs / agent dashboards), 3d (modeling & sculpting / animation & rigging /
+  3d scanning & capture), robotics (sim & control / drones & rovers / 3d printing &
+  firmware), bigtech (ai models / dev infrastructure / frontend & runtimes). ArtCraft
+  Tab UNTOUCHED (its own shelf, standing order).
+- BIGTECH lane law: only genuinely open licenses (MIT/Apache/BSD). Llama = Llama
+  Community License = NOT MIT (flagged honestly - excluded unless Gui overrides);
+  DeepSeek = MIT (in), PyTorch/React/VSCODE/K8s/Firecracker (in). Qwen models carry
+  permissive-but-not-OSI terms - case-by-case, license verified per row.
+- BIGTECH homepage carousel = second featured-slice row (same mechanism as the ArtCraft
+  suite shelf: slice category=bigtech, auto-hide) - wired during the sprint build.
+- IMAGE OVERHAUL (Gui critique 2026-11-08: PD plates "bedroom+window" syndrome):
+  root cause = lex anchor keyed on ambient words in film synopses (moon/night/harbor)
+  + one style family filling the whole PD batch. Fixes, ON for run-400:
+  1. PER-TITLE hand anchors for narrative works (the goat gets a goat; The General
+     gets the locomotive).
+  2. REFERENCE-IMAGE lane: Qwen-Image-Edit 2509 IS INSTALLED LOCALLY (fp8 + Lightning
+     4-step LoRA + Qwen2.5-VL encoder verified in Documents/ComfyUI/models) — feed the
+     ACTUAL public-domain film still as reference input; PD frames = free to use, and
+     the plate then LOOKS like the work. No IPAdapter purchase needed.
+  3. Chaplin-class likeness: stylize the PD FILM FRAME (the character in the PD film is
+     PD; we never brand the estate's trademarks) — lawful, and more authentic.
+  4. ANCHOR-DEDUPE law: max 2 rows per anchor-key family per batch.
+  5. QA bar raised: "bland/repeat-family composition" = a failing class, same as garble.
+- 400 count check (tool-verified): 12.67M repos with ≥2 stars (33M with ≥1, non-fork).
+  400 = 0.003% — reasonable. Sourcing lanes: productivity, 3d, robotics (Kickstarter-style
+  hardware heat), bigtech, + deeper fills for thin categories — same licenses law,
+  dedupe vs all 930 known URLs, junk/mirror screens unchanged.

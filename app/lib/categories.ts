@@ -25,6 +25,10 @@ export const CATEGORY_TAXONOMY: CategoryTaxonomy[] = [
   { top: "commons", subs: ["open knowledge", "preservation", "fonts & design", "public-domain revival"] },
   { top: "artcraft", subs: ["photo & light", "vector & design", "film & motion", "documents & grid", "materials & 3d"] },
   { top: "jev", subs: ["routed agents", "brains & routers", "jev tools"] },
+  { top: "productivity", subs: ["desktop apps", "launchers & widgets", "notes & docs", "agent dashboards"] },
+  { top: "3d", subs: ["modeling & sculpting", "animation & rigging", "3d scanning & capture"] },
+  { top: "robotics", subs: ["sim & control", "drones & rovers", "3d printing & firmware"] },
+  { top: "bigtech", subs: ["ai models", "dev infrastructure", "frontend & runtimes"] },
 ];
 
 // slugify: lowercase, every non-alphanumeric run becomes one dash
@@ -68,6 +72,10 @@ export const CATEGORY_BLURBS: Record<string, string> = {
   commons: "Open knowledge and preservation — fonts, archives and public-domain culture, kept alive by the community.",
   artcraft: "The ArtCraft suite: clean-room creative apps written from scratch in pure Rust — every Adobe-class tool, open, with receipts.",
   jev: "The Jev ecosystem: routed agents, Jev-class brains and the tools they run — decision models in production.",
+  productivity: "The apps that live in your daily flow — desktop utilities, launchers, agent dashboards, notes. Fund the ones you open every day.",
+  "3d": "The open 3D stack — modeling, sculpting, animation and phone-camera scanning that turns photos into models.",
+  robotics: "Robots, drones, printers and the firmware that moves them — hardware work with verifiable receipts.",
+  bigtech: "Open source from the platform giants — every row carries a genuinely open license (MIT/Apache/BSD), no community-license hijacks.",
 };
 export const FALLBACK_BLURB =
   "One slice of the live catalog at the sort of the tabs below — fund the work, and every run posts a public receipt.";
