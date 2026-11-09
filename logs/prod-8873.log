@@ -72,3 +72,35 @@ Error: listen EADDRINUSE: address already in use 127.0.0.1:8873
   address: '127.0.0.1',
   port: 8873
 }
+▲ Next.js 16.4.5
+- Local:         http://127.0.0.1:8873
+- Network:       http://127.0.0.1:8873
+✓ Ready in 171ms
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\Guilherme because it is outside the current Git repository (C:\Users\Guilherme\AppData\Local\hermes\projects\compute-fund).
+ To use this directory, set `outputFileTracingRoot` in your Next.js config.
+
+✓ Running next.config.ts took 43ms
+▲ Next.js 16.4.5
+- Local:         http://127.0.0.1:8873
+- Network:       http://127.0.0.1:8873
+✓ Ready in 193ms
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\Guilherme because it is outside the current Git repository (C:\Users\Guilherme\AppData\Local\hermes\projects\compute-fund).
+ To use this directory, set `outputFileTracingRoot` in your Next.js config.
+
+✓ Running next.config.ts took 50ms
+▲ Next.js 16.4.5
+- Local:         http://127.0.0.1:8873
+- Network:       http://127.0.0.1:8873
+✓ Ready in 154ms
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\Guilherme because it is outside the current Git repository (C:\Users\Guilherme\AppData\Local\hermes\projects\compute-fund).
+ To use this directory, set `outputFileTracingRoot` in your Next.js config.
+
+✓ Running next.config.ts took 39ms
+▲ Next.js 16.4.5
+- Local:         http://127.0.0.1:8873
+- Network:       http://127.0.0.1:8873
+✓ Ready in 160ms
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\Guilherme because it is outside the current Git repository (C:\Users\Guilherme\AppData\Local\hermes\projects\compute-fund).
+ To use this directory, set `outputFileTracingRoot` in your Next.js config.
+
+✓ Running next.config.ts took 47ms

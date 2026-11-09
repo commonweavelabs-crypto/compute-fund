@@ -12,6 +12,35 @@ function daysLeft(deadline: string) {
 
 function ProjectPageInner() {
   const { slug } = useParams<{ slug: string }>();
+  const [live, setLive] = useState<Project | null>(null);
+  useEffect(() => {
+    let alive = true;
+    fetch(`/api/pubproj/${slug}`)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => {
+        if (!alive || !d || !d.name) return;
+        setLive({
+          slug: String(slug),
+          name: d.name,
+          one: d.one_liner ?? "",
+          tags: [d.status ?? "active"].map((s: string) => (s === "active" ? "LIVE" : s)),
+          raised_usd: d.funded_usd ?? 0,
+          goal_usd: d.goal_usd ?? 500,
+          tiers: [25, 100, 500],
+          receipts: (d.receipts ?? []).map((r: { id: string; ts: string; model?: string; kind?: string; tokens_in?: number; tokens_out?: number; cost_usd?: number; outcome?: string }) => ({ id: r.id ?? "", ts: r.ts, project: String(slug), model: r.model ?? "", kind: (r.kind ?? "ops") as never, tokens_in: r.tokens_in ?? 0, tokens_out: r.tokens_out ?? 0, cost_usd: r.cost_usd ?? 0, outcome: (r.outcome ?? "success") as never })),
+          org: "commons",
+          location: "on-chain receipts",
+          cfq_id: d.cfq_id ?? "CFQ-?",
+          cfq_question: d.question ?? "",
+          cfq_falsified_by: d.falsified_by ?? "",
+          deadline: d.deadline ?? "",
+          story: d.story || d.one_liner || "",
+          roadmap: Array.isArray(d.roadmap) && d.roadmap.length ? d.roadmap : [{ title: "Claim & publish the first milestone", state: "planned" as const }, { title: "Maintainer ownership verification", state: "planned" as const }],
+        } as unknown as Project);
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, [slug]);
     const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
@@ -19,17 +48,19 @@ function ProjectPageInner() {
     const id = requestAnimationFrame(() => document.documentElement.setAttribute("data-theme", theme));
     return () => cancelAnimationFrame(id);
   }, [theme]);
-  const p = projects.find(x => x.slug === slug);
+  const p = live ?? projects.find(x => x.slug === slug);
+  // hooks BEFORE the early return — the API fetch flips p from undefined to data
+  // mid-session, and a hooks-after-return layout crashes the re-render
+  const [dl, setDl] = useState<number | null>(null);
+  useEffect(() => { setDl(daysLeft(p?.deadline ?? "")); }, [p?.deadline]);
   if (!p) return (
     <main className="wrap" style={{ padding: "80px 20px" }}>
       <h1 className="nf">No such project (yet).</h1>
       <p className="onedim"><Link href="/" style={{ color: "var(--accent)" }}>← back to the grid</Link> · it may be planned, not live.</p>
     </main>
   );
-  const org = orgs[p.org];
+  const org = orgs[p.org] ?? ({ avatar: "◈", name: "Compute Fund community", location: "stewarded on Compute Fund", joined: "2026-11-01", bio: "Community-stewarded project: fund the work, receive the artifacts as public receipts. Maintainer claim is verified against upstream ownership on adopt." } as (typeof orgs)[string]);
   const pct = Math.min(100, Math.round((p.raised_usd / p.goal_usd) * 100));
-  const [dl, setDl] = useState<number | null>(null);
-  useEffect(() => { setDl(daysLeft(p.deadline)); }, [p.deadline]);
   const sum = ledgerSummary(p);
   const money = (n: number) => n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
   return (
