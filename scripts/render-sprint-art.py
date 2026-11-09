@@ -1,3 +1,4 @@
+import re
 #!/usr/bin/env python3
 """Sprint art render pipeline — Compute Fund plates via local Z-Image-Turbo.
 
@@ -134,7 +135,21 @@ def api_run():
     # per recipe: don't trust exit; verify via jobs dir + history
     return r.returncode
 
-def fetch_output(prefix, wait_s=90):
+def max_suffix(prefix):
+    """Highest _000NN_ currently in history for this prefix (pre-run watermark)."""
+    with urllib.request.urlopen(f"{SERVER}/history?max_items=12", timeout=30) as r:
+        hist = json.loads(r.read())
+    best = 0
+    for pid, h in hist.items():
+        for nid, o in (h.get("outputs") or {}).items():
+            for img in (o.get("images") or []):
+                f = img.get("filename", "")
+                if f.startswith(prefix):
+                    m = re.search(r"_(\d+)_", f)
+                    if m: best = max(best, int(m.group(1)))
+    return best
+
+def fetch_output(prefix, wait_s=90, min_suffix=0):
     """Fetch the NEWEST file for this prefix (the server reuses _000NN_ suffixes —
     a first-match walk returns a STALE prior render; proven 11/8 on blendertools:
     the fresh vector take was _00003_, first-match returned the old _00001_).
@@ -159,7 +174,7 @@ def fetch_output(prefix, wait_s=90):
                     num = int(m.group(1)) if m else 0
                     if best is None or num > best[0]:
                         best = (num, f)
-        if best:
+        if best and best[0] > min_suffix:  # STRICTLY newer than the pre-run watermark
             return best[1]
     print(f"  fetch timed out for {prefix}")
     return None
@@ -174,8 +189,9 @@ def render_one(slug, prompt, seed):
     esc = prompt.replace('"', "'")
     api_set([f"57.text={esc}", f"57.width={SIZE[0]}", f"57.height={SIZE[1]}",
              f"57.seed={seed}", f"9.filename_prefix=cf-{slug}"])
+    pre = max_suffix(f"cf-{slug}_")
     rc = api_run()
-    fn = fetch_output(f"cf-{slug}_")
+    fn = fetch_output(f"cf-{slug}_", min_suffix=pre)
     if not fn:
         raise RuntimeError(f"no output for {slug} (rc={rc})")
     dst = os.path.join(ART, f"cf-{slug}.png")
