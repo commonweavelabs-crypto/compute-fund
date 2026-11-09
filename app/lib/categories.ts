@@ -22,7 +22,7 @@ export const CATEGORY_TAXONOMY: CategoryTaxonomy[] = [
   { top: "home", subs: ["hubs & automation", "cameras & detection"] },
   { top: "education", subs: ["study & flashcards", "classroom & lms"] },
   { top: "finance", subs: ["personal finance", "business & erp"] },
-  { top: "commons", subs: ["open knowledge", "preservation", "fonts & design"] },
+  { top: "commons", subs: ["open knowledge", "preservation", "fonts & design", "public-domain revival"] },
   { top: "artcraft", subs: ["photo & light", "vector & design", "film & motion", "documents & grid", "materials & 3d"] },
   { top: "jev", subs: ["routed agents", "brains & routers", "jev tools"] },
 ];
