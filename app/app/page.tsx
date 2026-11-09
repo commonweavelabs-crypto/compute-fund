@@ -88,6 +88,7 @@ type Board = {
   picks: Cf0Card[]; // follows count desc (≥1 follow)
   funded30: Cf0Card[]; // SUM donations last 30d desc (≥1 donation row)
   staff: Cf0Card[]; // ONLY the Gui-owned staff_pick flag (≥1 → row shows)
+  bigtech: Cf0Card[]; // Featured: Big Tech open source (category slice by meta stars)
   receipts: ReceiptLine[];
   claimedMap: Record<string, number>;
   totals: { funded: number; patrons: number; runs: number };
@@ -104,7 +105,7 @@ async function loadBoard(): Promise<Board> {
   const empty: Board = {
     cards: [], pool: [], recommended: [], strip: [],
     nearly: [], launched: [], claims: [],
-    buzzing: [], forking: [], picks: [], funded30: [], staff: [], receipts: [],
+    buzzing: [], forking: [], picks: [], funded30: [], staff: [], bigtech: [], receipts: [],
     claimedMap: {}, totals: { funded: 0, patrons: 0, runs: 0 },
   };
   try {
@@ -239,6 +240,29 @@ async function loadBoard(): Promise<Board> {
     const picks = byOrder(communityPicks().map((c2) => c2.slug), (c) => !isDemoProject(c));
     const funded30 = byOrder(mostFunded30d().map((c2) => c2.slug), (c) => !isDemoProject(c));
 
+    // Featured: Big Tech open source (Gui's row, 11/8) — the same featured-slice
+    // mechanism as staff picks: category slice ORDERED BY GitHub stars (the meta
+    // join) — the giants' genuinely open repos, no inventing, auto-hidden < 4.
+    const bigtech = (() => {
+      try {
+        const slugs = db
+          .prepare(
+            `SELECT p.slug FROM projects p
+             LEFT JOIN project_github_meta m ON m.slug = p.slug
+             WHERE p.status = 'active' AND lower(p.category) = 'bigtech'
+             ORDER BY COALESCE(m.stars, 0) DESC, p.created_at DESC
+             LIMIT 8`
+          )
+          .all() as Array<{ slug: string }>;
+        return take(
+          slugs.map((s) => cards.find((c) => c.slug === s.slug)).filter((c): c is Cf0Card => !!c),
+          8
+        );
+      } catch {
+        return [];
+      }
+    })();
+
     // The three v0 board slices render after the mechanism rows — they consume
     // the seen-set next, in the same order.
     const nearly = takeSorted(4, TAB_SORTS["ending"], (p) => p.pct >= 60 && p.pct < 100);
@@ -272,7 +296,7 @@ async function loadBoard(): Promise<Board> {
       runs: (db.prepare("SELECT COUNT(*) AS n FROM receipts").get() as { n: number }).n,
     };
 
-    return { cards, pool, recommended, strip, nearly, launched, claims, buzzing, forking, picks, funded30, staff, receipts, claimedMap, totals };
+    return { cards, pool, recommended, strip, nearly, launched, claims, buzzing, forking, picks, funded30, staff, bigtech, receipts, claimedMap, totals };
   } catch (err) {
     // Hard DB failure degrades to the honest empty board (never an error page).
     console.error("home board read failed:", err);
@@ -296,6 +320,7 @@ export default async function Home() {
   const discoveryRows = (
     [
       { id: "staff-picks", title: "Staff picks", tab: "", min: 1, cards: board.staff },
+      { id: "featured-bigtech", title: "Featured: Big Tech open source", tab: "", min: 4, cards: board.bigtech, href: "/discover?cat=bigtech" },
       { id: "buzzing-now", title: "What's buzzing now", tab: "trending", min: 2, cards: board.buzzing },
       { id: "ready-for-forking", title: "Ready for forking", tab: "community", min: 2, cards: board.forking },
       { id: "community-picks", title: "Community picks", tab: "community", min: 2, cards: board.picks },
@@ -433,7 +458,7 @@ export default async function Home() {
           <div className="cf0-rowhead">
             <h2 className="cf0-h2 cf0-display">{row.title}</h2>
             <Link
-              href={row.tab ? `/discover?tab=${row.tab}` : "/discover"}
+              href={row.tab ? `/discover?tab=${row.tab}` : (row as any).href ?? "/discover"}
               className="cf0-seeall mono"
             >
               see all →

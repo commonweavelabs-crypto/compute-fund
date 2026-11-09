@@ -150,8 +150,14 @@ async function DiscoverBoard({
   // (lowercase, dashes <-> spaces), the same tolerant compare /api/categories
   // uses, so ?cat=gaming&sub=recomp-ports and a ?sub=recomp%20ports variant
   // both resolve. Unknown cats still filter (honestly empty).
+  // SPREAD-400 (Gui 11/8): ?q= = full-catalog search (star-weighted) and
+  // ?plat= = the platform FILTER (windows/mac/linux/android/ios/web — filter,
+  // never a category; platforms = the per-row CSV, NULL = unspecified).
   const catSlug = slugify(pick(sp, "cat"));
   const subSlug = slugify(pick(sp, "sub"));
+  const qRaw = (pick(sp, "q") ?? "").trim().slice(0, 80);
+  const platRaw = slugify(pick(sp, "plat"));
+  const PLATS = ["windows", "mac", "linux", "android", "ios", "web"];
   const catNorm = catSlug ? normCat(catSlug) : "";
   const subNorm = subSlug ? normCat(subSlug) : "";
   const taxTop = catNorm ? CATEGORY_TAXONOMY.find((t) => normCat(t.top) === catNorm) : undefined;
@@ -163,6 +169,11 @@ async function DiscoverBoard({
   // -- server-side pagination ------------------------------------------------
   let page = Math.max(1, parseInt(pick(sp, "page") || "1", 10) || 1);
 
+  // SPREAD-400: per-slug side map (platforms CSV + stars) driving ?plat= and
+  // the star-weighted ?q= sort without widening the card shape — assigned from
+  // the same rows read that builds the cards (inside the try below).
+  const sideMap: Record<string, { platforms: string; stars: number }> = {};
+
   let allIn: Cf0Card[] = []; // the full active board (stable unit indexing)
   let dbFailed = false;
   try {
@@ -171,11 +182,13 @@ async function DiscoverBoard({
     const rows = db
       .prepare(
         `SELECT p.slug, p.name, p.one_liner, p.cfq_id, p.budget_credits, p.deadline,
-                p.logo_path, p.repo_url, p.created_at, p.category, p.subcategory, p.claimed,
+                p.logo_path, p.repo_url, p.created_at, p.category, p.subcategory, p.claimed, p.platforms,
+                COALESCE(m.stars, 0) AS stars,
                 (SELECT COUNT(*) FROM receipts r WHERE r.project_id = p.id) AS receipts,
                 COALESCE(d.usd, 0) AS funded_usd, COALESCE(d.n, 0) AS donors,
                 o.slug AS org_slug, o.name AS org_name
          FROM projects p
+         LEFT JOIN project_github_meta m ON m.slug = p.slug
          LEFT JOIN (SELECT project_id, SUM(amount_cents) / 100.0 AS usd, COUNT(*) AS n
                     FROM donations GROUP BY project_id) d ON d.project_id = p.id
          LEFT JOIN orgs o ON o.id = p.owner_org_id
@@ -216,6 +229,14 @@ async function DiscoverBoard({
         art: artFor(String(r.slug ?? "")),
       };
     });
+    // SPREAD-400: per-slug side map (platforms CSV + stars) driving ?plat= and
+    // the star-weighted ?q= sort without widening the card shape.
+    for (const r of rows) {
+      sideMap[String(r.slug ?? "")] = {
+        platforms: String(r.platforms ?? ""),
+        stars: Number(r.stars) || 0,
+      };
+    }
   } catch (err) {
     // Hard DB failure degrades to the honest empty state — never an error page
     // (the same degrade law as /api/home).
@@ -234,11 +255,42 @@ async function DiscoverBoard({
     ? inCat.filter((c) => normCat(c.subcategory ?? "") === subNorm)
     : inCat;
 
+  // SPREAD-400: ?q= search then ?plat= platform filter (compose in order:
+  // cat -> sub -> q -> plat). Search = token AND over name/one_liner/category/
+  // subcategory; the board then ranks STAR-WEIGHTED (name-hit > token count >
+  // GitHub stars from the meta join). Platform filter = the CSV carries the
+  // slug; NULL = only matches the unspecified pseudo-bucket (honest: a project
+  // that never claimed a platform sits out of every plat filter).
+  const qTokens = qRaw.toLowerCase().split(/[\s,.-]+/).filter(Boolean);
+  if (qTokens.length) {
+    const hay = (c: Cf0Card) =>
+      `${c.name} ${c.one_liner} ${c.category ?? ""} ${c.subcategory ?? ""}`.toLowerCase();
+    const scored = cards
+      .map((c) => {
+        const h = hay(c);
+        const s = sideMap[c.slug]?.stars ?? 0;
+        const nameHit = qTokens.some((t) => c.name.toLowerCase().includes(t));
+        const tokenHits = qTokens.filter((t) => h.includes(t)).length;
+        return { c, rank: (nameHit ? 1e12 : 0) + tokenHits * 1e6 + s };
+      })
+      .filter((x) => x.rank >= 1e6)
+      .sort((a, b) => b.rank - a.rank || a.c.slug.localeCompare(b.c.slug))
+      .map((x) => x.c);
+    cards = scored;
+  }
+  const prePlat = cards; // chips count against the board BEFORE the plat filter
+  if (platRaw && !["unspecified"].includes(platRaw)) {
+    cards = cards.filter((c) => (sideMap[c.slug]?.platforms ?? "").split(",").includes(platRaw));
+  }
+
   if (hasCat) {
     // cat precedence (the documented law above): a filtered category board is
     // ALWAYS newest-first, regardless of ?tab — the tab form stays reachable
     // but a filtered category cannot be reordered by tab.
     cards.sort((a, b) => b.created_at.localeCompare(a.created_at));
+  } else if (qTokens.length) {
+    // SPREAD-400 search law: an active ?q= KEEP its star-weighted rank — the
+    // tab sort must not reshuffle search results.
   } else {
     cards = [...cards].sort(TAB_SORTS[tab]);
   }
@@ -279,6 +331,8 @@ async function DiscoverBoard({
     } else {
       qs.push(`tab=${tab}`);
     }
+    if (qRaw) qs.push(`q=${encodeURIComponent(qRaw)}`);
+    if (platRaw) qs.push(`plat=${encodeURIComponent(platRaw)}`);
     qs.push(`page=${n}`);
     return `/discover?${qs.join("&")}`;
   };
@@ -348,6 +402,34 @@ async function DiscoverBoard({
             <Link href="/discover">× clear the {prettyLabel(catLabel)} filter — the full catalog</Link>
           </p>
         )}
+        {/* SPREAD-400: platform filter chips (the ?plat= param — filter, never a
+            category; composes with cat/sub/q). Each chip preserves the board's
+            other filters and re-enters page 1; the active one is `on` and links
+            plat-less (a toggle-off). Counts = per-platform inside the CURRENT
+            board set (honest counts of what is actually here). */}
+        <div className="cf0-chiprow" aria-label="platform filter">
+          {PLATS.map((pl) => {
+            const isCur = platRaw === pl;
+            const n = prePlat
+              .filter((c) => (sideMap[c.slug]?.platforms ?? "").split(",").includes(pl)).length;
+            if (n === 0) return null; // chips of zero = dead decoration; hide them
+            const qs = new URLSearchParams();
+            if (hasCat) { qs.set("cat", catSlug); if (subSlug) qs.set("sub", subSlug); }
+            if (qRaw) qs.set("q", qRaw);
+            if (!isCur) qs.set("plat", pl);
+            return (
+              <Link
+                key={pl}
+                className={"cf0-fchip mono" + (isCur ? " on" : "")}
+                href={`/discover?${qs.toString()}`}
+                aria-current={isCur ? "page" : undefined}
+              >
+                {pl}
+                <span className="cf0-fcount">{n}</span>
+              </Link>
+            );
+          })}
+        </div>
       </section>
 
       {/* tab list = plain GET form: real <button role=tab> semantics that work
@@ -359,6 +441,8 @@ async function DiscoverBoard({
       <form method="get" action="/discover" className="tabform">
         {hasCat && <input type="hidden" name="cat" value={catSlug} />}
         {hasCat && subSlug && <input type="hidden" name="sub" value={subSlug} />}
+        {qRaw && <input type="hidden" name="q" value={qRaw} />}
+        {platRaw && <input type="hidden" name="plat" value={platRaw} />}
         <div className="tabs" role="tablist" aria-label="discover sort order">
           {TABS.map((t) => (
             <button

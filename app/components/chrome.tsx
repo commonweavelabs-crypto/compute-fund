@@ -281,6 +281,27 @@ export function AppHeader() {
             <b>COMPUTE&nbsp;FUND</b>
           </Link>
           <span className="badge-none">investors: none</span>
+          {/* SPREAD-400 (Gui 11/8): the REAL catalog search — a plain GET form
+              to /discover (?q=), star-weighted there. No JS state, scripts-off
+              safe. Replaces the old disabled fake input (removed in row1 v2). */}
+          <form method="get" action="/discover" role="search" style={{ display: "flex", alignItems: "center" }}>
+            <input
+              name="q"
+              placeholder="search the catalog"
+              aria-label="Search projects"
+              className="mono"
+              style={{
+                background: "transparent",
+                border: "1px solid #2a3540",
+                color: "inherit",
+                font: "13px ui-monospace, monospace",
+                padding: "6px 10px",
+                borderRadius: 999,
+                width: 210,
+                outline: "none",
+              }}
+            />
+          </form>
           <div className="actions">
             <Link className="ghost" href="/start">Start a project</Link>
             {user ? (

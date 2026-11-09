@@ -61,6 +61,10 @@ export function getDb(): DatabaseSync {
     // renders a real 0 for that bin, never a guessed number). Same ALTER-able
     // drift pattern as the D5 category column above.
     addCol("projects", "subcategory", "subcategory TEXT");
+    // Platform filters (Gui, 2026-11-08): platforms = CSV ("windows,mac,linux")
+    // — NULL/empty = honestly unclaimed (never guessed). Filter-only, never a
+    // category (Gui's own call).
+    addCol("projects", "platforms", "platforms TEXT");
     const projCols = conn.prepare("PRAGMA table_info(projects)").all() as Array<{ name: string }>;
     if (!projCols.some((c) => c.name === "created_at")) {
       // backfill = slug timestamp: created_at takes the slug itself as a stable,
