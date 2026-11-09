@@ -1,0 +1,13 @@
+thephantomoftheopera -> REGEN OK
+battleshippotemkin -> REGEN OK
+20000leaguesunderthesea -> ALL OFFS FAILED
+cc-1915-10-04-charlieshanghaied -> REGEN OK
+nosferatu-dvd-quality -> REGEN OK
+chelovekskinoapparatommanwithamoviecamera -> REGEN OK
+haxan-tinted-and-subtitled -> ALL OFFS FAILED
+thegeneral -> REGEN OK
+Traceback (most recent call last):
+  File "C:\Users\Guilherme\AppData\Local\hermes\projects\compute-fund\scripts\pd-regen-flagged.py", line 88, in <module>
+    ident = item_of(links[slug])
+                    ~~~~~^^^^^^
+KeyError: 'tarzanoftheapes1918andydvx'

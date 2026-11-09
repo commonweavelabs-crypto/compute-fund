@@ -15,10 +15,8 @@ PROMPT = ("Restage this silent-film still as a cinematic art card: keep the scen
           "and NO written words visible anywhere in the scene; repaint the whole frame with rich modern color "
           "grading - deep teal shadows, warm amber key light, soft film grain; full-bleed edge to edge, no borders; "
           "completely blank of any writing anywhere")
-FLAGGED = ["thephantomoftheopera", "battleshippotemkin", "20000leaguesunderthesea", "cc-1915-10-04-charlieshanghaied",
-           "nosferatu-dvd-quality", "chelovekskinoapparatommanwithamoviecamera", "haxan-tinted-and-subtitled",
-           "thegeneral", "tarzanoftheapes1918andydvx", "alicerininwonderland1915-503", "cockeyed-gems-from-the-memoirs-of-a-showgirl",
-           "cc-1918-xxxx-tripletrouble", "arizonadays", "thefourhorsemenoftheapocalyps"]
+FLAGGED = ["tarzanoftheapes1918andydivx", "aliceinwonderland1915-503", "silent-cockeyed-gems-from-the-memory-of-a-nutty-cameraman",
+           "cc-1918-xx-xx-tripletrouble", "arizonadays", "the-four-horsemen-of-the-apocalypse"]
 
 con = sqlite3.connect(f"file:{REPO}/app/compute-fund.db?mode=ro", uri=True)
 links = dict(con.execute("SELECT slug, links FROM projects WHERE subcategory='public-domain revival'").fetchall())
