@@ -33,6 +33,10 @@ export default function ProjectStartPage() {
   const [busy, setBusy] = useState(false);
   const [needAuth, setNeedAuth] = useState(false);
   const [uploading, setUploading] = useState(false);
+  // SPREAD-400 (Gui 11/9): the content-policy agreement gate — the FIRST thing
+  // a project-opener sees; the checkbox is required before the wizard renders.
+  // Acceptance POSTs an append-only policy_acks record (receipts philosophy).
+  const [ack, setAck] = useState(false);
 
   useEffect(() => {
     fetch("/api/org").then(r => r.json()).then(d => setOrgs(d.orgs ?? [])).catch(() => {});
@@ -94,6 +98,59 @@ export default function ProjectStartPage() {
           <h1 className="auth-h">Sign in to open this project.</h1>
           <p className="auth-lead">Your answers are still here when you return — sign in, then submit.</p>
           <p><a className="btn btn-primary" href={`/login?next=${encodeURIComponent("/start/project")}`}>Sign in</a></p>
+        </section>
+      </main>
+    );
+  }
+
+  if (!ack) {
+    return (
+      <main className="wrap">
+        <section className="auth-card">
+          <p className="ptitle">BEFORE YOU OPEN A PROJECT</p>
+          <h1 className="auth-h">The content agreement.</h1>
+          <p className="auth-lead" style={{ textAlign: "left", lineHeight: 1.7 }}>
+            One minute of education that protects you, everyone who funds you, and this platform:
+          </p>
+          <ul style={{ textAlign: "left", lineHeight: 1.9, margin: "14px 0 18px", paddingLeft: 22 }}>
+            <li><b>Functionality is fair game.</b> Rebuilds, recompilations, decompilations and ports of how a program <i>works</i> are lawful engineering — courts have held it (<i>Sega v. Accolade</i>, <i>Sony v. Connectix</i>).</li>
+            <li><b>Assets are not fair game.</b> Textures, models, sprites, music, characters and trademarks belong to their makers. A legal recomp with ripped textures is still a violation — make your own or license them.</li>
+            <li><b>Inside Compute Fund, you fork — never copy.</b> A fork is public and credited; the original author stays visible in the ledger.</li>
+            <li><b>Violations get pulled.</b> Verified takedown = your project goes (hidden, receipts preserved) in 48h. One honest miss = a fix window. Bad faith = removal.</li>
+          </ul>
+          <p className="auth-lead" style={{ textAlign: "left" }}>
+            Read the full policy (educational, not legal advice):{" "}
+            <Link className="mono" href="/policy/content" target="_blank" style={{ color: "var(--accent)" }}>/policy/content</Link>
+          </p>
+          <label className="lbl" style={{ display: "flex", gap: 10, alignItems: "flex-start", textAlign: "left", cursor: "pointer" }}>
+            <input
+              type="checkbox"
+              checked={ack}
+              onChange={(e) => setAck(e.target.checked)}
+              style={{ marginTop: 4 }}
+            />
+            <span className="mono">
+              I own the rights to everything I'm about to open, I've read the{" "}
+              <Link href="/policy/content" target="_blank" style={{ color: "var(--accent)" }}>Content Policy</Link>, and if I break it I accept the project being pulled and my account being reviewed.
+            </span>
+          </label>
+          <div style={{ marginTop: 18 }}>
+            <button
+              className="btn btn-primary"
+              type="button"
+              disabled={!ack}
+              onClick={() => {
+                setAck(true);
+                fetch("/api/policy/ack", { method: "POST", headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ version: "content-policy-2026-11-1" }) }).catch(() => {});
+              }}
+            >
+              Agree &amp; continue →
+            </button>
+          </div>
+          <p className="hint" style={{ marginTop: 10 }}>
+            Checkbox first, then the button. Version content-policy-2026-11-1 — acceptance logged when you're signed in.
+          </p>
         </section>
       </main>
     );
