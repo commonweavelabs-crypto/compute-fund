@@ -1,0 +1,30 @@
+CF002 — THE FORK (Leah, script 2)
+Topic: the forking mechanism — why it exists, how it works, what rent is. ~1,250 words ≈ 7 min.
+
+(bright, friendly) Hi, I'm Leah. This is Compute Fund — and today's video is about the one mechanic I think defines us: the fork. By the end of this video you'll know what forking is, why we treat it as the respectful way to reuse work, and where the money flows when two projects are connected by a fork.
+
+(calm, confident) Let's start with what a fork actually is. In open source, a fork is when someone takes a project's full history — the code, the docs, the track record — and starts building on it under a new identity. The original keeps going. The new line goes its own way. It's not theft; it's a feature of every open license. Linux has hundreds of forks. The tools you use every day began as forks of other tools.
+
+(low, controlled) But there's a cheap version of this, and you've seen it. Copying. Slapping a new name on someone's work and presenting it as your own. No credit, no lineage, no receipts. Open source licenses technically permit a lot, but a fork done without credit starves the original and pollutes the ecosystem. Inside Compute Fund, we drew a hard line: you don't copy — you fork. Publicly. With credit. On the ledger.
+
+(friendly) Here's what that means in practice. A project page on Compute Fund carries its receipts: what was funded, what ran, what got proven. When you fork a project here, the fork declares its parent. The original author's line stays visible in the ledger forever — who built the base, what they funded, what they proved. A visitor clicking your fork can walk the lineage back to the very first commit. Nothing hides.
+
+(contemplative) And now the part that makes this engine actually turn: when you fork, you pay rent. Rent is a share of what your fork brings in — a percentage of the funding that flows into your fork, routed back to the parent project. Not a fee. Not a tax. A recognition payment: you're building on someone's shoulders, and some part of what lands in your hands flows up to theirs.
+
+(warm) Why make rent automatic instead of hoping for tips? Because the honest version of open source has a failure mode we've all watched: somebody builds a base, a bigger player forks it, improves it, scales it — and the original maintainers get nothing. The base rots from neglect while the clone thrives. Rent writes the fair outcome into the machinery: the people whose work made your work possible keep earning from it, for as long as your fork exists on the platform.
+
+(calm, measured) The amounts aren't a mystery. The platform sets the share, it's capped public policy, and you can see it before you fork. If the math doesn't look good to you, you don't have to fork — you can start fresh and build from zero, and some creators will. But most people, given the choice between two months of rebuilding a working base or a small percentage back, take the percentage. That's the deal, and it's fair in both directions.
+
+(resolved) Forks also solve a quieter problem: abandonment. Open source is full of projects that stall — the maintainer moves on, the momentum dies, and the community can't tell whether the project is sleeping or gone. On Compute Fund there's a standing rule: when a project goes quiet after taking money, the platform can mark it ready for forking. That's not punishment. It's a signal that says: this base is parked; if you need it, the fair path is a fork, and the original creators still collect their rent from whatever you make of it.
+
+(friendly) For the maintainers listening: notice what this does for you. Your abandoned project — the one you felt guilty about — stops being a dead weight and becomes an earning seed. Someone adopts your base through a fork, and your receipts keep accumulating, credited, public, real. And for the forkers: you inherit a working base plus a clean paper trail of everything the original proved. You start from month ten instead of month zero.
+
+(contemplative) There's a governance layer coming to this as well — the platform tracks engagement with decaying weight rather than letting the loudest voices own it — but the fork law above is the part I want you to remember. Fork, never copy. Credit stays visible. Rent flows back. Abandoned work becomes open doors.
+
+(low, controlled) One more thing, about renaming. A fork means a new name and a new identity — your project's own name, your own art. What you adopt is the mechanism and the lineage, not the branding. If the original artwork is open-licensed, you can carry it forward; if it isn't, you make your own. On this platform there's a whole shelf of clean-room creative apps whose creators did exactly that — rebuilt familiar tools from public specifications, with their own code and their own names, and gave the source away.
+
+(contemplative) Let me make the rent real with numbers. Say a fork you built brings in a thousand dollars of patron support this month. The rent law routes a small, platform-set slice of that — call it one to two hundred — back to the parent project the day it lands, and the rest funds your work. You see the split on your project page, on their project page, in both receipts. Nobody negotiates it in DMs and nobody depends on anyone's memory. And here's the compounding part: as your fork grows and other forks branch from YOU, the same law flows upward through the whole lineage. The creator whose work started it all — maybe two years ago, maybe three forks deep — keeps collecting from every branch that grew out of theirs. A tree of work with roots that never starve.
+
+(warm) So when you're browsing eighteen hundred projects and one of them is three-quarters of what you need — you know the path now. Fork it. Build on it. Credit it. Let the rent flow. That's the Compute Fund way: a commons that keeps its builders fed.
+
+(friendly) I'm Leah, this is Compute Fund, and next time I'll walk you through the rules — the ownership line, the takedown policy, and how we keep this platform honest. See you there.
