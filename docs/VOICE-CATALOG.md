@@ -35,6 +35,9 @@ chunked manifests, `dynaudnorm` concat + libopus 64k delivery. Sample-rate law:
 
 KAI provenance note: source sample supplied directly by Gui (platform owner) for
 cloning — basis = user-provided sample, recorded here for provenance.
+CLEANUP (2026-11-10): both Kai + Leah refs rebuilt from Demucs `htdemucs --two-stems=vocals`
+vocal stems (music bed stripped); demos re-rendered from clean refs. Demucs = the
+standing cleanup tool for future samples (ComfyUI venv, demucs 4.1.0 installed).
 
 Identification method (Gui re-shares = byte-exact): his 4 picked audio files matched
 my sent oggs' exact byte sizes (plate_07/08/09/10 = 90160/84417/105819/109379 B) —
