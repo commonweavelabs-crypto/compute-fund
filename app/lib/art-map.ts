@@ -1855,6 +1855,11 @@ const ART_MAP: ReadonlyArray<readonly [string, string]> = [
   ["zy-player", "cf-zy-player.png"],
   ["hairdeck", "cf-hairdeck.png"],
   ["supacraft", "cf-supacraft.png"],
+  ["higgsfield-ai-prompt-skill", "cf-higgsfield-ai-prompt-skill.png"],
+  ["higgsfield-mcp-unified", "cf-higgsfield-mcp-unified.png"],
+  ["open-source-higgsfield", "cf-open-source-higgsfield.png"],
+  ["openjutsu", "cf-openjutsu.png"],
+  ["openstudio", "cf-openstudio.png"],
 ];
 
 // Returns a web path under /project-art/ for any slug; never throws, falls

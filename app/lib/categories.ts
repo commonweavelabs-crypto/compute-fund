@@ -29,6 +29,7 @@ export const CATEGORY_TAXONOMY: CategoryTaxonomy[] = [
   { top: "3d", subs: ["modeling & sculpting", "animation & rigging", "3d scanning & capture"] },
   { top: "robotics", subs: ["sim & control", "drones & rovers", "3d printing & firmware"] },
   { top: "bigtech", subs: ["ai models", "dev infrastructure", "frontend & runtimes"] },
+  { top: "mcp", subs: ["servers", "clients & sdks", "skills & registries"] },
 ];
 
 // slugify: lowercase, every non-alphanumeric run becomes one dash
@@ -76,6 +77,7 @@ export const CATEGORY_BLURBS: Record<string, string> = {
   "3d": "The open 3D stack — modeling, sculpting, animation and phone-camera scanning that turns photos into models.",
   robotics: "Robots, drones, printers and the firmware that moves them — hardware work with verifiable receipts.",
   bigtech: "Open source from the platform giants — every row carries a genuinely open license (MIT/Apache/BSD), no community-license hijacks.",
+  mcp: "The Model Context Protocol ecosystem — open servers, clients, SDKs and skill registries that let agents use tools.",
 };
 export const FALLBACK_BLURB =
   "One slice of the live catalog at the sort of the tabs below — fund the work, and every run posts a public receipt.";
