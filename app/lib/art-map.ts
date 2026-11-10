@@ -1853,6 +1853,7 @@ const ART_MAP: ReadonlyArray<readonly [string, string]> = [
   ["zulip", "cf-zulip.png"],
   ["zx", "cf-zx.png"],
   ["zy-player", "cf-zy-player.png"],
+  ["hairdeck", "cf-hairdeck.png"],
 ];
 
 // Returns a web path under /project-art/ for any slug; never throws, falls
