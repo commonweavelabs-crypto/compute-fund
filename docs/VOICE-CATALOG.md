@@ -23,6 +23,10 @@ chunked manifests, `dynaudnorm` concat + libopus 64k delivery. Sample-rate law:
 - **gui's note:** plate-4 of the 10-plate audition; he picked it over 9 alternatives
 
 ## STANDING CAST (approved by Gui 2026-11-10)
+**OFFICIAL VOICES for platform videos (Gui 11/10): KAI + LEAH** — at the top of the
+cast. Gui will source a male voice later ("I'll find another male voice later and
+send a sample"). Emma remains the onboarded avatar; the four library voices = support.
+
 | name | voice source (PD LibriVox solo) | F0 Hz | character | ref | sample |
 |---|---|---|---|---|---|
 | **EMMA** ✅ avatar | emma_mt_librivox | 184 | warm mid, the platform's digital avatar | refs/EMMA_ref.wav | samples/EMMA_intro.ogg |
