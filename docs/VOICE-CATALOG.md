@@ -29,7 +29,11 @@ chunked manifests, `dynaudnorm` concat + libopus 64k delivery. Sample-rate law:
 | **PERSUA** | persuasion_0912_librivox (v5) | 208 | measured, composed | refs/PERSUA_ref.wav | samples/PERSUA_sample.ogg |
 | **HEIDI** | heidi_solo_librivox | 198 | gentle, clear | refs/HEIDI_ref.wav | samples/HEIDI_sample.ogg |
 | **NORTHANGER** | northangerabbeydramatic_1502_librivox | 203 | narrator energy, dramatic-trained | refs/NORTHANGER_ref.wav | samples/NORTHANGER_sample.ogg |
-| **DAISY** | daisy_miller_0708_librivox | 178 | warm, low, intimate | refs/DAISY_ref.wav | samples/DAISY_sample.ogg |
+| **DAISY** ✅ | daisy_miller_0708_librivox | 178 | warm, low, intimate | refs/DAISY_ref.wav | samples/DAISY_sample.ogg |
+| **KAI** ✅ | Gui-provided sample (26s speech, native-inputs 11/10) | 182 | androgynous-warm, interview-crisp | refs/KAI_ref.wav | samples/KAI_sample.ogg |
+
+KAI provenance note: source sample supplied directly by Gui (platform owner) for
+cloning — basis = user-provided sample, recorded here for provenance.
 
 Identification method (Gui re-shares = byte-exact): his 4 picked audio files matched
 my sent oggs' exact byte sizes (plate_07/08/09/10 = 90160/84417/105819/109379 B) —
