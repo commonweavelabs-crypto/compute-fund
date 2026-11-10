@@ -31,6 +31,7 @@ chunked manifests, `dynaudnorm` concat + libopus 64k delivery. Sample-rate law:
 | **NORTHANGER** | northangerabbeydramatic_1502_librivox | 203 | narrator energy, dramatic-trained | refs/NORTHANGER_ref.wav | samples/NORTHANGER_sample.ogg |
 | **DAISY** ✅ | daisy_miller_0708_librivox | 178 | warm, low, intimate | refs/DAISY_ref.wav | samples/DAISY_sample.ogg |
 | **KAI** ✅ | Gui-provided sample (26s speech, native-inputs 11/10) | 182 | androgynous-warm, interview-crisp | refs/KAI_ref.wav | samples/KAI_sample.ogg |
+| **LEAH** ✅ | Gui-provided sample (20s narration, native-inputs 11/10) | 211 | bright female, precise explainer — the 213 Hz zone he originally targeted | refs/LEAH_ref.wav | samples/LEAH_sample.ogg |
 
 KAI provenance note: source sample supplied directly by Gui (platform owner) for
 cloning — basis = user-provided sample, recorded here for provenance.
