@@ -22,7 +22,20 @@ chunked manifests, `dynaudnorm` concat + libopus 64k delivery. Sample-rate law:
 - **status:** approved by Gui 2026-11-10 ("Great, save Emma")
 - **gui's note:** plate-4 of the 10-plate audition; he picked it over 9 alternatives
 
-## AUDITION POOL (vetted 2026-11-10, public-domain LibriVox solos, refs under scratch 24h — re-pullable from ids below)
+## STANDING CAST (approved by Gui 2026-11-10)
+| name | voice source (PD LibriVox solo) | F0 Hz | character | ref | sample |
+|---|---|---|---|---|---|
+| **EMMA** ✅ avatar | emma_mt_librivox | 184 | warm mid, the platform's digital avatar | refs/EMMA_ref.wav | samples/EMMA_intro.ogg |
+| **PERSUA** | persuasion_0912_librivox (v5) | 208 | measured, composed | refs/PERSUA_ref.wav | samples/PERSUA_sample.ogg |
+| **HEIDI** | heidi_solo_librivox | 198 | gentle, clear | refs/HEIDI_ref.wav | samples/HEIDI_sample.ogg |
+| **NORTHANGER** | northangerabbeydramatic_1502_librivox | 203 | narrator energy, dramatic-trained | refs/NORTHANGER_ref.wav | samples/NORTHANGER_sample.ogg |
+| **DAISY** | daisy_miller_0708_librivox | 178 | warm, low, intimate | refs/DAISY_ref.wav | samples/DAISY_sample.ogg |
+
+Identification method (Gui re-shares = byte-exact): his 4 picked audio files matched
+my sent oggs' exact byte sizes (plate_07/08/09/10 = 90160/84417/105819/109379 B) —
+no fingerprinting needed. His voice note confirmed the four-re-share intent.
+
+## AUDITION POOL (vetted 2026-11-10, public-domain LibriVox solos)
 | # | source id | F0 Hz | wps | note |
 |---|---|---|---|---|
 | 1 | jane_eyre_ver03_0809_librivox | 200 | 2.55 | classic steady |
