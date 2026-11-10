@@ -282,8 +282,15 @@ export function insertProject(p: Record<string, unknown>) {
 }
 export function nextCfqId(): string {
   const year = new Date().getFullYear();
-  const row = db.prepare("SELECT COUNT(*) AS n FROM projects").get() as { n: number };
-  return `CFQ-${year}-${String(row.n + 1).padStart(3, "0")}`;
+  // MAX(numeric)+1, NOT COUNT(*)+1: row deletions (dup scrubs) shrink COUNT()
+  // and a count-based id collides with an already-issued one (UNIQUE burn).
+  const existing = db.prepare("SELECT cfq_id AS c FROM projects").all() as Array<{ c: string|number}>;
+  let mx = 0;
+  for (const r of existing) {
+    const m = String(r.c ?? "").match(/-(\d+)$/);
+    if (m) { const n = parseInt(m[1], 10); if (n > mx) mx = n; }
+  }
+  return `CFQ-${year}-${String(mx + 1).padStart(3, "0")}`;
 }
 
 // -- orgs (MVP create-flow; TRANSFERABLE law: owner may move projects) ---------
