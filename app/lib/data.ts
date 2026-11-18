@@ -31,6 +31,8 @@ export type Project = {
   deadline: string;        // ISO date (days-left computed client-side)
   story: string;           // project page narrative
   roadmap: { title: string; state: "done" | "active" | "planned" }[];
+  repo_url?: string;                                 // upstream source (GitHub or Hugging Face)
+  links?: { label: string; url: string }[];          // upstream artifacts (model card, downloads, paper...)
 };
 
 // ---- grounded demo data -------------------------------------------------

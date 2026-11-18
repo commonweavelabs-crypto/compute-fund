@@ -35,6 +35,8 @@ function ProjectPageInner() {
           cfq_falsified_by: d.falsified_by ?? "",
           deadline: d.deadline ?? "",
           story: d.story || d.one_liner || "",
+          repo_url: d.repo_url ?? undefined,
+          links: Array.isArray(d.links) ? d.links : [],
           roadmap: Array.isArray(d.roadmap) && d.roadmap.length ? d.roadmap : [{ title: "Claim & publish the first milestone", state: "planned" as const }, { title: "Maintainer ownership verification", state: "planned" as const }],
         } as unknown as Project);
       })
@@ -116,6 +118,28 @@ function ProjectPageInner() {
           <div className="col">
             <h2>The work</h2>
             <p className="story">{p.story}</p>
+            {(p.repo_url || (p.links ?? []).length > 0) && (
+              <div style={{ marginTop: 10, fontSize: "0.92em" }}>
+                {p.repo_url && (
+                  <div>
+                    <span style={{ opacity: 0.72 }}>
+                      Upstream {new URL(p.repo_url).hostname.replace("www.", "")}:
+                    </span>{" "}
+                    <a href={p.repo_url} target="_blank" rel="noreferrer noopener" style={{ color: "inherit" }}>
+                      {p.repo_url}
+                    </a>
+                  </div>
+                )}
+                {(p.links ?? []).map((l, i) => (
+                  <div key={i}>
+                    <span style={{ opacity: 0.72 }}>{l.label}:</span>{" "}
+                    <a href={l.url} target="_blank" rel="noreferrer noopener" style={{ color: "inherit" }}>
+                      {l.url}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           <div className="col">
             <h2>Roadmap</h2>
