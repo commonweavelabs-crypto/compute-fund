@@ -158,6 +158,7 @@ async function DiscoverBoard({
   const subSlug = slugify(pick(sp, "sub"));
   const qRaw = (pick(sp, "q") ?? "").trim().slice(0, 80);
   const platRaw = slugify(pick(sp, "plat"));
+  const tagRaw = slugify(pick(sp, "tag"));
   const PLATS = ["windows", "mac", "linux", "android", "ios", "web"];
   const catNorm = catSlug ? normCat(catSlug) : "";
   const subNorm = subSlug ? normCat(subSlug) : "";
@@ -183,7 +184,7 @@ async function DiscoverBoard({
     const rows = db
       .prepare(
         `SELECT p.slug, p.name, p.one_liner, p.cfq_id, p.budget_credits, p.deadline,
-                p.logo_path, p.repo_url, p.created_at, p.category, p.subcategory, p.claimed, p.platforms,
+                p.logo_path, p.repo_url, p.created_at, p.category, p.subcategory, p.claimed, p.platforms, p.tags,
                 COALESCE(m.stars, 0) AS stars,
                 (SELECT COUNT(*) FROM receipts r WHERE r.project_id = p.id) AS receipts,
                 COALESCE(d.usd, 0) AS funded_usd, COALESCE(d.n, 0) AS donors,
@@ -224,6 +225,7 @@ async function DiscoverBoard({
         follows: fols[String(r.slug ?? "")] ?? 0,
         category: (r.category as string | null) ?? null,
         subcategory: (r.subcategory as string | null) ?? null,
+        tagsJson: typeof r.tags === 'string' ? r.tags : null,
         claimed: Number(r.claimed) ? 1 : 0,
         receipts: Number(r.receipts) || 0,
         unit: String(42 + i).padStart(4, "0"),
@@ -288,8 +290,8 @@ async function DiscoverBoard({
   };
   const qExpanded = [...new Set(qTokens.flatMap((t) => SYN[t] ? [t, ...SYN[t]] : [t]))];
   if (qTokens.length) {
-    const hay = (c: Cf0Card) =>
-      `${c.name} ${c.one_liner} ${c.category ?? ""} ${c.subcategory ?? ""}`.toLowerCase();
+    const hay = (c: Cf0Card & { tagsJson?: string | null }) =>
+      `${c.name} ${c.one_liner} ${c.category ?? ""} ${c.subcategory ?? ""} ${(c as any).tagsJson ?? ""}`.toLowerCase();
     const scored = cards
       .map((c) => {
         const h = hay(c);
@@ -306,6 +308,14 @@ async function DiscoverBoard({
   const prePlat = cards; // chips count against the board BEFORE the plat filter
   if (platRaw && !["unspecified"].includes(platRaw)) {
     cards = cards.filter((c) => (sideMap[c.slug]?.platforms ?? "").split(",").includes(platRaw));
+  }
+  // D5.2 tag filter: ?tag= matches the inferred tag set (dashes/space tolerant)
+  if (tagRaw) {
+    const tn = tagRaw.replace(/-/g, " ");
+    cards = cards.filter((c) => {
+      try { return JSON.parse((c as any).tagsJson ?? "[]").some((t: string) => String(t).toLowerCase().replace(/-/g, " ") === tn); }
+      catch { return false; }
+    });
   }
 
   if (hasCat) {

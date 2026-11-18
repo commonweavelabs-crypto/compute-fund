@@ -27,6 +27,7 @@ import { artFor, artThumb, THUMB_W, THUMB_H, HERO_THUMB } from "../lib/art-map";
 import { DaysLeft } from "../app/discover/DaysLeft";
 
 export type Cf0Card = HomeCard & {
+  tagsJson?: string | null;
   claimed?: number; // 1 | 0 | undefined (unknown on tab-fetched cards → resolved via claimedMap)
   unit: string; // v0 furniture: board index + 42, zero-padded (placeholder numbering)
   art: string; // /project-art/<file> from lib/art-map.ts

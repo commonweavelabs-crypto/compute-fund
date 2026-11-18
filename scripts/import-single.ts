@@ -13,6 +13,11 @@ import { pathToFileURL, fileURLToPath } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 process.chdir(path.join(repoRoot, "app"));
+const fsTags = await import("node:fs");
+const queuePathNow = path.join(repoRoot, "docs", "pending-plates.json");
+let qNow: any = { pending: [] };
+try { qNow = JSON.parse(fsTags.readFileSync(queuePathNow, "utf-8")); } catch {}
+if (!Array.isArray(qNow.pending)) qNow.pending = [];
 const { ensureSystemUser, insertStubProject, nextCfqId, newId, getDb } = await import(pathToFileURL(path.join(repoRoot, "app/lib/db.ts")).href);
 getDb();
 
@@ -77,6 +82,19 @@ insertStubProject({
   owner_org_id: null, claimed: 0,
 });
 db.prepare(`UPDATE projects SET category=?, subcategory=? WHERE slug=?`).run(category, subcategory, slug);
+const TAG_EXT: Record<string, string[]> = {
+  hardware: ["verilog", "fpga", "hdl", "schematic", "pcb", "silicon", "firmware"],
+  marketing: ["marketing", "outreach", "social", "scheduler", "crm", "email", "brand"],
+  gaming: ["game", "gaming", "emu", "recomp", "decomp", "sprite", "console", "retro"],
+  "3d": ["3d", "mesh", "blender", "sculpt", "scan", "glb"],
+  artcraft: ["photo", "photoshop", "illustrator", "paint", "psd", "vector"],
+  audio: ["audio", "music", "synth", "daw"],
+};
+const hay = `${oneLiner}`.toLowerCase();
+const tset = [category, ...Object.entries(TAG_EXT)
+  .filter(([t, ws]) => t !== category && (ws.some((w) => hay.includes(w)) || hay.includes(category.split("-")[0] ?? "")))
+  .map(([t]) => t), "open-source"].slice(0, 5);
+db.prepare(`UPDATE projects SET tags=? WHERE slug=?`).run(JSON.stringify(tset), slug);
 
 // queue art for the batch pass (rendered when batch fills or on next art run)
 const queuePath = path.join(repoRoot, "docs", "pending-plates.json");
