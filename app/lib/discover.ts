@@ -347,6 +347,33 @@ export function staffPicks(): string[] {
 //   4. velocity fill — remaining ACTIVE projects by velocity desc
 // Anonymous: just the velocity fill (the board's own momentum).
 // The category step is the seam that improves when category data becomes real.
+
+// D5.2 "For You" (Gui 11/18): per-user suggestions = the affinity ladder
+// (own follows -> own funded -> same-category velocity -> global velocity)
+// with the already-interacted slugs REMOVED (a suggestion must be new).
+// Private by construction: the affinity input = the user's own events; the
+// output = only the caller sees it, keyed to the request user. Degrade-safe.
+export function forYou(userId?: string | null, limit = 6): string[] {
+  if (!userId) return [];
+  try {
+    const interacted = new Set<string>();
+    for (const r of db.prepare(`SELECT p.slug AS slug FROM follows f JOIN projects p ON p.id = f.project_id WHERE f.user_id = ?`).all(userId) as Array<{ slug: string }>) interacted.add(r.slug);
+    for (const r of db.prepare(`SELECT p.slug AS slug FROM donations d JOIN projects p ON p.id = d.project_id WHERE d.user_id = ?`).all(userId) as Array<{ slug: string }>) interacted.add(r.slug);
+    const ladder = affinity(userId).filter((s) => !interacted.has(s));
+    // active projects only
+    const out: string[] = [];
+    const seen = new Set<string>();
+    for (const s of ladder) {
+      if (out.length >= limit) break;
+      if (seen.has(s)) continue;
+      const p = db.prepare(`SELECT slug FROM projects WHERE slug = ? AND status = 'active'`).get(s) as { slug: string } | undefined;
+      if (!p) continue;
+      out.push(s); seen.add(s);
+    }
+    return out;
+  } catch { return []; }
+}
+
 export function affinity(userId?: string | null): string[] {
   const seen = new Set<string>();
   const out: string[] = [];

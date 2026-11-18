@@ -57,7 +57,8 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { db } from "../../lib/db";
-import { velocityBySlug, followsBySlug } from "../../lib/discover";
+import { velocityBySlug, followsBySlug , forYou} from "../../lib/discover";
+import { currentUser } from "../../lib/auth";
 import type { HomeCard, TabId } from "../api/home/route";
 import { CATEGORY_TAXONOMY, normCat, prettyLabel, slugify, categoryBlurb } from "../../lib/categories";
 import { artFor } from "../../lib/art-map";
@@ -262,6 +263,30 @@ async function DiscoverBoard({
   // slug; NULL = only matches the unspecified pseudo-bucket (honest: a project
   // that never claimed a platform sits out of every plat filter).
   const qTokens = qRaw.toLowerCase().split(/[\s,.-]+/).filter(Boolean);
+  // D5.2 search synonyms (Gui: "make it more like Google"): purpose-words alias
+  // to the vocabulary that actually lives in one-liners. Adjust the map; the
+  // engine stays modular. Original tokens always kept.
+  const SYN: Record<string, string[]> = {
+    social: ["social", "media", "twitter", "x", "mastodon", "post", "scheduler"],
+    media: ["media", "social", "post", "scheduler"],
+    marketing: ["marketing", "outreach", "crm", "scheduler", "social", "email"],
+    outreach: ["outreach", "crm", "email", "marketing"],
+    email: ["email", "mail", "smtp", "inbox"],
+    gpu: ["gpu", "verilog", "fpga", "cuda", "graphics"],
+    hardware: ["hardware", "verilog", "fpga", "firmware", "schematic", "pcb", "hdl"],
+    chat: ["chat", "chatbot", "assistant", "llm"],
+    agent: ["agent", "mcp", "bot", "assistant", "ai"],
+    ai: ["ai", "llm", "agent", "model"],
+    photo: ["photo", "image", "psd", "editor"],
+    video: ["video", "edit", "transcode", "movie"],
+    game: ["game", "gaming", "emu", "recomp", "decomp"],
+    games: ["game", "gaming", "emu", "recomp", "decomp"],
+    music: ["audio", "music", "synth", "daw"],
+    scheduler: ["scheduler", "cron", "calendar", "social"],
+    pdf: ["pdf", "reader"],
+    notes: ["notes", "markdown", "journal", "docs"],
+  };
+  const qExpanded = [...new Set(qTokens.flatMap((t) => SYN[t] ? [t, ...SYN[t]] : [t]))];
   if (qTokens.length) {
     const hay = (c: Cf0Card) =>
       `${c.name} ${c.one_liner} ${c.category ?? ""} ${c.subcategory ?? ""}`.toLowerCase();
@@ -269,8 +294,8 @@ async function DiscoverBoard({
       .map((c) => {
         const h = hay(c);
         const s = sideMap[c.slug]?.stars ?? 0;
-        const nameHit = qTokens.some((t) => c.name.toLowerCase().includes(t));
-        const tokenHits = qTokens.filter((t) => h.includes(t)).length;
+        const nameHit = qExpanded.some((t) => c.name.toLowerCase().includes(t));
+        const tokenHits = qExpanded.filter((t) => h.includes(t)).length;
         return { c, rank: (nameHit ? 1e12 : 0) + tokenHits * 1e6 + s };
       })
       .filter((x) => x.rank >= 1e6)
@@ -300,6 +325,32 @@ async function DiscoverBoard({
   const total = cards.length;
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
   if (page > totalPages) page = totalPages;
+  // D5.2 "FOR YOU" (Gui 11/18): logged-in personal band — the affinity ladder,
+  // already-interacted removed, active-only. Private: sourced from the user's
+  // own events; renders only for that user. Degrades to nothing when signed out.
+  const fuRows: Cf0Card[] = [];
+  let fuUser: string | null = null;
+  try {
+    const cu = await currentUser();
+    if (cu) {
+      fuUser = (cu as { id: string }).id;
+      const slugs = forYou(fuUser, 4);
+      for (const s of slugs) {
+        const r = db.prepare(
+          `SELECT p.slug, p.name, p.one_liner, p.cfq_id, p.logo_path, p.claimed,
+                  COALESCE(m.stars, 0) AS stars
+           FROM projects p LEFT JOIN project_github_meta m ON m.slug = p.slug
+           WHERE p.slug = ? AND p.status = 'active'`).get(s) as Record<string, any> | undefined;
+        if (r) fuRows.push({
+          slug: String(r.slug), name: String(r.name), one_liner: String(r.one_liner),
+          cfq_id: String(r.cfq_id ?? ""), budget_credits: 0, funded_usd: 0, donors: 0,
+          pct: 0, fraction: 0, deadline: "", logo_path: (r.logo_path as string) ?? null,
+          repo_url: null, created_at: "", org_slug: null, org_name: null,
+          velocity: 0, follows: 0, claimed: (r.claimed as number) ?? 0,
+        } as unknown as Cf0Card);
+      }
+    }
+  } catch {}
   const pageCards = dbFailed ? [] : cards.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   const activeTab = hasCat
@@ -484,6 +535,17 @@ async function DiscoverBoard({
           {/* the v0 MediaCard grid — the homepage's card anatomy (funded /
               pct / vbar / claim-it), full honest board (demo exclusion is a
               homepage curation law, never applied here) */}
+
+          {fuRows.length > 0 && (
+            <div className="cf0-mechrow" id="foryou-band" style={{ marginTop: 12 }}>
+              <p className="ptitle" style={{ marginBottom: 8 }}>FOR YOU{fuUser ? "" : ""}</p>
+              <div className="cf0-cards">
+                {fuRows.map((r) => (
+                  <MediaCard key={r.slug} p={r} idx={0} claimedMap={claimedMap} />
+                ))}
+              </div>
+            </div>
+          )}
           <div
             className="cf0-cards"
             id="discover-panel"
