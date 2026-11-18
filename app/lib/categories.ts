@@ -30,6 +30,8 @@ export const CATEGORY_TAXONOMY: CategoryTaxonomy[] = [
   { top: "robotics", subs: ["sim & control", "drones & rovers", "3d printing & firmware"] },
   { top: "bigtech", subs: ["ai models", "dev infrastructure", "frontend & runtimes"] },
   { top: "mcp", subs: ["servers", "clients & sdks", "skills & registries"] },
+  { top: "hardware", subs: ["fpga & hdl", "schematics & pcbs", "firmware & embedded", "3d-printable parts"] },
+  { top: "marketing", subs: ["social & schedulers", "outreach & crm", "email tools"] },
 ];
 
 // slugify: lowercase, every non-alphanumeric run becomes one dash
@@ -76,6 +78,8 @@ export const CATEGORY_BLURBS: Record<string, string> = {
   productivity: "The apps that live in your daily flow — desktop utilities, launchers, agent dashboards, notes. Fund the ones you open every day.",
   "3d": "The open 3D stack — modeling, sculpting, animation and phone-camera scanning that turns photos into models.",
   robotics: "Robots, drones, printers and the firmware that moves them — hardware work with verifiable receipts.",
+  hardware: "Open silicon: HDL designs, schematics, firmware and printable parts — the blueprints are the product, funded and receipted.",
+  marketing: "Open tools for reach: social schedulers, outreach and email infrastructure the community can self-host.",
   bigtech: "Open source from the platform giants — every row carries a genuinely open license (MIT/Apache/BSD), no community-license hijacks.",
   mcp: "The Model Context Protocol ecosystem — open servers, clients, SDKs and skill registries that let agents use tools.",
 };

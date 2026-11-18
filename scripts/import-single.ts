@@ -26,7 +26,10 @@ const ALLOW = new Set(["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "GPL
 if (!fullName || !fullName.includes("/")) { console.error("usage: --repo OWNER/NAME [--category c] [--subcategory s]"); process.exit(2); }
 const gh = await (await fetch(`https://api.github.com/repos/${fullName}`, { headers: { "User-Agent": "compute-fund-import" } })).json() as Record<string, any>;
 if (!gh.full_name) { console.error(`FAIL: GitHub API returned no repo (${fullName})`); process.exit(1); }
-const lic: string = gh.license?.spdx_id ?? "unlicensed";
+// triad override: --license-override SPDX = the LICENSE FILE was human-verified
+// (GitHub auto-detect misses custom files/preambles) — recorded in the receipt text.
+const licOverride = argv.indexOf("--license-override") >= 0 ? argv[argv.indexOf("--license-override") + 1] : null;
+const lic: string = licOverride ?? gh.license?.spdx_id ?? "unlicensed";
 const stars: number = gh.stargazers_count ?? 0;
 const pushed: string = (gh.pushed_at ?? "").slice(0, 10);
 const desc = String(gh.description ?? "").replace(/["\\\n]/g, " ").trim();
@@ -34,7 +37,8 @@ const daysIdle = Math.round((Date.now() - Date.parse(gh.pushed_at ?? new Date().
 const grade = stars >= 400 ? "A" : stars >= 100 ? "B" : "C";
 
 const gateFail: string[] = [];
-if (!ALLOW.has(lic)) gateFail.push(`license ${lic} not in allowlist`);
+if (!ALLOW.has(lic)) gateFail.push("license " + lic + " not in allowlist");
+if (licOverride && !ALLOW.has(licOverride)) gateFail.push("license override " + licOverride + " not in allowlist");
 if (daysIdle > 365) gateFail.push(`inactive (idle ${daysIdle}d)`);
 if (!desc) gateFail.push("no honest description");
 if (grade === "C") gateFail.push("grade C (thin project) — flag-only under the strict law");

@@ -4,6 +4,14 @@
  "pending": [
   "estella",
   "spritecast",
-  "rune"
+  "rune",
+  "logisim-evolution",
+  "yosys",
+  "skywater-pdk",
+  "esp-idf",
+  "kicad-source-mirror",
+  "openwifi",
+  "postiz-app",
+  "litex"
  ]
 }
