@@ -57,7 +57,7 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { db } from "../../lib/db";
-import { velocityBySlug, followsBySlug , forYou} from "../../lib/discover";
+import { velocityBySlug, followsBySlug , forYou, logSearch } from "../../lib/discover";
 import { currentUser } from "../../lib/auth";
 import type { HomeCard, TabId } from "../api/home/route";
 import { CATEGORY_TAXONOMY, normCat, prettyLabel, slugify, categoryBlurb } from "../../lib/categories";
@@ -269,7 +269,7 @@ async function DiscoverBoard({
   // to the vocabulary that actually lives in one-liners. Adjust the map; the
   // engine stays modular. Original tokens always kept.
   const SYN: Record<string, string[]> = {
-    social: ["social", "media", "twitter", "x", "mastodon", "post", "scheduler"],
+    social: ["social", "media", "twitter", "mastodon", "post", "scheduler"],
     media: ["media", "social", "post", "scheduler"],
     marketing: ["marketing", "outreach", "crm", "scheduler", "social", "email"],
     outreach: ["outreach", "crm", "email", "marketing"],
@@ -329,6 +329,9 @@ async function DiscoverBoard({
   } else {
     cards = [...cards].sort(TAB_SORTS[tab]);
   }
+  // D5.3: log the search — q + the final result count (after the q filter,
+  // before pagination), anonymized: only the query and the count are recorded.
+  if (qRaw) logSearch(qRaw, cards.length);
 
   // The pagination slice: 8 per page; ?page beyond the last clamps to it (the
   // status line still carries the full honest count).

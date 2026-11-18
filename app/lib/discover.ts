@@ -75,6 +75,30 @@ function sweepViewSeen(now: number) {
   for (const [k, t] of viewSeen) if (now - t > 5000) viewSeen.delete(k);
 }
 
+
+// D5.3 SEARCH SIGNALS (Gui 11/18): the community's searches become an open,
+// anonymized dataset. Law: a search row carries ONLY (at, q, n_results) —
+// never a user id, fingerprint, IP or session. Zero-result queries are the
+// category-gap signal; hot queries = the demand signal. Public dashboards +
+// open-data JSON are the only consumers. Iron-law honest: real events only.
+const searchSeen = new Map<string, number>();
+function sweepSearchSeen(now: number): void {
+  for (const [k, t] of searchSeen) if (now - t > 15000) searchSeen.delete(k);
+}
+// bucket dedupe: Next renders a route more than once per request (PPR flight +
+// render) — same bucket = same page request, logged once.
+export function logSearch(qRaw: string, nResults: number): void {
+  try { db.prepare(`CREATE TABLE IF NOT EXISTS search_queries (at TEXT NOT NULL, q TEXT NOT NULL, n_results INTEGER NOT NULL)`).run(); } catch {}
+  try {
+    const bucket = Math.floor(Date.now() / 60_000);
+    const key = `s:${qRaw.toLowerCase()}:${nResults}:${bucket}`;
+    const now = Date.now();
+    if (now - (searchSeen.get(key) ?? 0) < 2000) return;
+    sweepSearchSeen(now);
+    db.prepare(`INSERT INTO search_queries (at, q, n_results) VALUES (?, ?, ?)`).run(new Date().toISOString(), qRaw.slice(0, 120), nResults);
+    searchSeen.set(key, now);
+  } catch {}
+}
 export function recordView(slug: string, fingerprint: string, userId?: string | null): boolean {
   try {
     const p = db.prepare(`SELECT id, status FROM projects WHERE slug = ?`).get(slug) as
