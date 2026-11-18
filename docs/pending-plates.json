@@ -12,6 +12,8 @@
   "kicad-source-mirror",
   "openwifi",
   "postiz-app",
-  "litex"
+  "litex",
+  "raon-speech",
+  "raon-opentts"
  ]
 }
