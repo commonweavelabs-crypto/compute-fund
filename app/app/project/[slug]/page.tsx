@@ -89,7 +89,7 @@ function ProjectPageInner() {
               <span className="tag">{p.location}</span>
             </div>
             <h1>{p.name}</h1>
-            <div className="pmeta">{mounted ? (dl !== null && dl > 0 ? `${dl} days left` : "ended") : "—"} • {pct}% funded</div>
+            <div className="pmeta">{mounted ? (dl !== null && dl > 0 ? `${dl} days left` : "open — no deadline yet") : "—"} • {pct}% funded</div>
             <div className="prog">
               <div className="row"><span>{money(p.raised_usd)} / {money(p.goal_usd)}</span><span className="pct">{pct}%</span></div>
               <div className="bar"><i style={{ ["--pct" as string]: `${pct}%` }} /></div>
