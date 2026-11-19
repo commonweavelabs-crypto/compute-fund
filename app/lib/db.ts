@@ -65,6 +65,12 @@ export function getDb(): DatabaseSync {
     // — NULL/empty = honestly unclaimed (never guessed). Filter-only, never a
     // category (Gui's own call).
     addCol("projects", "platforms", "platforms TEXT");
+    // CFR v0 sub-scores (seed frozen at import; community/receipts internal-only).
+    addCol("projects", "cfr_seed", "cfr_seed REAL");
+    addCol("projects", "cfr_community", "cfr_community REAL");
+    addCol("projects", "cfr_receipts", "cfr_receipts REAL");
+    addCol("projects", "cfr_at", "cfr_at TEXT");
+    addCol("users", "prefs", "prefs TEXT");
     // Content-policy acceptance audit (append-only; the /start gate POSTs here).
     _db.exec(`CREATE TABLE IF NOT EXISTS policy_acks (
       id TEXT PRIMARY KEY, user_id TEXT NOT NULL, version TEXT NOT NULL,

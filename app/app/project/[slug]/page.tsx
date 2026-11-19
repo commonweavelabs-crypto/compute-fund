@@ -35,6 +35,7 @@ function ProjectPageInner() {
           cfq_falsified_by: d.falsified_by ?? "",
           deadline: d.deadline ?? "",
           story: d.story || d.one_liner || "",
+          cfr: d.cfr ?? undefined,
           repo_url: d.repo_url ?? undefined,
           links: Array.isArray(d.links) ? d.links : [],
           roadmap: Array.isArray(d.roadmap) && d.roadmap.length ? d.roadmap : [{ title: "Claim & publish the first milestone", state: "planned" as const }, { title: "Maintainer ownership verification", state: "planned" as const }],
@@ -89,7 +90,11 @@ function ProjectPageInner() {
               <span className="tag">{p.location}</span>
             </div>
             <h1>{p.name}</h1>
-            <div className="pmeta">{mounted ? (dl !== null && dl > 0 ? `${dl} days left` : "open — no deadline yet") : "—"} • {pct}% funded</div>
+            <div className="pmeta">{mounted ? (dl !== null && dl > 0 ? `${dl} days left` : "open — no deadline yet") : "—"} • {pct}% funded{p.cfr && (
+            <span style={{ opacity: 0.75, marginLeft: 10 }} className="mono" title={`seed ${p.cfr.seed.toFixed(1)} · community ${p.cfr.community.toFixed(1)} · receipts ${p.cfr.receipts.toFixed(1)} (compute-fund rating: frozen import seed + community + receipts)`}>
+              CFR {(p.cfr.seed + p.cfr.community + p.cfr.receipts).toFixed(1)}
+            </span>
+          )}</div>
             <div className="prog">
               <div className="row"><span>{money(p.raised_usd)} / {money(p.goal_usd)}</span><span className="pct">{pct}%</span></div>
               <div className="bar"><i style={{ ["--pct" as string]: `${pct}%` }} /></div>

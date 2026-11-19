@@ -328,9 +328,8 @@ export function AppHeader() {
                     <Link role="menuitem" className="cf0-menuitem" href="/account" onClick={() => setMenuOpen(false)}>
                       My projects &amp; dashboard
                     </Link>
-                    {/* platform settings anchor: /account carries no #settings
-                        section yet — the anchor-safe landing is plain /account. */}
-                    <Link role="menuitem" className="cf0-menuitem" href="/account" onClick={() => setMenuOpen(false)}>
+                    {/* D1.4: real settings screen (toggles + consent receipts). */}
+                    <Link role="menuitem" className="cf0-menuitem" href="/account/settings" onClick={() => setMenuOpen(false)}>
                       Platform settings
                     </Link>
                     <button role="menuitem" type="button" className="cf0-menuitem" onClick={logOut}>
