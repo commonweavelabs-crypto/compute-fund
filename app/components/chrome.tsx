@@ -441,6 +441,8 @@ export function AppFooter() {
         </div>
         <div>
           <h4>About</h4>
+          <Link href="/report">Report &amp; contact</Link>
+          <Link href="/account/settings">Platform settings</Link>
           <Link href="/account">My projects &amp; dashboard</Link>
           <Link href="/guide#law">Our rules</Link>
           <Link href="https://github.com/commonweavelabs-crypto/compute-fund">Source code</Link>

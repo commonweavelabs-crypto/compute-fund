@@ -78,7 +78,12 @@ export function getDb(): DatabaseSync {
     // Data-consent acceptance audit (append-only; the /account consent gate POSTs here).
     _db.exec(`CREATE TABLE IF NOT EXISTS privacy_acks (
       id TEXT PRIMARY KEY, user_id TEXT NOT NULL, version TEXT NOT NULL,
-      at TEXT NOT NULL DEFAULT (datetime('now')))`);
+      at TEXT NOT NULL DEFAULT (datetime('now')))`)
+    // Inbox: bugs, feature requests, takedowns, contact (the /report page writes here).
+    _db.exec(`CREATE TABLE IF NOT EXISTS reports (
+      id TEXT PRIMARY KEY, kind TEXT NOT NULL, subject TEXT NOT NULL,
+      body TEXT NOT NULL, email TEXT, user_id TEXT, url TEXT,
+      status TEXT NOT NULL DEFAULT 'new', at TEXT NOT NULL DEFAULT (datetime('now')))`);
     const projCols = conn.prepare("PRAGMA table_info(projects)").all() as Array<{ name: string }>;
     if (!projCols.some((c) => c.name === "created_at")) {
       // backfill = slug timestamp: created_at takes the slug itself as a stable,
