@@ -16,6 +16,17 @@ export default function AccountPage() {
   const [savedNote, setSavedNote] = useState("");
   const [orgName, setOrgName] = useState("");
   const [orgCreating, setOrgCreating] = useState(false);
+  // D1.4 DATA CONSENT: version-gated. Not acked (or an older version) = the
+  // honest consent screen greets before the dashboard; re-agree on big updates.
+  const [consentState, setConsentState] = useState<"pending" | "needed" | "ok">("pending");
+  const [ck, setCk] = useState(false);
+  const [consentBusy, setConsentBusy] = useState(false);
+  useEffect(() => {
+    fetch("/api/privacy/ack").then(r => r.json()).then(d => {
+      setConsentState(d.acked === "data-consent-2026-11-1" ? "ok" : "needed");
+    }).catch(() => setConsentState("ok")); // fail-open: never lock the dashboard on a probe error
+  }, []);
+
 
   useEffect(() => {
     fetch("/api/account").then(r => r.json()).then(d => {
@@ -59,6 +70,64 @@ export default function AccountPage() {
 
   if (loading) return <main className="wrap"><p className="onedim">loading…</p></main>;
   if (!me) return <main className="wrap"><p className="onedim">Not signed in. <Link href="/login">Log in</Link></p></main>;
+
+  if (consentState !== "ok") {
+    return (
+      <main className="wrap" style={{ maxWidth: 720, minHeight: "80vh", display: "flex", alignItems: "stretch", justifyContent: "center" }}>
+        <section style={{
+          width: "100%", alignSelf: "center",
+          border: "1px solid rgba(255,255,255,0.14)", borderRadius: 18,
+          padding: "34px 34px 28px", background: "rgba(255,255,255,0.03)",
+        }}>
+          <h1 style={{"fontSize": "clamp(1.6rem, 4vw, 2.2rem)", margin: "0 0 6px", letterSpacing: "-0.02em"}}>Your data. Your rules.</h1>
+          <p className="mono" style={{ opacity: 0.65, margin: "0 0 20px", fontSize: "0.85rem" }}>what we record — and never record — before you set foot inside your dashboard</p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 14, fontSize: "0.97rem", lineHeight: 1.55 }}>
+            <div style={{ borderLeft: "3px solid currentColor", paddingLeft: 12, opacity: 0.92 }}>
+              <strong>Your clicks power your suggestions.</strong>
+              <div style={{ opacity: 0.78, fontSize: "0.92em" }}>Signed-in activity shapes your feed — for your eyes only. Never sold, never an ad.</div>
+            </div>
+            <div style={{ borderLeft: "3px solid currentColor", paddingLeft: 12, opacity: 0.92 }}>
+              <strong>Searches are logged anonymized.</strong>
+              <div style={{ opacity: 0.78, fontSize: "0.92em" }}>Only the query, the timestamp, and the result count. No user id, no IP, no fingerprint — ever.</div>
+            </div>
+            <div style={{ borderLeft: "3px solid currentColor", paddingLeft: 12, opacity: 0.92 }}>
+              <strong>Aggregates belong to everyone.</strong>
+              <div style={{ opacity: 0.78, fontSize: "0.92em" }}>
+                Community-level stats are published as open data (CC0),
+                identity-free by design — and <a href="/privacy/data" style={{ color: "inherit", textDecoration: "underline" }}>the full policy lives here</a>.
+              </div>
+            </div>
+          </div>
+
+          <label style={{ display: "flex", gap: 10, alignItems: "flex-start", margin: "22px 0 14px", cursor: "pointer", fontSize: "0.93rem", opacity: 0.9 }}>
+            <input type="checkbox" checked={ck} onChange={(e) => setCk(e.target.checked)} style={{ marginTop: 3, width: 16, height: 16, accentColor: "currentColor" }} />
+            <span>I've read the data policy. Record my consent — version-stamped, so I'll be re-greeted if it ever changes meaningfully.</span>
+          </label>
+
+          <button
+            disabled={!ck || consentBusy}
+            onClick={async () => {
+              setConsentBusy(true);
+              try {
+                const r = await fetch("/api/privacy/ack", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ version: "data-consent-2026-11-1" }) });
+                if (r.ok) setConsentState("ok");
+              } finally { setConsentBusy(false); }
+            }}
+            style={{
+              width: "100%", padding: "12px 0", borderRadius: 10, cursor: ck ? "pointer" : "not-allowed",
+              fontSize: "1rem", opacity: ck ? 1 : 0.45,
+            }}
+          >
+            {consentBusy ? "recording…" : ck ? "Agree — enter your dashboard" : "Check the box to continue"}
+          </button>
+          <p className="mono" style={{ opacity: 0.55, margin: "14px 0 0", fontSize: "0.8rem", textAlign: "center" }}>
+            Everything on Compute Fund works without consent — you'd just get the generic feed.
+          </p>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="wrap">

@@ -69,6 +69,10 @@ export function getDb(): DatabaseSync {
     _db.exec(`CREATE TABLE IF NOT EXISTS policy_acks (
       id TEXT PRIMARY KEY, user_id TEXT NOT NULL, version TEXT NOT NULL,
       at TEXT NOT NULL DEFAULT (datetime('now')))`);
+    // Data-consent acceptance audit (append-only; the /account consent gate POSTs here).
+    _db.exec(`CREATE TABLE IF NOT EXISTS privacy_acks (
+      id TEXT PRIMARY KEY, user_id TEXT NOT NULL, version TEXT NOT NULL,
+      at TEXT NOT NULL DEFAULT (datetime('now')))`);
     const projCols = conn.prepare("PRAGMA table_info(projects)").all() as Array<{ name: string }>;
     if (!projCols.some((c) => c.name === "created_at")) {
       // backfill = slug timestamp: created_at takes the slug itself as a stable,
