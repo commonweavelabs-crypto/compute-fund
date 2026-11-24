@@ -15,3 +15,5 @@ Rule: every video = problem -> solution format when covering community concerns.
 | 10 | Question Standard deep-dive | What makes a question deterministic and falsifiable; lint at creation; examples of good vs bad questions from the engine. | pending |
 | 11 | Takedown law in practice | How rights issues are handled: 48h hide-not-delete, verified requests, why receipts survive. | pending |
 | 12 | The Open Gates board | Demand-proven, delivery-starved work: how the mismatch feed shows creators what to build next. | pending |
+
+| 13 | WHAT SHIPPED weekly roundups | Recurring Leah mini-segment: 3-4 primary-sourced releases/week + their Compute Fund connection (pilot drafted: CF-R01-what-shipped-pilot.md, Unsloth/LittleBit/Adom radio). Weekly cadence once approved. | pilot drafted |
