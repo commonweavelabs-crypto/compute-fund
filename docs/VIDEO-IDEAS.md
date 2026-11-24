@@ -17,3 +17,5 @@ Rule: every video = problem -> solution format when covering community concerns.
 | 12 | The Open Gates board | Demand-proven, delivery-starved work: how the mismatch feed shows creators what to build next. | pending |
 
 | 13 | WHAT SHIPPED weekly roundups | Recurring Leah mini-segment: 3-4 primary-sourced releases/week + their Compute Fund connection (pilot drafted: CF-R01-what-shipped-pilot.md, Unsloth/LittleBit/Adom radio). Weekly cadence once approved. | pilot drafted |
+
+| 14 | Free AI - three honest ways | Counter-programming for the 200K-view SMS-bypass reels: open weights locally, honest free tiers, funded compute on the platform - same models, zero ToS violations, zero hijack risk. Entry id 1EJA391KEo = the evidence. | idea |
